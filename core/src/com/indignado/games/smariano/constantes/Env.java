@@ -1,7 +1,7 @@
 package com.indignado.games.smariano.constantes;
 
 
-public class Constants {
+public class Env {
 
     public static final float WORLD_HEIGHT = 16.875f; // 1080 / 64 =16.875 px
     public static final float WORLD_WIDTH = 30f;     //  1920 / 64 = 30f px

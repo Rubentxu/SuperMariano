@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.managers.AbstractWorldManager;
 import com.indignado.games.smariano.managers.world.*;
 import com.indignado.games.smariano.modelo.World;
@@ -103,12 +103,12 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
             }
         }
         for(Box2DPhysicsObject d:destroy){
-            Gdx.app.log(Constants.LOG,"Destroy entity :" + d.getGrupo());
+            Gdx.app.log(Env.LOG,"Destroy entity :" + d.getGrupo());
             world.destroyEntity(d);
         }
         destroy.clear();
 
-        world.getPhysics().step(delta, Constants.VELOCITY_ITERATIONS, Constants.POSITION_ITERATIONS);
+        world.getPhysics().step(delta, Env.VELOCITY_ITERATIONS, Env.POSITION_ITERATIONS);
     }
 
     @Override

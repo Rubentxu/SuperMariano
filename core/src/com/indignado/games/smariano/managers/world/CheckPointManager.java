@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.managers.AbstractWorldManager;
 import com.indignado.games.smariano.modelo.CheckPoint;
@@ -23,9 +23,9 @@ public class CheckPointManager extends AbstractWorldManager {
     public void handleBeginContact(Contact contact) {
         CheckPoint checkPoint = getCheckPoint(contact);
         Hero hero = getHero(contact);
-        Gdx.app.log(Constants.LOG, "Begin Contact CheckPoint");
+        Gdx.app.log(Env.LOG, "Begin Contact CheckPoint");
         if (hero != null && checkPoint != null) {
-            Gdx.app.log(Constants.LOG, "Begin Contact CheckPoint TRUE");
+            Gdx.app.log(Env.LOG, "Begin Contact CheckPoint TRUE");
             ((PrismaticJoint) checkPoint.getJoint()).enableMotor(true);
         }
     }

@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.managers.AbstractWorldManager;
 import com.indignado.games.smariano.modelo.Enemy;
 import com.indignado.games.smariano.modelo.Enemy.StateEnemy;
@@ -24,7 +24,7 @@ public class EnemyManager extends AbstractWorldManager {
         boolean checkStateTimeMin = enemy.setStateTime(enemy.getStateTime() + delta);
 
         if (checkStateTimeMin) {
-            Gdx.app.log(Constants.LOG,"CheckStateTimeMin EnemyManager: "+checkStateTimeMin);
+            Gdx.app.log(Env.LOG,"CheckStateTimeMin EnemyManager: "+checkStateTimeMin);
             notifyObservers(enemy.getState(), enemy, enemy.getStateTime());
             if (enemy.getState().equals(BaseState.DEAD)) {
                 enemy.setState(BaseState.DESTROY);

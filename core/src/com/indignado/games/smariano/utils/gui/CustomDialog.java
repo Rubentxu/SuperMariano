@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.managers.game.ResourcesManager;
 
@@ -47,15 +47,15 @@ public class CustomDialog extends Window {
 
     protected void result (Object object) {
         SMariano.setGameState(GameState.GAME_RUNNING);
-        Gdx.app.log(Constants.LOG, "La respuesta a la ventana de Dialogo es: "+ object+ "Tipo clase "+object.getClass() );
+        Gdx.app.log(Env.LOG, "La respuesta a la ventana de Dialogo es: "+ object+ "Tipo clase "+object.getClass() );
         if (object instanceof Boolean && object.equals(true)){
            Gdx.app.exit();
         } else if(object instanceof Boolean && object.equals(false)){
-            Gdx.app.log(Constants.LOG, "Se pulso en continuar la partida: ");
+            Gdx.app.log(Env.LOG, "Se pulso en continuar la partida: ");
 
             this.remove();
              this.setVisible(false);
-            Gdx.app.log(Constants.LOG, "La ventana de dialogo se cerro?... "+remove());
+            Gdx.app.log(Env.LOG, "La ventana de dialogo se cerro?... "+remove());
         }
     }
 

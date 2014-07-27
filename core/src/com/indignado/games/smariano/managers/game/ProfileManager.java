@@ -1,29 +1,34 @@
 package com.indignado.games.smariano.managers.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
-import com.indignado.games.smariano.constantes.GameState;
+import com.indignado.games.smariano.constantes.Env;
+import com.indignado.games.smariano.fms.GameState;
 import com.indignado.games.smariano.managers.StateObserver;
+import com.indignado.games.smariano.managers.interfaces.IProfileManager;
 import com.indignado.games.smariano.modelo.Hero;
 import com.indignado.games.smariano.modelo.Item;
 import com.indignado.games.smariano.modelo.Profile;
 import com.indignado.games.smariano.modelo.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.modelo.base.State;
 
-public class ProfileManager implements StateObserver {
+import javax.inject.Inject;
 
-
+public class ProfileManager implements StateObserver, IProfileManager {
     private Profile profile;
+    @Inject
+    public StateMachine<BaseGame> gameStateMachine;
+
 
     public Profile retrieveProfile() {
         profile = null;
-        FileHandle profileDataFile = Gdx.files.local(Constants.PROFILE_DATA_FILE);
-        Gdx.app.log(Constants.LOG, "Retrieving profile from: " + profileDataFile.path());
+        FileHandle profileDataFile = Gdx.files.local(Env.PROFILE_DATA_FILE);
+        Gdx.app.log(Env.LOG, "Retrieving profile from: " + profileDataFile.path());
 
         Json json = new Json();
 
@@ -32,21 +37,21 @@ public class ProfileManager implements StateObserver {
                 String profileAsText = profileDataFile.readString().trim();
 
                 if (profileAsText.matches("^[A-Za-z0-9/+=]+$")) {
-                    Gdx.app.log(Constants.LOG, "Persisted profile is base64 encoded");
+                    Gdx.app.log(Env.LOG, "Persisted profile is base64 encoded");
                     profileAsText = Base64Coder.decodeString(profileAsText);
                 }
 
                 profile = json.fromJson(Profile.class, profileAsText);
 
             } catch (Exception e) {
-                FileHandle initProfileDataFile = Gdx.files.internal(Constants.INIT_PROFILE_DATA_FILE);
-                Gdx.app.error(Constants.LOG, "Retrieving profile from: " + initProfileDataFile.path());
+                FileHandle initProfileDataFile = Gdx.files.internal(Env.INIT_PROFILE_DATA_FILE);
+                Gdx.app.error(Env.LOG, "Retrieving profile from: " + initProfileDataFile.path());
                 profile = json.fromJson(Profile.class, initProfileDataFile.readString().trim());
                 persist(profile);
             }
         } else {
-            FileHandle initProfileDataFile = Gdx.files.internal(Constants.INIT_PROFILE_DATA_FILE);
-            Gdx.app.log(Constants.LOG, "Retrieving profile from: " + initProfileDataFile.path());
+            FileHandle initProfileDataFile = Gdx.files.internal(Env.INIT_PROFILE_DATA_FILE);
+            Gdx.app.log(Env.LOG, "Retrieving profile from: " + initProfileDataFile.path());
             profile = json.fromJson(Profile.class, initProfileDataFile.readString().trim());
             persist(profile);
         }
@@ -56,8 +61,8 @@ public class ProfileManager implements StateObserver {
 
     protected void persist(Profile profile) {
 
-        FileHandle profileDataFile = Gdx.files.local(Constants.PROFILE_DATA_FILE);
-        Gdx.app.log(Constants.LOG, "Persisting profile in: " + profileDataFile.path());
+        FileHandle profileDataFile = Gdx.files.local(Env.PROFILE_DATA_FILE);
+        Gdx.app.log(Env.LOG, "Persisting profile in: " + profileDataFile.path());
         Json json = new Json();
         String profileAsText = json.toJson(profile);
 
@@ -74,12 +79,12 @@ public class ProfileManager implements StateObserver {
     }
 
     public void resetToDefaultProfile() {
-        FileHandle profileDataFile = Gdx.files.local(Constants.PROFILE_DATA_FILE);
+        FileHandle profileDataFile = Gdx.files.local(Env.PROFILE_DATA_FILE);
         if (profileDataFile.exists()) profileDataFile.delete();
     }
 
-    public Profile getProfile(){
-        if(profile== null) return retrieveProfile();
+    public Profile getProfile() {
+        if (profile == null) return retrieveProfile();
         return profile;
     }
 
@@ -101,11 +106,11 @@ public class ProfileManager implements StateObserver {
 
     @Override
     public void onNotifyStateTimeLimit(State state, Box2DPhysicsObject entity, float time) {
-        Gdx.app.debug(Constants.LOG, "NotifyStateTimeLimit ProfileManager....");
+        Gdx.app.debug(Env.LOG, "NotifyStateTimeLimit ProfileManager....");
         if (state.equals(Box2DPhysicsObject.BaseState.HURT) && entity instanceof Hero) {
             Hero hero = (Hero) entity;
-            Gdx.app.log(Constants.LOG, "---------------------------------------------------------------------PIERDES VIDA???");
-            if (profile.removeLive()) BaseGame.setGameState(GameState.GAME_OVER);
+            Gdx.app.log(Env.LOG, "---------------------------------------------------------------------PIERDES VIDA???");
+            if (profile.removeLive()) gameStateMachine.changeState(GameState.GAME_OVER);
             hero.setState(Hero.StateHero.IDLE);
         }
     }

@@ -17,8 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.managers.game.ResourcesManager;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransition;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransitionSlide;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 public class OptionScreen extends BaseScreen {

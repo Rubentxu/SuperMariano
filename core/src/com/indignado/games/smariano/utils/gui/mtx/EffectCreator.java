@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 
 public class EffectCreator {
     private static final String logTag = "MtxEffectCreator";
@@ -308,9 +308,9 @@ public class EffectCreator {
             actor.clearActions();
             String actorName = actor.getName();
             if (group.removeActor(actor)) {
-                Gdx.app.log(Constants.LOG,   "Actor removed! (Name: " + actorName + ")");
+                Gdx.app.log(Env.LOG,   "Actor removed! (Name: " + actorName + ")");
             } else {
-                Gdx.app.log(Constants.LOG, "Actor not removed! (Name: " + actorName + ")");
+                Gdx.app.log(Env.LOG, "Actor not removed! (Name: " + actorName + ")");
             }
         }
     }

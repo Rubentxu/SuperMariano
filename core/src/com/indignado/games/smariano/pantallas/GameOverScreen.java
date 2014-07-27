@@ -9,8 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.modelo.Profile;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransition;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransitionSlide;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 public class GameOverScreen extends BaseScreen {

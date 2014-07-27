@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.modelo.World;
 import com.indignado.games.smariano.utils.debug.DebugWindow;
 import com.indignado.games.smariano.utils.parallax.ParallaxBackground;
@@ -51,11 +51,11 @@ public class WorldRenderer implements Disposable {
     public void resize(int w, int h) {
         this.width=w;
         this.height=h;
-        cam.viewportHeight = Constants.WORLD_HEIGHT;
-        cam.viewportWidth = (Constants.WORLD_HEIGHT / height) * width;
-        Gdx.app.log(Constants.LOG,"World ViewPortWidth: "+cam.viewportWidth+ " World ViewPortHeight: "+cam.viewportHeight);
+        cam.viewportHeight = Env.WORLD_HEIGHT;
+        cam.viewportWidth = (Env.WORLD_HEIGHT / height) * width;
+        Gdx.app.log(Env.LOG,"World ViewPortWidth: "+cam.viewportWidth+ " World ViewPortHeight: "+cam.viewportHeight);
 
-        background=new ParallaxBackground(Constants.WORLD_WIDTH, cam.viewportHeight);
+        background=new ParallaxBackground(Env.WORLD_WIDTH, cam.viewportHeight);
         background.addLayer(new ParallaxLayer(world.getBackground_01(),0.4f,0,100,100));
         background.addLayer(new ParallaxLayer(world.getBackground_03(),0.6f,0,100,100));
         background.addLayer(new ParallaxLayer(world.getBackground_02(), 0.8f, 0.02f, 100, 100));

@@ -19,25 +19,30 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.indignado.games.smariano.managers.game.ResourcesManager;
+import com.indignado.games.smariano.managers.interfaces.IResourcesManager;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
+
+import javax.inject.Inject;
 
 public class Styles implements Disposable {
     public BitmapFont font;
     public BitmapFont font2;
     public Skin skin;
     public boolean initialize = false;
+    @Inject
+    IResourcesManager resourcesManager;
 
-    public Styles(ResourcesManager resourcesManager) {
-        createStyles(resourcesManager);
+    public Styles() {
+        createStyles();
     }
 
-    public void createStyles(ResourcesManager resourcesManager) {
+    public void createStyles() {
         if (!initialize) {
-            initialize=true;
-            font = resourcesManager.get(resourcesManager.DEFAULT_FONT);
+            initialize = true;
+            font = resourcesManager.getAssetManager().get(ResourcesManager.DEFAULT_FONT);
             font.setScale(ScaleUtil.getSizeRatio());
             font.setUseIntegerPositions(false);
-            font2 = resourcesManager.get(resourcesManager.HEADER_FONT);
+            font2 = resourcesManager.getAssetManager().get(ResourcesManager.HEADER_FONT);
             font2.setScale(ScaleUtil.getSizeRatio());
             font2.setUseIntegerPositions(false);
             skin = new Skin();
@@ -48,29 +53,29 @@ public class Styles implements Disposable {
             skin.add("lt-green", new Color(.39f, .9f, .6f, 1f));
             skin.add("dark-blue", new Color(.79f, .95f, 91f, 1f));
 
-            skin.addRegions(resourcesManager.<TextureAtlas>get(resourcesManager.GUI_ATLAS));
-            skin.addRegions(resourcesManager.<TextureAtlas>get(resourcesManager.GUI_PACK_ATLAS));
+            skin.addRegions(resourcesManager.getAssetManager().<TextureAtlas>get(ResourcesManager.GUI_ATLAS));
+            skin.addRegions(resourcesManager.getAssetManager().<TextureAtlas>get(ResourcesManager.GUI_PACK_ATLAS));
 
 
-            TextureRegionDrawable touchpad_background = new TextureRegionDrawable(((TextureAtlas) resourcesManager.get(resourcesManager.GUI_ATLAS)).findRegion("touchpad_background"));
-            TextureRegionDrawable touchpad_thumb = new TextureRegionDrawable(((TextureAtlas) resourcesManager.get(resourcesManager.GUI_ATLAS)).findRegion("touchpad_thumb"));
+            TextureRegionDrawable touchpad_background = new TextureRegionDrawable(((TextureAtlas) resourcesManager.getAssetManager().get(ResourcesManager.GUI_ATLAS)).findRegion("touchpad_background"));
+            TextureRegionDrawable touchpad_thumb = new TextureRegionDrawable(((TextureAtlas) resourcesManager.getAssetManager().get(ResourcesManager.GUI_ATLAS)).findRegion("touchpad_thumb"));
 
 
-            TextureRegionDrawable checkox_true = new TextureRegionDrawable(((TextureAtlas) resourcesManager.get(resourcesManager.UISKIN_ATLAS)).findRegion("check-on"));
+            TextureRegionDrawable checkox_true = new TextureRegionDrawable(((TextureAtlas) resourcesManager.getAssetManager().get(ResourcesManager.UISKIN_ATLAS)).findRegion("check-on"));
 
-            TextureRegionDrawable checkox_false = new TextureRegionDrawable(((TextureAtlas) resourcesManager.get(resourcesManager.UISKIN_ATLAS)).findRegion("check-off"));
+            TextureRegionDrawable checkox_false = new TextureRegionDrawable(((TextureAtlas) resourcesManager.getAssetManager().get(ResourcesManager.UISKIN_ATLAS)).findRegion("check-off"));
 
-            TextureRegionDrawable slider_knob = new TextureRegionDrawable(((TextureAtlas) resourcesManager.get(resourcesManager.UISKIN_ATLAS)).findRegion("default-slider-knob"));
-            TextureRegionDrawable slider = new TextureRegionDrawable(((TextureAtlas) resourcesManager.get(resourcesManager.UISKIN_ATLAS)).findRegion("default-slider"));
+            TextureRegionDrawable slider_knob = new TextureRegionDrawable(((TextureAtlas) resourcesManager.getAssetManager().get(ResourcesManager.UISKIN_ATLAS)).findRegion("default-slider-knob"));
+            TextureRegionDrawable slider = new TextureRegionDrawable(((TextureAtlas) resourcesManager.getAssetManager().get(ResourcesManager.UISKIN_ATLAS)).findRegion("default-slider"));
 
             CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle(checkox_false, checkox_true, font, Color.WHITE);
 
 
-            SpriteDrawable stats = new SpriteDrawable(new Sprite((Texture) resourcesManager.get(resourcesManager.STATS_BACKGROUND)));
+            SpriteDrawable stats = new SpriteDrawable(new Sprite((Texture) resourcesManager.getAssetManager().get(ResourcesManager.STATS_BACKGROUND)));
 
 
             SliderStyle sliderStyle = new SliderStyle(slider, slider_knob);
-            skin.add("default",new WindowStyle(font2, Color.ORANGE,skin.getDrawable("debug")));
+            skin.add("default", new WindowStyle(font2, Color.ORANGE, skin.getDrawable("debug")));
             skin.add("stats", stats);
 
 

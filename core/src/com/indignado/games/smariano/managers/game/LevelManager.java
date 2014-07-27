@@ -5,55 +5,73 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
+import com.indignado.games.smariano.managers.interfaces.ILevelManager;
+import com.indignado.games.smariano.managers.interfaces.IProfileManager;
+import com.indignado.games.smariano.managers.interfaces.IResourcesManager;
 import com.indignado.games.smariano.modelo.Level;
-
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelManager {
-
-    private final SMariano game;
+public class LevelManager implements ILevelManager {
     private List<Level> levels;
     private Level currentLevel;
+    @Inject
+    protected IProfileManager profileManager;
+    @Inject
+    protected IResourcesManager resourcesManager;
 
-    public LevelManager(SMariano game) {
-        this.game = game;
+
+    public LevelManager() {
         levels = new ArrayList<Level>();
-        levels = game.getProfileManager().getProfile().getLevels();
-
+        levels = profileManager.getProfile().getLevels();
         loadLevels();
+
     }
 
-    public void loadAssetLevel(Level level){
-        game.getResourcesManager().load(level.getMap(), TiledMap.class);
-        game.getResourcesManager().load(level.getBackground_03(), Texture.class);
-        game.getResourcesManager().load(level.getBackground_02(), Texture.class);
-        game.getResourcesManager().load(level.getBackground_01(), Texture.class);
-        game.getResourcesManager().load(level.getMusic(), Music.class);
-        game.getResourcesManager().finishLoading();
+
+    public void loadAssetLevel(Level level) {
+        resourcesManager.getAssetManager().load(level.getMap(), TiledMap.class);
+        resourcesManager.getAssetManager().load(level.getBackground_03(), Texture.class);
+        resourcesManager.getAssetManager().load(level.getBackground_02(), Texture.class);
+        resourcesManager.getAssetManager().load(level.getBackground_01(), Texture.class);
+        resourcesManager.getAssetManager().load(level.getMusic(), Music.class);
+        resourcesManager.getAssetManager().finishLoading();
+
     }
+
 
     public void loadLevels() {
 
     }
 
+
     public void saveState() {
-        game.getProfileManager().persist();
+        profileManager.persist();
     }
+
 
     public Level getCurrentLevel() {
         return currentLevel;
     }
 
+
     public void setCurrentLevel(Level currentLevel) {
         loadAssetLevel(currentLevel);
-        Gdx.app.log(Constants.LOG,"Se cargo el mapa: "+ currentLevel.getMap());
+        Gdx.app.log(Env.LOG, "Se cargo el mapa: " + currentLevel.getMap());
         this.currentLevel = currentLevel;
     }
+
 
     public List<Level> getLevels() {
         return levels;
     }
+
+
+    @Override
+    public void initialize() {
+
+    }
+
 }

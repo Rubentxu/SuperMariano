@@ -7,12 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.modelo.Level;
 import com.indignado.games.smariano.modelo.Profile;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransition;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransitionSlide;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 public class ScoreScreen extends BaseScreen {
@@ -82,7 +80,7 @@ public class ScoreScreen extends BaseScreen {
         if (score > currentLevel.getHighScore()) currentLevel.setHighScore(score);
         if (currentLevel.getAchievements() < profile.getStarAquired())
             currentLevel.setAchievements(profile.getStarAquired());
-        Gdx.app.log(Constants.LOG, "ScoreScreen, score " + score + " vidas: " + profile.getLives() + " coins: " + profile.getCoinsAquired());
+        Gdx.app.log(Env.LOG, "ScoreScreen, score " + score + " vidas: " + profile.getLives() + " coins: " + profile.getCoinsAquired());
         game.getProfileManager().persist();
 
     }

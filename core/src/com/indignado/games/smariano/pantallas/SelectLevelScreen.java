@@ -10,12 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.managers.game.ResourcesManager;
 import com.indignado.games.smariano.modelo.Level;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransition;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransitionSlide;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
 
@@ -57,7 +55,7 @@ public class SelectLevelScreen extends BaseScreen {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     super.touchUp(event, x, y, pointer, button);
-                    Gdx.app.log(Constants.LOG, "Numero de boton presionado: " + levelButton.getLevelNumber());
+                    Gdx.app.log(Env.LOG, "Numero de boton presionado: " + levelButton.getLevelNumber());
                     game.getLevelManager().setCurrentLevel(levels.get(levelButton.getLevelNumber() - 1));
                     game.setGameState(GameState.GAME_SHOW_GAME);
                 }

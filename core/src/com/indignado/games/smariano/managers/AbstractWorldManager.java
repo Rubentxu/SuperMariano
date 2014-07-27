@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Disposable;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.modelo.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.modelo.base.State;
 
@@ -56,7 +56,7 @@ public abstract class AbstractWorldManager implements Disposable {
     }
 
     public void notifyObservers(State state, Box2DPhysicsObject entity,float stateTime) {
-        Gdx.app.debug(Constants.LOG, "NotifyStateTimeLimit State "+state+" Entity "+entity.getGrupo());
+        Gdx.app.debug(Env.LOG, "NotifyStateTimeLimit State "+state+" Entity "+entity.getGrupo());
         for (StateObserver observer : observers) {
             observer.onNotifyStateTimeLimit(state, entity,stateTime);
         }

@@ -16,7 +16,7 @@ public class SplashScreen extends BaseScreen {
     @Override
     public void show() {
         super.show();
-        splashTexture = game.getResourcesManager().get(ResourcesManager.SPLASH);
+        splashTexture = resourcesManager.get().get(ResourcesManager.SPLASH);
         splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
     }
 

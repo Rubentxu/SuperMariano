@@ -2,95 +2,52 @@ package com.indignado.games.smariano;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.indignado.games.smariano.constantes.Constants;
-import com.indignado.games.smariano.constantes.GameState;
-import com.indignado.games.smariano.managers.game.*;
-import com.indignado.games.smariano.pantallas.*;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransition;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransitionFade;
+import com.indignado.games.smariano.config.ScreensModule;
+import com.indignado.games.smariano.fms.GameState;
+import com.indignado.games.smariano.managers.interfaces.*;
+import com.indignado.games.smariano.pantallas.BaseScreen;
+import com.indignado.games.smariano.pantallas.MenuScreen;
+import com.indignado.games.smariano.pantallas.SplashScreen;
+import com.indignado.games.smariano.utils.debug.GameLogger;
+import dagger.ObjectGraph;
+
+import javax.inject.Inject;
 
 public class BaseGame implements ApplicationListener {
-    private boolean init = false;
-    private BaseScreen currScreen;
-    private BaseScreen nextScreen;
-    private FrameBuffer currFbo;
-    private FrameBuffer nextFbo;
-    private SpriteBatch batch;
-    private float t;
-    private ScreenTransition screenTransition;
 
-    public GameScreen gameScreen;
-    public MenuScreen menuScreen;
-    public OptionScreen optionScreen;
-    public HighScoresScreen highScoreScreen;
-    public SelectLevelScreen levelScreen;
-    public ScoreScreen scoreScreen;
+    @Inject
+    public IResourcesManager resourcesManager;
+    @Inject
+    public IAudioManager audioManager;
+    @Inject
+    public ILevelManager levelManager;
+    @Inject
+    protected AbstractPreferencesManager preferencesManager;
+    @Inject
+    protected IProfileManager profileManager;
+    public BaseScreen currScreen;
+    public BaseScreen nextScreen;
+    @Inject
+    public SpriteBatch batch;
 
-    protected ResourcesManager resourcesManager;
-    protected AudioManager audioManager;
-    protected LevelManager levelManager;
-    protected PreferencesManager preferencesManager;
-    private static GameState gameState = GameState.GAME_RUNNING;
-    protected ProfileManager profileManager;
 
-    public static GameState getGameState() {
-        return gameState;
-    }
+    @Inject
+    MenuScreen menuScreen;
+    @Inject
+    SplashScreen splashScreen;
+    @Inject
+    public StateMachine<BaseGame> gameStateMachine;
 
-    public static void setGameState(GameState gameState) {
-        Gdx.app.log(Constants.LOG, "Change GameState: " + gameState);
-        BaseGame.gameState = gameState;
-    }
 
-    public void setScreen(BaseScreen screen, ScreenTransition screenTransition) {
-        int w = Gdx.graphics.getWidth();
-        int h = Gdx.graphics.getHeight();
-        if (!init) {
-            currFbo = new FrameBuffer(Format.RGB888, w, h, false);
-            nextFbo = new FrameBuffer(Format.RGB888, w, h, false);
-            batch = new SpriteBatch();
-            init = true;
-        }
-
-        nextScreen = screen;
-        nextScreen.show();
-        nextScreen.resize(w, h);
-        nextScreen.render(0);
-        nextScreen.pause();
-        Gdx.input.setInputProcessor(null); // disable input
-        this.screenTransition = screenTransition;
-        t = 0;
-        if (currScreen != null) {
-            currScreen.pause();
-            SMariano.setGameState(GameState.SCREEN_TRANSITION);
-        } else {
-            Gdx.input.setInputProcessor(nextScreen.getInputProcessor());
-            currScreen = nextScreen;
-            nextScreen = null;
-            screenTransition = null;
-        }
-
-        Gdx.app.log(Constants.LOG, "SCREENS: instanceof: " + screen.getClass().getName());
-        if (screen instanceof GameScreen) {
-            Gdx.app.log(Constants.LOG, "music Game");
-            audioManager.stopMusic();
-            audioManager.playMusic(levelManager.getCurrentLevel().getMusic());
-        } else if (screen instanceof MenuScreen) {
-            Gdx.app.log(Constants.LOG, "music Menu");
-            audioManager.stopMusic();
-            audioManager.playMusic(resourcesManager.MUSIC_MENU);
-
-        }
-    }
 
     @Override
     public void render() {
         float deltaTime = Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f);
+        gameStateMachine.update();
 
-        switch (SMariano.getGameState()) {
+        /*switch (SMariano.getGameState()) {
             case GAME_RUNNING:
                 if (currScreen != null) currScreen.render(deltaTime);
                 break;
@@ -174,11 +131,22 @@ public class BaseGame implements ApplicationListener {
                 break;
             case GAME_EXIT:
                 Gdx.app.exit();
-        }
+        }*/
     }
 
     @Override
     public void create() {
+        GameLogger.info("BaseGame", "Ciclo Create del juego");
+        ObjectGraph objectGraph = ObjectGraph.create(new ScreensModule(this));
+        objectGraph.inject(this);
+
+        objectGraph.inject(splashScreen);
+        objectGraph.inject(menuScreen);
+        currScreen = splashScreen;
+        currScreen.show();
+        nextScreen = menuScreen;
+        gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+        GameLogger.info("BaseGame", "Finalizo el Ciclo Create del juego");
 
     }
 
@@ -204,38 +172,18 @@ public class BaseGame implements ApplicationListener {
         resourcesManager.dispose();
         if (currScreen != null) currScreen.hide();
         if (nextScreen != null) nextScreen.hide();
-        if (init) {
-            currFbo.dispose();
-            currScreen.dispose();
-            currScreen = null;
-            nextFbo.dispose();
-            nextScreen = null;
-            batch.dispose();
-            init = false;
-        }
+
     }
 
-    public AudioManager getAudioManager() {
-        return audioManager;
-    }
-
-    public LevelManager getLevelManager() {
-        return levelManager;
+    public BaseScreen getNextScreen() {
+        return nextScreen;
     }
 
 
-    public PreferencesManager getPreferencesManager() {
-        return preferencesManager;
+    public void setNextScreen(BaseScreen nextScreen) {
+        this.nextScreen = nextScreen;
     }
 
 
-    public ProfileManager getProfileManager() {
-        return profileManager;
-    }
-
-
-    public ResourcesManager getResourcesManager() {
-        return resourcesManager;
-    }
 }
 

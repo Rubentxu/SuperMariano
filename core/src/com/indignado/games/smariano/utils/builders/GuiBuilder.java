@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.controladores.WorldController;
 import com.indignado.games.smariano.managers.game.ResourcesManager;
 import com.indignado.games.smariano.servicios.Styles;
@@ -169,16 +169,16 @@ public class GuiBuilder {
 
 
         Image imageLives = new Image(((TextureAtlas) resourcesManager.get(resourcesManager.GUI_ATLAS)).findRegion("vidas"));
-        imageLives.setName(Constants.IMAGE_LIVES);
+        imageLives.setName(Env.IMAGE_LIVES);
 
         Label lives = new Label("0", styles.skin, "default", Color.ORANGE);
-        lives.setName(Constants.LIVES);
+        lives.setName(Env.LIVES);
 
         Label labelScore = new Label("Tijeras: ", styles.skin, "default", Color.ORANGE);
-        labelScore.setName(Constants.LABEL_SCORE);
+        labelScore.setName(Env.LABEL_SCORE);
 
         Label score = new Label("0000", styles.skin, "default", Color.ORANGE);
-        score.setName(Constants.SCORE);
+        score.setName(Env.SCORE);
         tableProfile.defaults().height(height);
         tableProfile.defaults().width(width/4.5f);
 

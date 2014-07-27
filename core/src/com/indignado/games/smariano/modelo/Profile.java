@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 
 import java.util.List;
 
@@ -48,12 +48,12 @@ public class Profile implements Serializable {
     }
 
     public void addLives(int lives){
-        Gdx.app.log(Constants.LOG,"Añadido una Vida....");
+        Gdx.app.log(Env.LOG,"Añadido una Vida....");
         this.lives+=lives;
     }
 
     public boolean removeLive() {
-        Gdx.app.log(Constants.LOG,"Pierdes una Vida....");
+        Gdx.app.log(Env.LOG,"Pierdes una Vida....");
         --lives;
         if(lives<0) lives=0;
         return lives == 0;

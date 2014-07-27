@@ -12,10 +12,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
+import com.indignado.games.smariano.managers.interfaces.IResourcesManager;
 import com.indignado.games.smariano.servicios.Styles;
 
-public class ResourcesManager extends AssetManager implements Disposable {
+public class ResourcesManager extends AssetManager implements Disposable,IResourcesManager {
 
     private Styles styles;
 
@@ -56,18 +57,18 @@ public class ResourcesManager extends AssetManager implements Disposable {
 
     @Override
     public void finishLoading () {
-        Gdx.app.log(Constants.LOG, "Finish Loading Assets: ");
+        Gdx.app.log(Env.LOG, "Finish Loading Assets: ");
         super.finishLoading();
     }
 
     @Override
     public synchronized <T> void load (String fileName, Class<T> type) {
-        Gdx.app.log(Constants.LOG, "Load Asset: " + fileName+" Type: "+ type.getName());
+        Gdx.app.log(Env.LOG, "Load Asset: " + fileName+" Type: "+ type.getName());
         load(fileName, type, null);
     }
 
     private void loadAssetsGame() {
-        Gdx.app.log(Constants.LOG, "Load ResourcesManager Game");
+        Gdx.app.log(Env.LOG, "Load ResourcesManager Game");
         this.load(DEFAULT_FONT, BitmapFont.class);
         this.load(DEBUG_FONT, BitmapFont.class);
         this.load(HEADER_FONT, BitmapFont.class);
@@ -89,6 +90,21 @@ public class ResourcesManager extends AssetManager implements Disposable {
 
     public void loadSplash() {
         this.load(SPLASH, Texture.class);
+    }
+
+    @Override
+    public void loadResourcesSplashScreen() {
+
+    }
+
+    @Override
+    public void loadResourcesMenuScreen() {
+
+    }
+
+    @Override
+    public AssetManager getAssetManager() {
+        return null;
     }
 
     public Music getMusic(String name) {

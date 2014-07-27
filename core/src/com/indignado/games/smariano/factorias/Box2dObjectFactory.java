@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.managers.game.ResourcesManager;
 import com.indignado.games.smariano.modelo.*;
 import com.indignado.games.smariano.modelo.base.Box2DPhysicsObject;
@@ -334,7 +334,7 @@ public class Box2dObjectFactory {
     }
 
     private Mill createMill(MapObject object) {
-        Gdx.app.log(Constants.LOG, "Creando Mill");
+        Gdx.app.log(Env.LOG, "Creando Mill");
         RevoluteJointDef revoluteJoint;
         MapProperties properties = object.getProperties();
         Mill mill = null;
@@ -351,14 +351,14 @@ public class Box2dObjectFactory {
             def.type = BodyType.StaticBody;
             Vector2 position = new Vector2(getProperty(properties, "x", def.position.x) * unitScale, getProperty(properties, "y", def.position.y) * unitScale);
 
-            Gdx.app.log(Constants.LOG, "Creando Mill");
+            Gdx.app.log(Env.LOG, "Creando Mill");
             CircleShape circle = new CircleShape();
             circle.setRadius(0.5f);
             Body bodyA = physics.createBody(def);
             bodyA.setTransform(position, 0);
 
             Fixture fixtA = bodyA.createFixture(circle, 1);
-            Gdx.app.log(Constants.LOG, "Creando2 Mill");
+            Gdx.app.log(Env.LOG, "Creando2 Mill");
 
             PolygonShape shape = new PolygonShape();
             shape.set(vertices);
@@ -375,7 +375,7 @@ public class Box2dObjectFactory {
             Body bodyB = physics.createBody(bd);
 
             Fixture fixtB = bodyB.createFixture(fd);
-            Gdx.app.log(Constants.LOG, "Creando3 Mill");
+            Gdx.app.log(Env.LOG, "Creando3 Mill");
 
             revoluteJoint = new RevoluteJointDef();
             revoluteJoint.bodyA = bodyA;
@@ -407,7 +407,7 @@ public class Box2dObjectFactory {
         } else {
             throw new IllegalArgumentException("type of " + object + " is  \"" + properties.get(Box2DMapObjectParser.Aliases.type) + "\" instead of \"" + Box2DMapObjectParser.Aliases.typeModelObject + "\"");
         }
-        Gdx.app.log(Constants.LOG, "Terminada la Creacion de Mill");
+        Gdx.app.log(Env.LOG, "Terminada la Creacion de Mill");
         return mill;
     }
 

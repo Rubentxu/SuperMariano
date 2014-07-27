@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.managers.AbstractWorldManager;
 import com.indignado.games.smariano.modelo.Hero;
 import com.indignado.games.smariano.modelo.Water;
@@ -119,17 +119,17 @@ public class WaterManager extends AbstractWorldManager {
         float sarea;
         switch (shape.getType()) {
             case Circle:
-                Gdx.app.log(Constants.LOG, "Apply water impulse....Circle");
+                Gdx.app.log(Env.LOG, "Apply water impulse....Circle");
                 sarea = BuoyancyUtils.ComputeSubmergedArea((CircleShape) shape, w.mSurfaceNormal, w.mSurfaceHeight, body.getTransform(), w.mSC);
                 break;
 
             case Chain:
-                Gdx.app.log(Constants.LOG, "Apply water impulse....Chain");
+                Gdx.app.log(Env.LOG, "Apply water impulse....Chain");
                 sarea = BuoyancyUtils.ComputeSubmergedArea((ChainShape) shape, w.mSurfaceNormal, w.mSurfaceHeight, body.getTransform(), w.mSC);
                 break;
 
             case Edge:
-                Gdx.app.log(Constants.LOG, "Apply water impulse....Edge");
+                Gdx.app.log(Env.LOG, "Apply water impulse....Edge");
                 sarea = BuoyancyUtils.ComputeSubmergedArea((EdgeShape) shape, w.mSurfaceNormal, w.mSurfaceHeight, body.getTransform(), w.mSC);
                 break;
 

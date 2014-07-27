@@ -4,7 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class DesktopLauncher {
         sizes.add(new Vector2(1920, 1080));
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.title = "Super Mariano Game " + Constants.VERSION+" "+SMariano.log;
+        config.title = "Super Mariano Game " + Env.VERSION+" "+SMariano.log;
         SMariano.DEBUG= false;
         config.useGL30 = true;
         config.width = (int) sizes.get(7).x;

@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.controladores.WorldController.Keys;
 import com.indignado.games.smariano.managers.AbstractWorldManager;
 import com.indignado.games.smariano.modelo.Enemy;
@@ -34,7 +34,7 @@ public class HeroManager extends AbstractWorldManager {
 
             notifyObservers(hero.getState(), hero, hero.getStateTime());
             if (hero.getState().equals(BaseState.HURT) || hero.getState().equals(BaseState.HIT)) {
-                Gdx.app.log(Constants.LOG, "CheckSTateTimeLimit HeroManager: " + checkStateTimeLimit);
+                Gdx.app.log(Env.LOG, "CheckSTateTimeLimit HeroManager: " + checkStateTimeLimit);
                 hero.setState(Hero.StateHero.IDLE);
             }
         }
@@ -243,7 +243,7 @@ public class HeroManager extends AbstractWorldManager {
             Vector2 pointVelHero = hero.getBodyA().getLinearVelocityFromWorldPoint(point);
             Vector2 diff = pointVelHero.cpy().sub(pointVelEnemy);
             Vector2 relativeVel = enemy.getBodyA().getLocalVector(diff);
-            Gdx.app.log(Constants.LOG, " Contacto relativeVel " + relativeVel + " pointVelEnemy " + pointVelEnemy
+            Gdx.app.log(Env.LOG, " Contacto relativeVel " + relativeVel + " pointVelEnemy " + pointVelEnemy
                     + " pointVelHero " + pointVelHero + " diff " + diff + " HeroPhysics " +
                     contact.getFixtureA().equals(hero.getHeroPhysicsFixture()) + " " + contact.getFixtureB().equals(hero.getHeroPhysicsFixture()) +
                     " HeroSensor " + contact.getFixtureA().equals(hero.getHeroSensorFixture()) + " " + contact.getFixtureB().equals(hero.getHeroSensorFixture()));

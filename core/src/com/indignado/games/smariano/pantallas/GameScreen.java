@@ -9,15 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Constants;
+import com.indignado.games.smariano.constantes.Env;
 import com.indignado.games.smariano.constantes.GameState;
 import com.indignado.games.smariano.controladores.WorldController;
 import com.indignado.games.smariano.inputs.GameInputs;
 import com.indignado.games.smariano.modelo.Hero;
 import com.indignado.games.smariano.modelo.Profile;
 import com.indignado.games.smariano.modelo.World;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransition;
-import com.indignado.games.smariano.pantallas.transiciones.ScreenTransitionSlice;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.vista.WorldRenderer;
@@ -58,8 +56,8 @@ public class GameScreen extends BaseScreen {
 
     private void updateStats() {
         Hero hero = world.getHero();
-        ((Label) stats.findActor(Constants.SCORE)).setText(String.valueOf(profile.getCoinsAquired()));
-        ((Label) stats.findActor(Constants.LIVES)).setText(profile.getLivesAsText());
+        ((Label) stats.findActor(Env.SCORE)).setText(String.valueOf(profile.getCoinsAquired()));
+        ((Label) stats.findActor(Env.LIVES)).setText(profile.getLivesAsText());
     }
 
     @Override
