@@ -1,21 +1,26 @@
 package com.indignado.games.smariano.utils.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Env;
-import com.indignado.games.smariano.constantes.GameState;
-import com.indignado.games.smariano.managers.game.ResourcesManager;
+import com.indignado.games.smariano.BaseGame;
+import com.indignado.games.smariano.config.constantes.Env;
+import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.ResourceService;
+
+import javax.inject.Inject;
 
 public class CustomDialog extends Window {
+    @Inject
+    public StateMachine<BaseGame> gameStateMachine;
 
     private Skin skin;
-    public CustomDialog (String title,ResourcesManager resourcesManager) {
-        super(title,resourcesManager.getStyles().skin );
-        this.skin=resourcesManager.getStyles().skin;
+    public CustomDialog (String title,ResourceService resourceService) {
+        super(title, resourceService.getStyles().skin );
+        this.skin= resourceService.getStyles().skin;
         initialize();
     }
 
@@ -46,7 +51,7 @@ public class CustomDialog extends Window {
 
 
     protected void result (Object object) {
-        SMariano.setGameState(GameState.GAME_RUNNING);
+        gameStateMachine.changeState(GameState.RUNNING);
         Gdx.app.log(Env.LOG, "La respuesta a la ventana de Dialogo es: "+ object+ "Tipo clase "+object.getClass() );
         if (object instanceof Boolean && object.equals(true)){
            Gdx.app.exit();

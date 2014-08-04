@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.indignado.games.smariano.constantes.Env;
+import com.indignado.games.smariano.config.constantes.Env;
 
 public class EffectCreator {
     private static final String logTag = "MtxEffectCreator";

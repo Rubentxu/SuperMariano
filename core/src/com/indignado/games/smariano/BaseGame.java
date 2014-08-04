@@ -5,12 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.indignado.games.smariano.config.ScreensModule;
-import com.indignado.games.smariano.fms.GameState;
-import com.indignado.games.smariano.managers.interfaces.*;
-import com.indignado.games.smariano.pantallas.BaseScreen;
-import com.indignado.games.smariano.pantallas.MenuScreen;
-import com.indignado.games.smariano.pantallas.SplashScreen;
+import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.interfaces.IAudioService;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
+import com.indignado.games.smariano.view.screens.*;
 import com.indignado.games.smariano.utils.debug.GameLogger;
+import dagger.Lazy;
 import dagger.ObjectGraph;
 
 import javax.inject.Inject;
@@ -18,27 +18,31 @@ import javax.inject.Inject;
 public class BaseGame implements ApplicationListener {
 
     @Inject
-    public IResourcesManager resourcesManager;
+    public IResourcesService resourcesService;
     @Inject
-    public IAudioManager audioManager;
-    @Inject
-    public ILevelManager levelManager;
-    @Inject
-    protected AbstractPreferencesManager preferencesManager;
-    @Inject
-    protected IProfileManager profileManager;
-    public BaseScreen currScreen;
-    public BaseScreen nextScreen;
+    public IAudioService audioService;
     @Inject
     public SpriteBatch batch;
-
-
     @Inject
-    MenuScreen menuScreen;
+    protected Lazy<SplashScreen> splashScreen;
     @Inject
-    SplashScreen splashScreen;
+    protected Lazy<MenuScreen> menuScreen;
     @Inject
-    public StateMachine<BaseGame> gameStateMachine;
+    protected Lazy<OptionScreen> optionScreen;
+    @Inject
+    protected Lazy<HighScoresScreen> highScoresScreen;
+    @Inject
+    protected Lazy<ScoreScreen> scoreScreen;
+    @Inject
+    protected Lazy<SelectLevelScreen> selectLevelScreen;
+    @Inject
+    protected Lazy<GameScreen> gameScreen;
+    @Inject
+    protected Lazy<GameOverScreen> gameOverScreen;
+    @Inject
+    protected StateMachine<BaseGame> gameStateMachine;
+    protected BaseScreen currScreen;
+    protected BaseScreen nextScreen;
 
 
 
@@ -152,7 +156,7 @@ public class BaseGame implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-        audioManager.stopMusic();
+        audioService.stopMusic();
         if (currScreen != null) currScreen.resize(width, height);
         if (nextScreen != null) nextScreen.resize(width, height);
     }
@@ -169,7 +173,7 @@ public class BaseGame implements ApplicationListener {
 
     @Override
     public void dispose() {
-        resourcesManager.dispose();
+        resourcesService.dispose();
         if (currScreen != null) currScreen.hide();
         if (nextScreen != null) nextScreen.hide();
 

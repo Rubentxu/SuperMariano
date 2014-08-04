@@ -1,0 +1,52 @@
+package com.indignado.games.smariano.view.screens;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.indignado.games.smariano.config.constantes.GameState;
+import com.indignado.games.smariano.model.services.ResourceService;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+
+public class SplashScreen extends BaseScreen {
+    private Texture splashTexture;
+
+
+    @Override
+    public void show() {
+        super.show();
+        splashTexture = resourcesManager.get().get(ResourceService.SPLASH);
+        splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+
+        mainTable.getColor().a = 0f;
+        mainTable.setBackground(new SpriteDrawable(new Sprite(splashTexture)));
+        mainTable.addAction(sequence(fadeIn(0.5f), run(new Runnable() {
+            public void run() {
+                game.menuScreen = new MenuScreen();
+            }
+        }), delay(1f, fadeOut(0.5f)), run(new Runnable() {
+            public void run() {
+                game.setGameState(GameState.GAME_SHOW_MENU);
+            }
+        })));
+
+        stage.addActor(mainTable);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
+
+    @Override
+    public void showDialog() {
+
+    }
+
+}

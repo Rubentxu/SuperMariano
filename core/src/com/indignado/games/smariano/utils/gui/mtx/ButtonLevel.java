@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.indignado.games.smariano.managers.game.ResourcesManager;
+import com.indignado.games.smariano.model.services.ResourceService;
 
 public class ButtonLevel extends AbstractButton {
     // Level stars (Not mandatory)
@@ -24,10 +24,10 @@ public class ButtonLevel extends AbstractButton {
     // Font (For writings and level number)
 
 
-    public ButtonLevel(ResourcesManager resourcesManager) {
+    public ButtonLevel(ResourceService resourceService) {
 
-        super(resourcesManager.<BitmapFont>get(ResourcesManager.HEADER_FONT), resourcesManager.getStyles().skin.getDrawable("gui_bloque_vacio")
-                , resourcesManager.getStyles().skin.getDrawable("btnMenuPress"));
+        super(resourceService.<BitmapFont>get(ResourceService.HEADER_FONT), resourceService.getStyles().skin.getDrawable("gui_bloque_vacio")
+                , resourceService.getStyles().skin.getDrawable("btnMenuPress"));
         bitMapFont.setColor(Color.ORANGE);
     }
 

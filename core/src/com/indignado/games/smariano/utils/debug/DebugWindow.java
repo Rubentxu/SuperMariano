@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.indignado.games.smariano.managers.game.ResourcesManager;
+import com.indignado.games.smariano.model.services.ResourceService;
 
 public class DebugWindow extends Window {
 
@@ -20,16 +20,16 @@ public class DebugWindow extends Window {
     }
 
 
-    public static Window createWindowDebug(ResourcesManager resourcesManager){
+    public static Window createWindowDebug(ResourceService resourceService){
 
-        BitmapFont font = (BitmapFont) resourcesManager.get(resourcesManager.DEBUG_FONT);
+        BitmapFont font = (BitmapFont) resourceService.get(resourceService.DEBUG_FONT);
         font.setScale(1 / 150F);
         font.setUseIntegerPositions(false);
         Window.WindowStyle style = new Window.WindowStyle();
         //style.background = background;
         style.titleFont = font;
         style.titleFontColor=new Color(1, 1, 1, 0.4f);
-        Sprite background = new Sprite((Texture) resourcesManager.get(resourcesManager.DEBUG_BACKGROUND));
+        Sprite background = new Sprite((Texture) resourceService.get(resourceService.DEBUG_BACKGROUND));
         background.setSize(10,8);
         background.setOrigin(background.getWidth() / 2, background.getHeight() / 2);
         background.setColor(1,1,1,0.4f);
@@ -47,9 +47,9 @@ public class DebugWindow extends Window {
         return window;
     }
 
-    public static final Window getInstance(ResourcesManager resourcesManager){
+    public static final Window getInstance(ResourceService resourceService){
         if(windowDebug==null){
-            windowDebug= createWindowDebug(resourcesManager);
+            windowDebug= createWindowDebug(resourceService);
         }
         return windowDebug;
     }

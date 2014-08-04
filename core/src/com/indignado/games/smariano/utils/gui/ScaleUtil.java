@@ -1,7 +1,7 @@
 package com.indignado.games.smariano.utils.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.indignado.games.smariano.constantes.Env;
+import com.indignado.games.smariano.config.constantes.Env;
 
 public class ScaleUtil {
 

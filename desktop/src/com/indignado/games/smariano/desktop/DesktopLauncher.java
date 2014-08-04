@@ -4,7 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
 import com.indignado.games.smariano.SMariano;
-import com.indignado.games.smariano.constantes.Env;
+import com.indignado.games.smariano.config.constantes.Env;
 
 import java.util.ArrayList;
 import java.util.List;

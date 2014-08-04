@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.indignado.games.smariano.constantes.Env;
-import com.indignado.games.smariano.controladores.WorldController;
-import com.indignado.games.smariano.managers.game.ResourcesManager;
-import com.indignado.games.smariano.servicios.Styles;
+import com.indignado.games.smariano.config.constantes.Env;
+import com.indignado.games.smariano.controller.WorldController;
+import com.indignado.games.smariano.model.services.ResourceService;
+import com.indignado.games.smariano.model.services.Styles;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 
@@ -162,13 +162,13 @@ public class GuiBuilder {
         return touchpad;
     }
 
-    public static final Table buildStats(float width,float height, Styles styles,ResourcesManager resourcesManager) {
+    public static final Table buildStats(float width,float height, Styles styles,ResourceService resourceService) {
 
         Table tableProfile = new Table();
         tableProfile.setBounds(0, 0, width , height );
 
 
-        Image imageLives = new Image(((TextureAtlas) resourcesManager.get(resourcesManager.GUI_ATLAS)).findRegion("vidas"));
+        Image imageLives = new Image(((TextureAtlas) resourceService.get(resourceService.GUI_ATLAS)).findRegion("vidas"));
         imageLives.setName(Env.IMAGE_LIVES);
 
         Label lives = new Label("0", styles.skin, "default", Color.ORANGE);

@@ -15,10 +15,10 @@ import javax.inject.Singleton;
  * Created by Rubentxu on 25/06/14.
  */
 @Module(injects = {BaseGame.class, SplashScreen.class, MenuScreen.class}, includes = {RenderModule.class, GameServicesModule.class})
-public class ScreensModule {
+public class ControllersModule {
     BaseGame game;
 
-    public ScreensModule(BaseGame game) {
+    public ControllersModule(BaseGame game) {
         this.game = game;
     }
 

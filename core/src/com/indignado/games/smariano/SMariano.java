@@ -2,9 +2,7 @@ package com.indignado.games.smariano;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
-import com.indignado.games.smariano.constantes.GameState;
-import com.indignado.games.smariano.managers.game.*;
-import com.indignado.games.smariano.pantallas.BaseScreen;
+import com.indignado.games.smariano.model.fms.GameState;
 
 public class SMariano extends BaseGame {
     public static boolean DEBUG = false;
@@ -12,18 +10,9 @@ public class SMariano extends BaseGame {
 
     @Override
     public void create() {
-        BaseScreen.game=this;
         Gdx.input.setCatchBackKey(true);
-        resourcesManager =new ResourcesManager();
-        preferencesManager = PreferencesManager.instance;
-        profileManager= new ProfileManager();
-        levelManager=new LevelManager(this);
-        audioManager =new AudioManager(this);
-
-        BaseScreen.game=this;
-
         log = new FPSLogger();
-        setGameState(GameState.GAME_SHOW_SPLASH);
+        gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
     }
 
     @Override
