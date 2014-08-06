@@ -6,12 +6,15 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.indignado.games.smariano.BaseGame;
+import com.indignado.games.smariano.model.services.LevelService;
 import com.indignado.games.smariano.model.services.ResourceService;
+import com.indignado.games.smariano.utils.debug.GameLogger;
 import com.indignado.games.smariano.view.screens.GameScreen;
 import com.indignado.games.smariano.view.screens.MenuScreen;
 import com.indignado.games.smariano.view.screens.transitions.Transition;
 import com.indignado.games.smariano.view.screens.transitions.TransitionFactory;
-import com.indignado.games.smariano.utils.debug.GameLogger;
+
+import javax.inject.Inject;
 
 
 /**
@@ -40,7 +43,8 @@ public enum GameState implements State<BaseGame> {
     OVER {
         @Override
         public void update(BaseGame game) {
-            game.currScreen.showMessage("Game Over", 1.5f, GameState.GAME_SHOW_SCORE);
+            game.setNextScreen(game.highScoresScreen.get());
+            game.currScreen.showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN);
             game.currScreen.render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
         }
     },
@@ -130,7 +134,7 @@ public enum GameState implements State<BaseGame> {
                 return;
             }
             GameLogger.info("GameState", "Comienza el Estado SHOW_NEXT_SCREEN NextScreen: %s"
-                    , game.nextScreen.getClass().getName());
+                    , game.nextScreen.getClass().getSimpleName());
 
             int w = Gdx.graphics.getWidth();
             int h = Gdx.graphics.getHeight();
@@ -152,13 +156,13 @@ public enum GameState implements State<BaseGame> {
                 game.currScreen.pause();
                 game.gameStateMachine.changeState(GameState.SCREEN_TRANSITION);
                 GameLogger.info("GameState", "Finalizo el Estado SHOW_NEXT_SCREEN NextScreen: %s"
-                        , game.nextScreen.getClass().getName());
+                        , game.nextScreen.getClass().getSimpleName());
                 transition = TransitionFactory.getTransition(game.nextScreen);
             }
             if (game.currScreen instanceof GameScreen) {
-                GameLogger.info("GameState","music Game");
+                GameLogger.info("GameState", "music Game");
                 game.audioService.stopMusic();
-                game.audioService.playMusic(game.levelManager.getCurrentLevel().getMusic());
+                game.audioService.playMusic(levelService.getCurrentLevel().getMusic());
             } else if (game.currScreen instanceof MenuScreen) {
                 GameLogger.info("GameState", "music Menu");
                 game.audioService.stopMusic();
@@ -174,16 +178,29 @@ public enum GameState implements State<BaseGame> {
     protected static FrameBuffer nextFbo;
     private static final String TAG = "GameState";
     private static Transition transition;
+    @Inject
+    LevelService levelService;
 
     @Override
     public void enter(BaseGame game) {
-        GameLogger.info(TAG, "Entrando en el Estado........");
+        if (game.gameStateMachine.getCurrentState().equals(SHOW_NEXT_SCREEN)) {
+            GameLogger.info(TAG, "Entrando en el Estado.......%s...........%s", game.gameStateMachine.getCurrentState(), game.nextScreen.getClass().getSimpleName());
+        } else {
+            GameLogger.info(TAG, "Entrando en el Estado.......%s...........%s", game.gameStateMachine.getCurrentState(), game.currScreen.getClass().getSimpleName());
+        }
+
     }
 
 
     @Override
     public void exit(BaseGame game) {
-        GameLogger.info(TAG, "Saliendo del Estado.........");
+        if (game.gameStateMachine.getCurrentState().equals(SHOW_NEXT_SCREEN)) {
+            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.nextScreen.getClass().getSimpleName());
+        } else {
+            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.currScreen.getClass().getSimpleName());
+        }
+
+
     }
 
 

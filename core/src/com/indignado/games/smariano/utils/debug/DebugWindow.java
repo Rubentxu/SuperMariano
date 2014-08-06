@@ -22,14 +22,14 @@ public class DebugWindow extends Window {
 
     public static Window createWindowDebug(ResourceService resourceService){
 
-        BitmapFont font = (BitmapFont) resourceService.get(resourceService.DEBUG_FONT);
+        BitmapFont font = (BitmapFont) resourceService.getAssetManager().get(resourceService.DEBUG_FONT);
         font.setScale(1 / 150F);
         font.setUseIntegerPositions(false);
         Window.WindowStyle style = new Window.WindowStyle();
         //style.background = background;
         style.titleFont = font;
         style.titleFontColor=new Color(1, 1, 1, 0.4f);
-        Sprite background = new Sprite((Texture) resourceService.get(resourceService.DEBUG_BACKGROUND));
+        Sprite background = new Sprite((Texture) resourceService.getAssetManager().get(resourceService.DEBUG_BACKGROUND));
         background.setSize(10,8);
         background.setOrigin(background.getWidth() / 2, background.getHeight() / 2);
         background.setColor(1,1,1,0.4f);

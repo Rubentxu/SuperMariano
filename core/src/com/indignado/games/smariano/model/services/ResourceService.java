@@ -14,10 +14,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
+import com.indignado.games.smariano.utils.debug.GameLogger;
 
-public class ResourceService extends AssetManager implements Disposable,IResourcesService {
+public class ResourceService implements Disposable,IResourcesService {
 
-    private Styles styles;
+    private AssetManager assetManager;
 
     public static final String GUI_ATLAS = "gui/gui.pack";
     public static final String GUI_PACK_ATLAS = "gui/gui-pack.pack";
@@ -46,24 +47,36 @@ public class ResourceService extends AssetManager implements Disposable,IResourc
 
 
     public ResourceService() {
-        super();
+        this.assetManager = new AssetManager();
         loadSplash();
         loadAssetsGame();
         loadSounds();
         this.finishLoading();
-        styles=new Styles();
     }
 
-    @Override
-    public void finishLoading () {
-        Gdx.app.log(Env.LOG, "Finish Loading Assets: ");
-        super.finishLoading();
+
+    public void finishLoading() {
+        GameLogger.info("ResourcesManager", "Finish Loading Assets: ");
+        assetManager.finishLoading();
+
     }
 
+
     @Override
+    public void dispose() {
+        assetManager.dispose();
+        assetManager = null;
+    }
+
+
+    public AssetManager getAssetManager() {
+        return assetManager;
+    }
+
+
     public synchronized <T> void load (String fileName, Class<T> type) {
         Gdx.app.log(Env.LOG, "Load Asset: " + fileName+" Type: "+ type.getName());
-        load(fileName, type, null);
+        assetManager.load(fileName, type, null);
     }
 
     private void loadAssetsGame() {
@@ -82,7 +95,7 @@ public class ResourceService extends AssetManager implements Disposable,IResourc
         this.load(UISKIN_ATLAS, TextureAtlas.class);
         this.load(PARTICLE_EFFECT, ParticleEffect.class);
         this.load(PARTICLE_EFFECT_CONTACT, ParticleEffect.class);
-        this.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         this.load(MUSIC_MENU,Music.class);
 
     }
@@ -101,23 +114,14 @@ public class ResourceService extends AssetManager implements Disposable,IResourc
 
     }
 
-    @Override
-    public AssetManager getAssetManager() {
-        return null;
-    }
 
     public Music getMusic(String name) {
-        if (this.isLoaded(name,Music.class)) return this.get(name,Music.class);
+        if (assetManager.isLoaded(name, Music.class)) return assetManager.get(name, Music.class);
         this.load(name, Music.class);
         this.finishLoading();
-        return this.get(name,Music.class);
+        return assetManager.get(name, Music.class);
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
-        styles.dispose();
-    }
 
     public void loadSounds() {
         this.load(HIT_SOUND, Sound.class);
@@ -127,10 +131,8 @@ public class ResourceService extends AssetManager implements Disposable,IResourc
     }
 
     public Sound getSound(String sound) {
-        return this.get(sound, Sound.class);
+        return assetManager.get(sound, Sound.class);
     }
 
-    public Styles getStyles() {
-        return styles;
-    }
+
 }

@@ -12,10 +12,17 @@ import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.services.Styles;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
+
+import javax.inject.Inject;
 
 
 public class GuiBuilder {
+    @Inject
+    protected IResourcesService resourcesService;
+    @Inject
+    protected Styles styles;
 
     public static final Table buildPadButtons(float width,float height, Styles styles, final WorldController controller) {
 
@@ -162,13 +169,13 @@ public class GuiBuilder {
         return touchpad;
     }
 
-    public static final Table buildStats(float width,float height, Styles styles,ResourceService resourceService) {
+    public Table buildStats(float width, float height) {
 
         Table tableProfile = new Table();
         tableProfile.setBounds(0, 0, width , height );
 
 
-        Image imageLives = new Image(((TextureAtlas) resourceService.get(resourceService.GUI_ATLAS)).findRegion("vidas"));
+        Image imageLives = new Image(((TextureAtlas) resourcesService.getAssetManager().get(ResourceService.GUI_ATLAS)).findRegion("vidas"));
         imageLives.setName(Env.IMAGE_LIVES);
 
         Label lives = new Label("0", styles.skin, "default", Color.ORANGE);

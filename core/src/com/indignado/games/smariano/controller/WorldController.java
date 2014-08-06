@@ -3,13 +3,15 @@ package com.indignado.games.smariano.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
-import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.managers.*;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
+import com.indignado.games.smariano.model.managers.*;
+import com.indignado.games.smariano.model.services.AudioService;
+import com.indignado.games.smariano.model.services.ProfileService;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,10 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     protected ItemsManager itemsManager;
     protected CheckPointManager checkPointManager;
     protected List<Box2DPhysicsObject> destroy=new ArrayList<Box2DPhysicsObject>();
+    @Inject
+    ProfileService profileService;
+    @Inject
+    AudioService audioService;
 
     public static java.util.Map<Keys, Boolean> keys = new java.util.HashMap<Keys, Boolean>();
 
@@ -48,10 +54,10 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
         itemsManager= new ItemsManager();
         checkPointManager = new CheckPointManager();
 
-        itemsManager.addObserver(game.getProfileManager());
-        itemsManager.addObserver(game.getAudioManager());
-        heroManager.addObserver(game.getProfileManager());
-        heroManager.addObserver(game.getAudioManager());
+        itemsManager.addObserver(profileService);
+        itemsManager.addObserver(audioService);
+        heroManager.addObserver(profileService);
+        heroManager.addObserver(audioService);
 
     }
 

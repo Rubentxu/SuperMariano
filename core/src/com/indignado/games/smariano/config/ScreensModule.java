@@ -2,6 +2,7 @@ package com.indignado.games.smariano.config;
 
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.view.screens.MenuScreen;
@@ -14,25 +15,16 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {BaseGame.class, SplashScreen.class, MenuScreen.class}, includes = {RenderModule.class, GameServicesModule.class})
+@Module(injects = {BaseGame.class, SplashScreen.class, MenuScreen.class}, complete = false)
 public class ScreensModule {
-    BaseGame game;
-
-    public ScreensModule(BaseGame game) {
-        this.game = game;
-    }
-
-    @Provides
-    BaseGame provideBaseGame() {
-        return game;
-    }
 
 
     @Provides
     @Singleton
-    StateMachine<BaseGame> provideGameStateMachine() {
+    StateMachine<BaseGame> provideGameStateMachine(BaseGame game) {
         return new DefaultStateMachine<BaseGame>(game, GameState.RUNNING);
     }
+
 
     @Provides
     @Singleton
@@ -40,10 +32,18 @@ public class ScreensModule {
         return new SplashScreen();
     }
 
+
     @Provides
     @Singleton
     MenuScreen provideMenuScreen() {
         return new MenuScreen();
+    }
+
+
+    @Provides
+    @Singleton
+    Stage provideStage() {
+        return new Stage();
     }
 
 

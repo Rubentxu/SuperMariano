@@ -18,27 +18,25 @@ import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.entities.*;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DUtils;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
 
 public class Box2dObjectFactory {
-
-
-    private com.indignado.games.smariano.model.entities.World world;
-    private World physics;
-    private ResourceService resourceService;
+    @Inject
+    protected IResourcesService resourcesService;
+    @Inject
+    protected com.indignado.games.smariano.model.entities.World world;
+    @Inject
+    protected World physics;
     private float unitScale;
 
-    public Box2dObjectFactory(World physics, com.indignado.games.smariano.model.entities.World world, ResourceService resourceService) {
-        this.physics = physics;
-        this.world=world;
-        this.resourceService = resourceService;
-    }
 
     public void createEntity(GRUPO tipo, MapObject object) {
         switch (tipo) {
@@ -275,8 +273,8 @@ public class Box2dObjectFactory {
             hero.getOriginBodyA().set(((width*scaleX/2)-(width/2))/2f,((height*scaleY/2+radius)-(height/2)+radius)/2f);
             heroPhysicsFixture.setUserData(hero);
             heroSensorFixture.setUserData(hero);
-            hero.setParticleEffectDust((ParticleEffect) resourceService.get(ResourceService.PARTICLE_EFFECT));
-            hero.setParticleEffectContact((ParticleEffect) resourceService.get(ResourceService.PARTICLE_EFFECT_CONTACT));
+            hero.setParticleEffectDust((ParticleEffect) resourcesService.getAssetManager().get(ResourceService.PARTICLE_EFFECT));
+            hero.setParticleEffectContact((ParticleEffect) resourcesService.getAssetManager().get(ResourceService.PARTICLE_EFFECT_CONTACT));
             shape.dispose();
             circle.dispose();
 

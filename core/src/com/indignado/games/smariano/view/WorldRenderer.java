@@ -12,6 +12,7 @@ import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.utils.parallax.ParallaxBackground;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 
 public class WorldRenderer implements Disposable {
@@ -20,19 +21,20 @@ public class WorldRenderer implements Disposable {
     @Inject
     protected World world;
     @Inject
+    @Named("camera")
     protected OrthographicCamera cam;
     @Inject
     protected OrthogonalTiledMapRenderer renderer;
 
     @Inject
-    private SpriteBatch spriteBatch;
+    protected SpriteBatch spriteBatch;
     private float width;
     private float height;
 
     @Inject
     protected ModelsAndViews modelsAndViews;
     @Inject
-    private ParallaxBackground background;
+    protected ParallaxBackground background;
 
 
 

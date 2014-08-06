@@ -10,40 +10,40 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(library = true)
+@Module(library = true,complete = false)
 public class GameServicesModule {
 
     @Provides
     @Singleton
-    IResourcesService provideResourcesManager() {
+    IResourcesService provideResourceService() {
         return new ResourceService();
     }
 
 
     @Provides
     @Singleton
-    IAudioService provideAudioManager() {
+    IAudioService provideAudioService() {
         return new AudioService();
     }
 
 
     @Provides
     @Singleton
-    ILevelService provideLevelManager() {
+    ILevelService provideLevelService() {
         return new LevelService();
     }
 
 
     @Provides
     @Singleton
-    AbstractPreferencesService providePreferencesManager() {
+    PreferencesService providePreferencesService() {
         return new PreferencesService();
     }
 
 
     @Provides
     @Singleton
-    IProfileService provideProfileManager() {
+    IProfileService provideProfileService() {
         return new ProfileService();
     }
 

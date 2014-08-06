@@ -44,7 +44,7 @@ public class SelectLevelScreen extends BaseScreen {
         int pad = (int) (30 * ScaleUtil.getSizeRatio());
         for (int i = 0; i < levels.size(); i++) {
 
-            final ButtonLevel levelButton = new ButtonLevel(resourcesManager);
+            final ButtonLevel levelButton = new ButtonLevel();
             if (!levels.get(i).isActive()) {
                 levelButton.setTextureLocked(skin.getRegion("gui_candado"), true);
             }

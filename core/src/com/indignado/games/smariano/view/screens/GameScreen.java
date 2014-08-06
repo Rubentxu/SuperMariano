@@ -9,30 +9,28 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.controller.WorldController;
-import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.view.inputs.GameInputs;
-import com.indignado.games.smariano.model.services.PreferencesService;
-import com.indignado.games.smariano.model.services.ProfileService;
-import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.World;
+import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.PreferencesService;
+import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.view.WorldRenderer;
+import com.indignado.games.smariano.view.inputs.GameInputs;
 
 import javax.inject.Inject;
 
 
 public class GameScreen extends BaseScreen {
-
-
     private Profile profile;
     private Table stats;
     @Inject
     ProfileService profileService;
     @Inject
-    ResourceService resourceService;
+    IResourcesService resourceService;
     @Inject
     PreferencesService preferencesService;
     @Inject
@@ -72,10 +70,10 @@ public class GameScreen extends BaseScreen {
     @Override
     public void showDialog() {
         if (dialog == null) {
-            dialog = new Window("Que desea hacer ?", resourceService.getStyles().skin);
+            dialog = new Window("Que desea hacer ?", styles.skin);
 
-            TextButton btnSalir = new TextButton("Salir", resourceService.getStyles().skin);
-            TextButton btnContinuar = new TextButton("Continuar", resourceService.getStyles().skin);
+            TextButton btnSalir = new TextButton("Salir", styles.skin);
+            TextButton btnContinuar = new TextButton("Continuar", styles.skin);
             btnSalir.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.println("Click Salir...");
@@ -97,27 +95,29 @@ public class GameScreen extends BaseScreen {
             dialog.add(btnContinuar);
             dialog.add(btnSalir);
             dialog.pack();
-            dialog.setPosition(width / 2 - dialog.getWidth() / 2, height / 2 - dialog.getHeight() / 2);
+            dialog.setPosition(Gdx.graphics.getWidth() / 2 - dialog.getWidth() / 2, Gdx.graphics.getHeight() / 2 - dialog.getHeight() / 2);
             stage.addActor(dialog);
         }
     }
+
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
         worldRenderer.resize(width, height);
 
-        stats = GuiBuilder.buildStats(stage.getWidth(), 100 * ScaleUtil.getSizeRatio(), resourceService.getStyles(), resourceService);
+        stats = new GuiBuilder().buildStats(stage.getWidth(), 100 * ScaleUtil.getSizeRatio());
         stats.setBounds(0, height - height / 7, width, height / 7);
         stage.addActor(stats);
 
         if (preferencesService.touchPadEnabled) {
-            Touchpad touchPad = GuiBuilder.buildTouchPad(350 * ScaleUtil.getSizeRatio(), 350 * ScaleUtil.getSizeRatio(), resourceService.getStyles(), worldController);
+            Touchpad touchPad = GuiBuilder.buildTouchPad(350 * ScaleUtil.getSizeRatio(), 350 * ScaleUtil.getSizeRatio(), styles, worldController);
             stage.addActor(touchPad);
         } else {
-            stage.addActor(GuiBuilder.buildPadButtons(370 * ScaleUtil.getSizeRatio(), 190 * ScaleUtil.getSizeRatio(), resourceService.getStyles(), worldController));
+            stage.addActor(GuiBuilder.buildPadButtons(370 * ScaleUtil.getSizeRatio(), 190 * ScaleUtil.getSizeRatio(), styles, worldController));
         }
     }
+
 
     @Override
     public void hide() {
@@ -131,10 +131,12 @@ public class GameScreen extends BaseScreen {
         super.pause();
     }
 
+
     @Override
     public void resume() {
         super.resume();
     }
+
 
     @Override
     public void dispose() {

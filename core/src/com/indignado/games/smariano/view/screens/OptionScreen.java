@@ -43,7 +43,7 @@ public class OptionScreen extends BaseScreen {
         mainTable.defaults().padLeft(50 * ScaleUtil.getSizeRatio());
         mainTable.add(label).colspan(3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) resourcesManager.get(ResourceService.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) resourcesManager.getAssetManager().get(ResourceService.MENU_BACKGROUND))));
 
         final CheckBox musicCheckbox = new CheckBox(" Music", styles.skin);
         musicCheckbox.align(Align.left);

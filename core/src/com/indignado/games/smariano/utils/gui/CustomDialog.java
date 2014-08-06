@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.ResourceService;
+import com.indignado.games.smariano.model.services.Styles;
 
 import javax.inject.Inject;
 
@@ -18,9 +18,10 @@ public class CustomDialog extends Window {
     public StateMachine<BaseGame> gameStateMachine;
 
     private Skin skin;
-    public CustomDialog (String title,ResourceService resourceService) {
-        super(title, resourceService.getStyles().skin );
-        this.skin= resourceService.getStyles().skin;
+    @Inject
+    public CustomDialog (String title,Styles styles) {
+        super(title, styles.skin );
+        this.skin= styles.skin;
         initialize();
     }
 

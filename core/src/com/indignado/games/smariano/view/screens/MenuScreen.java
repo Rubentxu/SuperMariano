@@ -68,7 +68,7 @@ public class MenuScreen extends BaseScreen {
         mainTable.row();
         mainTable.add(button3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) resourcesManager.get(ResourceService.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) resourcesManager.getAssetManager().get(ResourceService.MENU_BACKGROUND))));
         mainTable.row();
         this.stage.addActor(mainTable);
 

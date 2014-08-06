@@ -18,8 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 import javax.inject.Inject;
@@ -33,6 +33,7 @@ public class Styles implements Disposable {
     IResourcesService resourcesManager;
 
     public Styles() {
+        BaseGame.objectGraph.inject(this);
         createStyles();
     }
 

@@ -2,25 +2,23 @@ package com.indignado.games.smariano.model.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
 import com.indignado.games.smariano.model.services.LevelService;
-import com.indignado.games.smariano.model.services.ResourceService;
-import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class World implements Disposable {
-
     private TiledMap map;
-    private com.badlogic.gdx.physics.box2d.World physics;
+    @Inject
+    protected com.badlogic.gdx.physics.box2d.World physics;
     private Box2DMapObjectParser parser;
     private ArrayList<Box2DPhysicsObject> entities;
     private Hero hero;
@@ -32,7 +30,7 @@ public class World implements Disposable {
     @Inject
     LevelService levelService;
     @Inject
-    ResourceService resourceService;
+    IResourcesService resourceService;
 
 
     public World() {
@@ -47,16 +45,16 @@ public class World implements Disposable {
 
 
     private void createDreamsWorld(Level level) {
-        physics = new com.badlogic.gdx.physics.box2d.World(new Vector2(0, -9.81f), true);
-        box2dObjectFactory = new Box2dObjectFactory(physics, this, resourceService);
-        map = resourceService.get(level.getMap());
-        parser = new Box2DMapObjectParser(this, box2dObjectFactory);
+
+        box2dObjectFactory = new Box2dObjectFactory();
+        map = resourceService.getAssetManager().get(level.getMap());
+        parser = new Box2DMapObjectParser();
         // System.out.println(getParser().getHierarchy(map));
         parser.load(getPhysics(), map);
 
-        background_01 = resourceService.get(level.getBackground_01());
-        background_02 = resourceService.get(level.getBackground_02());
-        background_03 = resourceService.get(level.getBackground_03());
+        background_01 = resourceService.getAssetManager().get(level.getBackground_01());
+        background_02 = resourceService.getAssetManager().get(level.getBackground_02());
+        background_03 = resourceService.getAssetManager().get(level.getBackground_03());
 
     }
 

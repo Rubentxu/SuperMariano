@@ -4,19 +4,19 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.indignado.games.smariano.config.ScreensModule;
+import com.indignado.games.smariano.config.GameModule;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.interfaces.IAudioService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-import com.indignado.games.smariano.view.screens.*;
 import com.indignado.games.smariano.utils.debug.GameLogger;
+import com.indignado.games.smariano.view.screens.*;
 import dagger.Lazy;
 import dagger.ObjectGraph;
 
 import javax.inject.Inject;
 
 public class BaseGame implements ApplicationListener {
-
+    public static ObjectGraph objectGraph;
     @Inject
     public IResourcesService resourcesService;
     @Inject
@@ -24,25 +24,25 @@ public class BaseGame implements ApplicationListener {
     @Inject
     public SpriteBatch batch;
     @Inject
-    protected Lazy<SplashScreen> splashScreen;
+    public Lazy<SplashScreen> splashScreen;
     @Inject
-    protected Lazy<MenuScreen> menuScreen;
+    public Lazy<MenuScreen> menuScreen;
     @Inject
-    protected Lazy<OptionScreen> optionScreen;
+    public Lazy<OptionScreen> optionScreen;
     @Inject
-    protected Lazy<HighScoresScreen> highScoresScreen;
+    public Lazy<HighScoresScreen> highScoresScreen;
     @Inject
-    protected Lazy<ScoreScreen> scoreScreen;
+    public Lazy<ScoreScreen> scoreScreen;
     @Inject
-    protected Lazy<SelectLevelScreen> selectLevelScreen;
+    public Lazy<SelectLevelScreen> selectLevelScreen;
     @Inject
-    protected Lazy<GameScreen> gameScreen;
+    public Lazy<GameScreen> gameScreen;
     @Inject
-    protected Lazy<GameOverScreen> gameOverScreen;
+    public Lazy<GameOverScreen> gameOverScreen;
     @Inject
-    protected StateMachine<BaseGame> gameStateMachine;
-    protected BaseScreen currScreen;
-    protected BaseScreen nextScreen;
+    public StateMachine<BaseGame> gameStateMachine;
+    public BaseScreen currScreen;
+    public BaseScreen nextScreen;
 
 
 
@@ -141,38 +141,42 @@ public class BaseGame implements ApplicationListener {
     @Override
     public void create() {
         GameLogger.info("BaseGame", "Ciclo Create del juego");
-        ObjectGraph objectGraph = ObjectGraph.create(new ScreensModule(this));
+        objectGraph = ObjectGraph.create(new GameModule(this));
         objectGraph.inject(this);
+        currScreen = splashScreen.get();
+        nextScreen = menuScreen.get();
 
-        objectGraph.inject(splashScreen);
-        objectGraph.inject(menuScreen);
-        currScreen = splashScreen;
+        objectGraph.inject(currScreen);
+        objectGraph.inject(nextScreen);
+
         currScreen.show();
-        nextScreen = menuScreen;
-        gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
         GameLogger.info("BaseGame", "Finalizo el Ciclo Create del juego");
 
     }
 
     @Override
     public void resize(int width, int height) {
+        GameLogger.info("BaseGame", "Ciclo Resize del juego");
         audioService.stopMusic();
         if (currScreen != null) currScreen.resize(width, height);
-        if (nextScreen != null) nextScreen.resize(width, height);
+
     }
 
     @Override
     public void pause() {
+        GameLogger.info("BaseGame", "Ciclo Pause del juego");
         if (currScreen != null) currScreen.pause();
     }
 
     @Override
     public void resume() {
+        GameLogger.info("BaseGame", "Ciclo Resume del juego");
         if (currScreen != null) currScreen.resume();
     }
 
     @Override
     public void dispose() {
+        GameLogger.info("BaseGame", "Ciclo Dispose del juego");
         resourcesService.dispose();
         if (currScreen != null) currScreen.hide();
         if (nextScreen != null) nextScreen.hide();
@@ -180,11 +184,13 @@ public class BaseGame implements ApplicationListener {
     }
 
     public BaseScreen getNextScreen() {
+        GameLogger.info("BaseGame", "Get next screen %s", nextScreen.getClass().getSimpleName());
         return nextScreen;
     }
 
 
     public void setNextScreen(BaseScreen nextScreen) {
+        GameLogger.info("BaseGame", "Set next screen %s", nextScreen.getClass().getSimpleName());
         this.nextScreen = nextScreen;
     }
 

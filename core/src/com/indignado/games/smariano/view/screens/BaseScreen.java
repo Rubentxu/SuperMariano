@@ -19,10 +19,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.model.services.Styles;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
+import com.indignado.games.smariano.utils.debug.GameLogger;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 
@@ -41,7 +43,9 @@ public abstract class BaseScreen implements Screen {
     @Inject
     protected Styles styles;
     @Inject
+    @Named("camera")
     protected OrthographicCamera camera;
+    @Inject
     protected Stage stage;
     @Inject
     public StateMachine<BaseGame> gameStateMachine;
@@ -50,11 +54,12 @@ public abstract class BaseScreen implements Screen {
     // ScreenTransition transition = ScreenTransitionSlice.init(2,ScreenTransitionSlice.UP_DOWN, 10, Interpolation.pow5Out);
 
     protected String getName() {
-        return this.getClass().getName();
+        return this.getClass().getSimpleName();
     }
 
     @Override
     public void show() {
+        GameLogger.info(this.getClass().getSimpleName(),"Show Screen: " + getName());
         mainTable = new Table();
         mainTable.setFillParent(true);
 

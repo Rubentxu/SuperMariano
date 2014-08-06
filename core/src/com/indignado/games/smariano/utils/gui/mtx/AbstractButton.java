@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.indignado.games.smariano.model.services.ResourceService;
+import com.indignado.games.smariano.model.services.Styles;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
+
+import javax.inject.Inject;
 
 public abstract class AbstractButton extends Button {
     // Locked (Not mandatory)
@@ -25,13 +30,20 @@ public abstract class AbstractButton extends Button {
     protected float externalTextureSizeW = 50.0f;
     protected float externalTextureSizeH = 50.0f;
     protected TextureRegion textureExternal;
-
+    @Inject
+    protected IResourcesService resourcesService;
+    @Inject
+    protected Styles styles;
     //
     private boolean DIPActive = false;
 
-    public AbstractButton(BitmapFont bitMapFont, Drawable up, Drawable down) {
-        super(up, down);
-        this.bitMapFont = bitMapFont;
+    public AbstractButton() {
+        super();
+        Drawable up=styles.skin.getDrawable("gui_bloque_vacio");
+        Drawable down=styles.skin.getDrawable("btnMenuPress");
+        setStyle(new ButtonStyle(up, down, null));
+
+        this.bitMapFont = resourcesService.getAssetManager().<BitmapFont>get(ResourceService.HEADER_FONT);
     }
 
     public AbstractButton(BitmapFont bitMapFont, Drawable up, Drawable down,
