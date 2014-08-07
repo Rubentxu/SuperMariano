@@ -6,12 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.LevelService;
-import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.model.entities.Profile;
+import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 import javax.inject.Inject;
@@ -26,8 +27,12 @@ public class ScoreScreen extends BaseScreen {
     @Inject
     ProfileService profileService;
     @Inject
-    LevelService levelService;
+    ILevelService levelService;
 
+
+    public ScoreScreen(){
+        BaseGame.objectGraph.inject(this);
+    }
 
     @Override
     public void resize(int width, int height) {

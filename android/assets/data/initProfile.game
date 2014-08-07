@@ -1,7 +1,7 @@
 {
    levels:[
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:1,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:true,
@@ -15,7 +15,7 @@
          num:1
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:2,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:true,
@@ -29,7 +29,7 @@
          num:2
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:3,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:true,
@@ -43,7 +43,7 @@
          num:3
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:2,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:true,
@@ -57,7 +57,7 @@
          num:4
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:0,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:true,
@@ -71,7 +71,7 @@
          num:5
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:0,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:false,
@@ -85,7 +85,7 @@
          num:6
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:0,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:false,
@@ -99,7 +99,7 @@
          num:7
       },
       {
-         class:com.indignado.games.smariano.modelo.Level,
+         class:com.indignado.games.smariano.model.entities.Level,
          achievements:0,
          music:sounds/music/BusyDayAtTheMarket.mp3,
          active:false,

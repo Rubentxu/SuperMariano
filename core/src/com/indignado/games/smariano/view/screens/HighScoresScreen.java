@@ -6,14 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.indignado.games.smariano.controller.WorldController;
-import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.PreferencesService;
-import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.model.entities.Profile;
-import com.indignado.games.smariano.model.entities.World;
+import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
-import com.indignado.games.smariano.view.WorldRenderer;
+import dagger.Lazy;
 
 import javax.inject.Inject;
 
@@ -22,13 +19,7 @@ public class HighScoresScreen extends BaseScreen {
     @Inject
     ProfileService profileService;
     @Inject
-    PreferencesService preferencesService;
-    @Inject
-    protected World world;
-    @Inject
-    protected WorldController worldController;
-    @Inject
-    protected WorldRenderer worldRenderer;
+    public Lazy<MenuScreen> menuScreen;
 
 
     @Override
@@ -64,6 +55,7 @@ public class HighScoresScreen extends BaseScreen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
+                game.setNextScreen(menuScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });

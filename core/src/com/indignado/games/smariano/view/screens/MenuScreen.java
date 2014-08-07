@@ -20,6 +20,10 @@ import javax.inject.Inject;
 public class MenuScreen extends BaseScreen {
     @Inject
     public Lazy<OptionScreen> optionScreen;
+    @Inject
+    public Lazy<HighScoresScreen> highScoresScreen;
+    @Inject
+    public Lazy<SelectLevelScreen> selectLevelScreen;
 
 
     @Override
@@ -40,6 +44,7 @@ public class MenuScreen extends BaseScreen {
         btnStart.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click Comenzar...");
+                game.setNextScreen(selectLevelScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });
@@ -55,6 +60,7 @@ public class MenuScreen extends BaseScreen {
         btnScores.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click highScoreScreen...");
+                game.setNextScreen(highScoresScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });

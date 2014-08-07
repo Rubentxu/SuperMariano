@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
@@ -18,14 +19,15 @@ public class LevelService implements ILevelService {
     private List<Level> levels;
     private Level currentLevel;
     @Inject
-    protected IProfileService profileManager;
+    protected IProfileService profileService;
     @Inject
     protected IResourcesService resourcesManager;
 
 
     public LevelService() {
+        BaseGame.objectGraph.inject(this);
         levels = new ArrayList<Level>();
-        levels = profileManager.getProfile().getLevels();
+        levels = profileService.getProfile().getLevels();
         loadLevels();
 
     }
@@ -48,12 +50,14 @@ public class LevelService implements ILevelService {
 
 
     public void saveState() {
-        profileManager.persist();
+        profileService.persist();
     }
 
 
     public Level getCurrentLevel() {
+        if(currentLevel==null) setCurrentLevel(levels.get(0));
         return currentLevel;
+
     }
 
 

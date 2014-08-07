@@ -178,8 +178,17 @@ public class BaseGame implements ApplicationListener {
     public void dispose() {
         GameLogger.info("BaseGame", "Ciclo Dispose del juego");
         resourcesService.dispose();
-        if (currScreen != null) currScreen.hide();
-        if (nextScreen != null) nextScreen.hide();
+        if (currScreen != null) {
+            currScreen.hide();
+            currScreen.dispose();
+            currScreen=null;
+        }
+        if (nextScreen != null) {
+            nextScreen.hide();
+            nextScreen.dispose();
+            nextScreen= null;
+        }
+
 
     }
 
@@ -200,7 +209,11 @@ public class BaseGame implements ApplicationListener {
 
     public void setCurrScreen(BaseScreen currScreen) {
         GameLogger.info("BaseGame", "Set current screen %s", currScreen.getClass().getSimpleName());
+        this.currScreen.hide();
+        this.currScreen.dispose();
+        this.currScreen=null;
         this.currScreen = currScreen;
+
     }
 }
 

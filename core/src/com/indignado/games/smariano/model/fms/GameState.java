@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.services.LevelService;
-import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
-import com.indignado.games.smariano.view.screens.GameScreen;
-import com.indignado.games.smariano.view.screens.MenuScreen;
 import com.indignado.games.smariano.view.screens.transitions.Transition;
 import com.indignado.games.smariano.view.screens.transitions.TransitionFactory;
 
@@ -96,12 +93,12 @@ public enum GameState implements State<BaseGame> {
         private float timeTransition;
         private FrameBuffer currFbo;
         private FrameBuffer nextFbo;
-        private  Transition transition;
+        private Transition transition;
 
         @Override
         public void update(BaseGame game) {
 
-            if(screen_transition){
+            if (screen_transition) {
                 float duration = 0;
 
                 if (transition != null)
@@ -119,17 +116,16 @@ public enum GameState implements State<BaseGame> {
                     game.setNextScreen(null);
                     transition = null;
                     Gdx.input.setInputProcessor(game.getCurrScreen().getInputProcessor());
+                    screen_transition=false;
                     game.gameStateMachine.changeState(GameState.RUNNING);
                 } else {
 
                     currFbo.begin();
-                    GameLogger.info("GameState", "SCREEN_TRANSITION CurrentScreen: %s timeTransition %f NextScreen %s"
-                            , game.getCurrScreen().getClass().getSimpleName(), timeTransition, game.getNextScreen().getClass().getSimpleName());
-                    game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
+                        game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
                     currFbo.end();
 
                     nextFbo.begin();
-                    game.getNextScreen().render(Gdx.graphics.getDeltaTime());
+                        game.getNextScreen().render(Gdx.graphics.getDeltaTime());
                     nextFbo.end();
 
                     float alpha = timeTransition / duration;
@@ -137,7 +133,7 @@ public enum GameState implements State<BaseGame> {
 
                 }
 
-            }else {
+            } else {
                 if (game.getNextScreen() == null) {
                     GameLogger.error("GameState", "No existe una próxima pantalla a la que poder cambiar");
                     return;
@@ -164,7 +160,7 @@ public enum GameState implements State<BaseGame> {
                 timeTransition = 0;
                 if (game.getCurrScreen() != null && !screen_transition) {
                     transition = TransitionFactory.getTransition(game.getNextScreen());
-                    screen_transition=true;
+                    screen_transition = true;
                 }
             }
          /*   if (game.getCurrScreen() instanceof GameScreen) {
@@ -201,12 +197,7 @@ public enum GameState implements State<BaseGame> {
 
     @Override
     public void exit(BaseGame game) {
-        if (game.gameStateMachine.getCurrentState().equals(SHOW_NEXT_SCREEN)) {
-            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.getNextScreen().getClass().getSimpleName());
-        } else {
-            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.getCurrScreen().getClass().getSimpleName());
-        }
-
+        GameLogger.info(TAG, "Saliendo del Estado.........%s...........", game.gameStateMachine.getCurrentState());
 
     }
 

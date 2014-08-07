@@ -2,6 +2,7 @@ package com.indignado.games.smariano.config;
 
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.view.screens.MenuScreen;
@@ -25,20 +26,12 @@ public class ScreensModule {
     }
 
 
-    @Provides
-    @Singleton
-    SplashScreen provideSplashScreen() {
-        return new SplashScreen();
-    }
 
 
     @Provides
-    @Singleton
-    MenuScreen provideMenuScreen() {
-        return new MenuScreen();
+    Stage provideStage() {
+        return new Stage();
     }
-
-
 
 
 }

@@ -19,6 +19,7 @@ import com.indignado.games.smariano.model.services.AudioService;
 import com.indignado.games.smariano.model.services.PreferencesService;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
+import dagger.Lazy;
 
 import javax.inject.Inject;
 
@@ -30,6 +31,8 @@ public class OptionScreen extends BaseScreen {
     PreferencesService preferencesService;
     @Inject
     AudioService audioService;
+    @Inject
+    public Lazy<MenuScreen> menuScreen;
 
 
     @Override
@@ -132,6 +135,7 @@ public class OptionScreen extends BaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 preferencesService.save();
+                game.setNextScreen(menuScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });

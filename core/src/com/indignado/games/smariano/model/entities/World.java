@@ -5,11 +5,14 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
-import com.indignado.games.smariano.model.services.LevelService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
+import dagger.Lazy;
+
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,19 +31,20 @@ public class World implements Disposable {
     private Texture background_01;
     protected Box2dObjectFactory box2dObjectFactory;
     @Inject
-    LevelService levelService;
+    Lazy<ILevelService> levelService;
     @Inject
     IResourcesService resourceService;
 
 
     public World() {
+        BaseGame.objectGraph.inject(this);
         entities = new ArrayList<Box2DPhysicsObject>();
         Collections.sort(entities, new Comparator<Box2DPhysicsObject>() {
             public int compare(Box2DPhysicsObject one, Box2DPhysicsObject two) {
                 return one.getGrupo().compareTo(two.getGrupo());
             }
         });
-        createDreamsWorld(levelService.getCurrentLevel());
+        createDreamsWorld(levelService.get().getCurrentLevel());
     }
 
 

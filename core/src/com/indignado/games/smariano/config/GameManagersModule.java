@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(library = true,complete = false)
+@Module(injects = {World.class},library = true,complete = false)
 public class GameManagersModule {
 
     @Provides
