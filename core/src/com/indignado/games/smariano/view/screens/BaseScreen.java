@@ -45,7 +45,7 @@ public abstract class BaseScreen implements Screen {
     @Inject
     @Named("camera")
     protected OrthographicCamera camera;
-    @Inject
+
     protected Stage stage;
     @Inject
     public StateMachine<BaseGame> gameStateMachine;
@@ -60,6 +60,7 @@ public abstract class BaseScreen implements Screen {
     @Override
     public void show() {
         GameLogger.info(this.getClass().getSimpleName(),"Show Screen: " + getName());
+        stage=new Stage();
         mainTable = new Table();
         mainTable.setFillParent(true);
 

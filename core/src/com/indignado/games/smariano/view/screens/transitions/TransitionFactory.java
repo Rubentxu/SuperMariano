@@ -3,6 +3,7 @@ package com.indignado.games.smariano.view.screens.transitions;
 import com.badlogic.gdx.math.Interpolation;
 import com.indignado.games.smariano.view.screens.BaseScreen;
 import com.indignado.games.smariano.view.screens.MenuScreen;
+import com.indignado.games.smariano.view.screens.OptionScreen;
 import com.indignado.games.smariano.view.screens.SplashScreen;
 
 
@@ -13,14 +14,15 @@ public class TransitionFactory {
 
     public static Transition getTransition(BaseScreen screen) {
         if (screen instanceof SplashScreen) return getSlideTransition();
-        if (screen instanceof MenuScreen) return getSliceTransition();
+        if (screen instanceof MenuScreen) return getSlideTransition();
+        if (screen instanceof OptionScreen) return getSlideTransition();
         return getFadeTransition();
 
     }
 
 
     private static Transition getSlideTransition() {
-        return new SlideTransition(2F, SlideTransition.DOWN, true, Interpolation.swing);
+        return new SlideTransition(2F, SlideTransition.DOWN, false, Interpolation.swing);
 
     }
 

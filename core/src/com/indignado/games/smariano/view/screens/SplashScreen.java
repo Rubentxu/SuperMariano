@@ -30,12 +30,12 @@ public class SplashScreen extends BaseScreen {
 
         mainTable.getColor().a = 0f;
         mainTable.setBackground(new SpriteDrawable(new Sprite(splashTexture)));
-        mainTable.addAction(sequence(fadeIn(0.5f),  delay(1f, fadeOut(0.5f)), run(new Runnable() {
+        mainTable.addAction(sequence(fadeIn(0.5f),  delay(1f,  run(new Runnable() {
             public void run() {
                 game.setNextScreen(menuScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
-        })));
+        }))));
 
         stage.addActor(mainTable);
     }

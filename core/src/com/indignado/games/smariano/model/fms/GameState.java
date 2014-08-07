@@ -24,14 +24,14 @@ public enum GameState implements State<BaseGame> {
     RUNNING {
         @Override
         public void update(BaseGame game) {
-            if (game.currScreen != null) game.currScreen.render(Gdx.graphics.getDeltaTime());
+            if (game.getCurrScreen() != null) game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
         }
     },
     PAUSED {
         @Override
         public void update(BaseGame game) {
-            game.currScreen.showDialog();
-            game.currScreen.render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
+            game.getCurrScreen().showDialog();
+            game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
         }
     },
     UPDATE {
@@ -44,8 +44,8 @@ public enum GameState implements State<BaseGame> {
         @Override
         public void update(BaseGame game) {
             game.setNextScreen(game.highScoresScreen.get());
-            game.currScreen.showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN);
-            game.currScreen.render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
+            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN);
+            game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
         }
     },
     WIN {
@@ -84,40 +84,6 @@ public enum GameState implements State<BaseGame> {
 
         }
     },
-    SCREEN_TRANSITION {
-        @Override
-        public void update(BaseGame game) {
-            float duration = 0;
-            GameLogger.info("GameState", "Estado SCREEN_TRANSITION NextScreen: %s timeTransition %f"
-                    , game.nextScreen.getClass().getName(), timeTransition);
-
-
-            if (transition != null)
-                duration = transition.getDuration();
-
-            timeTransition = Math.min(timeTransition + Gdx.graphics.getDeltaTime(), duration);
-            if (transition == null || timeTransition >= duration) {
-                if (game.currScreen != null) game.currScreen.hide();
-                game.nextScreen.resume();
-                game.currScreen = game.nextScreen;
-                game.nextScreen = null;
-                transition = null;
-                //Gdx.input.setInputProcessor(currScreen.getInputProcessor());
-                game.gameStateMachine.changeState(GameState.RUNNING);
-            } else {
-                currFbo.begin();
-                if (game.currScreen != null) game.currScreen.render(Gdx.graphics.getDeltaTime());
-                currFbo.end();
-                nextFbo.begin();
-                if (game.nextScreen != null) game.nextScreen.render(Gdx.graphics.getDeltaTime());
-                nextFbo.end();
-
-                float alpha = timeTransition / duration;
-                transition.render(game.batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
-
-            }
-        }
-    },
     EXIT {
         @Override
         public void update(BaseGame game) {
@@ -126,67 +92,108 @@ public enum GameState implements State<BaseGame> {
     },
     SHOW_NEXT_SCREEN {
         private boolean init = false;
+        private boolean screen_transition = false;
+        private float timeTransition;
+        private FrameBuffer currFbo;
+        private FrameBuffer nextFbo;
+        private  Transition transition;
 
         @Override
         public void update(BaseGame game) {
-            if (game.nextScreen == null) {
-                GameLogger.error("GameState", "No existe una próxima pantalla a la que poder cambiar");
-                return;
+
+            if(screen_transition){
+                float duration = 0;
+
+                if (transition != null)
+                    duration = transition.getDuration();
+
+                timeTransition = Math.min(timeTransition + Gdx.graphics.getDeltaTime(), duration);
+                if (transition == null || timeTransition >= duration) {
+                    if (game.getCurrScreen() != null) {
+                        game.getCurrScreen().pause();
+                        game.getCurrScreen().hide();
+                    }
+
+                    game.getNextScreen().resume();
+                    game.setCurrScreen(game.getNextScreen());
+                    game.setNextScreen(null);
+                    transition = null;
+                    Gdx.input.setInputProcessor(game.getCurrScreen().getInputProcessor());
+                    game.gameStateMachine.changeState(GameState.RUNNING);
+                } else {
+
+                    currFbo.begin();
+                    GameLogger.info("GameState", "SCREEN_TRANSITION CurrentScreen: %s timeTransition %f NextScreen %s"
+                            , game.getCurrScreen().getClass().getSimpleName(), timeTransition, game.getNextScreen().getClass().getSimpleName());
+                    game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
+                    currFbo.end();
+
+                    nextFbo.begin();
+                    game.getNextScreen().render(Gdx.graphics.getDeltaTime());
+                    nextFbo.end();
+
+                    float alpha = timeTransition / duration;
+                    transition.render(game.batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
+
+                }
+
+            }else {
+                if (game.getNextScreen() == null) {
+                    GameLogger.error("GameState", "No existe una próxima pantalla a la que poder cambiar");
+                    return;
+                }
+                GameLogger.info("GameState", "Comienza el Estado SHOW_NEXT_SCREEN NextScreen: %s"
+                        , game.getNextScreen().getClass().getSimpleName());
+
+                int w = Gdx.graphics.getWidth();
+                int h = Gdx.graphics.getHeight();
+                if (!init) {
+                    nextFbo = new FrameBuffer(Pixmap.Format.RGB888, w, h, true);
+                    currFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
+
+                    init = true;
+                }
+
+
+                game.getNextScreen().show();
+                game.getNextScreen().resize(w, h);
+                game.getCurrScreen().pause();
+                game.getNextScreen().pause();
+                Gdx.input.setInputProcessor(null); // disable input
+
+                timeTransition = 0;
+                if (game.getCurrScreen() != null && !screen_transition) {
+                    transition = TransitionFactory.getTransition(game.getNextScreen());
+                    screen_transition=true;
+                }
             }
-            GameLogger.info("GameState", "Comienza el Estado SHOW_NEXT_SCREEN NextScreen: %s"
-                    , game.nextScreen.getClass().getSimpleName());
-
-            int w = Gdx.graphics.getWidth();
-            int h = Gdx.graphics.getHeight();
-            if (!init) {
-                currFbo = new FrameBuffer(Pixmap.Format.RGB888, w, h, false);
-                nextFbo = new FrameBuffer(Pixmap.Format.RGB888, w, h, false);
-                init = true;
-            }
-
-
-            game.nextScreen.show();
-            game.nextScreen.resize(w, h);
-            //game.nextScreen.render(0);
-            game.nextScreen.pause();
-            Gdx.input.setInputProcessor(null); // disable input
-
-            timeTransition = 0;
-            if (game.currScreen != null) {
-                game.currScreen.pause();
-                game.gameStateMachine.changeState(GameState.SCREEN_TRANSITION);
-                GameLogger.info("GameState", "Finalizo el Estado SHOW_NEXT_SCREEN NextScreen: %s"
-                        , game.nextScreen.getClass().getSimpleName());
-                transition = TransitionFactory.getTransition(game.nextScreen);
-            }
-            if (game.currScreen instanceof GameScreen) {
+         /*   if (game.getCurrScreen() instanceof GameScreen) {
                 GameLogger.info("GameState", "music Game");
                 game.audioService.stopMusic();
                 game.audioService.playMusic(levelService.getCurrentLevel().getMusic());
-            } else if (game.currScreen instanceof MenuScreen) {
+            } else if (game.getCurrScreen() instanceof MenuScreen) {
                 GameLogger.info("GameState", "music Menu");
                 game.audioService.stopMusic();
                 game.audioService.playMusic(ResourceService.MUSIC_MENU);
 
-            }
+            }*/
 
         }
     };
 
-    protected static float timeTransition;
-    protected static FrameBuffer currFbo;
-    protected static FrameBuffer nextFbo;
+
     private static final String TAG = "GameState";
-    private static Transition transition;
+
+
     @Inject
     LevelService levelService;
 
     @Override
     public void enter(BaseGame game) {
         if (game.gameStateMachine.getCurrentState().equals(SHOW_NEXT_SCREEN)) {
-            GameLogger.info(TAG, "Entrando en el Estado.......%s...........%s", game.gameStateMachine.getCurrentState(), game.nextScreen.getClass().getSimpleName());
+            GameLogger.info(TAG, "Entrando en el Estado.......%s...........%s", game.gameStateMachine.getCurrentState(), game.getNextScreen().getClass().getSimpleName());
         } else {
-            GameLogger.info(TAG, "Entrando en el Estado.......%s...........%s", game.gameStateMachine.getCurrentState(), game.currScreen.getClass().getSimpleName());
+            GameLogger.info(TAG, "Entrando en el Estado.......%s...........%s", game.gameStateMachine.getCurrentState(), game.getCurrScreen().getClass().getSimpleName());
         }
 
     }
@@ -195,9 +202,9 @@ public enum GameState implements State<BaseGame> {
     @Override
     public void exit(BaseGame game) {
         if (game.gameStateMachine.getCurrentState().equals(SHOW_NEXT_SCREEN)) {
-            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.nextScreen.getClass().getSimpleName());
+            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.getNextScreen().getClass().getSimpleName());
         } else {
-            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.currScreen.getClass().getSimpleName());
+            GameLogger.info(TAG, "Saliendo del Estado.........%s...........%s", game.gameStateMachine.getCurrentState(), game.getCurrScreen().getClass().getSimpleName());
         }
 
 

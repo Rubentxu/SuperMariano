@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class ParallaxBackground {
 
     private List<ParallaxLayer> layers;
     private float width;
-    @Named("camera")
+
     protected OrthographicCamera cam;
 
     public ParallaxBackground(float width) {

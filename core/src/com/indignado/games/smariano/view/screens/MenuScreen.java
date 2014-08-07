@@ -13,9 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
+import dagger.Lazy;
+
+import javax.inject.Inject;
 
 public class MenuScreen extends BaseScreen {
-
+    @Inject
+    public Lazy<OptionScreen> optionScreen;
 
 
     @Override
@@ -43,6 +47,7 @@ public class MenuScreen extends BaseScreen {
         btnOptions.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click optionScreen...");
+                game.setNextScreen(optionScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });

@@ -41,8 +41,8 @@ public class BaseGame implements ApplicationListener {
     public Lazy<GameOverScreen> gameOverScreen;
     @Inject
     public StateMachine<BaseGame> gameStateMachine;
-    public BaseScreen currScreen;
-    public BaseScreen nextScreen;
+    private BaseScreen currScreen;
+    private BaseScreen nextScreen;
 
 
 
@@ -184,16 +184,23 @@ public class BaseGame implements ApplicationListener {
     }
 
     public BaseScreen getNextScreen() {
-        GameLogger.info("BaseGame", "Get next screen %s", nextScreen.getClass().getSimpleName());
         return nextScreen;
     }
 
 
     public void setNextScreen(BaseScreen nextScreen) {
-        GameLogger.info("BaseGame", "Set next screen %s", nextScreen.getClass().getSimpleName());
+        GameLogger.info("BaseGame", "Set next screen %s",(nextScreen==null)? "Null": nextScreen.getClass().getSimpleName());
         this.nextScreen = nextScreen;
     }
 
 
+    public BaseScreen getCurrScreen() {
+        return currScreen;
+    }
+
+    public void setCurrScreen(BaseScreen currScreen) {
+        GameLogger.info("BaseGame", "Set current screen %s", currScreen.getClass().getSimpleName());
+        this.currScreen = currScreen;
+    }
 }
 
