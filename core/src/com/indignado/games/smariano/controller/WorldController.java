@@ -3,6 +3,7 @@ package com.indignado.games.smariano.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
@@ -18,12 +19,19 @@ import java.util.List;
 
 public class WorldController implements ContactListener, ContactFilter,Disposable {
 
+    @Inject
     protected World world;
+    @Inject
     protected HeroManager heroManager;
+    @Inject
     protected PlatformManager platformManager;
+    @Inject
     protected WaterManager waterManager;
+    @Inject
     protected EnemyManager enemyManager;
+    @Inject
     protected ItemsManager itemsManager;
+    @Inject
     protected CheckPointManager checkPointManager;
     protected List<Box2DPhysicsObject> destroy=new ArrayList<Box2DPhysicsObject>();
     @Inject
@@ -46,6 +54,7 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
 
 
     public WorldController() {
+        BaseGame.objectGraph.inject(this);
         world.getPhysics().setContactListener(this);
         heroManager = new HeroManager();
         platformManager = new PlatformManager();

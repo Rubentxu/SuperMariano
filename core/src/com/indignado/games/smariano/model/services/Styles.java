@@ -120,7 +120,9 @@ public class Styles implements Disposable {
 
     @Override
     public void dispose() {
-        skin.dispose();
-        skin = null;
+        if(skin!=null){
+            skin.dispose();
+            skin = null;
+        }
     }
 }

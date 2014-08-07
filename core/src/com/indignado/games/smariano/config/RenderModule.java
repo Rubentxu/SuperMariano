@@ -6,12 +6,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
 import com.indignado.games.smariano.model.services.Styles;
 import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
+import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.parallax.ParallaxBackground;
+import com.indignado.games.smariano.view.ModelsAndViews;
 import dagger.Module;
 import dagger.Provides;
 
@@ -21,7 +21,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(library = true,complete = false,injects = {Styles.class})
+@Module(library = true,complete = false,injects = {Styles.class,ModelsAndViews.class,GuiBuilder.class,ParallaxBackground.class})
 public class RenderModule {
 
     @Provides
@@ -71,34 +71,20 @@ public class RenderModule {
 
     @Provides
     @Singleton
-    OrthogonalTiledMapRenderer provideOrthogonalTiledMapRenderer(IResourcesService resourceService,ILevelService levelService,Box2DMapObjectParser parser) {
-        return new OrthogonalTiledMapRenderer((TiledMap) resourceService.getAssetManager().get(levelService.getCurrentLevel().getMap()), parser.getUnitScale());
+    OrthogonalTiledMapRenderer provideOrthogonalTiledMapRenderer(IResourcesService resourceService,ILevelService levelService) {
+        return new OrthogonalTiledMapRenderer((TiledMap) resourceService.getAssetManager().get(levelService.getCurrentLevel().getMap()), Env.UNIT_SCALE);
 
     }
 
 
     @Provides
     @Singleton
-    ParallaxBackground provideParallaxBackground() {
-        return new ParallaxBackground(Env.WORLD_WIDTH);
-
+    GuiBuilder provideGuiBuilder() {
+        return new GuiBuilder();
     }
 
 
-    @Provides
-    @Singleton
-    Box2DMapObjectParser provideBox2DMapObjectParser() {
-        return new Box2DMapObjectParser();
 
-    }
-
-
-    @Provides
-    @Singleton
-    Box2dObjectFactory provideBox2dObjectFactory() {
-        return new Box2dObjectFactory();
-
-    }
 
 
 

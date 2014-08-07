@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.services.Styles;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
@@ -39,6 +40,7 @@ public abstract class AbstractButton extends Button {
 
     public AbstractButton() {
         super();
+        BaseGame.objectGraph.inject(this);
         Drawable up=styles.skin.getDrawable("gui_bloque_vacio");
         Drawable down=styles.skin.getDrawable("btnMenuPress");
         setStyle(new ButtonStyle(up, down, null));

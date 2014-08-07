@@ -5,6 +5,7 @@ import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
 import com.indignado.games.smariano.view.screens.MenuScreen;
 import com.indignado.games.smariano.view.screens.SplashScreen;
 import dagger.Module;
@@ -15,7 +16,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {BaseGame.class, SplashScreen.class, MenuScreen.class}, complete = false)
+@Module(injects = {BaseGame.class, SplashScreen.class, MenuScreen.class,ButtonLevel.class}, complete = false)
 public class ScreensModule {
 
 

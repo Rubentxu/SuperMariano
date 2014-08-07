@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.model.services.ResourceService;
@@ -45,6 +46,7 @@ public class ModelsAndViews {
 
 
     public ModelsAndViews() {
+        BaseGame.objectGraph.inject(this);
         loadHeroAnimations();
         loadEnemyAnimations();
         loadWaterAnimations();

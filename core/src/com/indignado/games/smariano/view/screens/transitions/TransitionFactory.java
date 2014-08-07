@@ -22,19 +22,19 @@ public class TransitionFactory {
 
 
     private static Transition getSlideTransition() {
-        return new SlideTransition(2F, SlideTransition.DOWN, false, Interpolation.swing);
+        return new SlideTransition(1.2F, SlideTransition.DOWN, false, Interpolation.bounceOut);
 
     }
 
 
     private static Transition getSliceTransition() {
-        return new SliceTransition(2F, SliceTransition.UP_DOWN, 14, Interpolation.linear);
+        return new SliceTransition(1.2F, SliceTransition.UP_DOWN, 14, Interpolation.linear);
 
     }
 
 
     private static Transition getFadeTransition() {
-        return new FadeTransition(3F);
+        return new FadeTransition(1.5F);
 
     }
 }

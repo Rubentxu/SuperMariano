@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.services.ResourceService;
@@ -24,7 +25,11 @@ public class GuiBuilder {
     @Inject
     protected Styles styles;
 
-    public static final Table buildPadButtons(float width,float height, Styles styles, final WorldController controller) {
+    public GuiBuilder() {
+        BaseGame.objectGraph.inject(this);
+    }
+
+    public Table buildPadButtons(float width,float height, Styles styles, final WorldController controller) {
 
         Table tableControlPad = new Table();
 
@@ -134,7 +139,7 @@ public class GuiBuilder {
     }
 
 
-    public static final Touchpad buildTouchPad(float width,float height, Styles styles, final WorldController controller) {
+    public Touchpad buildTouchPad(float width,float height, Styles styles, final WorldController controller) {
         Touchpad touchpad = new Touchpad(10* ScaleUtil.getSizeRatio(), styles.skin);
         touchpad.setPosition(25 * ScaleUtil.getSizeRatio(), 15);
         touchpad.setWidth(width);

@@ -32,6 +32,9 @@ public class Env {
     public static final String IMAGE_LIVES= "ImageLives";
     public static final String LIVES= "Lives";
 
+
+    public static final float UNIT_SCALE= 0.015625f;
+
     // Name World Events
     public static final int COLLET_COIN = 1;
 }

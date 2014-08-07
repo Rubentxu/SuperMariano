@@ -3,7 +3,6 @@ package com.indignado.games.smariano.view.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -39,13 +38,14 @@ public class GameScreen extends BaseScreen {
     protected WorldController worldController;
     @Inject
     protected WorldRenderer worldRenderer;
+    @Inject
+    GuiBuilder guiBuilder;
 
 
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        super.render(delta);
 
         //updates
         if (gameStateMachine.getCurrentState().equals(GameState.PAUSED) &&
@@ -106,15 +106,15 @@ public class GameScreen extends BaseScreen {
         super.resize(width, height);
         worldRenderer.resize(width, height);
 
-        stats = new GuiBuilder().buildStats(stage.getWidth(), 100 * ScaleUtil.getSizeRatio());
+        stats = guiBuilder.buildStats(stage.getWidth(), 100 * ScaleUtil.getSizeRatio());
         stats.setBounds(0, height - height / 7, width, height / 7);
         stage.addActor(stats);
 
         if (preferencesService.touchPadEnabled) {
-            Touchpad touchPad = GuiBuilder.buildTouchPad(350 * ScaleUtil.getSizeRatio(), 350 * ScaleUtil.getSizeRatio(), styles, worldController);
+            Touchpad touchPad = guiBuilder.buildTouchPad(350 * ScaleUtil.getSizeRatio(), 350 * ScaleUtil.getSizeRatio(), styles, worldController);
             stage.addActor(touchPad);
         } else {
-            stage.addActor(GuiBuilder.buildPadButtons(370 * ScaleUtil.getSizeRatio(), 190 * ScaleUtil.getSizeRatio(), styles, worldController));
+            stage.addActor(guiBuilder.buildPadButtons(370 * ScaleUtil.getSizeRatio(), 190 * ScaleUtil.getSizeRatio(), styles, worldController));
         }
     }
 
@@ -140,12 +140,19 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void dispose() {
-        world.dispose();
-        world = null;
-        worldRenderer.dispose();
-        worldRenderer = null;
-        worldController.dispose();
-        worldController = null;
+        if(world!=null){
+            world.dispose();
+            world = null;
+        }
+        if(worldRenderer!=null){
+            worldRenderer.dispose();
+            worldRenderer = null;
+        }
+        if(worldController!=null){
+            worldController.dispose();
+            worldController = null;
+        }
+
     }
 
 

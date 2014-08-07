@@ -10,6 +10,7 @@ import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.utils.parallax.ParallaxBackground;
+import com.indignado.games.smariano.utils.parallax.ParallaxLayer;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,17 +34,10 @@ public class WorldRenderer implements Disposable {
 
     @Inject
     protected ModelsAndViews modelsAndViews;
-    @Inject
+
     protected ParallaxBackground background;
 
 
-
-    public WorldRenderer() {
-       // renderer = new OrthogonalTiledMapRenderer(world.getMap(), world.getParser().getUnitScale());
-        world.removeParser();
-
-        //cam = new OrthographicCamera();
-    }
 
     public void resize(int w, int h) {
         this.width=w;
@@ -52,10 +46,10 @@ public class WorldRenderer implements Disposable {
         cam.viewportWidth = (Env.WORLD_HEIGHT / height) * width;
         Gdx.app.log(Env.LOG,"World ViewPortWidth: "+cam.viewportWidth+ " World ViewPortHeight: "+cam.viewportHeight);
 
-      /*  background=new ParallaxBackground(Env.WORLD_WIDTH, cam.viewportHeight);
+        background=new ParallaxBackground(Env.WORLD_WIDTH);
         background.addLayer(new ParallaxLayer(world.getBackground_01(),0.4f,0,100,100));
         background.addLayer(new ParallaxLayer(world.getBackground_03(),0.6f,0,100,100));
-        background.addLayer(new ParallaxLayer(world.getBackground_02(), 0.8f, 0.02f, 100, 100));*/
+        background.addLayer(new ParallaxLayer(world.getBackground_02(), 0.8f, 0.02f, 100, 100));
 
     }
 
@@ -69,11 +63,11 @@ public class WorldRenderer implements Disposable {
 
         spriteBatch.begin();
         modelsAndViews.render(spriteBatch);
-
-       /* if (SMariano.DEBUG) {
+/*
+        if (SMariano.DEBUG) {
             DebugWindow.getInstance(res).setPosition(cam.position.x - 13f, cam.position.y - 5);
             DebugWindow.myLabel.setText("Modo Debug:\n\n" + world.getHero().toString());
-            DebugWindow.getInstance(game.getResourcesManager()).pack();
+            DebugWindow.getInstance(res).pack();
             DebugWindow.getInstance(game.getResourcesManager()).draw(spriteBatch, 1f);
 
         }*/

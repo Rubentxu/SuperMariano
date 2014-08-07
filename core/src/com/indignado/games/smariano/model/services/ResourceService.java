@@ -79,6 +79,7 @@ public class ResourceService implements Disposable,IResourcesService {
         assetManager.load(fileName, type, null);
     }
 
+
     private void loadAssetsGame() {
         Gdx.app.log(Env.LOG, "Load ResourcesManager Game");
         this.load(DEFAULT_FONT, BitmapFont.class);

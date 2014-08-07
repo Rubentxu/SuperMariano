@@ -22,6 +22,7 @@ public class World implements Disposable {
     private TiledMap map;
     @Inject
     protected com.badlogic.gdx.physics.box2d.World physics;
+
     private Box2DMapObjectParser parser;
     private ArrayList<Box2DPhysicsObject> entities;
     private Hero hero;
@@ -29,7 +30,8 @@ public class World implements Disposable {
     private Texture background_03;
     private Texture background_02;
     private Texture background_01;
-    protected Box2dObjectFactory box2dObjectFactory;
+
+    private Box2dObjectFactory box2dObjectFactory;
     @Inject
     Lazy<ILevelService> levelService;
     @Inject
@@ -49,10 +51,9 @@ public class World implements Disposable {
 
 
     private void createDreamsWorld(Level level) {
-
-        box2dObjectFactory = new Box2dObjectFactory();
+        box2dObjectFactory= new Box2dObjectFactory(physics,this,resourceService);
         map = resourceService.getAssetManager().get(level.getMap());
-        parser = new Box2DMapObjectParser();
+        parser = new Box2DMapObjectParser(this,box2dObjectFactory);
         // System.out.println(getParser().getHierarchy(map));
         parser.load(getPhysics(), map);
 

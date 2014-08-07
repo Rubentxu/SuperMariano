@@ -15,27 +15,31 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.entities.*;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
+import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DUtils;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
 
 public class Box2dObjectFactory {
-    @Inject
-    protected IResourcesService resourcesService;
-    @Inject
-    protected com.indignado.games.smariano.model.entities.World world;
-    @Inject
-    protected World physics;
+
+    private IResourcesService resourcesService;
+    private com.indignado.games.smariano.model.entities.World world;
+    private World physics;
     private float unitScale;
+
+    public Box2dObjectFactory(World physics, com.indignado.games.smariano.model.entities.World world, IResourcesService resourcesManager) {
+        this.physics = physics;
+        this.world=world;
+        this.resourcesService = resourcesManager;
+
+    }
 
 
     public void createEntity(GRUPO tipo, MapObject object) {

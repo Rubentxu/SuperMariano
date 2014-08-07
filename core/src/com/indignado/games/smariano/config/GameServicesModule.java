@@ -1,7 +1,10 @@
 package com.indignado.games.smariano.config;
 
-import com.indignado.games.smariano.model.services.interfaces.*;
 import com.indignado.games.smariano.model.services.*;
+import com.indignado.games.smariano.model.services.interfaces.IAudioService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
+import com.indignado.games.smariano.model.services.interfaces.IProfileService;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import dagger.Module;
 import dagger.Provides;
 
@@ -46,6 +49,9 @@ public class GameServicesModule {
     IProfileService provideProfileService() {
         return new ProfileService();
     }
+
+
+
 
 
 }

@@ -17,6 +17,7 @@ import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
+import dagger.Lazy;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -27,6 +28,8 @@ public class SelectLevelScreen extends BaseScreen {
     ProfileService profileService;
     @Inject
     LevelService levelService;
+    @Inject
+    public Lazy<GameScreen> gameScreen;
 
     private Label label(String text, Color color) {
         Label label = new Label(text, styles.skin, "header", color);
@@ -60,6 +63,7 @@ public class SelectLevelScreen extends BaseScreen {
                     super.touchUp(event, x, y, pointer, button);
                     Gdx.app.log(Env.LOG, "Numero de boton presionado: " + levelButton.getLevelNumber());
                     levelService.setCurrentLevel(levels.get(levelButton.getLevelNumber() - 1));
+                    game.setNextScreen(gameScreen.get());
                     gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
                 }
             });

@@ -28,12 +28,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.joints.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
+import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
 import com.indignado.games.smariano.utils.dermetfan.math.BayazitDecomposer;
 
-import javax.inject.Inject;
 import java.util.Iterator;
 
 import static com.indignado.games.smariano.utils.dermetfan.math.GeometryUtils.*;
@@ -56,10 +55,8 @@ import static com.indignado.games.smariano.utils.dermetfan.math.GeometryUtils.*;
  */
 public class Box2DMapObjectParser {
 
-    @Inject
-    protected Box2dObjectFactory box2dObjectFactory;
-    @Inject
-    protected com.indignado.games.smariano.model.entities.World worldEntity;
+    private Box2dObjectFactory box2dObjectFactory;
+    private com.indignado.games.smariano.model.entities.World worldEntity;
     /**
      * @see Aliases
      */
@@ -104,8 +101,8 @@ public class Box2DMapObjectParser {
     /**
      * creates a new {@link Box2DMapObjectParser} with the default {@link Aliases}
      */
-    public Box2DMapObjectParser() {
-        this(new Aliases());
+    public Box2DMapObjectParser(com.indignado.games.smariano.model.entities.World worldEntity,Box2dObjectFactory box2dObjectFactory) {
+        this(new Aliases(), worldEntity, box2dObjectFactory);
 
     }
 
@@ -115,9 +112,10 @@ public class Box2DMapObjectParser {
      *
      * @param aliases the {@link Aliases} to use
      */
-    public Box2DMapObjectParser(Aliases aliases) {
+    public Box2DMapObjectParser(Aliases aliases, com.indignado.games.smariano.model.entities.World worldEntity, Box2dObjectFactory box2dObjectFactory) {
         this.aliases = aliases;
-
+        this.worldEntity = worldEntity;
+        this.box2dObjectFactory = box2dObjectFactory;
 
     }
 
