@@ -1,16 +1,28 @@
 SuperMariano
 ============
+***
 
-Reestructuración y renombrado del proyecto DreamLibGdx, juego de plataformas con la libreria LibGdx en Java.
+![SuperMariano ](https://dl.dropboxusercontent.com/u/23370855/imagenes/SMariano/SMariano.png "Caricatura SuperMariano")
 
-Este juego estara basado en el patron MVC (al menos lo intenta), utiliza maven para gestionar las dependencias y la compilacion.
-Gracias al arquetipo creado para tal fin, pongo enlace para interesados: http://code.google.com/p/libgdx/wiki/MavenProjectSetup.
+Partiendo de la base del proyecto DreamLibGdx, juego de plataformas con la libreria LibGdx 1.x en Java.
 
-Para ejecutar utiliza mvn clean install -Pdesktop (Para Desktop), mvn clean install -Pandroid (Para instalar en un dispositivo Android).
-Ya esta disponible una demo en Google Play para descargar llamado "RubentxuDreams".
+Este juego estara basado en el patron MVC (al menos lo intenta), utiliza gradle para gestionar las dependencias y la compilacion.
+
+
+Para ejecutar en desktop utiliza ` gradlew desktop:run `.
+> Mas informacion sobre las diferentes compilaciones en Android,Hmtl y IOS en: 
+
+> [Gradle On the Commandline LibGdx:](https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline)
+
 
 Espero que os guste y reporteis fallos y sugerencias.
 
-Una muestra en un video de lo que llevo hecho por ahora:
+Una muestra en un video de lo que llevo hecho por ahora :
+> Nota: Aun hay que cambiar todos los graficos, si alguien quiere aportar en esta parcela que me contacte a `rubentxu74@gmail.com`.
 
-https://www.youtube.com/watch?v=-eL1fzhaTJI
+
+
+<a href="https://www.youtube.com/watch?v=-eL1fzhaTJI
+" target="_blank"><img src="http://img.youtube.com/vi/-eL1fzhaTJI/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="480" height="270" border="10" /></a>
+

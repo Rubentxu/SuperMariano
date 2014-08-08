@@ -71,8 +71,8 @@ public class RenderModule {
 
     @Provides
     @Singleton
-    OrthogonalTiledMapRenderer provideOrthogonalTiledMapRenderer(IResourcesService resourceService,ILevelService levelService) {
-        return new OrthogonalTiledMapRenderer((TiledMap) resourceService.getAssetManager().get(levelService.getCurrentLevel().getMap()), Env.UNIT_SCALE);
+    OrthogonalTiledMapRenderer provideOrthogonalTiledMapRenderer(IResourcesService resourceService,ILevelService levelService,SpriteBatch spriteBatch) {
+        return new OrthogonalTiledMapRenderer((TiledMap) resourceService.getAssetManager().get(levelService.getCurrentLevel().getMap()), Env.UNIT_SCALE,spriteBatch);
 
     }
 
