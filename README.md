@@ -1,8 +1,10 @@
 SuperMariano
 ============
-***
+
 
 ![SuperMariano ](https://dl.dropboxusercontent.com/u/23370855/imagenes/SMariano/SMariano.png "Caricatura SuperMariano")
+
+***
 
 Partiendo de la base del proyecto DreamLibGdx, juego de plataformas con la libreria LibGdx 1.x en Java.
 
@@ -14,6 +16,7 @@ Para ejecutar en desktop utiliza ` gradlew desktop:run `.
 
 > [Gradle On the Commandline LibGdx:](https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline)
 
+***
 
 Espero que os guste y reporteis fallos y sugerencias.
 
