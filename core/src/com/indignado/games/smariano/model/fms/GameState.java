@@ -6,8 +6,11 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.model.services.LevelService;
+import com.indignado.games.smariano.model.services.ResourceService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
+import com.indignado.games.smariano.view.screens.GameScreen;
+import com.indignado.games.smariano.view.screens.MenuScreen;
 import com.indignado.games.smariano.view.screens.transitions.Transition;
 import com.indignado.games.smariano.view.screens.transitions.TransitionFactory;
 
@@ -37,23 +40,12 @@ public enum GameState implements State<BaseGame> {
 
         }
     },
-    OVER {
-        @Override
-        public void update(BaseGame game) {
-            game.setNextScreen(game.highScoresScreen.get());
-            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN);
-            game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
-        }
-    },
-    WIN {
-        @Override
-        public void update(BaseGame game) {
-
-        }
-    },
     LEVELWIN {
         @Override
         public void update(BaseGame game) {
+            game.setNextScreen(game.highScoresScreen.get());
+            game.getCurrScreen().showMessage("Level completed ", 1.5f, GameState.SHOW_NEXT_SCREEN);
+            game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
 
         }
     },
@@ -78,7 +70,9 @@ public enum GameState implements State<BaseGame> {
     GAME_OVER {
         @Override
         public void update(BaseGame game) {
-
+            game.setNextScreen(game.highScoresScreen.get());
+            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN);
+            game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
         }
     },
     EXIT {
@@ -144,12 +138,11 @@ public enum GameState implements State<BaseGame> {
                 int w = Gdx.graphics.getWidth();
                 int h = Gdx.graphics.getHeight();
                 if (!init) {
-                    nextFbo = new FrameBuffer(Pixmap.Format.RGB888, w, h, true);
+                    nextFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
                     currFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
 
                     init = true;
                 }
-
 
                 game.getNextScreen().show();
                 game.getNextScreen().resize(w, h);
@@ -163,16 +156,16 @@ public enum GameState implements State<BaseGame> {
                     screen_transition = true;
                 }
             }
-         /*   if (game.getCurrScreen() instanceof GameScreen) {
+            if (game.getCurrScreen() instanceof GameScreen) {
                 GameLogger.info("GameState", "music Game");
                 game.audioService.stopMusic();
-                game.audioService.playMusic(levelService.getCurrentLevel().getMusic());
+                game.audioService.playMusic(game.levelService.getCurrentLevel().getMusic());
             } else if (game.getCurrScreen() instanceof MenuScreen) {
                 GameLogger.info("GameState", "music Menu");
                 game.audioService.stopMusic();
                 game.audioService.playMusic(ResourceService.MUSIC_MENU);
 
-            }*/
+            }
 
         }
     };
@@ -181,8 +174,6 @@ public enum GameState implements State<BaseGame> {
     private static final String TAG = "GameState";
 
 
-    @Inject
-    LevelService levelService;
 
     @Override
     public void enter(BaseGame game) {

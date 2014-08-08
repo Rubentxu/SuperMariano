@@ -3,16 +3,17 @@ package com.indignado.games.smariano.model.services;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.managers.StateObserver;
-import com.indignado.games.smariano.model.services.interfaces.IAudioService;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Item;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.BaseState;
 import com.indignado.games.smariano.model.entities.base.State;
+import com.indignado.games.smariano.model.managers.StateObserver;
+import com.indignado.games.smariano.model.services.interfaces.IAudioService;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,10 @@ public class AudioService implements StateObserver, IAudioService {
     @Inject
     PreferencesService preferencesService;
 
+
+    public AudioService() {
+        BaseGame.objectGraph.inject(this);
+    }
 
     public void stopMusic() {
         if (currentMusicPlaying != null) {

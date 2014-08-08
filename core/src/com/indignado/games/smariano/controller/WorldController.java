@@ -56,12 +56,6 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     public WorldController() {
         BaseGame.objectGraph.inject(this);
         world.getPhysics().setContactListener(this);
-        heroManager = new HeroManager();
-        platformManager = new PlatformManager();
-        waterManager = new WaterManager();
-        enemyManager = new EnemyManager();
-        itemsManager= new ItemsManager();
-        checkPointManager = new CheckPointManager();
 
         itemsManager.addObserver(profileService);
         itemsManager.addObserver(audioService);

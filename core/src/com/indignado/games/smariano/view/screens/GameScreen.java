@@ -19,7 +19,6 @@ import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.view.WorldRenderer;
 import com.indignado.games.smariano.view.inputs.GameInputs;
-
 import javax.inject.Inject;
 
 
@@ -42,7 +41,6 @@ public class GameScreen extends BaseScreen {
     protected GuiBuilder guiBuilder;
 
 
-
     @Override
     public void render(float delta) {
         super.render(delta);
@@ -61,12 +59,14 @@ public class GameScreen extends BaseScreen {
         stage.draw();
     }
 
+
     private void updateStats() {
         if(profile==null) profile = profileService.getProfile();
         Hero hero = world.getHero();
         ((Label) stats.findActor(Env.SCORE)).setText(String.valueOf(profile.getCoinsAquired()));
         ((Label) stats.findActor(Env.LIVES)).setText(profile.getLivesAsText());
     }
+
 
     @Override
     public void showDialog() {
@@ -189,4 +189,5 @@ public class GameScreen extends BaseScreen {
         multiplexer.addProcessor(gameInputs);
         return multiplexer;
     }
+
 }

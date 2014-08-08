@@ -1,5 +1,7 @@
 package com.indignado.games.smariano.config;
 
+import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.managers.*;
 import dagger.Module;
@@ -22,8 +24,8 @@ public class GameManagersModule {
 
     @Provides
     @Singleton
-    CheckPointManager provideCheckPointManager() {
-        return new CheckPointManager();
+    CheckPointManager provideCheckPointManager(StateMachine <BaseGame> stateMachine) {
+        return new CheckPointManager(stateMachine);
     }
 
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.indignado.games.smariano.config.GameModule;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.interfaces.IAudioService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 import com.indignado.games.smariano.view.screens.*;
@@ -14,6 +15,7 @@ import dagger.Lazy;
 import dagger.ObjectGraph;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class BaseGame implements ApplicationListener {
     public static ObjectGraph objectGraph;
@@ -22,6 +24,9 @@ public class BaseGame implements ApplicationListener {
     @Inject
     public IAudioService audioService;
     @Inject
+    public ILevelService levelService;
+    @Inject
+    @Named("game")
     public SpriteBatch batch;
     @Inject
     public Lazy<SplashScreen> splashScreen;

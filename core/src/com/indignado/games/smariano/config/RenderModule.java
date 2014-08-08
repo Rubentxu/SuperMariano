@@ -33,6 +33,14 @@ public class RenderModule {
 
     @Provides
     @Singleton
+    @Named("game")
+    SpriteBatch provideSpriteBatchWorldRender() {
+        return new SpriteBatch();
+    }
+
+
+    @Provides
+    @Singleton
     Styles provideStyles() {
         return new Styles();
     }

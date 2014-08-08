@@ -1,10 +1,7 @@
 package com.indignado.games.smariano.view.screens.transitions;
 
 import com.badlogic.gdx.math.Interpolation;
-import com.indignado.games.smariano.view.screens.BaseScreen;
-import com.indignado.games.smariano.view.screens.MenuScreen;
-import com.indignado.games.smariano.view.screens.OptionScreen;
-import com.indignado.games.smariano.view.screens.SplashScreen;
+import com.indignado.games.smariano.view.screens.*;
 
 
 /**
@@ -16,6 +13,11 @@ public class TransitionFactory {
         if (screen instanceof SplashScreen) return getSlideTransition();
         if (screen instanceof MenuScreen) return getSlideTransition();
         if (screen instanceof OptionScreen) return getSlideTransition();
+        if (screen instanceof SelectLevelScreen) return getFadeTransition();
+        if (screen instanceof GameOverScreen) return getSlideTransition();
+        if (screen instanceof HighScoresScreen) return getSlideTransition();
+        if (screen instanceof ScoreScreen) return getSlideTransition();
+        if (screen instanceof GameScreen) return getSliceTransition();
         return getFadeTransition();
 
     }

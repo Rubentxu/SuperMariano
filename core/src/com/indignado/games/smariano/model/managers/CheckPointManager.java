@@ -19,8 +19,14 @@ import javax.inject.Inject;
 
 
 public class CheckPointManager extends AbstractWorldManager {
+    private StateMachine<BaseGame> gameStateMachine;
+
+
     @Inject
-    public StateMachine<BaseGame> gameStateMachine;
+    public CheckPointManager(StateMachine<BaseGame> gameStateMachine) {
+        this.gameStateMachine=gameStateMachine;
+    }
+
 
     @Override
     public void handleBeginContact(Contact contact) {
@@ -33,20 +39,24 @@ public class CheckPointManager extends AbstractWorldManager {
         }
     }
 
+
     @Override
     public void handleEndContact(Contact contact) {
 
     }
+
 
     @Override
     public void handlePostSolve(Contact contact, ContactImpulse impulse) {
 
     }
 
+
     @Override
     public void handlePreSolve(Contact contact, Manifold oldManifold) {
 
     }
+
 
     @Override
     public boolean handleShouldCollide(Fixture fixtureA, Fixture fixtureB) {
@@ -61,10 +71,12 @@ public class CheckPointManager extends AbstractWorldManager {
 
     }
 
+
     @Override
     public void dispose() {
 
     }
+
 
     public Hero getHero(Contact contact) {
         Box2DPhysicsObject box2dPhysicsA = (Box2DPhysicsObject) contact.getFixtureA().getUserData();
@@ -79,6 +91,7 @@ public class CheckPointManager extends AbstractWorldManager {
         }
     }
 
+
     public CheckPoint getCheckPoint(Contact contact) {
         Box2DPhysicsObject box2dPhysicsA = (Box2DPhysicsObject) contact.getFixtureA().getUserData();
         Box2DPhysicsObject box2dPhysicsB = (Box2DPhysicsObject) contact.getFixtureB().getUserData();
@@ -92,11 +105,14 @@ public class CheckPointManager extends AbstractWorldManager {
         }
     }
 
+
     private void enableMotor(CheckPoint checkPoint) {
         ((PrismaticJoint) checkPoint.getJoint()).enableMotor(true);
     }
 
+
     private void disableMotor(CheckPoint checkPoint) {
         ((PrismaticJoint) checkPoint.getJoint()).enableMotor(false);
     }
+
 }
