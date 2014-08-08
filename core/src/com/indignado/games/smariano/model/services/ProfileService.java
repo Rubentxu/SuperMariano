@@ -8,22 +8,26 @@ import com.badlogic.gdx.utils.Json;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.managers.StateObserver;
-import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Item;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.State;
+import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 
 import javax.inject.Inject;
 
-public class ProfileService implements StateObserver, IProfileService {
+public class ProfileService implements IProfileService {
     private Profile profile;
     @Inject
     public StateMachine<BaseGame> gameStateMachine;
 
+
+    public ProfileService() {
+        BaseGame.objectGraph.inject(this);
+        this.profile = getProfile();
+    }
 
     public Profile retrieveProfile() {
         profile = null;

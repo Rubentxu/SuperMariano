@@ -13,7 +13,7 @@ import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.PreferencesService;
-import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
@@ -27,11 +27,11 @@ public class GameScreen extends BaseScreen {
     private Profile profile;
     private Table stats;
     @Inject
-    ProfileService profileService;
+    protected IProfileService profileService;
     @Inject
-    IResourcesService resourceService;
+    protected IResourcesService resourceService;
     @Inject
-    PreferencesService preferencesService;
+    protected PreferencesService preferencesService;
     @Inject
     protected World world;
     @Inject
@@ -39,7 +39,7 @@ public class GameScreen extends BaseScreen {
     @Inject
     protected WorldRenderer worldRenderer;
     @Inject
-    GuiBuilder guiBuilder;
+    protected GuiBuilder guiBuilder;
 
 
 
@@ -48,7 +48,7 @@ public class GameScreen extends BaseScreen {
         super.render(delta);
 
         //updates
-        if (gameStateMachine.getCurrentState().equals(GameState.PAUSED) &&
+        if (!gameStateMachine.getCurrentState().equals(GameState.PAUSED) &&
                 !gameStateMachine.getCurrentState().equals(GameState.LEVELWIN) &&
                 !gameStateMachine.getCurrentState().equals(GameState.GAME_OVER)) {
             worldController.update(delta);
@@ -62,6 +62,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void updateStats() {
+        if(profile==null) profile = profileService.getProfile();
         Hero hero = world.getHero();
         ((Label) stats.findActor(Env.SCORE)).setText(String.valueOf(profile.getCoinsAquired()));
         ((Label) stats.findActor(Env.LIVES)).setText(profile.getLivesAsText());

@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.indignado.games.smariano.config.constantes.Env;
+import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.LevelService;
-import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.model.services.ResourceService;
-import com.indignado.games.smariano.model.entities.Level;
+import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
 import dagger.Lazy;
@@ -25,7 +25,7 @@ import java.util.List;
 public class SelectLevelScreen extends BaseScreen {
 
     @Inject
-    ProfileService profileService;
+    IProfileService profileService;
     @Inject
     LevelService levelService;
     @Inject

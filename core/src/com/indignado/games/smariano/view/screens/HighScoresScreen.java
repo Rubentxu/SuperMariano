@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import dagger.Lazy;
 
@@ -17,7 +17,7 @@ import javax.inject.Inject;
 public class HighScoresScreen extends BaseScreen {
 
     @Inject
-    ProfileService profileService;
+    IProfileService profileService;
     @Inject
     public Lazy<MenuScreen> menuScreen;
 

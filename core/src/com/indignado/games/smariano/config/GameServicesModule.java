@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {LevelService.class},library = true,complete = false)
+@Module(injects = {LevelService.class,ProfileService.class},library = true,complete = false)
 public class GameServicesModule {
 
     @Provides

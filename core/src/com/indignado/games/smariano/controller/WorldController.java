@@ -10,7 +10,7 @@ import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
 import com.indignado.games.smariano.model.managers.*;
 import com.indignado.games.smariano.model.services.AudioService;
-import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     protected CheckPointManager checkPointManager;
     protected List<Box2DPhysicsObject> destroy=new ArrayList<Box2DPhysicsObject>();
     @Inject
-    ProfileService profileService;
+    IProfileService profileService;
     @Inject
     AudioService audioService;
 
