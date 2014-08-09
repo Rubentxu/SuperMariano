@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.indignado.games.smariano.config.GameModule;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.PreferencesService;
+import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.model.services.Styles;
 import com.indignado.games.smariano.model.services.interfaces.IAudioService;
 import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
@@ -26,8 +28,11 @@ public class BaseGame implements ApplicationListener {
     @Inject
     public ILevelService levelService;
     @Inject
-    @Named("game")
-    public SpriteBatch batch;
+    public PreferencesService preferencesService;
+    @Inject
+    public ProfileService profileService;
+    @Inject
+    public Styles styles;
     @Inject
     public Lazy<SplashScreen> splashScreen;
     @Inject
@@ -217,6 +222,7 @@ public class BaseGame implements ApplicationListener {
         GameLogger.info("BaseGame", "Set current screen %s", currScreen.getClass().getSimpleName());
         this.currScreen.pause();
         this.currScreen.hide();
+        this.currScreen.dispose();
         this.currScreen=null;
         this.currScreen = currScreen;
 

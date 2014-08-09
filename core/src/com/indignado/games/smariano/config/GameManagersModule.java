@@ -2,7 +2,6 @@ package com.indignado.games.smariano.config;
 
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.managers.*;
 import dagger.Module;
 import dagger.Provides;
@@ -12,14 +11,8 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {World.class},library = true,complete = false)
+@Module(library = true,complete = false)
 public class GameManagersModule {
-
-    @Provides
-    @Singleton
-    World provideWorld() {
-        return new World();
-    }
 
 
     @Provides

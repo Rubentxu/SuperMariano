@@ -5,11 +5,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-import com.indignado.games.smariano.utils.debug.GameLogger;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
 
 import javax.inject.Inject;
@@ -19,9 +18,7 @@ import java.util.Comparator;
 
 public class World implements Disposable {
     private TiledMap map;
-    @Inject
-    protected com.badlogic.gdx.physics.box2d.World physics;
-
+    private com.badlogic.gdx.physics.box2d.World physics;
     private Box2DMapObjectParser parser;
     private ArrayList<Box2DPhysicsObject> entities;
     private Hero hero;
@@ -31,19 +28,24 @@ public class World implements Disposable {
     private Texture background_01;
 
     private Box2dObjectFactory box2dObjectFactory;
-    @Inject
+
     IResourcesService resourceService;
+    ILevelService levelService;
 
 
-    public World() {
-        BaseGame.objectGraph.inject(this);
+    @Inject
+    public World(com.badlogic.gdx.physics.box2d.World physics, ILevelService levelService,IResourcesService resourceService) {
+        this.physics= physics;
+        this.levelService= levelService;
+        this.resourceService= resourceService;
         entities = new ArrayList<Box2DPhysicsObject>();
+        createDreamsWorld();
 
     }
 
 
-    public void createDreamsWorld(Level level) {
-        if(physics==null) GameLogger.error("World","Error physycs nulo %s",toString());
+    public void createDreamsWorld() {
+        Level level= levelService.getCurrentLevel();
         Collections.sort(entities, new Comparator<Box2DPhysicsObject>() {
             public int compare(Box2DPhysicsObject one, Box2DPhysicsObject two) {
                 return one.getGrupo().compareTo(two.getGrupo());
@@ -96,6 +98,8 @@ public class World implements Disposable {
         entities.clear();
         entities = new ArrayList<Box2DPhysicsObject>();
         hero=null;
+        physics.dispose();
+        physics=null;
         bodiesFlaggedDestroy.clear();
 
 

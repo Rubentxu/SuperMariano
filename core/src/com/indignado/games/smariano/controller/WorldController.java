@@ -3,7 +3,6 @@ package com.indignado.games.smariano.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
-import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
@@ -12,6 +11,7 @@ import com.indignado.games.smariano.model.managers.*;
 import com.indignado.games.smariano.model.services.AudioService;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
+
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,25 +19,16 @@ import java.util.List;
 
 public class WorldController implements ContactListener, ContactFilter,Disposable {
 
-    @Inject
-    protected World world;
-    @Inject
-    protected HeroManager heroManager;
-    @Inject
-    protected PlatformManager platformManager;
-    @Inject
-    protected WaterManager waterManager;
-    @Inject
-    protected EnemyManager enemyManager;
-    @Inject
-    protected ItemsManager itemsManager;
-    @Inject
-    protected CheckPointManager checkPointManager;
-    protected List<Box2DPhysicsObject> destroy=new ArrayList<Box2DPhysicsObject>();
-    @Inject
-    IProfileService profileService;
-    @Inject
-    AudioService audioService;
+    private World world;
+    private HeroManager heroManager;
+    private PlatformManager platformManager;
+    private WaterManager waterManager;
+    private EnemyManager enemyManager;
+    private ItemsManager itemsManager;
+    private CheckPointManager checkPointManager;
+    private List<Box2DPhysicsObject> destroy=new ArrayList<Box2DPhysicsObject>();
+    private IProfileService profileService;
+    private AudioService audioService;
 
     public static java.util.Map<Keys, Boolean> keys = new java.util.HashMap<Keys, Boolean>();
 
@@ -53,8 +44,20 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     }
 
 
-    public WorldController() {
-        BaseGame.objectGraph.inject(this);
+    @Inject
+    public WorldController(World world,HeroManager heroManager,PlatformManager platformManager,WaterManager waterManager,
+                           EnemyManager enemyManager,ItemsManager itemsManager,CheckPointManager checkPointManager,
+                           IProfileService profileService,AudioService audioService) {
+        this.world=world;
+        this.heroManager=heroManager;
+        this.platformManager=platformManager;
+        this.waterManager=waterManager;
+        this.enemyManager=enemyManager;
+        this.itemsManager=itemsManager;
+        this.checkPointManager=checkPointManager;
+        this.profileService=profileService;
+        this.audioService=audioService;
+
         world.getPhysics().setContactListener(this);
 
         itemsManager.addObserver(profileService);
@@ -63,6 +66,7 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
         heroManager.addObserver(audioService);
 
     }
+
 
     public void leftPressed() {
         keys.get(keys.put(WorldController.Keys.LEFT, true));
@@ -114,8 +118,8 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
             world.destroyEntity(d);
         }
         destroy.clear();
-
         world.getPhysics().step(delta, Env.VELOCITY_ITERATIONS, Env.POSITION_ITERATIONS);
+
     }
 
     @Override

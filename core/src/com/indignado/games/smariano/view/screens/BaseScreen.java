@@ -19,7 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.services.PreferencesService;
+import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.model.services.Styles;
+import com.indignado.games.smariano.model.services.interfaces.IAudioService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 
@@ -34,24 +38,31 @@ public abstract class BaseScreen implements Screen {
     protected Window dialog;
     protected Label message;
     protected Stack container;
-
-
-    @Inject
     protected BaseGame game;
-    @Inject
-    protected IResourcesService resourcesManager;
-    @Inject
+    protected IResourcesService resourcesService;
     protected Styles styles;
-    @Inject
-    @Named("camera")
     protected OrthographicCamera camera;
-    @Inject
     protected Stage stage;
-    @Inject
-    public StateMachine<BaseGame> gameStateMachine;
+    protected StateMachine<BaseGame> gameStateMachine;
+    protected IAudioService audioService;
+    protected ILevelService levelService;
+    protected PreferencesService preferencesService;
+    protected ProfileService profileService;
 
 
-    // ScreenTransition transition = ScreenTransitionSlice.init(2,ScreenTransitionSlice.UP_DOWN, 10, Interpolation.pow5Out);
+    public BaseScreen(BaseGame game,OrthographicCamera camera,Stage stage){
+        this.game=game;
+        this.resourcesService=game.resourcesService;
+        this.styles=game.styles;
+        this.gameStateMachine=game.gameStateMachine;
+        this.audioService=game.audioService;
+        this.levelService=game.levelService;
+        this.preferencesService=game.preferencesService;
+        this.profileService=game.profileService;
+        this.camera=camera;
+        this.stage=stage;
+    }
+
 
     protected String getName() {
         return this.getClass().getSimpleName();
