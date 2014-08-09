@@ -139,30 +139,6 @@ public class Enemy extends Box2DPhysicsObject implements Disposable {
     }
 
 
-    @Override
-    public String toString() {
-        return
-                "statePos=" + statePos +
-                        "\nstate=" + getState() +
-                        "\nfacingLeft=" + isFacingLeft() +
-                        "\nisActive= " + getBodyA().isActive() +
-                        "\nisSleepingAllowed= " + getBodyA().isSleepingAllowed() +
-                        "\nisAwake=" + getBodyA().isAwake() +
-                        "\nWayPoint0=" + this.getPath().getPoints().toArray()[0] +
-                        "\nWayPoint1=" + this.getPath().getPoints().toArray()[1] +
-                        "\nWayPointSize=" + this.getPath().getPoints().size() +
-                        "\nWayPointIndex=" + this.getPath().waypoint +
-                        "\nMass=" + getBodyA().getMass() +
-                        "\nisBullet=" + getBodyA().isBullet() +
-                        "\nisFixedRotation=" + getBodyA().isFixedRotation() +
-                        "\nLinearDamping=" + getBodyA().getLinearDamping() +
-                        "\nLinearVelocity=" + getBodyA().getLinearVelocity().toString() +
-                        "\nPosition=" + getBodyA().getPosition().toString() +
-                        "\nLocalCenter=" + getBodyA().getLocalCenter().toString() +
-                        "\nWidth=" + getWidthBodyA() +
-                        "\nHeight=" + getHeightBodyA() +
-                        "\nWorldCenter=" + getBodyA().getWorldCenter().toString();
-    }
 
     @Override
     public void dispose() {

@@ -101,16 +101,7 @@ public class MovingPlatform extends Platform implements Disposable {
         this.path = path;
     }
 
-    @Override
-    public String toString() {
-        return
-                "\nSin Pasajeros?= " + passengers.isEmpty() +
-                        "\nPosicion Comienzo= " + start +
-                        "\nPosicion Actual= " + this.getBodyA().getPosition() +
-                        "\nVelocidad= " + path.getVelocity() +
-                        "\nPasajeros= " + passengers.size();
 
-    }
 
     @Override
     public void dispose() {

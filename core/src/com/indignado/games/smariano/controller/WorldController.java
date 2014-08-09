@@ -11,7 +11,7 @@ import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO
 import com.indignado.games.smariano.model.managers.*;
 import com.indignado.games.smariano.model.services.AudioService;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
-
+import com.indignado.games.smariano.utils.debug.GameLogger;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,7 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
             if (e.getState().equals(Box2DPhysicsObject.BaseState.DESTROY)){
                 destroy.add(e);
             } else {
-                AbstractWorldManager manager =getManager(e.getGrupo());
+                AbstractWorldManager manager =getManager(e);
                 if(manager!=null) manager.update(delta,e);
             }
         }
@@ -121,8 +121,8 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
         contact.resetFriction();
-        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()).getGrupo());
-        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()).getGrupo());
+        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()));
+        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()));
 
         if(managerA!=null) managerA.handlePreSolve(contact, oldManifold);
         if(managerB!=null) managerB.handlePreSolve(contact, oldManifold);
@@ -130,46 +130,52 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()).getGrupo());
-        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()).getGrupo());
+        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()));
+        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()));
 
         if(managerA!=null) managerA.handlePostSolve(contact, impulse);
         if(managerB!=null) managerB.handlePostSolve(contact, impulse);
 
     }
 
-    public AbstractWorldManager getManager(GRUPO grupo){
-        switch (grupo){
-            case ENEMY:
-                return enemyManager;
+    public AbstractWorldManager getManager(Box2DPhysicsObject entity){
+        GRUPO grupo = entity.getGrupo();
+        if(grupo!=null){
+            switch (grupo){
+                case ENEMY:
+                    return enemyManager;
 
-            case ITEMS:
-                return itemsManager;
-            case FLUID:
-                return waterManager;
-            case HERO:
-                return heroManager;
-            case PLATFORM:
-                break;
-            case MOVING_PLATFORM:
-                return platformManager;
-            case CHECKPOINT:
-                return checkPointManager;
-            case SENSOR:
-                break;
-            case STATIC:
-                break;
+                case ITEMS:
+                    return itemsManager;
+                case FLUID:
+                    return waterManager;
+                case HERO:
+                    return heroManager;
+                case PLATFORM:
+                    break;
+                case MOVING_PLATFORM:
+                    return platformManager;
+                case CHECKPOINT:
+                    return checkPointManager;
+                case SENSOR:
+                    break;
+                case STATIC:
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
+        } else {
+            GameLogger.error("WorldController","No existe un grupo para esta entidad: %s",entity.toString());
         }
         return null;
+
     }
 
     @Override
     public void beginContact(Contact contact) {
-        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()).getGrupo());
-        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()).getGrupo());
+        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()));
+        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()));
 
         if(managerA!=null) managerA.handleBeginContact(contact);
         if(managerB!=null) managerB.handleBeginContact(contact);
@@ -180,8 +186,8 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     public void endContact(Contact contact) {
         if (contact.getFixtureA() == null || contact.getFixtureB()==null ) return;
 
-        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()).getGrupo());
-        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()).getGrupo());
+        AbstractWorldManager managerA=getManager(((Box2DPhysicsObject) contact.getFixtureA().getUserData()));
+        AbstractWorldManager managerB=getManager(((Box2DPhysicsObject) contact.getFixtureB().getUserData()));
 
         if(managerA!=null) managerA.handleEndContact(contact);
         if(managerB!=null) managerB.handleEndContact(contact);
@@ -201,5 +207,6 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
         enemyManager=null;
         waterManager=null;
         checkPointManager=null;
+        itemsManager=null;
     }
 }

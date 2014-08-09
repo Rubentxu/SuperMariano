@@ -143,6 +143,7 @@ public class BaseGame implements ApplicationListener {
         }*/
     }
 
+
     @Override
     public void create() {
         GameLogger.info("BaseGame", "Ciclo Create del juego");
@@ -214,8 +215,8 @@ public class BaseGame implements ApplicationListener {
 
     public void setCurrScreen(BaseScreen currScreen) {
         GameLogger.info("BaseGame", "Set current screen %s", currScreen.getClass().getSimpleName());
+        this.currScreen.pause();
         this.currScreen.hide();
-        this.currScreen.dispose();
         this.currScreen=null;
         this.currScreen = currScreen;
 

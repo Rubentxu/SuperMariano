@@ -13,12 +13,15 @@ import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.PreferencesService;
+import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.view.WorldRenderer;
 import com.indignado.games.smariano.view.inputs.GameInputs;
+import dagger.Lazy;
+
 import javax.inject.Inject;
 
 
@@ -39,6 +42,16 @@ public class GameScreen extends BaseScreen {
     protected WorldRenderer worldRenderer;
     @Inject
     protected GuiBuilder guiBuilder;
+    @Inject
+    Lazy<ILevelService> levelService;
+
+
+    @Override
+    public void show(){
+        super.show();
+        world.createDreamsWorld(levelService.get().getCurrentLevel());
+
+    }
 
 
     @Override
@@ -123,7 +136,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void hide() {
         super.hide();
-        dispose();
+        world.clearWorld();
     }
 
 
@@ -141,6 +154,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void dispose() {
+        super.dispose();
         if(world!=null){
             world.dispose();
             world = null;
@@ -156,30 +170,6 @@ public class GameScreen extends BaseScreen {
 
     }
 
-
-    public World getWorld() {
-        return world;
-    }
-
-    public void setWorld(World world) {
-        this.world = world;
-    }
-
-    public WorldRenderer getRenderer() {
-        return worldRenderer;
-    }
-
-    public void setRenderer(WorldRenderer renderer) {
-        this.worldRenderer = renderer;
-    }
-
-    public WorldController getController() {
-        return worldController;
-    }
-
-    public void setController(WorldController controller) {
-        this.worldController = controller;
-    }
 
     @Override
     public InputProcessor getInputProcessor() {

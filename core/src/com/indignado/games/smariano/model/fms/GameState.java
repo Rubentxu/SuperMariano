@@ -7,14 +7,11 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.services.ResourceService;
-import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 import com.indignado.games.smariano.view.screens.GameScreen;
 import com.indignado.games.smariano.view.screens.MenuScreen;
 import com.indignado.games.smariano.view.screens.transitions.Transition;
 import com.indignado.games.smariano.view.screens.transitions.TransitionFactory;
-
-import javax.inject.Inject;
 
 
 /**
@@ -43,8 +40,8 @@ public enum GameState implements State<BaseGame> {
     LEVELWIN {
         @Override
         public void update(BaseGame game) {
-            game.setNextScreen(game.highScoresScreen.get());
-            game.getCurrScreen().showMessage("Level completed ", 1.5f, GameState.SHOW_NEXT_SCREEN);
+
+            game.getCurrScreen().showMessage("Level completed ", 1.5f, GameState.SHOW_NEXT_SCREEN, game.highScoresScreen.get());
             game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
 
         }
@@ -71,7 +68,7 @@ public enum GameState implements State<BaseGame> {
         @Override
         public void update(BaseGame game) {
             game.setNextScreen(game.highScoresScreen.get());
-            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN);
+            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN, game.highScoresScreen.get());
             game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
         }
     },

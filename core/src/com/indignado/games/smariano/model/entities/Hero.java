@@ -137,25 +137,6 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
         this.particleEffectContact = particleEffectContact;
     }
 
-    @Override
-    public String toString() {
-        return
-                "StatePos=" + statePos +
-                        "\nstate=" + getState() +
-                        "\nfacingLeft=" + facingLeft +
-                        "\nGravityScale=" + getBodyA().getGravityScale() +
-                        "\nInertia=" + getBodyA().getInertia() +
-                        "\nMasa=" + getBodyA().getMass() +
-                        "\nPeso=" + getBodyA().getMass() * 9.8f +
-                        "\nisFixedRotation=" + getBodyA().isFixedRotation() +
-                        "\nLinearDamping=" + getBodyA().getLinearDamping() +
-                        "\nLinearVelocity=" + getBodyA().getLinearVelocity().toString() +
-                        "\nPosition=" + getBodyA().getPosition().toString() +
-                        "\nSizeGroundContact=" + grounContacts.size() +
-                        "\nWidth=" + getWidthBodyA() +
-                        "\nHeight=" + getHeightBodyA() +
-                        "\nTimeState=" + getStateTime();
-    }
 
     @Override
     public void dispose() {

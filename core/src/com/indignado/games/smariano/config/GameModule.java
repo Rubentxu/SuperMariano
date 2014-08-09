@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.controller.WorldController;
+import com.indignado.games.smariano.view.WorldRenderer;
 import dagger.Module;
 import dagger.Provides;
 
@@ -13,7 +14,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {SMariano.class, WorldController.class},includes = {GameManagersModule.class,GameServicesModule.class,
+@Module(injects = {SMariano.class, WorldController.class, WorldRenderer.class},includes = {GameManagersModule.class,GameServicesModule.class,
 RenderModule.class,ScreensModule.class},library = true)
 public class GameModule {
     public BaseGame game;
@@ -36,9 +37,15 @@ public class GameModule {
     }
 
 
-
     @Provides
     @Singleton
+    WorldRenderer provideWorldRenderer() {
+        return new WorldRenderer();
+    }
+
+
+
+    @Provides
     World providePhysics() {
         return new com.badlogic.gdx.physics.box2d.World(new Vector2(0, -9.81f), true);
     }

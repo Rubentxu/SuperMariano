@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.World;
@@ -26,17 +27,18 @@ public class WorldRenderer implements Disposable {
     protected OrthographicCamera cam;
     @Inject
     protected OrthogonalTiledMapRenderer renderer;
-
     @Inject
     protected SpriteBatch spriteBatch;
     private float width;
     private float height;
-
     @Inject
     protected ModelsAndViews modelsAndViews;
-
     protected ParallaxBackground background;
 
+
+    public WorldRenderer() {
+        BaseGame.objectGraph.inject(this);
+    }
 
 
     public void resize(int w, int h) {
@@ -90,6 +92,7 @@ public class WorldRenderer implements Disposable {
         cam=null;
         spriteBatch=null;
         background=null;
+        world=null;
     }
 
     public OrthographicCamera getCam() {

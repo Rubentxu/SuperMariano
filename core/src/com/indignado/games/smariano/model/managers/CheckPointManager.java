@@ -63,10 +63,12 @@ public class CheckPointManager extends AbstractWorldManager {
         return false;
     }
 
+
     @Override
     public void update(float delta, Box2DPhysicsObject entity) {
         CheckPoint checkPoint = (CheckPoint) entity;
-        if (((PrismaticJoint) checkPoint.getJoint()).getJointTranslation() > ((PrismaticJoint) checkPoint.getJoint()).getUpperLimit())
+        if (((PrismaticJoint) checkPoint.getJoint()).getJointTranslation() > ((PrismaticJoint) checkPoint.getJoint()).getUpperLimit()
+                && !gameStateMachine.getPreviousState().equals(GameState.LEVELWIN))
             gameStateMachine.changeState(GameState.LEVELWIN);
 
     }

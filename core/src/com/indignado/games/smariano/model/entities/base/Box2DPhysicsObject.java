@@ -218,6 +218,26 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
     public void dispose() {
         bodyA = null;
         grupo = null;
+        nombre= null;
+
+    }
+
+
+    @Override
+    public String toString() {
+        return "Box2DPhysicsObject{" +
+                "box2D=" + box2D +
+                ", bodyA=" + bodyA +
+                ", originBodyA=" + originBodyA +
+                ", scaleBodyA=" + scaleBodyA +
+                ", widthBodyA=" + widthBodyA +
+                ", heightBodyA=" + heightBodyA +
+                ", grupo=" + grupo +
+                ", nombre='" + nombre + '\'' +
+                ", stateTime=" + stateTime +
+                ", state=" + state +
+                ", facingLeft=" + facingLeft +
+                '}';
     }
 
 }

@@ -8,10 +8,9 @@ import com.badlogic.gdx.utils.Disposable;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
-import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
+import com.indignado.games.smariano.utils.debug.GameLogger;
 import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DMapObjectParser;
-import dagger.Lazy;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -33,28 +32,27 @@ public class World implements Disposable {
 
     private Box2dObjectFactory box2dObjectFactory;
     @Inject
-    Lazy<ILevelService> levelService;
-    @Inject
     IResourcesService resourceService;
 
 
     public World() {
         BaseGame.objectGraph.inject(this);
         entities = new ArrayList<Box2DPhysicsObject>();
+
+    }
+
+
+    public void createDreamsWorld(Level level) {
+        if(physics==null) GameLogger.error("World","Error physycs nulo %s",toString());
         Collections.sort(entities, new Comparator<Box2DPhysicsObject>() {
             public int compare(Box2DPhysicsObject one, Box2DPhysicsObject two) {
                 return one.getGrupo().compareTo(two.getGrupo());
             }
         });
-        createDreamsWorld(levelService.get().getCurrentLevel());
-    }
-
-
-    private void createDreamsWorld(Level level) {
         box2dObjectFactory= new Box2dObjectFactory(physics,this,resourceService);
         map = resourceService.getAssetManager().get(level.getMap());
         parser = new Box2DMapObjectParser(this,box2dObjectFactory);
-        // System.out.println(getParser().getHierarchy(map));
+        System.out.println(getParser().getHierarchy(map));
         parser.load(getPhysics(), map);
 
         background_01 = resourceService.getAssetManager().get(level.getBackground_01());
@@ -62,6 +60,7 @@ public class World implements Disposable {
         background_03 = resourceService.getAssetManager().get(level.getBackground_03());
 
     }
+
 
     public void destroyEntity(Box2DPhysicsObject data) {
 
@@ -78,15 +77,30 @@ public class World implements Disposable {
     @Override
     public void dispose() {
         map.dispose();
+        map=null;
+        parser=null;
         physics.dispose();
         physics = null;
         background_01 = null;
         bodiesFlaggedDestroy = null;
+        clearWorld();
+
+    }
+
+
+    public void clearWorld(){
         for (Box2DPhysicsObject e : entities) {
             e.dispose();
             e = null;
         }
+        entities.clear();
+        entities = new ArrayList<Box2DPhysicsObject>();
+        hero=null;
+        bodiesFlaggedDestroy.clear();
+
+
     }
+
 
     public TiledMap getMap() {
         return map;
@@ -136,4 +150,23 @@ public class World implements Disposable {
     public Hero getHero() {
         return hero;
     }
+
+
+    @Override
+    public String toString() {
+        return "World{" +
+                "map=" + map +
+                ", physics=" + physics +
+                ", parser=" + parser +
+                ", entities=" + entities +
+                ", hero=" + hero +
+                ", bodiesFlaggedDestroy=" + bodiesFlaggedDestroy +
+                ", background_03=" + background_03 +
+                ", background_02=" + background_02 +
+                ", background_01=" + background_01 +
+                ", box2dObjectFactory=" + box2dObjectFactory +
+                ", resourceService=" + resourceService +
+                '}';
+    }
+
 }

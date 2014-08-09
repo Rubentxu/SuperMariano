@@ -101,7 +101,7 @@ public abstract class BaseScreen implements Screen {
     @Override
     public void dispose() {
         Gdx.app.log(Env.LOG, "Disposing screen: " + getName());
-        if(stage!=null) stage.dispose();
+        if(stage!=null) stage.clear();
         mainTable = null;
 
     }
@@ -140,7 +140,7 @@ public abstract class BaseScreen implements Screen {
 
     }
 
-    public void showMessage(String text, float time, final GameState gameState) {
+    public void showMessage(String text, float time, final GameState gameState, final BaseScreen screen) {
         Gdx.app.debug(Env.LOG, "Show Message !");
         if (message == null) {
             message = new Label(text, styles.skin, "header", Color.ORANGE);
@@ -163,6 +163,7 @@ public abstract class BaseScreen implements Screen {
             container.addAction(Actions.sequence(action, Actions.delay(1f),
                     Actions.run(new Runnable() {
                         public void run() {
+                            game.setNextScreen(screen);
                             gameStateMachine.changeState(gameState);
                             container.setVisible(false);
                         }
