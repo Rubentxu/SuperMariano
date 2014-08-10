@@ -6,17 +6,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.ProfileService;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.Profile;
+import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 import javax.inject.Inject;
 
 public class GameOverScreen extends BaseScreen {
-    @Inject
-    ProfileService profileService;
 
+
+    @Inject
+    public GameOverScreen(BaseGame game) {
+        super(game);
+    }
 
 
     @Override

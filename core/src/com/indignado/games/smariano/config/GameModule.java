@@ -9,10 +9,6 @@ import com.indignado.games.smariano.SMariano;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.managers.*;
-import com.indignado.games.smariano.model.services.AudioService;
-import com.indignado.games.smariano.model.services.interfaces.ILevelService;
-import com.indignado.games.smariano.model.services.interfaces.IProfileService;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.view.ModelsAndViews;
 import com.indignado.games.smariano.view.WorldRenderer;
 import dagger.Module;
@@ -42,8 +38,8 @@ public class GameModule {
 
 
     @Provides
-    World provideWorld(com.badlogic.gdx.physics.box2d.World physics, ILevelService levelService, IResourcesService resourceService) {
-        return new World(physics, levelService, resourceService);
+    World provideWorld(com.badlogic.gdx.physics.box2d.World physics,BaseGame game) {
+        return new World(physics, game);
 
     }
 
@@ -51,16 +47,15 @@ public class GameModule {
     @Provides
     WorldController provideWorldController(World world, HeroManager heroManager, PlatformManager platformManager, WaterManager waterManager,
                                            EnemyManager enemyManager, ItemsManager itemsManager, CheckPointManager checkPointManager,
-                                           IProfileService profileService, AudioService audioService) {
-        return new WorldController(world, heroManager, platformManager, waterManager, enemyManager, itemsManager, checkPointManager,
-                profileService, audioService);
+                                           BaseGame game) {
+        return new WorldController(world, heroManager, platformManager, waterManager, enemyManager, itemsManager, checkPointManager,game);
 
     }
 
 
     @Provides
     WorldRenderer provideWorldRenderer(World world, @Named("camera") OrthographicCamera cam, OrthogonalTiledMapRenderer renderer,
-                                       SpriteBatch spriteBatch, ModelsAndViews modelsAndViews) {
+                                       @Named("game") SpriteBatch spriteBatch, ModelsAndViews modelsAndViews) {
         return new WorldRenderer(world, cam, renderer, spriteBatch, modelsAndViews);
 
     }

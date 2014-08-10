@@ -33,12 +33,11 @@ import javax.inject.Named;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 
 public abstract class BaseScreen implements Screen {
-
+    protected BaseGame game;
     protected Table mainTable;
     protected Window dialog;
     protected Label message;
     protected Stack container;
-    protected BaseGame game;
     protected IResourcesService resourcesService;
     protected Styles styles;
     protected OrthographicCamera camera;
@@ -50,7 +49,7 @@ public abstract class BaseScreen implements Screen {
     protected ProfileService profileService;
 
 
-    public BaseScreen(BaseGame game,OrthographicCamera camera,Stage stage){
+    public BaseScreen(BaseGame game){
         this.game=game;
         this.resourcesService=game.resourcesService;
         this.styles=game.styles;
@@ -59,14 +58,16 @@ public abstract class BaseScreen implements Screen {
         this.levelService=game.levelService;
         this.preferencesService=game.preferencesService;
         this.profileService=game.profileService;
-        this.camera=camera;
-        this.stage=stage;
+        this.camera=game.camera;
+        this.stage=game.stage;
+
     }
 
 
     protected String getName() {
         return this.getClass().getSimpleName();
     }
+
 
     @Override
     public void show() {

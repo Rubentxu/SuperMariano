@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.ResourceService;
-import dagger.Lazy;
 
 import javax.inject.Inject;
 
@@ -14,13 +14,16 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class SplashScreen extends BaseScreen {
     private Texture splashTexture;
+
     @Inject
-    Lazy<MenuScreen> menuScreen;
+    public SplashScreen(BaseGame game) {
+        super(game);
+    }
 
     @Override
     public void show() {
         super.show();
-        splashTexture = resourcesManager.getAssetManager().get(ResourceService.SPLASH);
+        splashTexture = resourcesService.getAssetManager().get(ResourceService.SPLASH);
         splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
     }
 
@@ -32,7 +35,7 @@ public class SplashScreen extends BaseScreen {
         mainTable.setBackground(new SpriteDrawable(new Sprite(splashTexture)));
         mainTable.addAction(sequence(fadeIn(0.5f),  delay(1f,  run(new Runnable() {
             public void run() {
-                game.setNextScreen(menuScreen.get());
+                game.setNextScreen(game.menuScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         }))));

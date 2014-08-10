@@ -3,7 +3,9 @@ package com.indignado.games.smariano;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.config.GameModule;
 import com.indignado.games.smariano.model.services.PreferencesService;
 import com.indignado.games.smariano.model.services.ProfileService;
@@ -53,7 +55,17 @@ public class BaseGame implements ApplicationListener {
     public StateMachine<BaseGame> gameStateMachine;
     private BaseScreen currScreen;
     private BaseScreen nextScreen;
-
+    @Inject
+    @Named("camera")
+    public OrthographicCamera camera;
+    @Inject
+    public Stage stage;
+    @Inject
+    @Named("transition")
+    public SpriteBatch transitionBatch;
+    @Inject
+    @Named("game")
+    public SpriteBatch gameBatch;
 
 
     @Override
@@ -156,9 +168,6 @@ public class BaseGame implements ApplicationListener {
         objectGraph.inject(this);
         currScreen = splashScreen.get();
         nextScreen = menuScreen.get();
-
-        objectGraph.inject(currScreen);
-        objectGraph.inject(nextScreen);
 
         currScreen.show();
         GameLogger.info("BaseGame", "Finalizo el Ciclo Create del juego");

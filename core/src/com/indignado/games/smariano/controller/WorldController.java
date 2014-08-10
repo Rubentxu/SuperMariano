@@ -3,12 +3,13 @@ package com.indignado.games.smariano.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
 import com.indignado.games.smariano.model.managers.*;
-import com.indignado.games.smariano.model.services.AudioService;
+import com.indignado.games.smariano.model.services.interfaces.IAudioService;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 
@@ -28,7 +29,7 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     private CheckPointManager checkPointManager;
     private List<Box2DPhysicsObject> destroy=new ArrayList<Box2DPhysicsObject>();
     private IProfileService profileService;
-    private AudioService audioService;
+    private IAudioService audioService;
 
     public static java.util.Map<Keys, Boolean> keys = new java.util.HashMap<Keys, Boolean>();
 
@@ -47,7 +48,7 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
     @Inject
     public WorldController(World world,HeroManager heroManager,PlatformManager platformManager,WaterManager waterManager,
                            EnemyManager enemyManager,ItemsManager itemsManager,CheckPointManager checkPointManager,
-                           IProfileService profileService,AudioService audioService) {
+                           BaseGame game) {
         this.world=world;
         this.heroManager=heroManager;
         this.platformManager=platformManager;
@@ -55,8 +56,8 @@ public class WorldController implements ContactListener, ContactFilter,Disposabl
         this.enemyManager=enemyManager;
         this.itemsManager=itemsManager;
         this.checkPointManager=checkPointManager;
-        this.profileService=profileService;
-        this.audioService=audioService;
+        this.profileService=game.profileService;
+        this.audioService=game.audioService;
 
         world.getPhysics().setContactListener(this);
 

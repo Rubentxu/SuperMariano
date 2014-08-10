@@ -14,25 +14,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.AudioService;
-import com.indignado.games.smariano.model.services.PreferencesService;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
-import dagger.Lazy;
 
 import javax.inject.Inject;
 
 public class OptionScreen extends BaseScreen {
-
     private Label volumeValueSound;
     private Label volumeValueMusic;
+
+
     @Inject
-    PreferencesService preferencesService;
-    @Inject
-    AudioService audioService;
-    @Inject
-    public Lazy<MenuScreen> menuScreen;
+    public OptionScreen(BaseGame game) {
+        super(game);
+    }
 
 
     @Override
@@ -46,7 +43,7 @@ public class OptionScreen extends BaseScreen {
         mainTable.defaults().padLeft(50 * ScaleUtil.getSizeRatio());
         mainTable.add(label).colspan(3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) resourcesManager.getAssetManager().get(ResourceService.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) resourcesService.getAssetManager().get(ResourceService.MENU_BACKGROUND))));
 
         final CheckBox musicCheckbox = new CheckBox(" Music", styles.skin);
         musicCheckbox.align(Align.left);
@@ -135,7 +132,7 @@ public class OptionScreen extends BaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 preferencesService.save();
-                game.setNextScreen(menuScreen.get());
+                game.setNextScreen(game.menuScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });

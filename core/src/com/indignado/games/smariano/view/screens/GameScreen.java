@@ -6,15 +6,13 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.PreferencesService;
-import com.indignado.games.smariano.model.services.interfaces.IProfileService;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.view.WorldRenderer;
@@ -26,22 +24,19 @@ import javax.inject.Inject;
 public class GameScreen extends BaseScreen {
     private Profile profile;
     private Table stats;
-    private IProfileService profileService;
-    private PreferencesService preferencesService;
     private World world;
     private WorldController worldController;
     private WorldRenderer worldRenderer;
     private GuiBuilder guiBuilder;
 
+
     @Inject
-    public GameScreen(World world, WorldController worldController, WorldRenderer worldRenderer,IProfileService profileService,
-                      IResourcesService resourceService,PreferencesService preferencesService,GuiBuilder guiBuilder) {
+    public GameScreen(World world, WorldController worldController, WorldRenderer worldRenderer,
+                      BaseGame game,GuiBuilder guiBuilder) {
+        super(game);
         this.world= world;
         this.worldController= worldController;
         this.worldRenderer= worldRenderer;
-        this.profileService=profileService;
-        this.resourcesService=resourceService;
-        this.preferencesService=preferencesService;
         this.guiBuilder=guiBuilder;
 
     }

@@ -30,7 +30,7 @@ public class WorldRenderer implements Disposable {
 
     @Inject
     public WorldRenderer(World world,@Named("camera") OrthographicCamera cam,OrthogonalTiledMapRenderer renderer,
-                         SpriteBatch spriteBatch,ModelsAndViews modelsAndViews) {
+                         @Named("game") SpriteBatch spriteBatch,ModelsAndViews modelsAndViews) {
         this.world=world;
         this.cam=cam;
         this.renderer=renderer;

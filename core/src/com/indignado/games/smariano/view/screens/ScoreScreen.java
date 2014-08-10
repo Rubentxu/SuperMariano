@@ -6,28 +6,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.fms.GameState;
-import com.indignado.games.smariano.model.services.interfaces.ILevelService;
-import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 import javax.inject.Inject;
 
 public class ScoreScreen extends BaseScreen {
-
     private Profile profile;
     private Level currentLevel;
     private int coins;
     private int kills;
     private int stars;
-    @Inject
-    IProfileService profileService;
-    @Inject
-    ILevelService levelService;
 
+
+    @Inject
+    public ScoreScreen(BaseGame game) {
+        super(game);
+    }
 
 
     @Override

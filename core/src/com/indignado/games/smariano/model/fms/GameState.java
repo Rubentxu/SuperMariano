@@ -120,7 +120,7 @@ public enum GameState implements State<BaseGame> {
                     nextFbo.end();
 
                     float alpha = timeTransition / duration;
-                    transition.render(game.batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
+                    transition.render(game.transitionBatch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
 
                 }
 

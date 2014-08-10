@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.factories.Box2dObjectFactory;
 import com.indignado.games.smariano.model.services.interfaces.ILevelService;
@@ -19,7 +20,6 @@ import java.util.Comparator;
 public class World implements Disposable {
     private TiledMap map;
     private com.badlogic.gdx.physics.box2d.World physics;
-    private Box2DMapObjectParser parser;
     private ArrayList<Box2DPhysicsObject> entities;
     private Hero hero;
     private Array<Body> bodiesFlaggedDestroy = new Array<Body>();
@@ -28,16 +28,16 @@ public class World implements Disposable {
     private Texture background_01;
 
     private Box2dObjectFactory box2dObjectFactory;
-
+    private Box2DMapObjectParser parser;
     IResourcesService resourceService;
     ILevelService levelService;
 
 
     @Inject
-    public World(com.badlogic.gdx.physics.box2d.World physics, ILevelService levelService,IResourcesService resourceService) {
+    public World(com.badlogic.gdx.physics.box2d.World physics,BaseGame game) {
         this.physics= physics;
-        this.levelService= levelService;
-        this.resourceService= resourceService;
+        this.levelService= game.levelService;
+        this.resourceService= game.resourcesService;
         entities = new ArrayList<Box2DPhysicsObject>();
         createDreamsWorld();
 

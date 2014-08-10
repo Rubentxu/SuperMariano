@@ -9,26 +9,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.ResourceService;
-import com.indignado.games.smariano.model.services.interfaces.ILevelService;
-import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
-import dagger.Lazy;
 
 import javax.inject.Inject;
 import java.util.List;
 
 public class SelectLevelScreen extends BaseScreen {
+
     @Inject
-    protected IProfileService profileService;
-    @Inject
-    protected ILevelService levelService;
-    @Inject
-    public Lazy<GameScreen> gameScreen;
+    public SelectLevelScreen(BaseGame game) {
+        super(game);
+    }
 
 
     private Label label(String text, Color color) {
@@ -36,6 +33,7 @@ public class SelectLevelScreen extends BaseScreen {
         label.setAlignment(Align.center, Align.center);
         return label;
     }
+
 
     @Override
     public void resize(int width, int height) {
@@ -54,7 +52,7 @@ public class SelectLevelScreen extends BaseScreen {
 
             levelButton.setLevelNumber(levels.get(i).getNum(), styles.font2);
 
-            levelButton.setLevelStars(((TextureAtlas) resourcesManager.getAssetManager().get(ResourceService.GUI_ATLAS)).findRegion("estrellaZocalo"),
+            levelButton.setLevelStars(((TextureAtlas) resourcesService.getAssetManager().get(ResourceService.GUI_ATLAS)).findRegion("estrellaZocalo"),
                     skin.getRegion("gui_estrella"), 5, levels.get(i).getAchievements(), size);
 
             levelButton.addListener(new ActorGestureListener() {
@@ -63,7 +61,7 @@ public class SelectLevelScreen extends BaseScreen {
                     super.touchUp(event, x, y, pointer, button);
                     Gdx.app.log(Env.LOG, "Numero de boton presionado: " + levelButton.getLevelNumber());
                     levelService.setCurrentLevel(levels.get(levelButton.getLevelNumber() - 1));
-                    game.setNextScreen(gameScreen.get());
+                    game.setNextScreen(game.gameScreen.get());
                     gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
                 }
             });
