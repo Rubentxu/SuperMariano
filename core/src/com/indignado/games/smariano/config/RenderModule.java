@@ -2,13 +2,10 @@ package com.indignado.games.smariano.config;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.services.Styles;
-import com.indignado.games.smariano.model.services.interfaces.ILevelService;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.parallax.ParallaxBackground;
 import com.indignado.games.smariano.view.ModelsAndViews;
@@ -24,9 +21,9 @@ import javax.inject.Singleton;
 @Module(library = true,complete = false,injects = {Styles.class,ModelsAndViews.class,GuiBuilder.class,ParallaxBackground.class})
 public class RenderModule {
 
+
     @Provides
     @Singleton
-    @Named("transition")
     SpriteBatch provideSpriteBatch() {
         return new SpriteBatch();
     }
@@ -34,9 +31,8 @@ public class RenderModule {
 
     @Provides
     @Singleton
-    @Named("game")
-    SpriteBatch provideSpriteBatchWorldRender() {
-        return new SpriteBatch();
+    Stage provideStage(SpriteBatch batch) {
+        return new Stage();
     }
 
 
@@ -58,6 +54,7 @@ public class RenderModule {
 
     }
 
+
     @Provides
     @Singleton
     @Named("uiCamera")
@@ -77,13 +74,6 @@ public class RenderModule {
 
     }
 
-
-    @Provides
-    @Singleton
-    OrthogonalTiledMapRenderer provideOrthogonalTiledMapRenderer(IResourcesService resourceService,ILevelService levelService,@Named("game") SpriteBatch spriteBatch) {
-        return new OrthogonalTiledMapRenderer((TiledMap) resourceService.getAssetManager().get(levelService.getCurrentLevel().getMap()), Env.UNIT_SCALE,spriteBatch);
-
-    }
 
 
     @Provides

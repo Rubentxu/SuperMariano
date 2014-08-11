@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.model.entities.Enemy;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Hero.StateHero;
@@ -21,15 +18,15 @@ import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.BaseState;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
 import com.indignado.games.smariano.model.entities.base.Box2dPhysicsCompoundObject;
-import javax.inject.Inject;
+import com.indignado.games.smariano.model.services.ResourceService;
+import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModelsAndViews {
-    @Inject
-    protected IResourcesService resourcesManager;
-    @Inject
-    protected World world;
+    private IResourcesService resourcesService;
+    private World world;
 
     /**
      * Animations *
@@ -45,8 +42,10 @@ public class ModelsAndViews {
     private HashMap<String, Animation> animationCheckPointBandera;
 
 
-    public ModelsAndViews() {
-        BaseGame.objectGraph.inject(this);
+    public ModelsAndViews(IResourcesService resourcesService, World world) {
+        this.resourcesService=resourcesService;
+        this.world=world;
+
         loadHeroAnimations();
         loadEnemyAnimations();
         loadWaterAnimations();
@@ -133,8 +132,8 @@ public class ModelsAndViews {
     }
 
     private void loadHeroAnimations() {
-        TextureAtlas atlas = resourcesManager.getAssetManager().get(ResourceService.SPRITE_ATLAS);
-        TextureAtlas atlasVarios = resourcesManager.getAssetManager().get(ResourceService.VARIOS_ATLAS);
+        TextureAtlas atlas = resourcesService.getAssetManager().get(ResourceService.SPRITE_ATLAS);
+        TextureAtlas atlasVarios = resourcesService.getAssetManager().get(ResourceService.VARIOS_ATLAS);
 
         Array<TextureAtlas.AtlasRegion> heroWalking = atlas.findRegions("Andando");
         Array<TextureAtlas.AtlasRegion> heroJump = atlas.findRegions("Saltando");
@@ -162,7 +161,7 @@ public class ModelsAndViews {
 
     private void loadEnemyAnimations() {
 
-        TextureAtlas atlasVarios = resourcesManager.getAssetManager().get(ResourceService.VARIOS_ATLAS);
+        TextureAtlas atlasVarios = resourcesService.getAssetManager().get(ResourceService.VARIOS_ATLAS);
         Array<TextureAtlas.AtlasRegion> enemy = atlasVarios.findRegions("ENEMY");
         Animation walking = new Animation(Env.RUNNING_FRAME_DURATION, enemy, Animation.PlayMode.LOOP);
         Array<TextureAtlas.AtlasRegion> dead = atlasVarios.findRegions("ENEMY");
@@ -181,7 +180,7 @@ public class ModelsAndViews {
 
     private void loadWaterAnimations() {
 
-        TextureAtlas atlasVarios = resourcesManager.getAssetManager().get(ResourceService.VARIOS_ATLAS);
+        TextureAtlas atlasVarios = resourcesService.getAssetManager().get(ResourceService.VARIOS_ATLAS);
         Array<TextureAtlas.AtlasRegion> water = atlasVarios.findRegions("agua");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, water, Animation.PlayMode.LOOP);
         animationWater = new HashMap<String, Animation>();
@@ -190,7 +189,7 @@ public class ModelsAndViews {
     }
 
     private void loadMotorMolinoAnimations() {
-        TextureAtlas objectsAtlas = resourcesManager.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
+        TextureAtlas objectsAtlas = resourcesService.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
         Array<TextureAtlas.AtlasRegion> motorMolino = objectsAtlas.findRegions("motorMolino");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, motorMolino, Animation.PlayMode.LOOP);
         animationMotorMill = new HashMap<String, Animation>();
@@ -198,7 +197,7 @@ public class ModelsAndViews {
     }
 
     private void loadAspasMolinoAnimations() {
-        TextureAtlas objectsAtlas = resourcesManager.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
+        TextureAtlas objectsAtlas = resourcesService.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
         Array<TextureAtlas.AtlasRegion> aspasMolino = objectsAtlas.findRegions("aspasMolino");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, aspasMolino, Animation.PlayMode.LOOP);
         animationAspasMolino = new HashMap<String, Animation>();
@@ -206,7 +205,7 @@ public class ModelsAndViews {
     }
 
     private void loadCheckPointMastilAnimations() {
-        TextureAtlas objectsAtlas = resourcesManager.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
+        TextureAtlas objectsAtlas = resourcesService.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
         Array<TextureAtlas.AtlasRegion> mastil = objectsAtlas.findRegions("mastil");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, mastil, Animation.PlayMode.LOOP);
         animationCheckPointMastil = new HashMap<String, Animation>();
@@ -214,7 +213,7 @@ public class ModelsAndViews {
     }
 
     private void loadCheckPointBanderaAnimations() {
-        TextureAtlas objectsAtlas = resourcesManager.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
+        TextureAtlas objectsAtlas = resourcesService.getAssetManager().get(ResourceService.OBJECTS_ATLAS);
         Array<TextureAtlas.AtlasRegion> bandera = objectsAtlas.findRegions("bandera");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, bandera, Animation.PlayMode.LOOP);
         animationCheckPointBandera = new HashMap<String, Animation>();
@@ -224,7 +223,7 @@ public class ModelsAndViews {
 
     private void loadMovingPlatformAnimations() {
 
-        TextureAtlas atlasVarios = resourcesManager.getAssetManager().get(ResourceService.VARIOS_ATLAS);
+        TextureAtlas atlasVarios = resourcesService.getAssetManager().get(ResourceService.VARIOS_ATLAS);
         Array<TextureAtlas.AtlasRegion> moving_platform = atlasVarios.findRegions("MOVING_PLATFORM");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, moving_platform, Animation.PlayMode.LOOP);
         animationMovingPlatform = new HashMap<String, Animation>();
@@ -234,7 +233,7 @@ public class ModelsAndViews {
 
     private void loadItemsCoinAnimations() {
 
-        TextureAtlas atlasGui = resourcesManager.getAssetManager().get(ResourceService.GUI_ATLAS);
+        TextureAtlas atlasGui = resourcesService.getAssetManager().get(ResourceService.GUI_ATLAS);
         Array<TextureAtlas.AtlasRegion> moving_platform = atlasGui.findRegions("tijeras");
         Animation defaultState = new Animation(Env.RUNNING_FRAME_DURATION, moving_platform, Animation.PlayMode.LOOP);
         animationItemCoin = new HashMap<String, Animation>();

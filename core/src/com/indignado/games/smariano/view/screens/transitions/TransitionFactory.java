@@ -15,7 +15,7 @@ public class TransitionFactory {
         if (screen instanceof OptionScreen) return getSlideTransition();
         if (screen instanceof SelectLevelScreen) return getFadeTransition();
         if (screen instanceof GameOverScreen) return getSlideTransition();
-        if (screen instanceof HighScoresScreen) return getSlideTransition();
+        if (screen instanceof HighScoresScreen) return getFadeTransition();
         if (screen instanceof ScoreScreen) return getSlideTransition();
         if (screen instanceof GameScreen) return getSliceTransition();
         return getFadeTransition();

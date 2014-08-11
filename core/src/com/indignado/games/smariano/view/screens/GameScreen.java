@@ -3,6 +3,7 @@ package com.indignado.games.smariano.view.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,8 +32,8 @@ public class GameScreen extends BaseScreen {
 
 
     @Inject
-    public GameScreen(World world, WorldController worldController, WorldRenderer worldRenderer,
-                      BaseGame game,GuiBuilder guiBuilder) {
+    public GameScreen(BaseGame game,World world, WorldController worldController, WorldRenderer worldRenderer,
+                      GuiBuilder guiBuilder) {
         super(game);
         this.world= world;
         this.worldController= worldController;
@@ -45,14 +46,15 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show(){
         super.show();
-        world.createDreamsWorld();
 
     }
 
 
     @Override
     public void render(float delta) {
-        super.render(delta);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
         //updates
         if (!gameStateMachine.getCurrentState().equals(GameState.PAUSED) &&

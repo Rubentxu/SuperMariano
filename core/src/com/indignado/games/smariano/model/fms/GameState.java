@@ -23,6 +23,8 @@ public enum GameState implements State<BaseGame> {
         public void update(BaseGame game) {
             if (game.getCurrScreen() != null) game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
         }
+
+
     },
     PAUSED {
         @Override
@@ -120,7 +122,7 @@ public enum GameState implements State<BaseGame> {
                     nextFbo.end();
 
                     float alpha = timeTransition / duration;
-                    transition.render(game.transitionBatch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
+                    transition.render(game.batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
 
                 }
 
@@ -191,7 +193,7 @@ public enum GameState implements State<BaseGame> {
 
 
     @Override
-    public boolean onMessage(Telegram telegram) {
+    public boolean onMessage( Telegram telegram) {
         return false;
     }
 

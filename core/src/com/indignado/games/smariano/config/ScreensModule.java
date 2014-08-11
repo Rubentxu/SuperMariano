@@ -2,7 +2,6 @@ package com.indignado.games.smariano.config;
 
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.entities.World;
@@ -32,15 +31,9 @@ public class ScreensModule {
 
 
     @Provides
-    Stage provideStage() {
-        return new Stage();
-    }
+    GameScreen provideGameScreen( BaseGame game,World world,GuiBuilder guiBuilder){
+        return new GameScreen(game,world,new WorldController(world),new WorldRenderer(game,world),guiBuilder);
 
-
-    @Provides
-    GameScreen provideGameScreen(World world, WorldController worldController, WorldRenderer worldRenderer,
-                                 BaseGame game,GuiBuilder guiBuilder){
-        return new GameScreen(world,worldController,worldRenderer,game,guiBuilder);
     }
 
 

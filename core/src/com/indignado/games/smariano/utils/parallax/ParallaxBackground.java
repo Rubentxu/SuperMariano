@@ -3,10 +3,7 @@ package com.indignado.games.smariano.utils.parallax;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.indignado.games.smariano.BaseGame;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +11,12 @@ public class ParallaxBackground {
 
     private List<ParallaxLayer> layers;
     private float width;
-    @Inject
-    @Named("camera")
-    protected OrthographicCamera cam;
+    private OrthographicCamera cam;
 
-    public ParallaxBackground(float width) {
+    public ParallaxBackground(float width,OrthographicCamera cam) {
         this.layers = new ArrayList<ParallaxLayer>();
         this.width = width;
-        BaseGame.objectGraph.inject(this);
+        this.cam=cam;
 
     }
 

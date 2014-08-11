@@ -59,7 +59,7 @@ public abstract class BaseScreen implements Screen {
         this.preferencesService=game.preferencesService;
         this.profileService=game.profileService;
         this.camera=game.camera;
-        this.stage=game.stage;
+        this.stage=new Stage();//game.stage;
 
     }
 

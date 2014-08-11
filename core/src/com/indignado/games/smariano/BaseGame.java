@@ -20,6 +20,7 @@ import dagger.ObjectGraph;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 
 public class BaseGame implements ApplicationListener {
     public static ObjectGraph objectGraph;
@@ -48,7 +49,7 @@ public class BaseGame implements ApplicationListener {
     @Inject
     public Lazy<SelectLevelScreen> selectLevelScreen;
     @Inject
-    public Lazy<GameScreen> gameScreen;
+    public Provider<GameScreen> gameScreen;
     @Inject
     public Lazy<GameOverScreen> gameOverScreen;
     @Inject
@@ -59,13 +60,9 @@ public class BaseGame implements ApplicationListener {
     @Named("camera")
     public OrthographicCamera camera;
     @Inject
+    public SpriteBatch batch;
+    @Inject
     public Stage stage;
-    @Inject
-    @Named("transition")
-    public SpriteBatch transitionBatch;
-    @Inject
-    @Named("game")
-    public SpriteBatch gameBatch;
 
 
     @Override
