@@ -1,13 +1,9 @@
 package com.indignado.games.smariano.utils.gui.mtx;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.indignado.games.smariano.model.services.Styles;
-import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-
-import javax.inject.Inject;
 
 public class ButtonLevel extends AbstractButton {
     // Level stars (Not mandatory)
@@ -23,10 +19,7 @@ public class ButtonLevel extends AbstractButton {
 
     // Level Number (Not mandatory)
     private int levelNumber = -999;
-    @Inject
-    protected IResourcesService resourcesService;
-    @Inject
-    protected Styles styles;
+
 
     // Font (For writings and level number)
 
@@ -36,7 +29,9 @@ public class ButtonLevel extends AbstractButton {
         bitMapFont.setColor(Color.ORANGE);
     }
 
-    public void draw(SpriteBatch batch, float parentAlpha) {
+
+    @Override
+    public void draw (Batch batch, float parentAlpha) {
 // If level locked
 // ##################################################################
         if (isLockActive && textureLocked != null) {
@@ -64,7 +59,7 @@ public class ButtonLevel extends AbstractButton {
         }
     }
 
-    private void drawStars(SpriteBatch batch) {
+    private void drawStars(Batch batch) {
         if(textureStarHolder != null && textureStar != null){
 // Updated start positions
             float activePosXStart = (getX() + getWidth() / 2) - ((starSizeWidth * numberOfTotalStars) / 2);
@@ -89,23 +84,23 @@ public class ButtonLevel extends AbstractButton {
         }
     }
 
-    private void drawText(SpriteBatch batch) {
+    private void drawText(Batch batch) {
         if(isTextActive && bitMapFont != null){
             bitMapFont.draw(batch, text, getX() + textPosX, getY() + textPosY);
         }
     }
 
-    private void drawLocked(SpriteBatch batch) {
+    private void drawLocked(Batch batch) {
         batch.draw(textureLocked, getX(), getY(), getWidth(), getHeight());
     }
 
-    private void drawExternalTexture(SpriteBatch batch) {
+    private void drawExternalTexture(Batch batch) {
         if(isExternalTextureActive && textureExternal != null){
             batch.draw(textureExternal, getX() + externalTexturePosX, getY() + externalTexturePosY, externalTextureSizeW, externalTextureSizeH);
         }
     }
 
-    private void drawLevelNumber(SpriteBatch batch) {
+    private void drawLevelNumber(Batch batch) {
 // TODO Set precise position of level number for each game
 // there i single numbers ( < 10)
 // there is double numbers (9 >)

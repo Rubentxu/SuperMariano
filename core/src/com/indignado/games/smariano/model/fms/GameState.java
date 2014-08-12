@@ -90,10 +90,10 @@ public enum GameState implements State<BaseGame> {
         @Override
         public void enter(BaseGame game) {
             if (game.getNextScreen() == null) {
-                GameLogger.error("GameState", "No existe una próxima pantalla a la que poder cambiar");
+                GameLogger.error(TAG, "No existe una próxima pantalla a la que poder cambiar");
                 return;
             }
-            GameLogger.info("GameState", "Comienza Enter en el Estado SHOW_NEXT_SCREEN NextScreen: %s"
+            GameLogger.info(TAG, "Comienza Enter en el Estado SHOW_NEXT_SCREEN NextScreen: %s"
                     , game.getNextScreen().getClass().getSimpleName());
 
             int w = Gdx.graphics.getWidth();
