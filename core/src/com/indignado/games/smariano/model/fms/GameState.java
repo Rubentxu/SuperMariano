@@ -82,79 +82,45 @@ public enum GameState implements State<BaseGame> {
     },
     SHOW_NEXT_SCREEN {
         private boolean init = false;
-        private boolean screen_transition = false;
         private float timeTransition;
         private FrameBuffer currFbo;
         private FrameBuffer nextFbo;
         private Transition transition;
 
         @Override
-        public void update(BaseGame game) {
-
-            if (screen_transition) {
-                float duration = 0;
-
-                if (transition != null)
-                    duration = transition.getDuration();
-
-                timeTransition = Math.min(timeTransition + Gdx.graphics.getDeltaTime(), duration);
-                if (transition == null || timeTransition >= duration) {
-                    if (game.getCurrScreen() != null) {
-                        game.getCurrScreen().pause();
-                        game.getCurrScreen().hide();
-                    }
-
-                    game.getNextScreen().resume();
-                    game.setCurrScreen(game.getNextScreen());
-                    game.setNextScreen(null);
-                    transition = null;
-                    Gdx.input.setInputProcessor(game.getCurrScreen().getInputProcessor());
-                    screen_transition=false;
-                    game.gameStateMachine.changeState(GameState.RUNNING);
-                } else {
-
-                    currFbo.begin();
-                        game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
-                    currFbo.end();
-
-                    nextFbo.begin();
-                        game.getNextScreen().render(Gdx.graphics.getDeltaTime());
-                    nextFbo.end();
-
-                    float alpha = timeTransition / duration;
-                    transition.render(game.batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
-
-                }
-
-            } else {
-                if (game.getNextScreen() == null) {
-                    GameLogger.error("GameState", "No existe una próxima pantalla a la que poder cambiar");
-                    return;
-                }
-                GameLogger.info("GameState", "Comienza el Estado SHOW_NEXT_SCREEN NextScreen: %s"
-                        , game.getNextScreen().getClass().getSimpleName());
-
-                int w = Gdx.graphics.getWidth();
-                int h = Gdx.graphics.getHeight();
-                if (!init) {
-                    nextFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
-                    currFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
-
-                    init = true;
-                }
-
-                game.getNextScreen().show();
-                game.getNextScreen().resize(w, h);
-                game.getCurrScreen().pause();
-                game.getNextScreen().pause();
-                Gdx.input.setInputProcessor(null); // disable input
-
-                timeTransition = 0;
-                if (game.getCurrScreen() != null && !screen_transition) {
-                    transition = TransitionFactory.getTransition(game.getNextScreen());
-                    screen_transition = true;
-                }
+        public void enter(BaseGame game) {
+            if (game.getNextScreen() == null) {
+                GameLogger.error("GameState", "No existe una próxima pantalla a la que poder cambiar");
+                return;
             }
+            GameLogger.info("GameState", "Comienza Enter en el Estado SHOW_NEXT_SCREEN NextScreen: %s"
+                    , game.getNextScreen().getClass().getSimpleName());
+
+            int w = Gdx.graphics.getWidth();
+            int h = Gdx.graphics.getHeight();
+            if (!init) {
+                nextFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
+                currFbo = new FrameBuffer(Pixmap.Format.RGBA8888, w, h, true);
+
+                init = true;
+            }
+
+            game.getNextScreen().show();
+            game.getNextScreen().resize(w, h);
+            game.getCurrScreen().pause();
+            game.getNextScreen().pause();
+            Gdx.input.setInputProcessor(null); // disable input
+
+            timeTransition = 0;
+            transition = TransitionFactory.getTransition(game.getNextScreen());
+
+
+        }
+
+
+        @Override
+        public void exit(BaseGame game) {
+            GameLogger.info(TAG, "Exit del Estado.........%s...........", game.gameStateMachine.getCurrentState());
             if (game.getCurrScreen() instanceof GameScreen) {
                 GameLogger.info("GameState", "music Game");
                 game.audioService.stopMusic();
@@ -165,13 +131,50 @@ public enum GameState implements State<BaseGame> {
                 game.audioService.playMusic(ResourceService.MUSIC_MENU);
 
             }
+        }
+
+
+        @Override
+        public void update(BaseGame game) {
+
+            float duration = 0;
+            if (transition != null)
+                duration = transition.getDuration();
+
+            timeTransition = Math.min(timeTransition + Gdx.graphics.getDeltaTime(), duration);
+            if (transition == null || timeTransition >= duration) {
+                if (game.getCurrScreen() != null) {
+                    game.getCurrScreen().pause();
+                    game.getCurrScreen().hide();
+                }
+
+                game.getNextScreen().resume();
+                game.setCurrScreen(game.getNextScreen());
+                game.setNextScreen(null);
+                transition = null;
+                Gdx.input.setInputProcessor(game.getCurrScreen().getInputProcessor());
+                game.gameStateMachine.changeState(GameState.RUNNING);
+            } else {
+
+                currFbo.begin();
+                game.getCurrScreen().render(Gdx.graphics.getDeltaTime());
+                currFbo.end();
+
+                nextFbo.begin();
+                game.getNextScreen().render(Gdx.graphics.getDeltaTime());
+                nextFbo.end();
+
+                float alpha = timeTransition / duration;
+                transition.render(game.batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
+
+            }
+
 
         }
     };
 
 
     private static final String TAG = "GameState";
-
 
 
     @Override
@@ -193,7 +196,7 @@ public enum GameState implements State<BaseGame> {
 
 
     @Override
-    public boolean onMessage( Telegram telegram) {
+    public boolean onMessage(Telegram telegram) {
         return false;
     }
 
