@@ -42,7 +42,7 @@ public class AudioService implements IAudioService {
     }
 
     public void playMusic(String music) {
-        if (preferencesService.music) {
+        if (!preferencesService.music) {
             stopMusic();
             return;
         }

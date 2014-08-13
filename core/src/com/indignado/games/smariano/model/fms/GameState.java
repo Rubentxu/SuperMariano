@@ -63,7 +63,7 @@ public enum GameState implements State<BaseGame> {
     BACK {
         @Override
         public void update(BaseGame game) {
-
+            game.gameStateMachine.changeState(GameState.PAUSED);
         }
     },
     GAME_OVER {
@@ -196,7 +196,7 @@ public enum GameState implements State<BaseGame> {
 
 
     @Override
-    public boolean onMessage(Telegram telegram) {
+    public boolean onMessage(BaseGame game,Telegram telegram) {
         return false;
     }
 

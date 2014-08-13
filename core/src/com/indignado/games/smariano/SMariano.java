@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
 
 public class SMariano extends BaseGame {
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
     public static FPSLogger log;
 
     @Override
