@@ -196,7 +196,7 @@ public enum GameState implements State<BaseGame> {
 
 
     @Override
-    public boolean onMessage(BaseGame game,Telegram telegram) {
+    public boolean onMessage(Telegram telegram) {
         return false;
     }
 
