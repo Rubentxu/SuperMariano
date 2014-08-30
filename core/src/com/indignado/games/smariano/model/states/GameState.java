@@ -1,4 +1,4 @@
-package com.indignado.games.smariano.model.fms;
+package com.indignado.games.smariano.model.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.State;
@@ -42,8 +42,7 @@ public enum GameState implements State<BaseGame> {
     LEVELWIN {
         @Override
         public void update(BaseGame game) {
-
-            game.getCurrScreen().showMessage("Level completed ", 1.5f, GameState.SHOW_NEXT_SCREEN, game.highScoresScreen.get());
+            game.getCurrScreen().showMessage("Level completed ", 1.5f, GameState.SHOW_NEXT_SCREEN, game.scoreScreen.get());
             game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
 
         }
@@ -70,7 +69,7 @@ public enum GameState implements State<BaseGame> {
         @Override
         public void update(BaseGame game) {
             game.setNextScreen(game.highScoresScreen.get());
-            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN, game.highScoresScreen.get());
+            game.getCurrScreen().showMessage("Game Over", 1.5f, GameState.SHOW_NEXT_SCREEN, game.scoreScreen.get());
             game.getCurrScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f));
         }
     },

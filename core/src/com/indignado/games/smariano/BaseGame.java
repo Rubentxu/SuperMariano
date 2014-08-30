@@ -70,91 +70,7 @@ public class BaseGame implements ApplicationListener {
         float deltaTime = Math.min(Gdx.graphics.getDeltaTime(), 1.0f / 60.0f);
         gameStateMachine.update();
 
-        /*switch (SMariano.getGameState()) {
-            case GAME_RUNNING:
-                if (currScreen != null) currScreen.render(deltaTime);
-                break;
-            case GAME_PAUSED:
-                currScreen.showDialog();
-                currScreen.render(deltaTime);
-                break;
-            case GAME_UPDATE:
-                break;
-            case GAME_OVER:
-                currScreen.showMessage("Game Over", 1.5f, GameState.GAME_SHOW_SCORE);
-                currScreen.render(deltaTime);
-                break;
-            case GAME_WIN:
-                break;
-            case GAME_LEVELWIN:
-                currScreen.showMessage("Nivel Completado", 1f, GameState.GAME_SHOW_SCORE);
-                currScreen.render(deltaTime);
-                break;
-            case GAME_IDLE:
-                break;
-            case GAME_SLOWMOTION:
-                break;
-            case GAME_BACK:
-                SMariano.setGameState(GameState.GAME_PAUSED);
-                break;
-            case GAME_SHOW_SPLASH:
-                ScreenTransition transition = ScreenTransitionFade.init(0.75f);
-                SplashScreen splash = new SplashScreen();
-                setScreen(splash, transition);
-                break;
-            case GAME_SHOW_MENU:
-                if (menuScreen == null) menuScreen = new MenuScreen();
-                setScreen(menuScreen, menuScreen.getTransition());
-                break;
-            case GAME_SHOW_SCORE:
-                if (scoreScreen == null) scoreScreen = new ScoreScreen();
-                setScreen(scoreScreen, scoreScreen.getTransition());
-                break;
-            case GAME_SHOW_LEVEL_MENU:
-                if (levelScreen == null) levelScreen = new SelectLevelScreen();
-                setScreen(levelScreen, levelScreen.getTransition());
-                break;
-            case GAME_SHOW_OPTIONS:
-                if (optionScreen == null) optionScreen = new OptionScreen();
-                setScreen(optionScreen, optionScreen.getTransition());
-                break;
-            case GAME_SHOW_HIGHSCORES:
-                if (highScoreScreen == null) highScoreScreen = new HighScoresScreen();
-                setScreen(highScoreScreen, highScoreScreen.getTransition());
-                break;
-            case GAME_SHOW_GAME:
-                if (gameScreen == null) gameScreen = new GameScreen();
-                setScreen(gameScreen, gameScreen.getTransition());
-                break;
-            case SCREEN_TRANSITION:
-                float duration = 0;
-                if (screenTransition != null)
-                    duration = screenTransition.getDuration();
 
-                t = Math.min(t + deltaTime, duration);
-                if (screenTransition == null || t >= duration) {
-                    if (currScreen != null) currScreen.hide();
-                    nextScreen.resume();
-                    currScreen = nextScreen;
-                    nextScreen = null;
-                    screenTransition = null;
-                    Gdx.input.setInputProcessor(currScreen.getInputProcessor());
-                    SMariano.setGameState(GameState.GAME_RUNNING);
-                } else {
-                    currFbo.begin();
-                    if (currScreen != null) currScreen.render(deltaTime);
-                    currFbo.end();
-                    nextFbo.begin();
-                    nextScreen.render(deltaTime);
-                    nextFbo.end();
-
-                    float alpha = t / duration;
-                    screenTransition.render(batch, currFbo.getColorBufferTexture(), nextFbo.getColorBufferTexture(), alpha);
-                }
-                break;
-            case GAME_EXIT:
-                Gdx.app.exit();
-        }*/
     }
 
 
@@ -171,6 +87,7 @@ public class BaseGame implements ApplicationListener {
 
     }
 
+
     @Override
     public void resize(int width, int height) {
         GameLogger.info("BaseGame", "Ciclo Resize del juego");
@@ -179,17 +96,20 @@ public class BaseGame implements ApplicationListener {
 
     }
 
+
     @Override
     public void pause() {
         GameLogger.info("BaseGame", "Ciclo Pause del juego");
         if (currScreen != null) currScreen.pause();
     }
 
+
     @Override
     public void resume() {
         GameLogger.info("BaseGame", "Ciclo Resume del juego");
         if (currScreen != null) currScreen.resume();
     }
+
 
     @Override
     public void dispose() {
@@ -206,8 +126,8 @@ public class BaseGame implements ApplicationListener {
             nextScreen= null;
         }
 
-
     }
+
 
     public BaseScreen getNextScreen() {
         return nextScreen;
@@ -224,6 +144,7 @@ public class BaseGame implements ApplicationListener {
         return currScreen;
     }
 
+
     public void setCurrScreen(BaseScreen currScreen) {
         GameLogger.info("BaseGame", "Set current screen %s", currScreen.getClass().getSimpleName());
         this.currScreen.pause();
@@ -233,5 +154,6 @@ public class BaseGame implements ApplicationListener {
         this.currScreen = currScreen;
 
     }
+
 }
 

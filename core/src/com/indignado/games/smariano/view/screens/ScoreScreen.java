@@ -10,7 +10,7 @@ import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.model.entities.Profile;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 
 import javax.inject.Inject;
@@ -65,7 +65,9 @@ public class ScoreScreen extends BaseScreen {
         levelMenuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                game.setNextScreen(game.selectLevelScreen.get());
                 gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+
             }
         });
 

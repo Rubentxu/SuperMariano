@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.model.entities.CheckPoint;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;

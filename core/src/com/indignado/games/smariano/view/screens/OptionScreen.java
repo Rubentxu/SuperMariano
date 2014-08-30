@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 

@@ -13,7 +13,7 @@ import com.indignado.games.smariano.model.entities.Item;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.State;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 
 import javax.inject.Inject;
@@ -92,6 +92,7 @@ public class ProfileService implements IProfileService {
         return profile;
     }
 
+
     @Override
     public void onNotify(State state, Box2DPhysicsObject entity) {
 
@@ -107,6 +108,7 @@ public class ProfileService implements IProfileService {
             }
         }
     }
+
 
     @Override
     public void onNotifyStateTimeLimit(State state, Box2DPhysicsObject entity, float time) {

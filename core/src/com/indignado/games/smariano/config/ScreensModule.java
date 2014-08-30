@@ -5,7 +5,7 @@ import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.entities.World;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
 import com.indignado.games.smariano.view.WorldRenderer;

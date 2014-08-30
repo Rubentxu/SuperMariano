@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.model.services.Styles;
 
 import javax.inject.Inject;

@@ -1,5 +1,6 @@
 package com.indignado.games.smariano.model.entities;
 
+import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -12,7 +13,7 @@ import java.util.HashSet;
 
 
 public class Hero extends Box2DPhysicsObject implements Disposable {
-
+    public StateMachine<Hero> heroPosStateMachine;
 
      public enum StateHero implements State {
         IDLE, WALKING, JUMPING, DYING, FALL, SWIMMING, PROPULSION,WIN ;
@@ -135,6 +136,34 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
 
     public void setParticleEffectContact(ParticleEffect particleEffectContact) {
         this.particleEffectContact = particleEffectContact;
+    }
+
+
+    public void applyPhysicJumpingImpulse() {
+        this.getBodyA().setLinearVelocity(getVelocity().x, 0);
+        this.getBodyA().setTransform(getBodyA().getPosition().x, getBodyA().getPosition().y + 0.01f, 0);
+        this.getBodyA().applyLinearImpulse(0, this.JUMP_FORCE, getBodyA().getPosition().x, getBodyA().getPosition().y, true);
+    }
+
+
+    public void applyPhysicMovingImpulse() {
+        Vector2 vel = this.getVelocity();
+        Vector2 pos = this.getBodyA().getPosition();
+
+        float impulse = 0;
+        if (this.isFacingLeft() && vel.x > -this.MAX_VELOCITY) {
+            impulse = -3;
+        }
+        if (!this.isFacingLeft() && vel.x < this.MAX_VELOCITY) {
+            impulse = 3;
+        }
+        if (!this.isFacingLeft() && vel.x < 0) {
+            impulse = 1.5f;
+        }
+        if (this.isFacingLeft() && vel.x > 0) {
+            impulse = -1.5f;
+        }
+        this.getBodyA().applyLinearImpulse(impulse, 0, pos.x, pos.y, true);
     }
 
 

@@ -4,16 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.entities.World;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.utils.builders.GuiBuilder;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.view.WorldRenderer;
@@ -79,38 +79,7 @@ public class GameScreen extends BaseScreen {
     }
 
 
-    @Override
-    public void showDialog() {
-        if (dialog == null) {
-            dialog = new Window("Que desea hacer ?", styles.skin);
 
-            TextButton btnSalir = new TextButton("Salir", styles.skin);
-            TextButton btnContinuar = new TextButton("Continuar", styles.skin);
-            btnSalir.addListener(new ClickListener() {
-                public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Click Salir...");
-                    gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
-
-                }
-            });
-            btnContinuar.addListener(new ClickListener() {
-                public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Click Continuar...");
-                    gameStateMachine.changeState(GameState.RUNNING);
-                    dialog.remove();
-                    dialog = null;
-                }
-            });
-
-            dialog.defaults().spaceBottom(10);
-            dialog.row().fill().expandX();
-            dialog.add(btnContinuar);
-            dialog.add(btnSalir);
-            dialog.pack();
-            dialog.setPosition(Gdx.graphics.getWidth() / 2 - dialog.getWidth() / 2, Gdx.graphics.getHeight() / 2 - dialog.getHeight() / 2);
-            stage.addActor(dialog);
-        }
-    }
 
 
     @Override

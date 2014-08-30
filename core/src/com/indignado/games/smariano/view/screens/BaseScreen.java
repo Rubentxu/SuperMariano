@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.fms.GameState;
+import com.indignado.games.smariano.model.states.GameState;
 import com.indignado.games.smariano.model.services.PreferencesService;
 import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.model.services.Styles;
@@ -27,12 +27,10 @@ import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 
 public abstract class BaseScreen implements Screen {
+    protected final String TAG= this.getClass().getSimpleName();
     protected BaseGame game;
     protected Table mainTable;
     protected Window dialog;
@@ -77,6 +75,7 @@ public abstract class BaseScreen implements Screen {
 
     }
 
+
     @Override
     public void resize(int width, int height) {
         Gdx.app.log(Env.LOG, "Resizing screen: " + getName() + " to: " + width + " x " + height);
@@ -87,6 +86,7 @@ public abstract class BaseScreen implements Screen {
         mainTable.addAction(fadeIn(0.2f));
     }
 
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.1f, 0f, 0f, 1f);
@@ -95,20 +95,24 @@ public abstract class BaseScreen implements Screen {
         stage.draw();
     }
 
+
     @Override
     public void hide() {
         Gdx.app.log(Env.LOG, "Hiding screen: " + getName());
     }
+
 
     @Override
     public void pause() {
         Gdx.app.log(Env.LOG, "Pausing screen: " + getName());
     }
 
+
     @Override
     public void resume() {
         Gdx.app.log(Env.LOG, "Resuming screen: " + getName());
     }
+
 
     @Override
     public void dispose() {
@@ -119,7 +123,6 @@ public abstract class BaseScreen implements Screen {
     }
 
 
-
     public void showDialog() {
         if (dialog == null) {
             dialog = new Window("Que desea hacer ?", styles.skin);
@@ -128,8 +131,17 @@ public abstract class BaseScreen implements Screen {
             TextButton btnContinuar = new TextButton("Continuar", styles.skin);
             btnSalir.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Click Salir...");
-                    gameStateMachine.changeState(GameState.EXIT);
+                    GameLogger.info(TAG, "Click Salir...");
+                    if(game.getCurrScreen() instanceof GameScreen ||  game.getCurrScreen() instanceof SelectLevelScreen){
+                        GameLogger.info(TAG, "Volviendo al Menu del Juego.");
+                        game.setNextScreen(game.menuScreen.get());
+                        game.gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+                    }else {
+                        GameLogger.info(TAG, "Saliendo del Juego, GameState Exit");
+                        gameStateMachine.changeState(GameState.EXIT);
+                    }
+
+
                 }
             });
             btnContinuar.addListener(new ClickListener() {
@@ -151,6 +163,7 @@ public abstract class BaseScreen implements Screen {
         }
 
     }
+
 
     public void showMessage(String text, float time, final GameState gameState, final BaseScreen screen) {
         Gdx.app.debug(Env.LOG, "Show Message !");
@@ -186,6 +199,7 @@ public abstract class BaseScreen implements Screen {
 
     }
 
+
     public InputProcessor getInputProcessor() {
         return stage;
     }
@@ -204,8 +218,6 @@ public abstract class BaseScreen implements Screen {
             }
         });
     }
-
-    public static enum SCREEN {SPLASH, MENU, GAME, OPTIONS, HIGHSCORES, SCORE, CREDITS, LEVELSCREEN}
 
 
 }

@@ -270,6 +270,7 @@ public class HeroManager extends AbstractWorldManager {
         }
     }
 
+
     private void resolveContact(Contact contact, Hero hero, Vector2 point) {
         hero.getParticleEffectContact().setPosition(point.x, point.y);
         hero.getParticleEffectContact().reset();
