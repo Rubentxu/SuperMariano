@@ -2,7 +2,7 @@ package com.indignado.games.smariano.view.inputs;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.indignado.games.smariano.SMariano;
+import com.indignado.games.smariano.SuperMariano;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.view.WorldRenderer;
 
@@ -13,10 +13,10 @@ public class GameInputs implements InputProcessor {
     private WorldController controller;
     private WorldRenderer renderer;
 
-    public GameInputs( WorldController controller, WorldRenderer renderer) {
+    public GameInputs(WorldController controller, WorldRenderer renderer) {
 
-        this.controller=controller;
-        this.renderer=renderer;
+        this.controller = controller;
+        this.renderer = renderer;
     }
 
     // * InputProcessor methods ***************************//
@@ -45,7 +45,7 @@ public class GameInputs implements InputProcessor {
         if (keycode == Keys.X)
             controller.fireReleased();
         if (keycode == Keys.D)
-            SMariano.DEBUG=!SMariano.DEBUG;
+            SuperMariano.DEBUG = !SuperMariano.DEBUG;
         return true;
     }
 

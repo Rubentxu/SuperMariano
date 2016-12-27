@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.SMariano;
+import com.indignado.games.smariano.SuperMariano;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Item;
@@ -17,14 +17,14 @@ import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import javax.inject.Inject;
 
 public class AudioService implements IAudioService {
-    private SMariano game;
-    private Music currentMusicPlaying;
-    private String currentNameMusicPlaying;
-    private Sound soundToPlay;
     @Inject
     IResourcesService resourcesManager;
     @Inject
     PreferencesService preferencesService;
+    private SuperMariano game;
+    private Music currentMusicPlaying;
+    private String currentNameMusicPlaying;
+    private Sound soundToPlay;
 
 
     public AudioService() {

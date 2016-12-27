@@ -32,19 +32,19 @@ public class GameScreen extends BaseScreen {
 
 
     @Inject
-    public GameScreen(BaseGame game,World world, WorldController worldController, WorldRenderer worldRenderer,
+    public GameScreen(BaseGame game, World world, WorldController worldController, WorldRenderer worldRenderer,
                       GuiBuilder guiBuilder) {
         super(game);
-        this.world= world;
-        this.worldController= worldController;
-        this.worldRenderer= worldRenderer;
-        this.guiBuilder=guiBuilder;
+        this.world = world;
+        this.worldController = worldController;
+        this.worldRenderer = worldRenderer;
+        this.guiBuilder = guiBuilder;
 
     }
 
 
     @Override
-    public void show(){
+    public void show() {
         super.show();
 
     }
@@ -72,7 +72,7 @@ public class GameScreen extends BaseScreen {
 
 
     private void updateStats() {
-        if(profile==null) profile = profileService.getProfile();
+        if (profile == null) profile = profileService.getProfile();
         Hero hero = world.getHero();
         ((Label) stats.findActor(Env.SCORE)).setText(String.valueOf(profile.getCoinsAquired()));
         ((Label) stats.findActor(Env.LIVES)).setText(profile.getLivesAsText());
@@ -153,15 +153,15 @@ public class GameScreen extends BaseScreen {
     @Override
     public void dispose() {
         super.dispose();
-        if(world!=null){
+        if (world != null) {
             world.dispose();
             world = null;
         }
-        if(worldRenderer!=null){
+        if (worldRenderer != null) {
             worldRenderer.dispose();
             worldRenderer = null;
         }
-        if(worldController!=null){
+        if (worldController != null) {
             worldController.dispose();
             worldController = null;
         }

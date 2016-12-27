@@ -16,9 +16,7 @@ import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 
-public class ResourceService implements Disposable,IResourcesService {
-
-    private AssetManager assetManager;
+public class ResourceService implements Disposable, IResourcesService {
 
     public static final String GUI_ATLAS = "gui/gui.pack";
     public static final String GUI_PACK_ATLAS = "gui/gui-pack.pack";
@@ -44,6 +42,7 @@ public class ResourceService implements Disposable,IResourcesService {
     public static final String JUMP_SOUND = "sounds/sound/Jump.ogg";
     public static final String PICKUP_COIN_SOUND = "sounds/sound/Pickup_Coin.ogg";
     public static final String POWERUP_SOUND = "sounds/sound/Powerup.ogg";
+    private AssetManager assetManager;
 
 
     public ResourceService() {
@@ -56,7 +55,7 @@ public class ResourceService implements Disposable,IResourcesService {
 
 
     public void finishLoading() {
-        GameLogger.info("ResourcesManager", "Finish Loading Assets: ");
+                                                                          GameLogger.info("ResourcesManager", "Finish Loading Assets: ");
         assetManager.finishLoading();
 
     }
@@ -74,8 +73,8 @@ public class ResourceService implements Disposable,IResourcesService {
     }
 
 
-    public synchronized <T> void load (String fileName, Class<T> type) {
-        Gdx.app.log(Env.LOG, "Load Asset: " + fileName+" Type: "+ type.getName());
+    public synchronized <T> void load(String fileName, Class<T> type) {
+        Gdx.app.log(Env.LOG, "Load Asset: " + fileName + " Type: " + type.getName());
         assetManager.load(fileName, type, null);
     }
 
@@ -97,7 +96,7 @@ public class ResourceService implements Disposable,IResourcesService {
         this.load(PARTICLE_EFFECT, ParticleEffect.class);
         this.load(PARTICLE_EFFECT_CONTACT, ParticleEffect.class);
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        this.load(MUSIC_MENU,Music.class);
+        this.load(MUSIC_MENU, Music.class);
 
     }
 

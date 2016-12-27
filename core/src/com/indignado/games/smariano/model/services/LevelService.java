@@ -7,21 +7,22 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
+import com.indignado.games.smariano.model.entities.Level;
 import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
-import com.indignado.games.smariano.model.entities.Level;
+
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LevelService implements ILevelService {
-    private List<Level> levels;
-    private Level currentLevel;
     @Inject
     protected IProfileService profileService;
     @Inject
     protected IResourcesService resourcesManager;
+    private List<Level> levels;
+    private Level currentLevel;
 
 
     public LevelService() {
@@ -55,7 +56,7 @@ public class LevelService implements ILevelService {
 
 
     public Level getCurrentLevel() {
-        if(currentLevel==null) setCurrentLevel(levels.get(0));
+        if (currentLevel == null) setCurrentLevel(levels.get(0));
         return currentLevel;
 
     }

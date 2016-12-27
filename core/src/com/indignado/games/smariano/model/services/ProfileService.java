@@ -6,7 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.SMariano;
+import com.indignado.games.smariano.SuperMariano;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Item;
@@ -19,9 +19,9 @@ import com.indignado.games.smariano.model.services.interfaces.IProfileService;
 import javax.inject.Inject;
 
 public class ProfileService implements IProfileService {
-    private Profile profile;
     @Inject
-    public StateMachine<BaseGame> gameStateMachine;
+    public StateMachine<BaseGame,GameState> gameStateMachine;
+    private Profile profile;
 
 
     public ProfileService() {
@@ -70,7 +70,7 @@ public class ProfileService implements IProfileService {
         Json json = new Json();
         String profileAsText = json.toJson(profile);
 
-        if (!SMariano.DEBUG) {
+        if (!SuperMariano.DEBUG) {
             profileAsText = Base64Coder.encodeString(profileAsText);
         }
         profileDataFile.writeString(profileAsText, false);

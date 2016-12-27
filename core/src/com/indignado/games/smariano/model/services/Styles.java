@@ -41,10 +41,10 @@ public class Styles implements Disposable {
         if (!initialize) {
             initialize = true;
             font = resourcesManager.getAssetManager().get(ResourceService.DEFAULT_FONT);
-            font.setScale(ScaleUtil.getSizeRatio());
+            font.getData().setScale(ScaleUtil.getSizeRatio());
             font.setUseIntegerPositions(false);
             font2 = resourcesManager.getAssetManager().get(ResourceService.HEADER_FONT);
-            font2.setScale(ScaleUtil.getSizeRatio());
+            font2.getData().setScale(ScaleUtil.getSizeRatio());
             font2.setUseIntegerPositions(false);
             skin = new Skin();
             skin.add("default", font);
@@ -120,7 +120,7 @@ public class Styles implements Disposable {
 
     @Override
     public void dispose() {
-        if(skin!=null){
+        if (skin != null) {
             skin.dispose();
             skin = null;
         }

@@ -49,26 +49,26 @@ public class World implements Disposable {
 
 
     @Inject
-    public World(BaseGame game,HeroManager heroManager,PlatformManager platformManager,WaterManager waterManager,
-                 EnemyManager enemyManager,ItemsManager itemsManager,CheckPointManager checkPointManager) {
-        this.heroManager=heroManager;
-        this.platformManager=platformManager;
-        this.waterManager=waterManager;
-        this.enemyManager=enemyManager;
-        this.itemsManager=itemsManager;
-        this.checkPointManager=checkPointManager;
+    public World(BaseGame game, HeroManager heroManager, PlatformManager platformManager, WaterManager waterManager,
+                 EnemyManager enemyManager, ItemsManager itemsManager, CheckPointManager checkPointManager) {
+        this.heroManager = heroManager;
+        this.platformManager = platformManager;
+        this.waterManager = waterManager;
+        this.enemyManager = enemyManager;
+        this.itemsManager = itemsManager;
+        this.checkPointManager = checkPointManager;
 
-        this.profileService=game.profileService;
-        this.audioService=game.audioService;
+        this.profileService = game.profileService;
+        this.audioService = game.audioService;
 
         itemsManager.addObserver(profileService);
         itemsManager.addObserver(audioService);
         heroManager.addObserver(profileService);
         heroManager.addObserver(audioService);
 
-        this.physics= new com.badlogic.gdx.physics.box2d.World(new Vector2(0, -9.81f), true);
-        this.levelService= game.levelService;
-        this.resourceService= game.resourcesService;
+        this.physics = new com.badlogic.gdx.physics.box2d.World(new Vector2(0, -9.81f), true);
+        this.levelService = game.levelService;
+        this.resourceService = game.resourcesService;
         entities = new ArrayList<Box2DPhysicsObject>();
         createDreamsWorld();
 
@@ -76,15 +76,15 @@ public class World implements Disposable {
 
 
     public void createDreamsWorld() {
-        Level level= levelService.getCurrentLevel();
+        Level level = levelService.getCurrentLevel();
         Collections.sort(entities, new Comparator<Box2DPhysicsObject>() {
             public int compare(Box2DPhysicsObject one, Box2DPhysicsObject two) {
                 return one.getGrupo().compareTo(two.getGrupo());
             }
         });
-        box2dObjectFactory= new Box2dObjectFactory(physics,this,resourceService);
+        box2dObjectFactory = new Box2dObjectFactory(physics, this, resourceService);
         map = resourceService.getAssetManager().get(level.getMap());
-        parser = new Box2DMapObjectParser(this,box2dObjectFactory);
+        parser = new Box2DMapObjectParser(this, box2dObjectFactory);
         //System.out.println(getParser().getHierarchy(map));
         parser.load(getPhysics(), map);
 
@@ -95,11 +95,10 @@ public class World implements Disposable {
     }
 
 
-
-    public AbstractWorldManager getManager(Box2DPhysicsObject entity){
+    public AbstractWorldManager getManager(Box2DPhysicsObject entity) {
         Box2DPhysicsObject.GRUPO grupo = entity.getGrupo();
-        if(grupo!=null){
-            switch (grupo){
+        if (grupo != null) {
+            switch (grupo) {
                 case ENEMY:
                     return enemyManager;
 
@@ -146,9 +145,9 @@ public class World implements Disposable {
     @Override
     public void dispose() {
         map.dispose();
-        map=null;
-        parser=null;
-        if(physics!=null){
+        map = null;
+        parser = null;
+        if (physics != null) {
             physics.dispose();
             physics = null;
         }
@@ -159,14 +158,14 @@ public class World implements Disposable {
     }
 
 
-    public void clearWorld(){
+    public void clearWorld() {
         for (Box2DPhysicsObject e : entities) {
             e.dispose();
             e = null;
         }
         entities.clear();
         entities = new ArrayList<Box2DPhysicsObject>();
-        hero=null;
+        hero = null;
 
     }
 
@@ -212,14 +211,13 @@ public class World implements Disposable {
         return entities;
     }
 
-    public void setHero(Hero hero) {
-        this.hero = hero;
-    }
-
     public Hero getHero() {
         return hero;
     }
 
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
 
     @Override
     public String toString() {

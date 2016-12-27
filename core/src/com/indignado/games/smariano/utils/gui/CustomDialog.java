@@ -15,20 +15,21 @@ import javax.inject.Inject;
 
 public class CustomDialog extends Window {
     @Inject
-    public StateMachine<BaseGame> gameStateMachine;
+    public StateMachine<BaseGame,GameState> gameStateMachine;
 
     private Skin skin;
+
     @Inject
-    public CustomDialog (String title,Styles styles) {
-        super(title, styles.skin );
-        this.skin= styles.skin;
+    public CustomDialog(String title, Styles styles) {
+        super(title, styles.skin);
+        this.skin = styles.skin;
         initialize();
     }
 
     private void initialize() {
 
         padTop(60);
-        getButtonTable().defaults().height(60);
+        //getButtonTable().defaults().height(60);
         setModal(true);
         setMovable(false);
     }
@@ -51,17 +52,17 @@ public class CustomDialog extends Window {
     }
 
 
-    protected void result (Object object) {
+    protected void result(Object object) {
         gameStateMachine.changeState(GameState.RUNNING);
-        Gdx.app.log(Env.LOG, "La respuesta a la ventana de Dialogo es: "+ object+ "Tipo clase "+object.getClass() );
-        if (object instanceof Boolean && object.equals(true)){
-           Gdx.app.exit();
-        } else if(object instanceof Boolean && object.equals(false)){
+        Gdx.app.log(Env.LOG, "La respuesta a la ventana de Dialogo es: " + object + "Tipo clase " + object.getClass());
+        if (object instanceof Boolean && object.equals(true)) {
+            Gdx.app.exit();
+        } else if (object instanceof Boolean && object.equals(false)) {
             Gdx.app.log(Env.LOG, "Se pulso en continuar la partida: ");
 
             this.remove();
-             this.setVisible(false);
-            Gdx.app.log(Env.LOG, "La ventana de dialogo se cerro?... "+remove());
+            this.setVisible(false);
+            Gdx.app.log(Env.LOG, "La ventana de dialogo se cerro?... " + remove());
         }
     }
 

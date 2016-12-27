@@ -13,34 +13,10 @@ import java.util.HashSet;
 public class MovingPlatform extends Platform implements Disposable {
 
 
-    public enum StateMovingPlatform implements State {
-        ENABLED, DISABLED ;
-
-        protected float stateTimeMin;
-
-        StateMovingPlatform(){
-            this.stateTimeMin = 0.1f;
-        }
-
-        StateMovingPlatform(float stateTimeMin){
-            this.stateTimeMin = stateTimeMin;
-        }
-
-        StateMovingPlatform(Box2DPhysicsObject.BaseState state){
-            this.stateTimeMin =state.getStateTimeMin();
-        }
-
-        @Override
-        public float getStateTimeMin(){
-            return this.stateTimeMin;
-        }
-    }
-
-    private Vector2 pVelocity, start;
-
-    private float distance = 0;
     public Boolean enabled = true;
     public Boolean waitForPassenger = false;
+    private Vector2 pVelocity, start;
+    private float distance = 0;
     private Boolean forward = false;
     private HashSet<Box2DPhysicsObject> passengers = new HashSet<Box2DPhysicsObject>();
     private Path path;
@@ -83,7 +59,6 @@ public class MovingPlatform extends Platform implements Disposable {
         return pVelocity;
     }
 
-
     public float getDistance() {
         return distance;
     }
@@ -91,7 +66,6 @@ public class MovingPlatform extends Platform implements Disposable {
     public void setDistance(float distance) {
         this.distance = distance;
     }
-
 
     public Path getPath() {
         return path;
@@ -101,8 +75,6 @@ public class MovingPlatform extends Platform implements Disposable {
         this.path = path;
     }
 
-
-
     @Override
     public void dispose() {
         super.dispose();
@@ -110,5 +82,29 @@ public class MovingPlatform extends Platform implements Disposable {
         start = null;
         passengers = null;
         path = null;
+    }
+
+
+    public enum StateMovingPlatform implements State {
+        ENABLED, DISABLED;
+
+        protected float stateTimeMin;
+
+        StateMovingPlatform() {
+            this.stateTimeMin = 0.1f;
+        }
+
+        StateMovingPlatform(float stateTimeMin) {
+            this.stateTimeMin = stateTimeMin;
+        }
+
+        StateMovingPlatform(Box2DPhysicsObject.BaseState state) {
+            this.stateTimeMin = state.getStateTimeMin();
+        }
+
+        @Override
+        public float getStateTimeMin() {
+            return this.stateTimeMin;
+        }
     }
 }

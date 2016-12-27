@@ -18,7 +18,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(library = true,complete = false,injects = {Styles.class,ModelsAndViews.class,GuiBuilder.class,ParallaxBackground.class})
+@Module(library = true, complete = false, injects = {Styles.class, ModelsAndViews.class, GuiBuilder.class, ParallaxBackground.class})
 public class RenderModule {
 
 
@@ -75,17 +75,11 @@ public class RenderModule {
     }
 
 
-
     @Provides
     @Singleton
     GuiBuilder provideGuiBuilder() {
         return new GuiBuilder();
     }
-
-
-
-
-
 
 
 }

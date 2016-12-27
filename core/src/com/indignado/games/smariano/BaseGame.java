@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.indignado.games.smariano.config.GameModule;
+import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.PreferencesService;
 import com.indignado.games.smariano.model.services.ProfileService;
 import com.indignado.games.smariano.model.services.Styles;
@@ -53,9 +54,7 @@ public class BaseGame implements ApplicationListener {
     @Inject
     public Lazy<GameOverScreen> gameOverScreen;
     @Inject
-    public StateMachine<BaseGame> gameStateMachine;
-    private BaseScreen currScreen;
-    private BaseScreen nextScreen;
+    public StateMachine<BaseGame, GameState> gameStateMachine;
     @Inject
     @Named("camera")
     public OrthographicCamera camera;
@@ -63,7 +62,8 @@ public class BaseGame implements ApplicationListener {
     public SpriteBatch batch;
     @Inject
     public Stage stage;
-
+    private BaseScreen currScreen;
+    private BaseScreen nextScreen;
 
     @Override
     public void render() {
@@ -198,12 +198,12 @@ public class BaseGame implements ApplicationListener {
         if (currScreen != null) {
             currScreen.hide();
             currScreen.dispose();
-            currScreen=null;
+            currScreen = null;
         }
         if (nextScreen != null) {
             nextScreen.hide();
             nextScreen.dispose();
-            nextScreen= null;
+            nextScreen = null;
         }
 
 
@@ -215,7 +215,7 @@ public class BaseGame implements ApplicationListener {
 
 
     public void setNextScreen(BaseScreen nextScreen) {
-        GameLogger.info("BaseGame", "Set next screen %s",(nextScreen==null)? "Null": nextScreen.getClass().getSimpleName());
+        GameLogger.info("BaseGame", "Set next screen %s", (nextScreen == null) ? "Null" : nextScreen.getClass().getSimpleName());
         this.nextScreen = nextScreen;
     }
 
@@ -229,7 +229,7 @@ public class BaseGame implements ApplicationListener {
         this.currScreen.pause();
         this.currScreen.hide();
         this.currScreen.dispose();
-        this.currScreen=null;
+        this.currScreen = null;
         this.currScreen = currScreen;
 
     }

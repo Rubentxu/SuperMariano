@@ -7,14 +7,14 @@ import java.util.ArrayList;
 public class Path {
     private static final int FORWARD = 1;
     private static final int REVERSE = -1;
-    private ArrayList<Vector2> points;
     public int waypoint = 0;
+    private ArrayList<Vector2> points;
     private float maxDist = 0;
     private float speed;
     private float distance = 0;
     private Vector2 velocity;
     private int direction = FORWARD;
-    private boolean changeDirection=false;
+    private boolean changeDirection = false;
 
     public Path(float speed) {
         points = new ArrayList<Vector2>();
@@ -32,7 +32,7 @@ public class Path {
         if (maxDist == 0) maxDist = points.get(waypoint).dst2(bodyPosition);
         distance += getVelocity().len() * delta;
         if (isWaypointReached(bodyPosition, delta) || changeDirection) {
-            changeDirection=false;
+            changeDirection = false;
             distance = 0;
             int tempPoint = waypoint;
             waypoint = getNextPoint();
@@ -63,12 +63,12 @@ public class Path {
         return velocity.cpy();
     }
 
-    public void setPoints(ArrayList<Vector2> points) {
-        this.points = points;
-    }
-
     public ArrayList<Vector2> getPoints() {
         return points;
+    }
+
+    public void setPoints(ArrayList<Vector2> points) {
+        this.points = points;
     }
 
     public Vector2 getForce(float mass) {

@@ -43,8 +43,8 @@ public class ModelsAndViews {
 
 
     public ModelsAndViews(IResourcesService resourcesService, World world) {
-        this.resourcesService=resourcesService;
-        this.world=world;
+        this.resourcesService = resourcesService;
+        this.world = world;
 
         loadHeroAnimations();
         loadEnemyAnimations();
@@ -69,9 +69,9 @@ public class ModelsAndViews {
             if (anims != null) {
                 try {
                     if (!e.getState().equals(BaseState.DESTROY)) {
-                        frame = anims.get(String.valueOf(e.getState())).getKeyFrame(e.getStateTime());
+                        frame = (TextureRegion) anims.get(String.valueOf(e.getState())).getKeyFrame(e.getStateTime());
                         if (anims2 != null)
-                            frame2 = anims2.get(String.valueOf(e.getState())).getKeyFrame(e.getStateTime());
+                            frame2 = (TextureRegion) anims2.get(String.valueOf(e.getState())).getKeyFrame(e.getStateTime());
 
                         if (e.isFacingLeft() && !frame.isFlipX()) {
                             frame.flip(true, false);
@@ -94,7 +94,7 @@ public class ModelsAndViews {
                 }
             }
             if (e instanceof Hero) {
-                Hero hero= (Hero) e;
+                Hero hero = (Hero) e;
                 hero.getParticleEffectContact().draw(batch);
                 hero.getParticleEffectDust().draw(batch);
             }
@@ -116,7 +116,7 @@ public class ModelsAndViews {
             if (((Item) e).getType().equals(Item.TYPE.COIN)) return animationItemCoin;
         } else if (e.getGrupo().equals(GRUPO.MILL)) {
             return animationMotorMill;
-        }else if (e.getGrupo().equals(GRUPO.CHECKPOINT)) {
+        } else if (e.getGrupo().equals(GRUPO.CHECKPOINT)) {
             return animationCheckPointMastil;
         }
         return null;
@@ -125,7 +125,7 @@ public class ModelsAndViews {
     private Map<String, Animation> getAnimation2(Box2DPhysicsObject e) {
         if (e.getGrupo().equals(GRUPO.MILL)) {
             return animationAspasMolino;
-        }else if (e.getGrupo().equals(GRUPO.CHECKPOINT)) {
+        } else if (e.getGrupo().equals(GRUPO.CHECKPOINT)) {
             return animationCheckPointBandera;
         }
         return null;

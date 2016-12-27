@@ -9,22 +9,22 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
-import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.entities.CheckPoint;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject;
 import com.indignado.games.smariano.model.entities.base.Box2DPhysicsObject.GRUPO;
+import com.indignado.games.smariano.model.fms.GameState;
 
 import javax.inject.Inject;
 
 
 public class CheckPointManager extends AbstractWorldManager {
-    private StateMachine<BaseGame> gameStateMachine;
+    private StateMachine<BaseGame,GameState> gameStateMachine;
 
 
     @Inject
-    public CheckPointManager(StateMachine<BaseGame> gameStateMachine) {
-        this.gameStateMachine=gameStateMachine;
+    public CheckPointManager(StateMachine<BaseGame,GameState> gameStateMachine) {
+        this.gameStateMachine = gameStateMachine;
     }
 
 

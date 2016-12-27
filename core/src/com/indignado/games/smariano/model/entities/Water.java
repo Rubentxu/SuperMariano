@@ -9,27 +9,6 @@ import com.indignado.games.smariano.utils.dermetfan.box2d.Box2DUtils;
 
 public class Water extends Box2DPhysicsObject implements Disposable {
 
-    public Array<Body> m_bodyList;
-
-    // The outer surface normal. Change this to point out from the surface. Assume up.
-    public final Vector2 mSurfaceNormal = new Vector2();
-    // Fluid velocity, for drag calculations. Creates a directional 'current' for the fluid.
-    public final Vector2 mFluidVelocity = new Vector2();
-    // Gravity vector of the fluid. Used to provide upward force within the fluid
-    public final Vector2 mGravity = new Vector2();
-    // Linear drag co-efficient. Recommend that this is about 5x the angular drag.
-    public float mLinearDrag;
-    // Angular drag co-efficient
-    public float mAngularDrag;
-    // The height of the Box2D fluid surface at the normal
-    public float mSurfaceHeight;
-    // The fluid density
-    public float mFluidDensity;
-
-    // If false, bodies are assumed to be uniformly dense, otherwise use the
-    // shapes' densities
-    public boolean mUseDensity = false;
-
     //
     // Shared values
     //
@@ -37,7 +16,6 @@ public class Water extends Box2DPhysicsObject implements Disposable {
     public static final Vector2 mSC = new Vector2(); //
     public static final Vector2 mAreac = new Vector2(); // centroid of the area
     public static final Vector2 mMassc = new Vector2(); // centroid of the mass
-
     //
     // Default values
     //
@@ -46,8 +24,25 @@ public class Water extends Box2DPhysicsObject implements Disposable {
     public static final Vector2 DEFAULT_FLUID_GRAVITY = new Vector2(0, -9.8f); // standard gravity
     public static final float DEFAULT_LINEAR_DRAG = 5f;
     public static final float DEFAULT_ANGULAR_DRAG = 2f;
-
     public static final boolean DEBUG_BUOYANCY = true;
+    // The outer surface normal. Change this to point out from the surface. Assume up.
+    public final Vector2 mSurfaceNormal = new Vector2();
+    // Fluid velocity, for drag calculations. Creates a directional 'current' for the fluid.
+    public final Vector2 mFluidVelocity = new Vector2();
+    // Gravity vector of the fluid. Used to provide upward force within the fluid
+    public final Vector2 mGravity = new Vector2();
+    public Array<Body> m_bodyList;
+    // Linear drag co-efficient. Recommend that this is about 5x the angular drag.
+    public float mLinearDrag;
+    // Angular drag co-efficient
+    public float mAngularDrag;
+    // The height of the Box2D fluid surface at the normal
+    public float mSurfaceHeight;
+    // The fluid density
+    public float mFluidDensity;
+    // If false, bodies are assumed to be uniformly dense, otherwise use the
+    // shapes' densities
+    public boolean mUseDensity = false;
 
 
     public Water(String nombre, Body body) {

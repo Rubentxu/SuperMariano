@@ -14,38 +14,11 @@ import java.util.HashSet;
 public class Hero extends Box2DPhysicsObject implements Disposable {
 
 
-     public enum StateHero implements State {
-        IDLE, WALKING, JUMPING, DYING, FALL, SWIMMING, PROPULSION,WIN ;
-
-         protected float stateTimeMin;
-
-         StateHero(){
-             this.stateTimeMin = 0.1f;
-         }
-
-         StateHero(float stateTimeMin){
-             this.stateTimeMin = stateTimeMin;
-         }
-
-         StateHero(BaseState state){
-             this.stateTimeMin =state.getStateTimeMin();
-         }
-
-         @Override
-         public float getStateTimeMin(){
-             return this.stateTimeMin;
-         }
-    }
-
-    public enum StatePos {ONGROUND, INWATER, ONAIR}
-
-
-    // States
-    private StatePos statePos = StatePos.ONGROUND;
-    boolean facingLeft = true;
-
     public final static float MAX_VELOCITY = 4f;
     public final static float JUMP_FORCE = 14.5f;
+    boolean facingLeft = true;
+    // States
+    private StatePos statePos = StatePos.ONGROUND;
     private HashSet<Fixture> grounContacts;
     private Fixture heroPhysicsFixture;
     private Fixture heroSensorFixture;
@@ -53,7 +26,7 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
     private ParticleEffect particleEffectContact;
 
     public Hero(String name, Body body) {
-        super(name, GRUPO.HERO,body);
+        super(name, GRUPO.HERO, body);
         setGrounContacts(new HashSet<Fixture>());
         setState(StateHero.IDLE);
     }
@@ -90,18 +63,17 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
         return heroPhysicsFixture;
     }
 
-    public Fixture getHeroSensorFixture() {
-        return heroSensorFixture;
-    }
-
     public void setHeroPhysicsFixture(Fixture heroPhysicsFixture) {
         this.heroPhysicsFixture = heroPhysicsFixture;
+    }
+
+    public Fixture getHeroSensorFixture() {
+        return heroSensorFixture;
     }
 
     public void setHeroSensorFixture(Fixture heroSensorFixture) {
         this.heroSensorFixture = heroSensorFixture;
     }
-
 
     public HashSet<Fixture> getGrounContacts() {
         return grounContacts;
@@ -110,8 +82,6 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
     public void setGrounContacts(HashSet<Fixture> grounContacts) {
         this.grounContacts = grounContacts;
     }
-
-
 
     public StatePos getStatePos() {
         return statePos;
@@ -137,7 +107,6 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
         this.particleEffectContact = particleEffectContact;
     }
 
-
     @Override
     public void dispose() {
         super.dispose();
@@ -145,6 +114,32 @@ public class Hero extends Box2DPhysicsObject implements Disposable {
         heroPhysicsFixture = null;
         heroSensorFixture = null;
     }
+
+    public enum StateHero implements State {
+        IDLE, WALKING, JUMPING, DYING, FALL, SWIMMING, PROPULSION, WIN;
+
+        protected float stateTimeMin;
+
+        StateHero() {
+            this.stateTimeMin = 0.1f;
+        }
+
+        StateHero(float stateTimeMin) {
+            this.stateTimeMin = stateTimeMin;
+        }
+
+        StateHero(BaseState state) {
+            this.stateTimeMin = state.getStateTimeMin();
+        }
+
+        @Override
+        public float getStateTimeMin() {
+            return this.stateTimeMin;
+        }
+    }
+
+
+    public enum StatePos {ONGROUND, INWATER, ONAIR}
 
 }
 

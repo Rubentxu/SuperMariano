@@ -27,7 +27,7 @@ public class HeroManager extends AbstractWorldManager {
     @Override
     public void update(float delta, Box2DPhysicsObject entity) {
         Hero hero = (Hero) entity;
-        boolean checkStateTimeLimit= hero.setStateTime(hero.getStateTime() + delta);
+        boolean checkStateTimeLimit = hero.setStateTime(hero.getStateTime() + delta);
 
         if (checkStateTimeLimit) {
 
@@ -41,8 +41,8 @@ public class HeroManager extends AbstractWorldManager {
                 && !hero.getState().equals(BaseState.DEAD)) {
             handleInput(hero);
         }
-        if(!hero.getStatePos().equals(Hero.StatePos.ONGROUND)) hero.getParticleEffectDust().allowCompletion();
-        hero.getParticleEffectDust().setPosition(hero.getXBodyA() + hero.getWidthBodyA() / 2, hero.getYBodyA()- hero.getWidthBodyA() / 2);
+        if (!hero.getStatePos().equals(Hero.StatePos.ONGROUND)) hero.getParticleEffectDust().allowCompletion();
+        hero.getParticleEffectDust().setPosition(hero.getXBodyA() + hero.getWidthBodyA() / 2, hero.getYBodyA() - hero.getWidthBodyA() / 2);
         hero.getParticleEffectDust().update(delta);
         hero.getParticleEffectContact().update(delta);
     }
@@ -253,16 +253,16 @@ public class HeroManager extends AbstractWorldManager {
 
                 if (relativeVel.y >= -0.5) {
                     enemy.setState(BaseState.HIT);
-                    if(hero.setState(BaseState.HURT))  notifyObservers(BaseState.HURT, hero);
+                    if (hero.setState(BaseState.HURT)) notifyObservers(BaseState.HURT, hero);
                     resolveContact(contact, hero, point);
                 }
 
-            }else if ((contact.getFixtureA().equals(hero.getHeroSensorFixture()) || contact.getFixtureB().equals(hero.getHeroSensorFixture()))
+            } else if ((contact.getFixtureA().equals(hero.getHeroSensorFixture()) || contact.getFixtureB().equals(hero.getHeroSensorFixture()))
                     && !hero.getState().equals(BaseState.HIT) && !hero.getState().equals(BaseState.HURT)) {
 
                 if (relativeVel.y <= -0.5) {
                     enemy.setState(BaseState.DEAD);
-                    if(hero.setState(BaseState.HIT))  notifyObservers(BaseState.HIT, hero);
+                    if (hero.setState(BaseState.HIT)) notifyObservers(BaseState.HIT, hero);
                     resolveContact(contact, hero, point);
                 }
 

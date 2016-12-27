@@ -23,12 +23,12 @@ public class EnemyManager extends AbstractWorldManager {
         boolean checkStateTimeMin = enemy.setStateTime(enemy.getStateTime() + delta);
 
         if (checkStateTimeMin) {
-            Gdx.app.log(Env.LOG,"CheckStateTimeMin EnemyManager: "+checkStateTimeMin);
+            Gdx.app.log(Env.LOG, "CheckStateTimeMin EnemyManager: " + checkStateTimeMin);
             notifyObservers(enemy.getState(), enemy, enemy.getStateTime());
             if (enemy.getState().equals(BaseState.DEAD)) {
                 enemy.setState(BaseState.DESTROY);
             }
-            if(enemy.getState().equals(BaseState.HIT)) {
+            if (enemy.getState().equals(BaseState.HIT)) {
                 enemy.getPath().setChangeDirection(true);
                 enemy.setState(StateEnemy.WALKING);
             }

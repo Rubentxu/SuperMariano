@@ -16,43 +16,15 @@ import java.util.List;
 
 public class Enemy extends Box2DPhysicsObject implements Disposable {
 
-    public enum StateEnemy implements State {
-        IDLE(0.5f), WALKING, JUMPING, FALL;
-
-        protected float stateTimeMin;
-
-        StateEnemy(){
-            this.stateTimeMin = 0.1f;
-        }
-
-        StateEnemy(float stateTimeMin){
-            this.stateTimeMin = stateTimeMin;
-        }
-
-        StateEnemy(BaseState state){
-            this.stateTimeMin =state.getStateTimeMin();
-        }
-
-        @Override
-        public float getStateTimeMin(){
-            return this.stateTimeMin;
-        }
-    }
-
-    public enum StatePos {ONGROUND, INWATER, ONAIR}
-
-    // States
-    private StatePos statePos = StatePos.ONGROUND;
-    boolean facingLeft = true;
-
     public final static float MAX_VELOCITY = 3f;
     public final static float JUMP_FORCE = 14.5f;
-
+    boolean facingLeft = true;
+    // States
+    private StatePos statePos = StatePos.ONGROUND;
     private HashSet<Fixture> grounContacts = new HashSet<Fixture>();
     private Fixture enemyPhysicsFixture;
     private Fixture enemySensorFixture;
     private Path path;
-
 
     public Enemy(World physics) {
         super("Enemigo", GRUPO.ENEMY, physics);
@@ -80,7 +52,6 @@ public class Enemy extends Box2DPhysicsObject implements Disposable {
         }
     }
 
-
     public Vector2 getVelocity() {
         return super.getBodyA().getLinearVelocity();
     }
@@ -104,7 +75,6 @@ public class Enemy extends Box2DPhysicsObject implements Disposable {
     public void setEnemySensorFixture(Fixture enemySensorFixture) {
         this.enemySensorFixture = enemySensorFixture;
     }
-
 
     public HashSet<Fixture> getGrounContacts() {
         return grounContacts;
@@ -138,8 +108,6 @@ public class Enemy extends Box2DPhysicsObject implements Disposable {
         this.facingLeft = facingLeft;
     }
 
-
-
     @Override
     public void dispose() {
         super.dispose();
@@ -148,6 +116,32 @@ public class Enemy extends Box2DPhysicsObject implements Disposable {
         enemySensorFixture = null;
         path = null;
     }
+
+    public enum StateEnemy implements State {
+        IDLE(0.5f), WALKING, JUMPING, FALL;
+
+        protected float stateTimeMin;
+
+        StateEnemy() {
+            this.stateTimeMin = 0.1f;
+        }
+
+        StateEnemy(float stateTimeMin) {
+            this.stateTimeMin = stateTimeMin;
+        }
+
+        StateEnemy(BaseState state) {
+            this.stateTimeMin = state.getStateTimeMin();
+        }
+
+        @Override
+        public float getStateTimeMin() {
+            return this.stateTimeMin;
+        }
+    }
+
+
+    public enum StatePos {ONGROUND, INWATER, ONAIR}
 
 
 }

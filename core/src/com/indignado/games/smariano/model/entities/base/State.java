@@ -5,12 +5,12 @@ public interface State {
     /**
      * Standard {@code Enum} method.
      */
-    String name() ;
+    String name();
 
     /**
      * Standard {@code Enum} method.
      */
-    int ordinal() ;
+    int ordinal();
 
     float getStateTimeMin();
 

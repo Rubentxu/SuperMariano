@@ -36,7 +36,7 @@ public class Box2dObjectFactory {
 
     public Box2dObjectFactory(World physics, com.indignado.games.smariano.model.entities.World world, IResourcesService resourcesManager) {
         this.physics = physics;
-        this.world=world;
+        this.world = world;
         this.resourcesService = resourcesManager;
 
     }
@@ -45,7 +45,7 @@ public class Box2dObjectFactory {
     public void createEntity(GRUPO tipo, MapObject object) {
         switch (tipo) {
             case HERO:
-                Hero hero=createHero(object);
+                Hero hero = createHero(object);
                 world.getEntities().add(hero);
                 world.setHero(hero);
                 break;
@@ -242,12 +242,12 @@ public class Box2dObjectFactory {
 
         if (object instanceof RectangleMapObject) {
             PolygonShape shape = new PolygonShape();
-            float width= 1f;
-            float radius= width/2;
-            float height=2f;
+            float width = 1f;
+            float radius = width / 2;
+            float height = 2f;
             Rectangle rectangle = getRectangle((RectangleMapObject) object);
-            shape.setAsBox(width / 2, height/ 2 -radius/2, new Vector2(rectangle.x - bodyA.getPosition().x + width / 2,
-                    rectangle.y - bodyA.getPosition().y + height / 2 - radius/2), bodyA.getAngle());
+            shape.setAsBox(width / 2, height / 2 - radius / 2, new Vector2(rectangle.x - bodyA.getPosition().x + width / 2,
+                    rectangle.y - bodyA.getPosition().y + height / 2 - radius / 2), bodyA.getAngle());
 
             FixtureDef fixDef = new FixtureDef();
             fixDef.shape = shape;
@@ -257,7 +257,7 @@ public class Box2dObjectFactory {
 
             CircleShape circle = new CircleShape();
             circle.setRadius(radius);
-            circle.setPosition(new Vector2(width / 2, 0 ));
+            circle.setPosition(new Vector2(width / 2, 0));
             fixDef.shape = circle;
             Fixture heroSensorFixture = bodyA.createFixture(fixDef);
             //heroSensorFixture.setSensor(true);
@@ -270,11 +270,11 @@ public class Box2dObjectFactory {
             hero.setWidthBodyA(width);
             hero.setHeightBodyA(height);
             bodyA.setUserData(hero);
-            float scaleX=1.7f;
-            float scaleY=1.15f;
-            hero.getScaleBodyA().set(scaleX,scaleY);
+            float scaleX = 1.7f;
+            float scaleY = 1.15f;
+            hero.getScaleBodyA().set(scaleX, scaleY);
             /*    NuevoOrigen=((NuevoAncho/2)-(ViejoAncho/2)) / 2    */
-            hero.getOriginBodyA().set(((width*scaleX/2)-(width/2))/2f,((height*scaleY/2+radius)-(height/2)+radius)/2f);
+            hero.getOriginBodyA().set(((width * scaleX / 2) - (width / 2)) / 2f, ((height * scaleY / 2 + radius) - (height / 2) + radius) / 2f);
             heroPhysicsFixture.setUserData(hero);
             heroSensorFixture.setUserData(hero);
             hero.setParticleEffectDust((ParticleEffect) resourcesService.getAssetManager().get(ResourceService.PARTICLE_EFFECT));
@@ -298,10 +298,10 @@ public class Box2dObjectFactory {
 
         if (object instanceof RectangleMapObject && !properties.get(Box2DMapObjectParser.Aliases.type).equals(Box2DMapObjectParser.Aliases.typeModelObject)) {
             PolygonShape shape = new PolygonShape();
-            float width=1;
-            float height=1;
+            float width = 1;
+            float height = 1;
             Rectangle rectangle = getRectangle((RectangleMapObject) object);
-            shape.setAsBox(width / 2, height/2, new Vector2(rectangle.x - box.getPosition().x
+            shape.setAsBox(width / 2, height / 2, new Vector2(rectangle.x - box.getPosition().x
                     + width / 2, rectangle.y - box.getPosition().y + height / 2), box.getAngle());
 
             FixtureDef fixDef = new FixtureDef();
@@ -345,7 +345,7 @@ public class Box2dObjectFactory {
             vertices[0] = new Vector2(0.3256686329841614f, 0f);
             vertices[1] = new Vector2(0.1628349423408508f, 3.026409149169922f);
             vertices[2] = new Vector2(-0.1628349423408508f, 3.026409149169922f);
-            vertices[3] = new Vector2(-0.3256686329841614f,-3.055059494272427e-07f);
+            vertices[3] = new Vector2(-0.3256686329841614f, -3.055059494272427e-07f);
             vertices[4] = new Vector2(-0.1628349423408508f, -3.026409149169922f);
             vertices[5] = new Vector2(0.1628349423408508f, -3.026409149169922f);
 
@@ -392,8 +392,8 @@ public class Box2dObjectFactory {
 
             bodyB.resetMassData();
             mill = new Mill(object.getName(), bodyA, bodyB, rj);
-            mill.getOriginBodyA().set(0.5f,0.5f);
-            mill.getOriginBodyB().set(Box2DUtils.width(bodyB)/2, Box2DUtils.height(bodyB)/2);
+            mill.getOriginBodyA().set(0.5f, 0.5f);
+            mill.getOriginBodyB().set(Box2DUtils.width(bodyB) / 2, Box2DUtils.height(bodyB) / 2);
             mill.setWidthBodyA(1);
             mill.setHeightBodyA(1);
             mill.setWidthBodyB(Box2DUtils.width(bodyB));
@@ -463,12 +463,12 @@ public class Box2dObjectFactory {
             m_joint = (PrismaticJoint) physics.createJoint(pjd);
 
             checkPoint = new CheckPoint(object.getName(), bodyA, bodyB, m_joint);
-            checkPoint.setWidthBodyA(0.25f*2);
-            checkPoint.setHeightBodyA(5f*2);
-            checkPoint.setWidthBodyB(1.1f*2);
-            checkPoint.setHeightBodyB(0.8f*2);
-            checkPoint.getOriginBodyA().set(Box2DUtils.width(bodyA)/2, Box2DUtils.height(bodyA)/2);
-            checkPoint.getOriginBodyB().set(Box2DUtils.width(bodyB)/2, Box2DUtils.height(bodyB)/2);
+            checkPoint.setWidthBodyA(0.25f * 2);
+            checkPoint.setHeightBodyA(5f * 2);
+            checkPoint.setWidthBodyB(1.1f * 2);
+            checkPoint.setHeightBodyB(0.8f * 2);
+            checkPoint.getOriginBodyA().set(Box2DUtils.width(bodyA) / 2, Box2DUtils.height(bodyA) / 2);
+            checkPoint.getOriginBodyB().set(Box2DUtils.width(bodyB) / 2, Box2DUtils.height(bodyB) / 2);
 
 
             bodyA.setUserData(checkPoint);

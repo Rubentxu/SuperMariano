@@ -41,8 +41,8 @@ public abstract class AbstractButton extends Button {
     public AbstractButton() {
         super();
         BaseGame.objectGraph.inject(this);
-        Drawable up=styles.skin.getDrawable("gui_bloque_vacio");
-        Drawable down=styles.skin.getDrawable("btnMenuPress");
+        Drawable up = styles.skin.getDrawable("gui_bloque_vacio");
+        Drawable down = styles.skin.getDrawable("btnMenuPress");
         setStyle(new ButtonStyle(up, down, null));
 
         this.bitMapFont = resourcesService.getAssetManager().<BitmapFont>get(ResourceService.HEADER_FONT);
@@ -72,7 +72,7 @@ public abstract class AbstractButton extends Button {
 
     /**
      * Get if the button lock active
-     * */
+     */
     public boolean isLockActive() {
         return isLockActive;
     }
@@ -82,14 +82,14 @@ public abstract class AbstractButton extends Button {
      * if it is active, lock texture will be drawn
      *
      * @see
-     * */
+     */
     public void setLockActive(boolean isLockActive) {
         this.isLockActive = isLockActive;
     }
 
     /**
      * Get lock texture
-     * */
+     */
     public TextureRegion getTextureLocked() {
         return textureLocked;
     }
@@ -97,11 +97,9 @@ public abstract class AbstractButton extends Button {
     /**
      * Set lock texture
      *
-     * @param textureLocked
-     *            the lock texture to draw
-     * @param isLockActive
-     *            to enable lock or not
-     * */
+     * @param textureLocked the lock texture to draw
+     * @param isLockActive  to enable lock or not
+     */
     public void setTextureLocked(TextureRegion textureLocked,
                                  boolean isLockActive) {
         this.textureLocked = textureLocked;
@@ -110,7 +108,7 @@ public abstract class AbstractButton extends Button {
 
     /**
      * Get if text active
-     * */
+     */
     public boolean isTextActive() {
         return isTextActive;
     }
@@ -132,11 +130,8 @@ public abstract class AbstractButton extends Button {
     /**
      * Set text (first initiation), later to change text use setTextChange
      *
-     * @param text
-     *            the text to be written
-     * @param isTextActive
-     *            to write/draw the text or not
-     *
+     * @param text         the text to be written
+     * @param isTextActive to write/draw the text or not
      */
     public void setText(String text, boolean isTextActive) {
         this.text = text;

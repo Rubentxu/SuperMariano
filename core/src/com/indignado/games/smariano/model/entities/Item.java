@@ -6,10 +6,6 @@ import com.indignado.games.smariano.model.entities.base.Sensor;
 public class Item extends Sensor {
 
 
-    public static enum TYPE {
-        COIN, KEY, POWERUP
-    }
-
     private int value;
     private String name;
     private TYPE TYPE_ITEM = null;
@@ -43,6 +39,10 @@ public class Item extends Sensor {
 
     public void setType(TYPE type) {
         this.TYPE_ITEM = type;
+    }
+
+    public static enum TYPE {
+        COIN, KEY, POWERUP
     }
 
 

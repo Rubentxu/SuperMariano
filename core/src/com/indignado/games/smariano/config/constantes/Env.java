@@ -27,13 +27,13 @@ public class Env {
     public static final String INIT_PROFILE_DATA_FILE = "data/initProfile.game";
 
     //Name elements GUI STATS
-    public static final String LABEL_SCORE= "Puntuacion";
-    public static final String SCORE= "Score";
-    public static final String IMAGE_LIVES= "ImageLives";
-    public static final String LIVES= "Lives";
+    public static final String LABEL_SCORE = "Puntuacion";
+    public static final String SCORE = "Score";
+    public static final String IMAGE_LIVES = "ImageLives";
+    public static final String LIVES = "Lives";
 
 
-    public static final float UNIT_SCALE= 0.015625f;
+    public static final float UNIT_SCALE = 0.015625f;
 
     // Name World Events
     public static final int COLLET_COIN = 1;

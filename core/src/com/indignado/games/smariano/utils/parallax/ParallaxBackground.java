@@ -13,10 +13,10 @@ public class ParallaxBackground {
     private float width;
     private OrthographicCamera cam;
 
-    public ParallaxBackground(float width,OrthographicCamera cam) {
+    public ParallaxBackground(float width, OrthographicCamera cam) {
         this.layers = new ArrayList<ParallaxLayer>();
         this.width = width;
-        this.cam=cam;
+        this.cam = cam;
 
     }
 
@@ -24,8 +24,8 @@ public class ParallaxBackground {
         for (ParallaxLayer layer : layers) {
             float layerOffsetX = (position.x * layer.getxRatio() % width);
             float layerOffsetY = (position.y * layer.getyRatio() % cam.viewportHeight);
-            layer.render(position.x - width / 2f - layerOffsetX, position.y -cam.viewportHeight/2 +cam.viewportHeight/12- layerOffsetY, width, cam.viewportHeight, batch);
-            layer.render(position.x + width / 2f - layerOffsetX , position.y - cam.viewportHeight/2 +cam.viewportHeight/12- layerOffsetY, width, cam.viewportHeight, batch);
+            layer.render(position.x - width / 2f - layerOffsetX, position.y - cam.viewportHeight / 2 + cam.viewportHeight / 12 - layerOffsetY, width, cam.viewportHeight, batch);
+            layer.render(position.x + width / 2f - layerOffsetX, position.y - cam.viewportHeight / 2 + cam.viewportHeight / 12 - layerOffsetY, width, cam.viewportHeight, batch);
         }
     }
 

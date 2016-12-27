@@ -13,40 +13,40 @@ public class GuiInput extends InputListener {
 
     public GuiInput(WorldController controller, Stage stage) {
         this.controller = controller;
-        this.stage= stage;
+        this.stage = stage;
     }
 
 
     @Override
-    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             /* if (!Gdx.app.getType().equals(ApplicationType.Android))
                 return false;*/
-        System.out.println("TouchDown"+ event.getStageX() +" y " +event.getStageY()+" pointer "+pointer+" button "+button);
-        if (event.getStageX() < stage.getWidth() /2 && event.getStageY() < stage.getHeight() * 1/3) {
+        System.out.println("TouchDown" + event.getStageX() + " y " + event.getStageY() + " pointer " + pointer + " button " + button);
+        if (event.getStageX() < stage.getWidth() / 2 && event.getStageY() < stage.getHeight() * 1 / 3) {
             controller.leftPressed();
         }
-        if (event.getStageX() >stage.getWidth() /2 && event.getStageY() < stage.getHeight()* 1/3) {
+        if (event.getStageX() > stage.getWidth() / 2 && event.getStageY() < stage.getHeight() * 1 / 3) {
             controller.rightPressed();
         }
-        if ( event.getStageY() > stage.getHeight()* 1/3) {
+        if (event.getStageY() > stage.getHeight() * 1 / 3) {
             controller.jumpPressed();
         }
         return true;
     }
 
     @Override
-    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
           /*  if (!Gdx.app.getType().equals(Application.ApplicationType.Android))
                 return false;*/
-        System.out.println("TouchUp "+ event.getStageX() +" y " +event.getStageY()+" pointer "+pointer+" button "+button);
-        if (event.getStageX() < stage.getWidth() /2 && event.getStageY() < stage.getHeight() * 1/3) {
+        System.out.println("TouchUp " + event.getStageX() + " y " + event.getStageY() + " pointer " + pointer + " button " + button);
+        if (event.getStageX() < stage.getWidth() / 2 && event.getStageY() < stage.getHeight() * 1 / 3) {
             controller.leftReleased();
         }
-        if (event.getStageX() > stage.getWidth() /2 && event.getStageY() < stage.getHeight()* 1/3) {
+        if (event.getStageX() > stage.getWidth() / 2 && event.getStageY() < stage.getHeight() * 1 / 3) {
             controller.rightReleased();
         }
-        if ( event.getStageY()> stage.getHeight()* 1/3) {
+        if (event.getStageY() > stage.getHeight() * 1 / 3) {
             controller.jumpReleased();
         }
 

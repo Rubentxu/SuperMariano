@@ -10,13 +10,13 @@ public class ParallaxLayer {
     private Texture fondo;
     private float xRatio, yRatio;
 
-    public ParallaxLayer(Texture fondo, float xRatio, float yRatio,float widthPercent,float heightPercent) {
+    public ParallaxLayer(Texture fondo, float xRatio, float yRatio, float widthPercent, float heightPercent) {
         super();
         this.fondo = fondo;
         this.xRatio = xRatio;
         this.yRatio = yRatio;
-        this.widthPercent= widthPercent;
-        this.heightPercent=heightPercent;
+        this.widthPercent = widthPercent;
+        this.heightPercent = heightPercent;
     }
 
     public Texture getFondo() {
@@ -33,7 +33,7 @@ public class ParallaxLayer {
 
     public void render(float xPosition, float yPosition, float width, float height, SpriteBatch batch) {
         batch.begin();
-        batch.draw(fondo, xPosition, yPosition, width/100*widthPercent,  height/100 *heightPercent);
+        batch.draw(fondo, xPosition, yPosition, width / 100 * widthPercent, height / 100 * heightPercent);
         batch.end();
 
     }

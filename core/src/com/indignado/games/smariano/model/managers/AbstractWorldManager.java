@@ -20,6 +20,10 @@ public abstract class AbstractWorldManager implements Disposable {
 
     private List<StateObserver> observers;
 
+    public AbstractWorldManager() {
+        observers = new ArrayList<StateObserver>();
+    }
+
     public abstract void handleBeginContact(Contact contact);
 
     public abstract void handleEndContact(Contact contact);
@@ -31,10 +35,6 @@ public abstract class AbstractWorldManager implements Disposable {
     public abstract boolean handleShouldCollide(Fixture fixtureA, Fixture fixtureB);
 
     public abstract void update(float delta, Box2DPhysicsObject entity);
-
-    public AbstractWorldManager() {
-        observers = new ArrayList<StateObserver>();
-    }
 
     public void addObserver(StateObserver o) {
         if (o == null)
@@ -55,10 +55,10 @@ public abstract class AbstractWorldManager implements Disposable {
         }
     }
 
-    public void notifyObservers(State state, Box2DPhysicsObject entity,float stateTime) {
-        Gdx.app.debug(Env.LOG, "NotifyStateTimeLimit State "+state+" Entity "+entity.getGrupo());
+    public void notifyObservers(State state, Box2DPhysicsObject entity, float stateTime) {
+        Gdx.app.debug(Env.LOG, "NotifyStateTimeLimit State " + state + " Entity " + entity.getGrupo());
         for (StateObserver observer : observers) {
-            observer.onNotifyStateTimeLimit(state, entity,stateTime);
+            observer.onNotifyStateTimeLimit(state, entity, stateTime);
         }
     }
 

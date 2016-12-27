@@ -27,9 +27,6 @@ import com.indignado.games.smariano.model.services.interfaces.ILevelService;
 import com.indignado.games.smariano.model.services.interfaces.IResourcesService;
 import com.indignado.games.smariano.utils.debug.GameLogger;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 
 public abstract class BaseScreen implements Screen {
@@ -42,24 +39,24 @@ public abstract class BaseScreen implements Screen {
     protected Styles styles;
     protected OrthographicCamera camera;
     protected Stage stage;
-    protected StateMachine<BaseGame> gameStateMachine;
+    protected StateMachine<BaseGame,GameState> gameStateMachine;
     protected IAudioService audioService;
     protected ILevelService levelService;
     protected PreferencesService preferencesService;
     protected ProfileService profileService;
 
 
-    public BaseScreen(BaseGame game){
-        this.game=game;
-        this.resourcesService=game.resourcesService;
-        this.styles=game.styles;
-        this.gameStateMachine=game.gameStateMachine;
-        this.audioService=game.audioService;
-        this.levelService=game.levelService;
-        this.preferencesService=game.preferencesService;
-        this.profileService=game.profileService;
-        this.camera=game.camera;
-        this.stage=new Stage();//game.stage;
+    public BaseScreen(BaseGame game) {
+        this.game = game;
+        this.resourcesService = game.resourcesService;
+        this.styles = game.styles;
+        this.gameStateMachine = game.gameStateMachine;
+        this.audioService = game.audioService;
+        this.levelService = game.levelService;
+        this.preferencesService = game.preferencesService;
+        this.profileService = game.profileService;
+        this.camera = game.camera;
+        this.stage = new Stage();//game.stage;
 
     }
 
@@ -71,7 +68,7 @@ public abstract class BaseScreen implements Screen {
 
     @Override
     public void show() {
-        GameLogger.info(this.getClass().getSimpleName(),"Show Screen: " + getName());
+        GameLogger.info(this.getClass().getSimpleName(), "Show Screen: " + getName());
         mainTable = new Table();
         mainTable.setFillParent(true);
 
@@ -113,11 +110,10 @@ public abstract class BaseScreen implements Screen {
     @Override
     public void dispose() {
         Gdx.app.log(Env.LOG, "Disposing screen: " + getName());
-        if(stage!=null) stage.clear();
+        if (stage != null) stage.clear();
         mainTable = null;
 
     }
-
 
 
     public void showDialog() {

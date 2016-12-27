@@ -1,12 +1,12 @@
 /**
  * Copyright 2013 Robin Stumm (serverkorken@googlemail.com, http://dermetfan.bplaced.net)
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -101,7 +101,7 @@ public class Box2DMapObjectParser {
     /**
      * creates a new {@link Box2DMapObjectParser} with the default {@link Aliases}
      */
-    public Box2DMapObjectParser(com.indignado.games.smariano.model.entities.World worldEntity,Box2dObjectFactory box2dObjectFactory) {
+    public Box2DMapObjectParser(com.indignado.games.smariano.model.entities.World worldEntity, Box2dObjectFactory box2dObjectFactory) {
         this(new Aliases(), worldEntity, box2dObjectFactory);
 
     }
@@ -246,9 +246,9 @@ public class Box2DMapObjectParser {
         if (object.getProperties().get(aliases.typeModelObject).equals(aliases.enemy))
             box2dObjectFactory.createEntity(GRUPO.ENEMY, object);
         if (object.getProperties().get(aliases.typeModelObject).equals(aliases.item))
-           box2dObjectFactory.createEntity(GRUPO.ITEMS, object);
+            box2dObjectFactory.createEntity(GRUPO.ITEMS, object);
         if (object.getProperties().get(aliases.typeModelObject).equals(aliases.millObject))
-           box2dObjectFactory.createEntity(GRUPO.MILL, object);
+            box2dObjectFactory.createEntity(GRUPO.MILL, object);
         if (object.getProperties().get(aliases.typeModelObject).equals(aliases.checkPointObject))
             box2dObjectFactory.createEntity(GRUPO.CHECKPOINT, object);
 

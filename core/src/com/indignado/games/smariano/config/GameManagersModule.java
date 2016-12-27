@@ -2,6 +2,7 @@ package com.indignado.games.smariano.config;
 
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.indignado.games.smariano.BaseGame;
+import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.managers.*;
 import dagger.Module;
 import dagger.Provides;
@@ -11,13 +12,13 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(library = true,complete = false)
+@Module(library = true, complete = false)
 public class GameManagersModule {
 
 
     @Provides
     @Singleton
-    CheckPointManager provideCheckPointManager(StateMachine <BaseGame> stateMachine) {
+    CheckPointManager provideCheckPointManager(StateMachine<BaseGame,GameState> stateMachine) {
         return new CheckPointManager(stateMachine);
     }
 

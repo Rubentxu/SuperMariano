@@ -1,9 +1,13 @@
 package com.indignado.games.smariano;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class SMariano extends BaseGame {
+public class SuperMariano extends BaseGame {
     public static boolean DEBUG = false;
     public static FPSLogger log;
 

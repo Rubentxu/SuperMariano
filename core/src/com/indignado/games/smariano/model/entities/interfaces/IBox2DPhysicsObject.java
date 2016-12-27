@@ -19,9 +19,9 @@ public interface IBox2DPhysicsObject {
 
     public float getWidthBodyA();
 
-    public float getHeightBodyA();
-
     public void setWidthBodyA(float widthBodyA);
+
+    public float getHeightBodyA();
 
     public void setHeightBodyA(float heightBodyA);
 

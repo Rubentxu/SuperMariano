@@ -18,63 +18,63 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {BaseGame.class,ButtonLevel.class}, complete = false)
+@Module(injects = {BaseGame.class, ButtonLevel.class}, complete = false)
 public class ScreensModule {
 
 
     @Provides
     @Singleton
-    StateMachine<BaseGame> provideGameStateMachine(BaseGame game) {
-        return new DefaultStateMachine<BaseGame>(game, GameState.RUNNING);
+    StateMachine<BaseGame,GameState> provideGameStateMachine(BaseGame game) {
+        return new DefaultStateMachine<BaseGame,GameState>(game, GameState.RUNNING);
 
     }
 
 
     @Provides
-    GameScreen provideGameScreen( BaseGame game,World world,GuiBuilder guiBuilder){
-        return new GameScreen(game,world,new WorldController(world),new WorldRenderer(game,world),guiBuilder);
+    GameScreen provideGameScreen(BaseGame game, World world, GuiBuilder guiBuilder) {
+        return new GameScreen(game, world, new WorldController(world), new WorldRenderer(game, world), guiBuilder);
 
     }
 
 
     @Provides
-    SplashScreen provideSplashScreen(BaseGame game){
+    SplashScreen provideSplashScreen(BaseGame game) {
         return new SplashScreen(game);
     }
 
 
     @Provides
-    MenuScreen provideMenuScreen(BaseGame game){
+    MenuScreen provideMenuScreen(BaseGame game) {
         return new MenuScreen(game);
     }
 
 
     @Provides
-    OptionScreen provideOptionScreen(BaseGame game){
+    OptionScreen provideOptionScreen(BaseGame game) {
         return new OptionScreen(game);
     }
 
 
     @Provides
-    HighScoresScreen provideHighScoresScreen(BaseGame game){
+    HighScoresScreen provideHighScoresScreen(BaseGame game) {
         return new HighScoresScreen(game);
     }
 
 
     @Provides
-    ScoreScreen provideScoreScreen(BaseGame game){
+    ScoreScreen provideScoreScreen(BaseGame game) {
         return new ScoreScreen(game);
     }
 
 
     @Provides
-    SelectLevelScreen provideSelectLevelScreen(BaseGame game){
+    SelectLevelScreen provideSelectLevelScreen(BaseGame game) {
         return new SelectLevelScreen(game);
     }
 
 
     @Provides
-    GameOverScreen provideGameOverScreen(BaseGame game){
+    GameOverScreen provideGameOverScreen(BaseGame game) {
         return new GameOverScreen(game);
     }
 

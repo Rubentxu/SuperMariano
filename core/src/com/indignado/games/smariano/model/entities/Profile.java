@@ -18,16 +18,16 @@ public class Profile implements Serializable {
 
     public Profile() {
         lives = 2;
-        kills=0;
-        coinsAquired=0;
-        starAquired=0;
+        kills = 0;
+        coinsAquired = 0;
+        starAquired = 0;
     }
 
     public Profile(List<Level> levels) {
         lives = 2;
-        kills=0;
-        coinsAquired=0;
-        starAquired=0;
+        kills = 0;
+        coinsAquired = 0;
+        starAquired = 0;
         this.levels = levels;
     }
 
@@ -47,15 +47,15 @@ public class Profile implements Serializable {
         return lives;
     }
 
-    public void addLives(int lives){
-        Gdx.app.log(Env.LOG,"Añadido una Vida....");
-        this.lives+=lives;
+    public void addLives(int lives) {
+        Gdx.app.log(Env.LOG, "Añadido una Vida....");
+        this.lives += lives;
     }
 
     public boolean removeLive() {
-        Gdx.app.log(Env.LOG,"Pierdes una Vida....");
+        Gdx.app.log(Env.LOG, "Pierdes una Vida....");
         --lives;
-        if(lives<0) lives=0;
+        if (lives < 0) lives = 0;
         return lives == 0;
     }
 
@@ -71,11 +71,11 @@ public class Profile implements Serializable {
         json.writeValue("lives", lives);
     }
 
-    public void resetValues(){
-        if(lives<=0) lives=1;
-        coinsAquired=0;
-        kills=0;
-        starAquired=0;
+    public void resetValues() {
+        if (lives <= 0) lives = 1;
+        coinsAquired = 0;
+        kills = 0;
+        starAquired = 0;
     }
 
     public CharSequence getLivesAsText() {

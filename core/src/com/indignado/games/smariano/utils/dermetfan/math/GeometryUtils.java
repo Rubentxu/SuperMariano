@@ -1,12 +1,12 @@
 /**
  * Copyright 2013 Robin Stumm (serverkorken@googlemail.com, http://dermetfan.bplaced.net)
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,97 +15,124 @@
  */
 
 package com.indignado.games.smariano.utils.dermetfan.math;
+
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
  * contains some useful methods for geometric calculations
+ *
  * @author dermetfan
  */
 public abstract class GeometryUtils {
 
-    /** a temporary variable used by some methods
-     *  warning not safe to use as it may change any time */
+    /**
+     * a temporary variable used by some methods
+     * warning not safe to use as it may change any time
+     */
     public static Vector2 tmpVec = new Vector2();
 
-    /** @see #tmpVec */
+    /**
+     * @see #tmpVec
+     */
     public static Vector2[] tmpVecArr;
 
-    /** @see #tmpVec */
+    /**
+     * @see #tmpVec
+     */
     public static float[] tmpFloatArr;
 
-    /** @return a Vector2 representing the size of a rectangle containing all given vertices */
+    /**
+     * @return a Vector2 representing the size of a rectangle containing all given vertices
+     */
     public static Vector2 size(Vector2[] vertices, Vector2 output) {
         return output.set(amplitude(filterX(vertices)), amplitude(filterY(vertices)));
     }
 
-    /** @see #size(com.badlogic.gdx.math.Vector2[], com.badlogic.gdx.math.Vector2) */
+    /**
+     * @see #size(com.badlogic.gdx.math.Vector2[], com.badlogic.gdx.math.Vector2)
+     */
     public static Vector2 size(Vector2[] vertices) {
         return size(vertices, tmpVec);
     }
 
-    /** @return the peak-to-peak amplitude of the given array */
+    /**
+     * @return the peak-to-peak amplitude of the given array
+     */
     public static float amplitude(float[] f) {
         return Math.abs(max(f) - min(f));
     }
 
-    /** @return the largest element of the given array */
+    /**
+     * @return the largest element of the given array
+     */
     public static float max(float[] floats) {
         float max = Float.NEGATIVE_INFINITY;
-        for(float f : floats)
+        for (float f : floats)
             max = f > max ? f : max;
         return max;
     }
 
-    /** @return the smallest element of the given array */
+    /**
+     * @return the smallest element of the given array
+     */
     public static float min(float[] floats) {
         float min = Float.POSITIVE_INFINITY;
-        for(float f : floats)
+        for (float f : floats)
             min = f < min ? f : min;
         return min;
     }
 
-    /** @return the x values of the given vertices */
+    /**
+     * @return the x values of the given vertices
+     */
     public static float[] filterX(Vector2[] vertices, float[] output) {
         output = new float[vertices.length];
-        for(int i = 0; i < output.length; i++)
+        for (int i = 0; i < output.length; i++)
             output[i] = vertices[i].x;
         return output;
     }
 
-    /** @see #filterX(com.badlogic.gdx.math.Vector2[], float[]) */
+    /**
+     * @see #filterX(com.badlogic.gdx.math.Vector2[], float[])
+     */
     public static float[] filterX(Vector2[] vertices) {
         return filterX(vertices, tmpFloatArr);
     }
 
-    /** @return the y values of the given vertices */
+    /**
+     * @return the y values of the given vertices
+     */
     public static float[] filterY(Vector2[] vertices, float[] output) {
         output = new float[vertices.length];
-        for(int i = 0; i < output.length; i++)
+        for (int i = 0; i < output.length; i++)
             output[i] = vertices[i].y;
         return output;
     }
 
-    /** @see #filterY(com.badlogic.gdx.math.Vector2[], float[]) */
+    /**
+     * @see #filterY(com.badlogic.gdx.math.Vector2[], float[])
+     */
     public static float[] filterY(Vector2[] vertices) {
         return filterY(vertices, tmpFloatArr);
     }
 
     /**
      * scales the given float array to have the given min and max values
+     *
      * @param values the values to scale
-     * @param min the desired minimal value in the array
-     * @param max the desired maximal value in the array
+     * @param min    the desired minimal value in the array
+     * @param max    the desired maximal value in the array
      * @return the rescaled array
      */
     public static float[] scale(float[] values, float min, float max) {
         float tmp = amplitude(values) / (max - min);
-        for(int i = 0; i < values.length; i++)
+        for (int i = 0; i < values.length; i++)
             values[i] /= tmp;
 
         tmp = min - min(values);
-        for(int i = 0; i < values.length; i++)
+        for (int i = 0; i < values.length; i++)
             values[i] += tmp;
 
         return values;
@@ -119,8 +146,8 @@ public abstract class GeometryUtils {
         output = new float[vector2s.length * 2];
 
         int vi = -1;
-        for(int i = 0; i < output.length; i++)
-            if(i % 2 == 0)
+        for (int i = 0; i < output.length; i++)
+            if (i % 2 == 0)
                 output[i] = vector2s[++vi].x;
             else
                 output[i] = vector2s[vi].y;
@@ -128,7 +155,9 @@ public abstract class GeometryUtils {
         return output;
     }
 
-    /** @see #toFloatArray(com.badlogic.gdx.math.Vector2[], float[]) */
+    /**
+     * @see #toFloatArray(com.badlogic.gdx.math.Vector2[], float[])
+     */
     public static float[] toFloatArray(Vector2[] vector2s) {
         return toFloatArray(vector2s, tmpFloatArr);
     }
@@ -138,27 +167,28 @@ public abstract class GeometryUtils {
      * @return the Vector2[] converted from the given float[]
      */
     public static Vector2[] toVector2Array(float[] floats, Vector2[] output) {
-        if(floats.length % 2 != 0)
+        if (floats.length % 2 != 0)
             throw new IllegalArgumentException("the float array's length is not dividable by two, so it won't make up a Vector2 array: " + floats.length);
 
         output = new Vector2[floats.length / 2];
 
         int fi = -1;
-        for(int i = 0; i < output.length; i++)
+        for (int i = 0; i < output.length; i++)
             output[i] = new Vector2(floats[++fi], floats[++fi]);
 
         return output;
     }
 
-    /** @see #toVector2Array(float[], com.badlogic.gdx.math.Vector2[]) */
+    /**
+     * @see #toVector2Array(float[], com.badlogic.gdx.math.Vector2[])
+     */
     public static Vector2[] toVector2Array(float[] floats) {
         return toVector2Array(floats, tmpVecArr);
     }
 
     public static Vector2[] toVector2Array(short[] shorts) {
         float[] floats = new float[shorts.length];
-        for (int i = 0 ; i < shorts.length; i++)
-        {
+        for (int i = 0; i < shorts.length; i++) {
             floats[i] = (float) shorts[i];
         }
         return toVector2Array(floats, tmpVecArr);
@@ -170,13 +200,13 @@ public abstract class GeometryUtils {
      */
     public static Polygon[] toPolygonArray(Vector2[] vertices, int vertexCount) {
         int[] vertexCounts = new int[vertices.length / vertexCount];
-        for(int i = 0; i < vertexCounts.length; i++)
+        for (int i = 0; i < vertexCounts.length; i++)
             vertexCounts[i] = vertexCount;
         return toPolygonArray(vertices, vertexCounts);
     }
 
     /**
-     * @param vertices the vertices which should be split into a {@link com.badlogic.gdx.math.Polygon} array
+     * @param vertices     the vertices which should be split into a {@link com.badlogic.gdx.math.Polygon} array
      * @param vertexCounts the number of vertices of each {@link com.badlogic.gdx.math.Polygon}
      * @return the {@link com.badlogic.gdx.math.Polygon} array extracted from the vertices
      */
@@ -184,9 +214,9 @@ public abstract class GeometryUtils {
         Polygon[] polygons = new Polygon[vertexCounts.length];
 
         int vertice = -1;
-        for(int i = 0; i < polygons.length; i++) {
+        for (int i = 0; i < polygons.length; i++) {
             tmpVecArr = new Vector2[vertexCounts[i]];
-            for(int i2 = 0; i2 < tmpVecArr.length; i2++)
+            for (int i2 = 0; i2 < tmpVecArr.length; i2++)
                 tmpVecArr[i2] = vertices[++vertice];
             polygons[i] = new Polygon(toFloatArray(tmpVecArr));
         }
@@ -194,13 +224,15 @@ public abstract class GeometryUtils {
         return polygons;
     }
 
-    /** @see com.badlogic.gdx.math.Polygon#area() */
+    /**
+     * @see com.badlogic.gdx.math.Polygon#area()
+     */
     public static float area(float[] vertices) {
         // from com.badlogic.gdx.math.Polygon#area()
         float area = 0;
 
         int x1, y1, x2, y2;
-        for(int i = 0; i < vertices.length; i += 2) {
+        for (int i = 0; i < vertices.length; i += 2) {
             x1 = i;
             y1 = i + 1;
             x2 = (i + 2) % vertices.length;
@@ -221,19 +253,25 @@ public abstract class GeometryUtils {
         return polygon.area() < 0;
     }
 
-    /** @see #areVerticesClockwise(com.badlogic.gdx.math.Polygon) */
+    /**
+     * @see #areVerticesClockwise(com.badlogic.gdx.math.Polygon)
+     */
     public static boolean areVerticesClockwise(float[] vertices) {
-        if(vertices.length <= 4)
+        if (vertices.length <= 4)
             return true;
         return area(vertices) < 0;
     }
 
-    /** @see #isConvex(com.badlogic.gdx.math.Vector2[]) */
+    /**
+     * @see #isConvex(com.badlogic.gdx.math.Vector2[])
+     */
     public static boolean isConvex(float[] vertices) {
         return isConvex(toVector2Array(vertices));
     }
 
-    /** @see #isConvex(com.badlogic.gdx.math.Vector2[]) */
+    /**
+     * @see #isConvex(com.badlogic.gdx.math.Vector2[])
+     */
     public static boolean isConvex(Polygon polygon) {
         return isConvex(polygon.getVertices());
     }
@@ -247,7 +285,7 @@ public abstract class GeometryUtils {
 
         Vector2 p, v, u;
         float res = 0;
-        for(int i = 0; i < vertices.length; i++) {
+        for (int i = 0; i < vertices.length; i++) {
             p = vertices[i];
             tmpVec = vertices[(i + 1) % vertices.length];
             v = new Vector2();
@@ -255,11 +293,11 @@ public abstract class GeometryUtils {
             v.y = tmpVec.y - p.y;
             u = vertices[(i + 2) % vertices.length];
 
-            if(i == 0) // in first loop direction is unknown, so save it in res
+            if (i == 0) // in first loop direction is unknown, so save it in res
                 res = u.x * v.y - u.y * v.x + v.x * p.y - v.y * p.x;
             else {
                 float newres = u.x * v.y - u.y * v.x + v.x * p.y - v.y * p.x;
-                if(newres > 0 && res < 0 || newres < 0 && res > 0)
+                if (newres > 0 && res < 0 || newres < 0 && res > 0)
                     return false;
             }
         }
@@ -269,8 +307,9 @@ public abstract class GeometryUtils {
 
     /**
      * converts point to its coordinates on an isometric grid
-     * @param point the point to convert
-     * @param cellWidth the width of the grid cells
+     *
+     * @param point      the point to convert
+     * @param cellWidth  the width of the grid cells
      * @param cellHeight the height of the grid cells
      * @return the given point converted to its coordinates on an isometric grid
      */
@@ -279,7 +318,9 @@ public abstract class GeometryUtils {
         return point;
     }
 
-    /** @see #toIsometricGridPoint(com.badlogic.gdx.math.Vector2, float, float) */
+    /**
+     * @see #toIsometricGridPoint(com.badlogic.gdx.math.Vector2, float, float)
+     */
     public static Vector3 toIsometricGridPoint(Vector3 point, float cellWidth, float cellHeight) {
         point.x = (point.x /= cellWidth) - ((point.y = (point.y - cellHeight / 2) / cellHeight + point.x) - point.x);
         return point;

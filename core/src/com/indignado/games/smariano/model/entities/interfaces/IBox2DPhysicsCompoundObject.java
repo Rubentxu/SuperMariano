@@ -22,9 +22,9 @@ public interface IBox2DPhysicsCompoundObject {
 
     public float getWidthBodyB();
 
-    public float getHeightBodyB();
-
     public void setWidthBodyB(float widthBodyB);
+
+    public float getHeightBodyB();
 
     public void setHeightBodyB(float heightBodyB);
 

@@ -9,42 +9,6 @@ import com.indignado.games.smariano.model.entities.interfaces.IBox2DPhysicsObjec
 
 public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
 
-    public static enum GRUPO {
-        HERO((short) 0x0001), ENEMY((short) 0x0002), PLATFORM((short) 0x0004), MOVING_PLATFORM((short) 0x0008),
-        ITEMS((short) 0x0010), SENSOR((short) 0x0020), STATIC((short) 0x0040), FLUID((short) 0x0080), MILL((short) 0x0100), CHECKPOINT((short) 0x0200);
-        //  1024=0x0400
-
-        private final short category;
-
-        GRUPO(short category) {
-            this.category = category;
-
-        }
-
-        public short getCategory() {
-            return category;
-        }
-    }
-
-    public enum BaseState implements State {
-        INITIAL, DEFAULT, DESTROY, HURT(1f), HIT(1f), DEAD(1f) ;
-
-        protected float stateTimeLimit;
-
-        BaseState(){
-            this.stateTimeLimit = 0.0f;
-        }
-
-        BaseState(float stateTimeLimit){
-            this.stateTimeLimit =stateTimeLimit;
-        }
-
-        @Override
-        public float getStateTimeMin(){
-            return this.stateTimeLimit;
-        }
-    }
-
     public static final short MASK_HERO = (short) ~GRUPO.HERO.category;
     public static final short MASK_ENEMY = (short) (GRUPO.HERO.category | GRUPO.STATIC.category);
     public static final short MASK_FLUID = (short) ~GRUPO.FLUID.category;
@@ -52,20 +16,30 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
     public static final short MASK_ITEMS = (short) (GRUPO.HERO.category | GRUPO.STATIC.category);
     public static final short MASK_INTERACTIVE = (short) (GRUPO.HERO.category);
     public static final short MASK_STATIC = -1;
-
-
-    protected com.badlogic.gdx.physics.box2d.World box2D;
-    protected Body bodyA;
     private final Vector2 originBodyA = new Vector2(0, 0);
     private final Vector2 scaleBodyA = new Vector2(1, 1);
-    private float widthBodyA;
-    private float heightBodyA;
+    protected com.badlogic.gdx.physics.box2d.World box2D;
+    protected Body bodyA;
     protected GRUPO grupo;
     protected String nombre;
+    private float widthBodyA;
+    private float heightBodyA;
     private float stateTime;
     private State state = BaseState.DEFAULT;
-
     private boolean facingLeft = false;
+
+    public Box2DPhysicsObject(String nombre, GRUPO grupo, Body bodyA) {
+        this.nombre = nombre;
+        this.grupo = grupo;
+        this.bodyA = bodyA;
+
+    }
+
+    public Box2DPhysicsObject(String nombre, GRUPO grupo, World physics) {
+        this.nombre = nombre;
+        this.grupo = grupo;
+        this.box2D = physics;
+    }
 
     public State getState() {
         return state;
@@ -91,25 +65,11 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
     }
 
     public boolean setStateTime(float stateTime) {
-        boolean check=false;
-        if(this.stateTime< this.state.getStateTimeMin() && stateTime > this.state.getStateTimeMin()) check= true;
+        boolean check = false;
+        if (this.stateTime < this.state.getStateTimeMin() && stateTime > this.state.getStateTimeMin()) check = true;
         this.stateTime = stateTime;
         return check;
     }
-
-    public Box2DPhysicsObject(String nombre, GRUPO grupo, Body bodyA) {
-        this.nombre = nombre;
-        this.grupo = grupo;
-        this.bodyA = bodyA;
-
-    }
-
-    public Box2DPhysicsObject(String nombre, GRUPO grupo, World physics) {
-        this.nombre = nombre;
-        this.grupo = grupo;
-        this.box2D = physics;
-    }
-
 
     @Override
     public float getXBodyA() {
@@ -132,7 +92,6 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
         getBodyA().getPosition().y = value;
     }
 
-
     @Override
     public float getRotationBodyA() {
         return (float) (bodyA.getAngle() * 180 / Math.PI);
@@ -144,6 +103,10 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
         return widthBodyA;
     }
 
+    @Override
+    public void setWidthBodyA(float widthBodyA) {
+        this.widthBodyA = widthBodyA;
+    }
 
     @Override
     public float getHeightBodyA() {
@@ -151,15 +114,9 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
     }
 
     @Override
-    public void setWidthBodyA(float widthBodyA) {
-        this.widthBodyA = widthBodyA;
-    }
-
-    @Override
     public void setHeightBodyA(float heightBodyA) {
         this.heightBodyA = heightBodyA;
     }
-
 
     @Override
     public Body getBodyA() {
@@ -195,11 +152,9 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
         bodyA.setLinearVelocity(velocity);
     }
 
-
     public Vector2 getOriginBodyA() {
         return originBodyA;
     }
-
 
     public boolean isFacingLeft() {
         return facingLeft;
@@ -213,15 +168,13 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
         return scaleBodyA;
     }
 
-
     @Override
     public void dispose() {
         bodyA = null;
         grupo = null;
-        nombre= null;
+        nombre = null;
 
     }
-
 
     @Override
     public String toString() {
@@ -238,6 +191,44 @@ public class Box2DPhysicsObject implements IBox2DPhysicsObject, Disposable {
                 ", state=" + state +
                 ", facingLeft=" + facingLeft +
                 '}';
+    }
+
+
+    public static enum GRUPO {
+        HERO((short) 0x0001), ENEMY((short) 0x0002), PLATFORM((short) 0x0004), MOVING_PLATFORM((short) 0x0008),
+        ITEMS((short) 0x0010), SENSOR((short) 0x0020), STATIC((short) 0x0040), FLUID((short) 0x0080), MILL((short) 0x0100), CHECKPOINT((short) 0x0200);
+        //  1024=0x0400
+
+        private final short category;
+
+        GRUPO(short category) {
+            this.category = category;
+
+        }
+
+        public short getCategory() {
+            return category;
+        }
+    }
+
+
+    public enum BaseState implements State {
+        INITIAL, DEFAULT, DESTROY, HURT(1f), HIT(1f), DEAD(1f);
+
+        protected float stateTimeLimit;
+
+        BaseState() {
+            this.stateTimeLimit = 0.0f;
+        }
+
+        BaseState(float stateTimeLimit) {
+            this.stateTimeLimit = stateTimeLimit;
+        }
+
+        @Override
+        public float getStateTimeMin() {
+            return this.stateTimeLimit;
+        }
     }
 
 }

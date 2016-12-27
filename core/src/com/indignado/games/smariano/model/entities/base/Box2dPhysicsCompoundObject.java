@@ -7,10 +7,10 @@ import com.indignado.games.smariano.model.entities.interfaces.IBox2DPhysicsCompo
 
 public class Box2dPhysicsCompoundObject extends Box2DPhysicsObject implements IBox2DPhysicsCompoundObject {
 
-    private Joint joint;
-    private Body bodyB;
     private final Vector2 originBodyB = new Vector2(0, 0);
     private final Vector2 scaleBodyB = new Vector2(1, 1);
+    private Joint joint;
+    private Body bodyB;
     private float widthBodyB;
     private float heightBodyB;
 
@@ -55,13 +55,13 @@ public class Box2dPhysicsCompoundObject extends Box2DPhysicsObject implements IB
     }
 
     @Override
-    public float getHeightBodyB() {
-        return heightBodyB;
+    public void setWidthBodyB(float widthBodyB) {
+        this.widthBodyB = widthBodyB;
     }
 
     @Override
-    public void setWidthBodyB(float widthBodyB) {
-        this.widthBodyB = widthBodyB;
+    public float getHeightBodyB() {
+        return heightBodyB;
     }
 
     @Override

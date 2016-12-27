@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {LevelService.class,ProfileService.class,AudioService.class},library = true,complete = false)
+@Module(injects = {LevelService.class, ProfileService.class, AudioService.class}, library = true, complete = false)
 public class GameServicesModule {
 
     @Provides
@@ -49,9 +49,6 @@ public class GameServicesModule {
     IProfileService provideProfileService() {
         return new ProfileService();
     }
-
-
-
 
 
 }

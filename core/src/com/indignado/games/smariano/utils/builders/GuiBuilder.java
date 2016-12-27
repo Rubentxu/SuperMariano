@@ -29,13 +29,13 @@ public class GuiBuilder {
         BaseGame.objectGraph.inject(this);
     }
 
-    public Table buildPadButtons(float width,float height, Styles styles, final WorldController controller) {
+    public Table buildPadButtons(float width, float height, Styles styles, final WorldController controller) {
 
         Table tableControlPad = new Table();
 
 
         tableControlPad.row().height(height);
-        ImageButton btnLeft = new ImageButton( styles.skin, "buttonLeft");
+        ImageButton btnLeft = new ImageButton(styles.skin, "buttonLeft");
         tableControlPad.add(btnLeft).width(width).expandY().fill();
 
         btnLeft.addListener(new ClickListener() {
@@ -71,33 +71,33 @@ public class GuiBuilder {
 
 
         ImageButton btnRight = new ImageButton(styles.skin, "buttonRight");
-        tableControlPad.add(btnRight).width(width).expandY().fill().padRight((width)*2);
+        tableControlPad.add(btnRight).width(width).expandY().fill().padRight((width) * 2);
         btnRight.addListener(new ClickListener() {
 
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Event "+event.getType());
-                super.touchDown(event,x,y,pointer,button);
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Event " + event.getType());
+                super.touchDown(event, x, y, pointer, button);
                 controller.leftReleased();
                 controller.rightPressed();
                 return true;
             }
 
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Event "+event.getType());
-                super.touchUp(event,x,y,pointer,button);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Event " + event.getType());
+                super.touchUp(event, x, y, pointer, button);
                 controller.rightReleased();
             }
 
             @Override
-            public void touchDragged (InputEvent event, float x, float y, int pointer) {
-                System.out.println("Event- "+event.getType());
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                System.out.println("Event- " + event.getType());
                 super.touchDragged(event, x, y, pointer);
-                if(isOver(event.getListenerActor(), x, y)){
+                if (isOver(event.getListenerActor(), x, y)) {
                     controller.rightPressed();
                     controller.leftReleased();
-                }else {
+                } else {
                     controller.rightReleased();
                 }
             }
@@ -108,39 +108,40 @@ public class GuiBuilder {
         btnUP.addListener(new ClickListener() {
 
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Event "+event.getType());
-                super.touchDown(event,x,y,pointer,button);
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Event " + event.getType());
+                super.touchDown(event, x, y, pointer, button);
                 controller.jumpPressed();
                 return true;
             }
 
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Event "+event.getType());
-                super.touchUp(event,x,y,pointer,button);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Event " + event.getType());
+                super.touchUp(event, x, y, pointer, button);
                 controller.jumpReleased();
             }
+
             @Override
-            public void touchDragged (InputEvent event, float x, float y, int pointer) {
-                System.out.println("Event- "+event.getType());
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                System.out.println("Event- " + event.getType());
                 super.touchDragged(event, x, y, pointer);
-                if(isOver(event.getListenerActor(), x, y)){
+                if (isOver(event.getListenerActor(), x, y)) {
                     controller.jumpPressed();
-                }else {
+                } else {
                     controller.jumpReleased();
                 }
             }
         });
 
-        tableControlPad.setBounds(0,0, Gdx.graphics.getWidth(),height+10);
+        tableControlPad.setBounds(0, 0, Gdx.graphics.getWidth(), height + 10);
         return tableControlPad;
 
     }
 
 
-    public Touchpad buildTouchPad(float width,float height, Styles styles, final WorldController controller) {
-        Touchpad touchpad = new Touchpad(10* ScaleUtil.getSizeRatio(), styles.skin);
+    public Touchpad buildTouchPad(float width, float height, Styles styles, final WorldController controller) {
+        Touchpad touchpad = new Touchpad(10 * ScaleUtil.getSizeRatio(), styles.skin);
         touchpad.setPosition(25 * ScaleUtil.getSizeRatio(), 15);
         touchpad.setWidth(width);
         touchpad.setHeight(height);
@@ -148,7 +149,7 @@ public class GuiBuilder {
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("PercentX "+((Touchpad) actor).getKnobPercentX()+"PercentY "+((Touchpad) actor).getKnobPercentY());
+                System.out.println("PercentX " + ((Touchpad) actor).getKnobPercentX() + "PercentY " + ((Touchpad) actor).getKnobPercentY());
                 if (((Touchpad) actor).getKnobPercentX() == 0 || ((Touchpad) actor).getKnobPercentX() < 0.5
                         && ((Touchpad) actor).getKnobPercentX() > -0.5) {
                     controller.rightReleased();
@@ -158,7 +159,7 @@ public class GuiBuilder {
                     controller.rightPressed();
                     controller.leftReleased();
                 }
-                if (((Touchpad) actor).getKnobPercentX() < -0.5){
+                if (((Touchpad) actor).getKnobPercentX() < -0.5) {
                     controller.leftPressed();
                     controller.rightReleased();
                 }
@@ -177,7 +178,7 @@ public class GuiBuilder {
     public Table buildStats(float width, float height) {
 
         Table tableProfile = new Table();
-        tableProfile.setBounds(0, 0, width , height );
+        tableProfile.setBounds(0, 0, width, height);
 
 
         Image imageLives = new Image(((TextureAtlas) resourcesService.getAssetManager().get(ResourceService.GUI_ATLAS)).findRegion("vidas"));
@@ -192,10 +193,10 @@ public class GuiBuilder {
         Label score = new Label("0000", styles.skin, "default", Color.ORANGE);
         score.setName(Env.SCORE);
         tableProfile.defaults().height(height);
-        tableProfile.defaults().width(width/4.5f);
+        tableProfile.defaults().width(width / 4.5f);
 
 
-        tableProfile.add(imageLives).left().padRight(15).width(imageLives.getPrefWidth()*ScaleUtil.getSizeRatio());
+        tableProfile.add(imageLives).left().padRight(15).width(imageLives.getPrefWidth() * ScaleUtil.getSizeRatio());
         tableProfile.add(lives).expandY().fill();
         tableProfile.add();
 
@@ -204,7 +205,6 @@ public class GuiBuilder {
         tableProfile.debug();
         return tableProfile;
     }
-
 
 
 }

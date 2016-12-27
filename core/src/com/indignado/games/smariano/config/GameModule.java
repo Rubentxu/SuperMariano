@@ -1,7 +1,7 @@
 package com.indignado.games.smariano.config;
 
 import com.indignado.games.smariano.BaseGame;
-import com.indignado.games.smariano.SMariano;
+import com.indignado.games.smariano.SuperMariano;
 import com.indignado.games.smariano.controller.WorldController;
 import com.indignado.games.smariano.model.entities.World;
 import com.indignado.games.smariano.model.managers.*;
@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 /**
  * Created by Rubentxu on 25/06/14.
  */
-@Module(injects = {SMariano.class, WorldController.class, WorldRenderer.class}
+@Module(injects = {SuperMariano.class, WorldController.class, WorldRenderer.class}
         , includes = {GameManagersModule.class, GameServicesModule.class,
         RenderModule.class, ScreensModule.class}, library = true)
 public class GameModule {
@@ -33,12 +33,11 @@ public class GameModule {
 
 
     @Provides
-    World provideWorld(BaseGame game,HeroManager heroManager, PlatformManager platformManager, WaterManager waterManager,
+    World provideWorld(BaseGame game, HeroManager heroManager, PlatformManager platformManager, WaterManager waterManager,
                        EnemyManager enemyManager, ItemsManager itemsManager, CheckPointManager checkPointManager) {
-        return new World(game,heroManager,platformManager,waterManager,enemyManager,itemsManager,checkPointManager);
+        return new World(game, heroManager, platformManager, waterManager, enemyManager, itemsManager, checkPointManager);
 
     }
-
 
 
 }
