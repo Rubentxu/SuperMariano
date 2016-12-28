@@ -1,0 +1,3 @@
+[submodule "core/lib/entitas"]
+	path = core/lib/entitas
+	url = https://github.com/Rubentxu/Entitas-Java.git

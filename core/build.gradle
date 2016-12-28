@@ -5,6 +5,16 @@ sourceCompatibility = 1.6
 
 sourceSets.main.java.srcDirs = ["src/"]
 
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/'
+            srcDirs 'lib/entitas/entitas/src'
+            srcDirs 'lib/entitas/entitas-libgdx/src'
+        }
+    }
+}
+
 
 eclipse.project {
     name = appName + "-core"
