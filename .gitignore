@@ -1,5 +1,4 @@
 ## Java
-
 *.class
 *.war
 *.ear
@@ -64,6 +63,9 @@ nb-configuration.xml
 .gradle
 gradle-app.setting
 build/
+
+gradle.properties
+local.properties
 
 ## OS Specific
 .DS_Store
