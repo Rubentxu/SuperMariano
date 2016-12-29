@@ -1,77 +1,54 @@
 package com.indignado.games.states.splash.systems;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.ilargia.games.entitas.Group;
 import com.ilargia.games.entitas.interfaces.IExecuteSystem;
+import com.ilargia.games.entitas.interfaces.ISetPool;
+import com.indignado.games.states.splash.components.TextureView;
+import com.indignado.games.states.splash.gen.SplashEntity;
+import com.indignado.games.states.splash.gen.SplashMatcher;
+import com.indignado.games.states.splash.gen.SplashPool;
 
 
-public class RendererSplashSystem implements IExecuteSystem/*, ISetPool<Pool>*/ {
-    @Override
-    public void execute(float deltaTime) {
+public class RendererSplashSystem implements IExecuteSystem, ISetPool<SplashPool> {
+
+
+    private OrthographicCamera cam;
+    private Batch batch;
+    private Group<SplashEntity> _groupTextureView;
+
+    public RendererSplashSystem(OrthographicCamera cam, Batch batch) {
+        this.cam = cam;
+        this.batch = batch;
 
     }
-//    private final BitmapFont font;
-//    private Group<Entity> _group;
-//    private ShapeRenderer sr;
-//    private OrthographicCamera cam;
-//    private Group<Entity> _groupScore;
-//    private Batch batch;
-//    private Group<Entity> _groupTextureView;
-//
-//    public RendererSplashSystem(ShapeRenderer sr, OrthographicCamera cam, Batch batch, BitmapFont font) {
-//        this.sr = sr;
-//        this.cam = cam;
-//        this.batch = batch;
-//        this.font =  font;
-//    }
-//
-//    @Override
-//    public void setPool(Pool pool) {
-//        _group = pool.getGroup(CoreMatcher.View());
-//        _groupScore = pool.getGroup(CoreMatcher.Score());
-//        _groupTextureView = pool.getGroup(CoreMatcher.TextureView());
-//    }
-//
-//    @Override
-//    public void execute(float deltatime) {
-//        Gdx.gl.glClearColor(0, 0, 0, 1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//
-//        cam.update();
-//
-//        sr.setProjectionMatrix(cam.combined);
-//        sr.begin(ShapeRenderer.ShapeType.Filled);
-//        sr.setColor(Color.WHITE);
-//
-//        for (Entity e : _group.getEntities()) {
-//            View view = e.getView();
-//
-//            if(view.shape instanceof Rectangle) {
-//                Rectangle ret = (Rectangle) view.shape;
-//                sr.rect(ret.x, ret.y, ret.width, ret.height);
-//            } else {
-//                Circle circle = (Circle) view.shape;
-//                sr.circle(circle.x, circle.y, circle.radius);
-//            }
-//
-//        }
-//
-//        sr.end();
-//
-//        batch.begin();
-//        for (Entity e : _groupScore.getEntities()) {
-//            Score score = e.getScore();
-//            font.draw(batch, score.text+ " "+ score.points, score.x, score.y);
-//        }
-//        for (Entity e : _groupTextureView.getEntities()) {
-//            TextureView textureView = e.getTextureView();
-//            float originX = textureView.width * 0.5f;
-//            float originY = textureView.height * 0.5f;
-//
-//            batch.draw(textureView.texture, textureView.position.x , textureView.position.y ,
-//                    0, 0, textureView.width, textureView.height, 1, 1, textureView.rotation);
-//
-//
-//        }
-//        batch.end();
-//    }
+
+    @Override
+    public void setPool(SplashPool pool) {
+        _groupTextureView = pool.getGroup(SplashMatcher.TextureView());
+    }
+
+    @Override
+    public void execute(float deltatime) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        cam.update();
+
+        batch.begin();
+
+        for (SplashEntity e : _groupTextureView.getEntities()) {
+            TextureView textureView = e.getTextureView();
+            batch.draw(textureView.texture, textureView.position.x , textureView.position.y ,
+                    0, 0, textureView.width, textureView.height, 1, 1, textureView.rotation);
+
+
+        }
+        batch.end();
+    }
 
 }

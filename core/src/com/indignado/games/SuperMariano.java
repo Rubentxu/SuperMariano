@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.ilargia.games.entitas.Systems;
+import com.indignado.games.states.splash.SplashState;
 
 public class SuperMariano implements ApplicationListener {
         private static SMGame game;
@@ -21,7 +22,7 @@ public class SuperMariano implements ApplicationListener {
         SMEngine engine = new SMEngine(new Systems(), new EGAssetsManager(assetsManager, preferencesManager));
         game = new SMGame(engine);
         game.init(null);
-        //game.pushState(new SplashState());
+        game.pushState(new SplashState());
 
     }
 

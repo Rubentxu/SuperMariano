@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 
 public class SMEngine  extends com.ilargia.games.egdx.EGEngine {
-
-   // public Context context;
     public ShapeRenderer sr;
     public Batch batch;
     public BitmapFont font;
@@ -26,7 +24,7 @@ public class SMEngine  extends com.ilargia.games.egdx.EGEngine {
 
     @Override
     public void configure(String[] args) {
-        //context = new Context();
+
 
     }
 

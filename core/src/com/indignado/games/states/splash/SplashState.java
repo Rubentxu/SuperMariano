@@ -8,35 +8,37 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
 import com.indignado.games.SuperMariano;
+import com.indignado.games.states.splash.gen.SplashContext;
 import com.indignado.games.states.splash.systems.DelaySystem;
 import com.indignado.games.states.splash.systems.RendererSplashSystem;
 
 public class SplashState implements GameState<SMEngine> {
-    private String splash = "assets/textures/pong.jpg";
+    public static final String SPLASH = "imagenes/fondos/splash.jpg";
     private EGAssetsManager assetsManager;
+    private SplashContext context;
 
 
     @Override
     public void loadResources(SMEngine engine) {
         assetsManager = engine.getManager(EGAssetsManager.class);
-        assetsManager.loadAsset(splash, Texture.class);
+        assetsManager.loadAsset(SPLASH, Texture.class);
         assetsManager.finishLoading();
 
     }
 
     @Override
     public void init(SMEngine engine) {
-       // Context context = engine.context;
-//        engine._systems
-//                .addSystem(context.core, new DelaySystem())
-//                .addSystem(context.core, new RendererSplashSystem(engine.sr, engine.cam, engine.batch, engine.font));
+        context = new SplashContext();
+        engine._systems
+                .addSystem(context.splash, new DelaySystem())
+                .addSystem(context.splash, new RendererSplashSystem(engine.cam, engine.batch));
 
-        Texture texture = assetsManager.getTexture(splash);
+        Texture texture = assetsManager.getTexture(SPLASH);
 
-//        context.core.createEntity()
-//                .addTextureView("Pong", new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()), new Vector2(),
-//                        0, SuperMariano.SCREEN_HEIGHT, SuperMariano.SCREEN_WIDTH)
-//                .addDelay(3);
+        context.splash.createEntity()
+                .addTextureView("Splash", new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()), new Vector2(),
+                        0, SuperMariano.SCREEN_HEIGHT, SuperMariano.SCREEN_WIDTH)
+                .addDelay(3);
     }
 
     @Override
@@ -51,8 +53,8 @@ public class SplashState implements GameState<SMEngine> {
 
     @Override
     public void unloadResources(SMEngine engine) {
-        assetsManager.unloadAsset(splash);
-//        engine.context.core.destroyAllEntities();
+        assetsManager.unloadAsset(SPLASH);
+        context.splash.destroyAllEntities();
         engine._systems.clearSystems();
     }
 }
