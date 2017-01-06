@@ -9,7 +9,7 @@ import net.engio.mbassy.listener.Handler;
 public class SMGame extends BaseGame<SMEngine> {
 
     public SMGame(SMEngine engine, Systems systems, EventBus bus) {
-        super(engine, systems, bus);
+        super(engine, bus);
         ebus.subscribe(this);
     }
 

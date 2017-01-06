@@ -23,8 +23,7 @@ public class SuperMariano implements ApplicationListener {
         engine.addManager(new EGAssetsManager(assetsManager, preferencesManager));
         game = new SMGame(engine, new Systems(), new EGEventBus(new MBassador()));
         game.init();
-        game.pushState(new SplashState(game._systems));
-
+        game.pushState(new SplashState(engine));
 
     }
 
