@@ -1,15 +1,15 @@
 package com.indignado.games;
 
-import com.ilargia.games.egdx.EGGame;
+import com.ilargia.games.egdx.base.BaseGame;
+import com.ilargia.games.egdx.base.interfaces.EventBus;
 import com.ilargia.games.egdx.events.game.GameEvent;
-import com.ilargia.games.egdx.interfaces.Engine;
-import com.ilargia.games.egdx.interfaces.EventBus;
+import com.ilargia.games.entitas.Systems;
 import net.engio.mbassy.listener.Handler;
 
-public class SMGame extends EGGame {
+public class SMGame extends BaseGame<SMEngine> {
 
-    public SMGame(Engine engine, EventBus bus) {
-        super(engine, bus);
+    public SMGame(SMEngine engine, Systems systems, EventBus bus) {
+        super(engine, systems, bus);
         ebus.subscribe(this);
     }
 
@@ -21,4 +21,18 @@ public class SMGame extends EGGame {
         }
     }
 
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public boolean isRunning() {
+        return false;
+    }
+
+    @Override
+    public int getErrorState() {
+        return 0;
+    }
 }

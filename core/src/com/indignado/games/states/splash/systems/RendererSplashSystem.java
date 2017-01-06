@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.ilargia.games.entitas.Group;
 import com.ilargia.games.entitas.interfaces.IExecuteSystem;
 import com.ilargia.games.entitas.interfaces.ISetPool;
@@ -43,7 +41,7 @@ public class RendererSplashSystem implements IExecuteSystem, ISetPool<SplashPool
 
         for (SplashEntity e : _groupTextureView.getEntities()) {
             TextureView textureView = e.getTextureView();
-            batch.draw(textureView.texture, textureView.position.x , textureView.position.y ,
+            batch.draw(textureView.texture, textureView.position.x, textureView.position.y,
                     0, 0, textureView.width, textureView.height, 1, 1, textureView.rotation);
 
 

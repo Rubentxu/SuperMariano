@@ -1,8 +1,8 @@
 package com.indignado.games.states.splash.gen;
 
 import com.ilargia.games.entitas.EntityMetaData;
-import com.ilargia.games.entitas.interfaces.FactoryEntity;
 import com.ilargia.games.entitas.events.EventBus;
+import com.ilargia.games.entitas.interfaces.FactoryEntity;
 
 /**
  * ---------------------------------------------------------------------------
@@ -11,9 +11,9 @@ import com.ilargia.games.entitas.events.EventBus;
  */
 public class SplashPool extends com.ilargia.games.entitas.BasePool<SplashEntity, SplashPool> {
 
-	public SplashPool(int totalComponents, int startCreationIndex,
-					  EntityMetaData metaData, FactoryEntity<SplashEntity> factoryMethod,
-					  EventBus<SplashEntity> bus) {
-		super(totalComponents, startCreationIndex, metaData, bus, factoryMethod);
-	}
+    public SplashPool(int totalComponents, int startCreationIndex,
+                      EntityMetaData metaData, FactoryEntity<SplashEntity> factoryMethod,
+                      EventBus<SplashEntity> bus) {
+        super(totalComponents, startCreationIndex, metaData, bus, factoryMethod);
+    }
 }

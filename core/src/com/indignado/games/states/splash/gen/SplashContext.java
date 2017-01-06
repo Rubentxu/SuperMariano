@@ -1,10 +1,11 @@
 package com.indignado.games.states.splash.gen;
 
-import com.ilargia.games.entitas.interfaces.FactoryEntity;
-import java.util.Stack;
-import com.ilargia.games.entitas.interfaces.IComponent;
 import com.ilargia.games.entitas.EntityMetaData;
 import com.ilargia.games.entitas.events.EventBus;
+import com.ilargia.games.entitas.interfaces.FactoryEntity;
+import com.ilargia.games.entitas.interfaces.IComponent;
+
+import java.util.Stack;
 
 /**
  * ---------------------------------------------------------------------------
@@ -13,33 +14,33 @@ import com.ilargia.games.entitas.events.EventBus;
  */
 public class SplashContext {
 
-	public SplashPool splash;
-	public EventBus<SplashEntity> bus;
+    public SplashPool splash;
+    public EventBus<SplashEntity> bus;
 
-	public SplashContext() {
-		bus = new EventBus<>();
-		splash = createSplashPool();
-	}
+    public SplashContext() {
+        bus = new EventBus<>();
+        splash = createSplashPool();
+    }
 
-	public SplashPool createSplashPool() {
-		return new SplashPool(
-				SplashComponentIds.totalComponents,
-				0,
-				new EntityMetaData("Splash", SplashComponentIds
-						.componentNames(), SplashComponentIds.componentTypes()),
-				factoryEntity(),
-				bus);
-	}
+    public SplashPool createSplashPool() {
+        return new SplashPool(
+                SplashComponentIds.totalComponents,
+                0,
+                new EntityMetaData("Splash", SplashComponentIds
+                        .componentNames(), SplashComponentIds.componentTypes()),
+                factoryEntity(),
+                bus);
+    }
 
-	public SplashPool[] allPools() {
-		return new SplashPool[]{splash};
-	}
+    public SplashPool[] allPools() {
+        return new SplashPool[]{splash};
+    }
 
-	public FactoryEntity<SplashEntity> factoryEntity() {
-		return (int totalComponents, Stack<IComponent>[] componentPools,
-				EntityMetaData entityMetaData) -> {
-			return new SplashEntity(totalComponents, componentPools, entityMetaData,
-					bus);
-		};
-	}
+    public FactoryEntity<SplashEntity> factoryEntity() {
+        return (int totalComponents, Stack<IComponent>[] componentPools,
+                EntityMetaData entityMetaData) -> {
+            return new SplashEntity(totalComponents, componentPools, entityMetaData,
+                    bus);
+        };
+    }
 }
