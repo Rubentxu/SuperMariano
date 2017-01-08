@@ -3,12 +3,14 @@ package com.indignado.games;
 import com.ilargia.games.egdx.base.BaseGame;
 import com.ilargia.games.egdx.base.interfaces.EventBus;
 import com.ilargia.games.egdx.events.game.GameEvent;
+import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.entitas.Systems;
+import com.indignado.games.states.menu.MenuState;
 import net.engio.mbassy.listener.Handler;
 
 public class SMGame extends BaseGame<SMEngine> {
 
-    public SMGame(SMEngine engine, Systems systems, EventBus bus) {
+    public SMGame(SMEngine engine, EventBus bus) {
         super(engine, bus);
         ebus.subscribe(this);
     }
@@ -17,7 +19,9 @@ public class SMGame extends BaseGame<SMEngine> {
     @Handler
     public void handleNextState(GameEvent gmEvent) {
         if (gmEvent.equals(GameEvent.NEXT_STATE)) {
-            //changeState(new PongState());
+            EGAssetsManager assetManager = _engine.getManager(EGAssetsManager.class);
+            Styles styles = new Styles(assetManager);
+            changeState(new MenuState(styles, _engine));
         }
     }
 

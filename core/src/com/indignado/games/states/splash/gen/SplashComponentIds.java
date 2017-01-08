@@ -10,15 +10,15 @@ import com.indignado.games.states.splash.components.TextureView;
  */
 public class SplashComponentIds {
 
-    public static final int Delay = 0;
-    public static final int TextureView = 1;
-    public static final int totalComponents = 2;
+	public static final int Delay = 0;
+	public static final int TextureView = 1;
+	public static final int totalComponents = 2;
 
-    public static String[] componentNames() {
-        return new String[]{"Delay", "TextureView"};
-    }
+	public static String[] componentNames() {
+		return new String[]{"Delay", "TextureView"};
+	}
 
-    public static Class[] componentTypes() {
-        return new Class[]{Delay.class, TextureView.class};
-    }
+	public static Class[] componentTypes() {
+		return new Class[]{Delay.class, TextureView.class};
+	}
 }

@@ -25,7 +25,7 @@ public class SplashState extends BaseGameState {
     @Override
     public void loadResources() {
         assetsManager = engine.getManager(EGAssetsManager.class);
-        assetsManager.loadAsset(SPLASH, Texture.class);
+        assetsManager.loadTexture(SPLASH);
         assetsManager.finishLoading();
 
     }
@@ -37,9 +37,9 @@ public class SplashState extends BaseGameState {
                 .addSystem(context.splash, new RendererSplashSystem(engine.cam, engine.batch));
 
         Texture texture = assetsManager.getTexture(SPLASH);
-        context.splash.createEntity()
-                .addTextureView("Splash", new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()), new Vector2(),
-                        0, SuperMariano.SCREEN_HEIGHT, SuperMariano.SCREEN_WIDTH)
+
+        context.splash.setTextureView("Splash", new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()), new Vector2(),
+                0, SuperMariano.SCREEN_HEIGHT, SuperMariano.SCREEN_WIDTH)
                 .addDelay(3);
     }
 
@@ -55,7 +55,7 @@ public class SplashState extends BaseGameState {
 
     @Override
     public void unloadResources() {
-        assetsManager.unloadAsset(SPLASH);
+        assetsManager.unloadTexture(SPLASH);
         context.splash.destroyAllEntities();
         systems.clearSystems();
     }

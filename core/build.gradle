@@ -10,7 +10,7 @@ sourceSets {
             srcDirs 'src/'
             srcDirs 'lib/entitas/entitas/src/main/java'
             srcDirs 'lib/entitas/entitas-libgdx/src/main/java'
-            include 'lib/entitas/codegenerator/src/main/java/com/ilargia/games/entitas/codeGenerator/Component.java'
+
         }
     }
 }
