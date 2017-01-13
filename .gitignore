@@ -66,6 +66,8 @@ build/
 
 gradle.properties
 local.properties
+gradlew*
+gradle/
 
 ## OS Specific
 .DS_Store

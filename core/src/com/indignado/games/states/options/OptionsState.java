@@ -1,4 +1,4 @@
-package com.indignado.games.states.menu;
+package com.indignado.games.states.options;
 
 
 import com.badlogic.gdx.Gdx;
@@ -20,14 +20,14 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.Styles;
 
-public class MenuState implements GameState {
+public class OptionsState implements GameState {
     private Styles styles;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
     private EGAssetsManager assetsManager;
 
-    public MenuState(Styles styles, SMEngine engine) {
+    public OptionsState(Styles styles, SMEngine engine) {
         this.styles = styles;
         this.engine = engine;
         this.stage = new Stage();
