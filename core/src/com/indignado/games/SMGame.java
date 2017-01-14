@@ -1,13 +1,11 @@
 package com.indignado.games;
 
-import com.badlogic.gdx.math.Interpolation;
 import com.ilargia.games.egdx.base.BaseGame;
 import com.ilargia.games.egdx.base.interfaces.EventBus;
-import com.ilargia.games.egdx.events.game.GameEvent;
+import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.base.interfaces.events.GameEvent;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.transitions.FadeTransition;
-import com.ilargia.games.egdx.transitions.SlideTransition;
-import com.ilargia.games.entitas.Systems;
 import com.indignado.games.states.menu.MenuState;
 import net.engio.mbassy.listener.Handler;
 
@@ -19,12 +17,8 @@ public class SMGame extends BaseGame<SMEngine> {
     }
 
     @Handler
-    public void handleGameEvent(GameEvent gmEvent) {
-        if (gmEvent.equals(GameEvent.NEXT_STATE)) {
-            EGAssetsManager assetManager = _engine.getManager(EGAssetsManager.class);
-            Styles styles = new Styles(assetManager);
-            changeState(new MenuState(styles, _engine), new FadeTransition(1, _engine));
-        }
+    public void handleChangeState(ChangeStateCommand command) {
+        command.change("GameState", this);
     }
 
     @Override

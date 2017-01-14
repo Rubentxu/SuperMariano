@@ -1,10 +1,16 @@
 package com.indignado.games.states.splash.systems;
 
-import com.ilargia.games.egdx.events.game.GameEvent;
+import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.base.interfaces.events.GameEvent;
+import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.ilargia.games.entitas.Group;
 import com.ilargia.games.entitas.interfaces.IExecuteSystem;
 import com.ilargia.games.entitas.interfaces.ISetPool;
+import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
+import com.indignado.games.Styles;
+import com.indignado.games.states.menu.MenuState;
 import com.indignado.games.states.splash.components.Delay;
 import com.indignado.games.states.splash.gen.SplashEntity;
 import com.indignado.games.states.splash.gen.SplashMatcher;
@@ -28,7 +34,11 @@ public class DelaySystem implements IExecuteSystem, ISetPool<SplashPool> {
             Delay delay = e.getDelay();
             delay.time += deltatime;
             if (delay.time > delay.duration) {
-                SMGame.ebus.post(GameEvent.NEXT_STATE);
+                SMGame.ebus.post((ChangeStateCommand<SMEngine>)(nameState, game)-> {
+                    EGAssetsManager assetManager = game.getEngine().getManager(EGAssetsManager.class);
+                    Styles styles = new Styles(assetManager);
+                    game.changeState(new MenuState(styles,game.getEngine()), new FadeTransition(1, game.getEngine()));
+                } );
                 delay.time = 0;
             }
 

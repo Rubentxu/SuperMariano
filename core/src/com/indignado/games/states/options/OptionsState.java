@@ -33,13 +33,12 @@ public class OptionsState implements GameState {
     private SMEngine engine;
     private EGAssetsManager assetsManager;
 
-    public OptionsState(Styles styles, SMEngine engine, EGPreferencesManager preferencesManager,
-                        ProfileManager<Profile> profileManager) {
+    public OptionsState(Styles styles, SMEngine engine) {
         this.styles = styles;
         this.engine = engine;
         this.stage = new Stage();
-        this.preferencesManager = preferencesManager;
-        this.profileManager = profileManager;
+        this.preferencesManager = engine.getManager(EGPreferencesManager.class);
+        this.profileManager = engine.getManager(ProfileManager.class);
         mainTable = new Table();
         mainTable.setFillParent(true);
 
@@ -81,16 +80,18 @@ public class OptionsState implements GameState {
             }
         });
         mainTable.add(musicCheckbox);
-        com.badlogic.gdx.scenes.scene2d.EventListener
 
         Slider volumeSliderMusic = new Slider(0f, 1f, 0.1f, false, styles.skin);
         volumeSliderMusic.setValue(preferencesManager.VOL_MUSIC);
-        volumeSliderMusic.addListener((ChangeListener.ChangeEvent event) -> {
-            Slider slider = (Slider)  event.getTarget();
-            float value = slider.getValue();
-            preferencesManager.VOL_MUSIC = value;
-            updateVolumeLabelMusic();
-            return false;
+        volumeSliderMusic.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Slider slider = (Slider) actor;
+                float value = slider.getValue();
+                preferencesManager.VOL_MUSIC = value;
+                updateVolumeLabelMusic();
+            }
+
         });
         mainTable.add(volumeSliderMusic);
 
@@ -152,9 +153,9 @@ public class OptionsState implements GameState {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                preferencesManager.save();
-                game.setNextScreen(game.menuScreen.get());
-                gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+//                preferencesManager.save();
+//                game.setNextScreen(game.menuScreen.get());
+//                gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
             }
         });
 
@@ -193,12 +194,12 @@ public class OptionsState implements GameState {
     }
 
     private void updateVolumeLabelMusic() {
-        int volume = (int) (preferencesService.volMusic * 100);
+        int volume = (int) (preferencesManager.VOL_MUSIC * 100);
         volumeValueMusic.setText("Volume " + Integer.toString(volume));
     }
 
     private void updateVolumeLabelSound() {
-        int volume = (int) (preferencesService.volSound * 100);
+        int volume = (int) (preferencesManager.VOL_SOUND * 100);
         volumeValueSound.setText("Volume " + Integer.toString(volume));
     }
 }

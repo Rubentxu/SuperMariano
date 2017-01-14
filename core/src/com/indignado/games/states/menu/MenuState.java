@@ -16,9 +16,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.base.interfaces.GameState;
+import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.indignado.games.SMEngine;
+import com.indignado.games.SMGame;
 import com.indignado.games.Styles;
+import com.indignado.games.states.options.OptionsState;
 
 public class MenuState implements GameState {
     private Styles styles;
@@ -73,8 +77,11 @@ public class MenuState implements GameState {
         btnOptions.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click optionScreen...");
-//                game.setNextScreen(game.optionScreen.get());
-//                gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+                SMGame.ebus.post((ChangeStateCommand<SMEngine>)(nameState, game)-> {
+                    EGAssetsManager assetManager = game.getEngine().getManager(EGAssetsManager.class);
+                    Styles styles = new Styles(assetManager);
+                    game.changeState(new OptionsState(styles,game.getEngine()), new FadeTransition(1, game.getEngine()));
+                } );
             }
         });
 

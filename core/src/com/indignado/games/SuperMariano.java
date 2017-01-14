@@ -4,8 +4,11 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.ilargia.games.egdx.EGEventBus;
+import com.ilargia.games.egdx.base.interfaces.managers.ProfileManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
+import com.ilargia.games.egdx.managers.EGProfileManager;
+import com.indignado.games.states.options.Profile;
 import com.indignado.games.states.splash.SplashState;
 import net.engio.mbassy.bus.MBassador;
 
@@ -19,6 +22,9 @@ public class SuperMariano implements ApplicationListener {
         AssetManager assetsManager = new AssetManager();
         EGPreferencesManager preferencesManager = new EGPreferencesManager();
         SMEngine engine = new SMEngine();
+        ProfileManager profileManager = new EGProfileManager<Profile>(new Profile(), preferencesManager);
+        engine.addManager(preferencesManager);
+        engine.addManager(profileManager);
         engine.addManager(new EGAssetsManager(assetsManager, preferencesManager));
         game = new SMGame(engine, new EGEventBus(new MBassador()));
         game.init();
