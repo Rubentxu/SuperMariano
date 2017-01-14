@@ -14,13 +14,6 @@ public class Profile implements Serializable {
     private int starAquired;
     private List<Level> levels;
 
-    public Profile() {
-        lives = 2;
-        kills = 0;
-        coinsAquired = 0;
-        starAquired = 0;
-    }
-
     public Profile(List<Level> levels) {
         lives = 2;
         kills = 0;

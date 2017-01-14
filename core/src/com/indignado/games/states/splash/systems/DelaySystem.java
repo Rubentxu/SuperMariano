@@ -29,15 +29,12 @@ public class DelaySystem implements IExecuteSystem, ISetPool<SplashPool> {
 
     @Override
     public void execute(float deltatime) {
-
         for (SplashEntity e : _group.getEntities()) {
             Delay delay = e.getDelay();
             delay.time += deltatime;
             if (delay.time > delay.duration) {
-                SMGame.ebus.post((ChangeStateCommand<SMEngine>)(nameState, game)-> {
-                    EGAssetsManager assetManager = game.getEngine().getManager(EGAssetsManager.class);
-                    Styles styles = new Styles(assetManager);
-                    game.changeState(new MenuState(styles,game.getEngine()), new FadeTransition(1, game.getEngine()));
+                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)-> {
+                    game.changeState(game.getMenuState(),game.getFadeTransition());
                 } );
                 delay.time = 0;
             }

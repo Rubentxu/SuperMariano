@@ -10,7 +10,10 @@ import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.states.options.Profile;
 import com.indignado.games.states.splash.SplashState;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.engio.mbassy.bus.MBassador;
+import net.engio.mbassy.bus.error.IPublicationErrorHandler;
+import net.engio.mbassy.bus.error.PublicationError;
 
 public class SuperMariano implements ApplicationListener {
     public static final int SCREEN_WIDTH = 800;
@@ -22,11 +25,16 @@ public class SuperMariano implements ApplicationListener {
         AssetManager assetsManager = new AssetManager();
         EGPreferencesManager preferencesManager = new EGPreferencesManager();
         SMEngine engine = new SMEngine();
-        ProfileManager profileManager = new EGProfileManager<Profile>(new Profile(), preferencesManager);
+        ProfileManager profileManager = new EGProfileManager(new Profile(new ObjectArrayList<>()), preferencesManager);
         engine.addManager(preferencesManager);
         engine.addManager(profileManager);
         engine.addManager(new EGAssetsManager(assetsManager, preferencesManager));
-        game = new SMGame(engine, new EGEventBus(new MBassador()));
+        game = new SMGame(engine, new EGEventBus(new MBassador(new IPublicationErrorHandler() {
+            @Override
+            public void handleError(PublicationError error) {
+                Gdx.app.error("BusException", error.toString());
+            }
+        })));
         game.init();
         game.pushState(new SplashState(engine));
 

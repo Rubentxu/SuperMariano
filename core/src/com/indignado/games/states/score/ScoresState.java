@@ -1,0 +1,163 @@
+package com.indignado.games.states.score;
+
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
+import com.ilargia.games.egdx.base.interfaces.GameState;
+import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.base.interfaces.managers.ProfileManager;
+import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.managers.EGPreferencesManager;
+import com.ilargia.games.egdx.managers.EGProfileManager;
+import com.indignado.games.SMEngine;
+import com.indignado.games.SMGame;
+import com.indignado.games.Styles;
+import com.indignado.games.states.game.Level;
+import com.indignado.games.states.options.Profile;
+
+public class ScoresState implements GameState {
+    private ProfileManager<Profile> profileManager;
+    private Styles styles;
+    private Stage stage;
+    private Table mainTable;
+    private SMEngine engine;
+    private EGAssetsManager assetsManager;
+
+    private Profile profile;
+    private Level currentLevel;
+    private int coins;
+    private int kills;
+    private int stars;
+
+    public ScoresState(Styles styles, SMEngine engine) {
+        this.styles = styles;
+        this.engine = engine;
+        this.stage = new Stage();
+        this.profileManager = engine.getManager(EGProfileManager.class);
+        this.assetsManager = engine.getManager(EGAssetsManager.class);
+        mainTable = new Table();
+        mainTable.setFillParent(true);
+
+    }
+
+    @Override
+    public void loadResources() {
+        stage.clear();
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(multiplexer);
+        multiplexer.addProcessor(stage);
+        Gdx.app.log("ScoresState", "LoadResources");
+    }
+
+    @Override
+    public void init() {
+        Gdx.app.log("ScoresState", "Init");
+        profile = profileManager.getProfile();
+        currentLevel = new Level();//levelService.getCurrentLevel();
+        coins = profile.getCoinsAquired();
+        kills = profile.getKills();
+        stars = profile.getStarAquired();
+
+        Skin skin = styles.skin;
+
+        mainTable.defaults().spaceBottom(50 * Styles.ScaleUtil.getSizeRatio());
+        mainTable.setFillParent(true);
+
+        Label killsLabel = new Label("Kills: ", skin);
+        killsLabel.setText(killsLabel.getText() + String.valueOf(kills));
+
+        Label coinsLabel = new Label("Gold: ", skin);
+        coinsLabel.setText(coinsLabel.getText() + String.valueOf(coins));
+
+        Label starsLabel = new Label("Stars: ", skin);
+        starsLabel.setText(starsLabel.getText() + String.valueOf(stars));
+
+        int score = calculateScore();
+
+        Label scoreLabel = new Label("Score: ", skin);
+        scoreLabel.setText(scoreLabel.getText() + String.valueOf(score));
+
+        Label highScoreLabel = new Label("HighScoreLabel: ", skin);
+        highScoreLabel.setText(highScoreLabel.getText() + String.valueOf(currentLevel.getHighScore()));
+
+
+        TextButton levelMenuButton = new TextButton("LevelMenu", skin);
+        levelMenuButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)-> {
+                    game.changeState(game.getMenuState(),game.getFadeTransition());
+                } );
+            }
+        });
+
+        mainTable.add(killsLabel);
+        mainTable.row();
+        mainTable.add(coinsLabel);
+        mainTable.row();
+        mainTable.add(starsLabel);
+        mainTable.row();
+        mainTable.add(starsLabel);
+        mainTable.row();
+        mainTable.add(levelMenuButton);
+        stage.addActor(mainTable);
+        if (profile.getLives() > 0 && profile.getLevels().size()>0) profile.getLevels().get(currentLevel.getNum() + 1).setActive(true);
+        profile.resetValues();
+        if (score > currentLevel.getHighScore()) currentLevel.setHighScore(score);
+        if (currentLevel.getAchievements() < profile.getStarAquired())
+            currentLevel.setAchievements(profile.getStarAquired());
+
+        profileManager.persist(profileManager.getProfile());
+    }
+
+
+    @Override
+    public void update(float deltaTime) {
+        Gdx.gl.glClearColor(0.1f, 0f, 0f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act(deltaTime);
+
+    }
+
+    @Override
+    public void render() {
+        stage.draw();
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void dispose() {
+        stage.clear();
+        stage = null;
+    }
+
+    private int calculateScore() {
+        int score = 0;
+        score = coins * 10;
+        score += kills * 25;
+        score += stars * 50;
+        return score;
+    }
+}

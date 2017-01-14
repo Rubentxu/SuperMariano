@@ -16,10 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.base.interfaces.GameState;
+import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.base.interfaces.managers.ProfileManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.indignado.games.SMEngine;
+import com.indignado.games.SMGame;
 import com.indignado.games.Styles;
 
 public class OptionsState implements GameState {
@@ -153,9 +155,10 @@ public class OptionsState implements GameState {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                preferencesManager.save();
-//                game.setNextScreen(game.menuScreen.get());
-//                gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+               preferencesManager.save();
+                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)-> {
+                    game.changeState(game.getMenuState(),game.getFadeTransition());
+                } );
             }
         });
 

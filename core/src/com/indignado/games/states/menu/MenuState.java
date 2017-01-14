@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -19,10 +20,12 @@ import com.ilargia.games.egdx.base.interfaces.GameState;
 import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.transitions.FadeTransition;
+import com.ilargia.games.egdx.transitions.SlideTransition;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
 import com.indignado.games.Styles;
 import com.indignado.games.states.options.OptionsState;
+import com.indignado.games.states.score.ScoresState;
 
 public class MenuState implements GameState {
     private Styles styles;
@@ -69,27 +72,25 @@ public class MenuState implements GameState {
         btnStart.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click Comenzar...");
-//                game.setNextScreen(game.selectLevelScreen.get());
-//                gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+
             }
         });
 
         btnOptions.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click optionScreen...");
-                SMGame.ebus.post((ChangeStateCommand<SMEngine>)(nameState, game)-> {
-                    EGAssetsManager assetManager = game.getEngine().getManager(EGAssetsManager.class);
-                    Styles styles = new Styles(assetManager);
-                    game.changeState(new OptionsState(styles,game.getEngine()), new FadeTransition(1, game.getEngine()));
-                } );
+                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)->
+                    game.changeState(game.getOptionState(),game.getFadeTransition())
+                 );
             }
         });
 
         btnScores.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click highScoreScreen...");
-//                game.setNextScreen(game.highScoresScreen.get());
-//                gameStateMachine.changeState(GameState.SHOW_NEXT_SCREEN);
+                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)->
+                    game.changeState(game.getScoresState(), game.getSlideTransition())
+                 );
             }
         });
 
