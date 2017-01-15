@@ -9,25 +9,25 @@ import com.ilargia.games.entitas.matcher.Matcher;
  */
 public class SplashMatcher {
 
-	private static Matcher _matcherDelay;
-	private static Matcher _matcherTextureView;
+    private static Matcher _matcherDelay;
+    private static Matcher _matcherTextureView;
 
-	public static Matcher Delay() {
-		if (_matcherDelay == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(SplashComponentIds.Delay);
-			matcher.componentNames = SplashComponentIds.componentNames();
-			_matcherDelay = matcher;
-		}
-		return _matcherDelay;
-	}
+    public static Matcher Delay() {
+        if (_matcherDelay == null) {
+            Matcher matcher = (Matcher) Matcher.AllOf(SplashComponentIds.Delay);
+            matcher.componentNames = SplashComponentIds.componentNames();
+            _matcherDelay = matcher;
+        }
+        return _matcherDelay;
+    }
 
-	public static Matcher TextureView() {
-		if (_matcherTextureView == null) {
-			Matcher matcher = (Matcher) Matcher
-					.AllOf(SplashComponentIds.TextureView);
-			matcher.componentNames = SplashComponentIds.componentNames();
-			_matcherTextureView = matcher;
-		}
-		return _matcherTextureView;
-	}
+    public static Matcher TextureView() {
+        if (_matcherTextureView == null) {
+            Matcher matcher = (Matcher) Matcher
+                    .AllOf(SplashComponentIds.TextureView);
+            matcher.componentNames = SplashComponentIds.componentNames();
+            _matcherTextureView = matcher;
+        }
+        return _matcherTextureView;
+    }
 }

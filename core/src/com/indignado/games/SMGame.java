@@ -3,10 +3,8 @@ package com.indignado.games;
 import com.badlogic.gdx.math.Interpolation;
 import com.ilargia.games.egdx.base.BaseGame;
 import com.ilargia.games.egdx.base.interfaces.EventBus;
-import com.ilargia.games.egdx.base.interfaces.GameState;
 import com.ilargia.games.egdx.base.interfaces.StateTransition;
 import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
-import com.ilargia.games.egdx.base.interfaces.events.GameEvent;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.ilargia.games.egdx.transitions.SlideTransition;
@@ -51,37 +49,37 @@ public class SMGame extends BaseGame<SMEngine> {
     }
 
     public MenuState getMenuState() {
-        if(menuState==null) {
-            menuState = new MenuState(styles,_engine);
+        if (menuState == null) {
+            menuState = new MenuState(styles, _engine);
         }
         return menuState;
     }
 
     public FadeTransition getFadeTransition() {
-        if(fadeTransition == null) {
+        if (fadeTransition == null) {
             fadeTransition = new FadeTransition(1, _engine.batch);
         }
         return fadeTransition;
     }
 
     public OptionsState getOptionState() {
-        if(optionState==null) {
-            optionState =  new OptionsState(styles,_engine);
+        if (optionState == null) {
+            optionState = new OptionsState(styles, _engine);
         }
         return optionState;
 
     }
 
     public ScoresState getScoresState() {
-        if(scoresState==null) {
-            scoresState =  new ScoresState(styles,_engine);
+        if (scoresState == null) {
+            scoresState = new ScoresState(styles, _engine);
         }
         return scoresState;
     }
 
     public StateTransition getSlideTransition() {
-        if(slideTransition==null) {
-            slideTransition =  new SlideTransition(1,SlideTransition.LEFT,false, Interpolation.bounce,_engine.batch);
+        if (slideTransition == null) {
+            slideTransition = new SlideTransition(1, SlideTransition.LEFT, false, Interpolation.bounce, _engine.batch);
         }
         return slideTransition;
 

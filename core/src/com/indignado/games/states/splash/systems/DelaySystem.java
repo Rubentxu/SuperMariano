@@ -1,16 +1,10 @@
 package com.indignado.games.states.splash.systems;
 
 import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
-import com.ilargia.games.egdx.base.interfaces.events.GameEvent;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
-import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.ilargia.games.entitas.Group;
 import com.ilargia.games.entitas.interfaces.IExecuteSystem;
 import com.ilargia.games.entitas.interfaces.ISetPool;
-import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.Styles;
-import com.indignado.games.states.menu.MenuState;
 import com.indignado.games.states.splash.components.Delay;
 import com.indignado.games.states.splash.gen.SplashEntity;
 import com.indignado.games.states.splash.gen.SplashMatcher;
@@ -33,9 +27,9 @@ public class DelaySystem implements IExecuteSystem, ISetPool<SplashPool> {
             Delay delay = e.getDelay();
             delay.time += deltatime;
             if (delay.time > delay.duration) {
-                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)-> {
-                    game.changeState(game.getMenuState(),game.getFadeTransition());
-                } );
+                SMGame.ebus.post((ChangeStateCommand<SMGame>) (nameState, game) -> {
+                    game.changeState(game.getMenuState(), game.getFadeTransition());
+                });
                 delay.time = 0;
             }
 

@@ -16,8 +16,8 @@ import com.indignado.games.states.splash.components.TextureView;
 public class SplashPool extends com.ilargia.games.entitas.BasePool<SplashEntity, SplashPool> {
 
     public SplashPool(int totalComponents, int startCreationIndex,
-                EntityMetaData metaData, FactoryEntity<SplashEntity> factoryMethod,
-                EventBus<SplashEntity> bus) {
+                      EntityMetaData metaData, FactoryEntity<SplashEntity> factoryMethod,
+                      EventBus<SplashEntity> bus) {
         super(totalComponents, startCreationIndex, metaData, bus, factoryMethod);
     }
 
@@ -34,7 +34,7 @@ public class SplashPool extends com.ilargia.games.entitas.BasePool<SplashEntity,
     }
 
     public SplashEntity setTextureView(String name, TextureRegion texture,
-                                 Vector2 position, float rotation, int height, int width) {
+                                       Vector2 position, float rotation, int height, int width) {
         if (hasTextureView()) {
             throw new EntitasException(
                     "Could not set TextureView!" + this
@@ -47,7 +47,7 @@ public class SplashPool extends com.ilargia.games.entitas.BasePool<SplashEntity,
     }
 
     public SplashEntity replaceTextureView(String name, TextureRegion texture,
-                                     Vector2 position, float rotation, int height, int width) {
+                                           Vector2 position, float rotation, int height, int width) {
         SplashEntity entity = getTextureViewEntity();
         if (entity == null) {
             entity = setTextureView(name, texture, position, rotation, height,

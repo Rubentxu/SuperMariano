@@ -9,13 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.ilargia.games.entitas.Group;
 import com.ilargia.games.entitas.interfaces.IExecuteSystem;
 import com.ilargia.games.entitas.interfaces.IInitializeSystem;
 import com.ilargia.games.entitas.interfaces.ISetPool;
-import com.indignado.games.states.splash.components.TextureView;
-import com.indignado.games.states.splash.gen.SplashEntity;
-import com.indignado.games.states.splash.gen.SplashMatcher;
 import com.indignado.games.states.splash.gen.SplashPool;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
@@ -36,7 +32,7 @@ public class RendererSplashSystem implements IInitializeSystem, IExecuteSystem, 
         mainTable.setFillParent(true);
         mainTable.getColor().a = 0f;
         mainTable.addAction(fadeIn(1f));
-        stage= new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.addActor(mainTable);
     }
 
@@ -57,7 +53,7 @@ public class RendererSplashSystem implements IInitializeSystem, IExecuteSystem, 
 
     @Override
     public void initialize() {
-       mainTable.setBackground(new SpriteDrawable(new Sprite(pool.getTextureView().texture)));
+        mainTable.setBackground(new SpriteDrawable(new Sprite(pool.getTextureView().texture)));
 
     }
 }

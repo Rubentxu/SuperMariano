@@ -3,23 +3,18 @@ package com.indignado.games.states.score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.base.interfaces.GameState;
 import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.base.interfaces.managers.ProfileManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
-import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
@@ -44,28 +39,25 @@ public class ScoresState implements GameState {
     public ScoresState(Styles styles, SMEngine engine) {
         this.styles = styles;
         this.engine = engine;
-        this.stage = new Stage();
         this.profileManager = engine.getManager(EGProfileManager.class);
         this.assetsManager = engine.getManager(EGAssetsManager.class);
-        mainTable = new Table();
-        mainTable.setFillParent(true);
-
     }
 
     @Override
     public void loadResources() {
+        this.stage = new Stage();
         stage.clear();
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        Gdx.input.setInputProcessor(multiplexer);
-        multiplexer.addProcessor(stage);
+        mainTable = new Table();
+        mainTable.setFillParent(true);
+        profile = profileManager.getProfile();
+        Gdx.input.setInputProcessor(stage);
         Gdx.app.log("ScoresState", "LoadResources");
     }
 
     @Override
     public void init() {
         Gdx.app.log("ScoresState", "Init");
-        profile = profileManager.getProfile();
         currentLevel = new Level();//levelService.getCurrentLevel();
         coins = profile.getCoinsAquired();
         kills = profile.getKills();
@@ -98,9 +90,9 @@ public class ScoresState implements GameState {
         levelMenuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)-> {
-                    game.changeState(game.getMenuState(),game.getFadeTransition());
-                } );
+                SMGame.ebus.post((ChangeStateCommand<SMGame>) (nameState, game) -> {
+                    game.changeState(game.getMenuState(), game.getFadeTransition());
+                });
             }
         });
 
@@ -114,7 +106,8 @@ public class ScoresState implements GameState {
         mainTable.row();
         mainTable.add(levelMenuButton);
         stage.addActor(mainTable);
-        if (profile.getLives() > 0 && profile.getLevels().size()>0) profile.getLevels().get(currentLevel.getNum() + 1).setActive(true);
+        if (profile.getLives() > 0 && profile.getLevels().size() > 0)
+            profile.getLevels().get(currentLevel.getNum() + 1).setActive(true);
         profile.resetValues();
         if (score > currentLevel.getHighScore()) currentLevel.setHighScore(score);
         if (currentLevel.getAchievements() < profile.getStarAquired())
@@ -148,9 +141,16 @@ public class ScoresState implements GameState {
     }
 
     @Override
-    public void dispose() {
+    public void unloadResources() {
         stage.clear();
+        mainTable.clear();
+        Gdx.input.setInputProcessor(null);
+    }
+
+    @Override
+    public void dispose() {
         stage = null;
+        mainTable = null;
     }
 
     private int calculateScore() {

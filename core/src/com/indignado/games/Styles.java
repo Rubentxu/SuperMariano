@@ -166,19 +166,19 @@ public class Styles implements ISkin, Disposable {
             return Gdx.graphics.getHeight() / VIRTUAL_HEIGHT;
         }
 
+        public static float getSizeRatio() {
+            if (getRatioX() < getRatioY())
+                return getRatioX();
+            else
+                return getRatioY();
+        }
+
         public float getWorldRatioX() {
             return Gdx.graphics.getWidth() / WORLD_WIDTH;
         }
 
         public float getWorldRatioY() {
             return Gdx.graphics.getHeight() / WORLD_HEIGHT;
-        }
-
-        public static float getSizeRatio() {
-            if (getRatioX() < getRatioY())
-                return getRatioX();
-            else
-                return getRatioY();
         }
 
         public float getWorldSizeRatio() {

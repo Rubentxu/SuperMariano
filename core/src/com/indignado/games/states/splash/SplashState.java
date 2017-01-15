@@ -31,8 +31,17 @@ public class SplashState extends BaseGameState {
     }
 
     @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
     public void initialize() {
-        context = new SplashContext();
         systems.addSystem(context.splash, new DelaySystem())
                 .addSystem(context.splash, new RendererSplashSystem(engine.cam, engine.batch));
 
@@ -44,19 +53,11 @@ public class SplashState extends BaseGameState {
     }
 
     @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
     public void unloadResources() {
         assetsManager.unloadTexture(SPLASH);
         context.splash.destroyAllEntities();
         systems.clearSystems();
     }
+
+
 }

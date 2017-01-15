@@ -38,22 +38,20 @@ public class OptionsState implements GameState {
     public OptionsState(Styles styles, SMEngine engine) {
         this.styles = styles;
         this.engine = engine;
-        this.stage = new Stage();
         this.preferencesManager = engine.getManager(EGPreferencesManager.class);
         this.profileManager = engine.getManager(ProfileManager.class);
-        mainTable = new Table();
-        mainTable.setFillParent(true);
 
     }
 
     @Override
     public void loadResources() {
         assetsManager = engine.getManager(EGAssetsManager.class);
+        this.stage = new Stage();
         stage.clear();
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        Gdx.input.setInputProcessor(multiplexer);
-        multiplexer.addProcessor(stage);
+        mainTable = new Table();
+        mainTable.setFillParent(true);
+        Gdx.input.setInputProcessor(stage);
         Gdx.app.log("OptionState", "LoadResources");
     }
 
@@ -155,16 +153,21 @@ public class OptionsState implements GameState {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-               preferencesManager.save();
-                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)-> {
-                    game.changeState(game.getMenuState(),game.getFadeTransition());
-                } );
+                preferencesManager.save();
+                SMGame.ebus.post((ChangeStateCommand<SMGame>) (nameState, game) -> {
+                    game.changeState(game.getMenuState(), game.getFadeTransition());
+                });
             }
         });
 
         mainTable.add(backButton).colspan(3);
 
         this.stage.addActor(mainTable);
+    }
+
+    @Override
+    public void onResume() {
+
     }
 
     @Override
@@ -181,19 +184,22 @@ public class OptionsState implements GameState {
     }
 
     @Override
-    public void onResume() {
-
-    }
-
-    @Override
     public void onPause() {
 
     }
 
     @Override
-    public void dispose() {
+    public void unloadResources() {
         stage.clear();
+        mainTable.clear();
+        Gdx.input.setInputProcessor(null);
+    }
+
+
+    @Override
+    public void dispose() {
         stage = null;
+        mainTable = null;
     }
 
     private void updateVolumeLabelMusic() {

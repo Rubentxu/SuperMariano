@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -19,13 +18,9 @@ import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.base.interfaces.GameState;
 import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
-import com.ilargia.games.egdx.transitions.FadeTransition;
-import com.ilargia.games.egdx.transitions.SlideTransition;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
 import com.indignado.games.Styles;
-import com.indignado.games.states.options.OptionsState;
-import com.indignado.games.states.score.ScoresState;
 
 public class MenuState implements GameState {
     private Styles styles;
@@ -37,26 +32,26 @@ public class MenuState implements GameState {
     public MenuState(Styles styles, SMEngine engine) {
         this.styles = styles;
         this.engine = engine;
-        this.stage = new Stage();
-        mainTable = new Table();
-        mainTable.setFillParent(true);
+
 
     }
 
     @Override
     public void loadResources() {
         assetsManager = engine.getManager(EGAssetsManager.class);
+        this.stage = new Stage();
+        mainTable = new Table();
+        mainTable.setFillParent(true);
         stage.clear();
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        Gdx.input.setInputProcessor(multiplexer);
-        multiplexer.addProcessor(stage);
-        Gdx.app.log("Menu","LoadResources");
+        this.stage.addActor(mainTable);
+        Gdx.input.setInputProcessor(stage);
+        Gdx.app.log("Menu", "LoadResources");
     }
 
     @Override
     public void init() {
-        Gdx.app.log("Menu","Init");
+        Gdx.app.log("Menu", "Init");
         int pad = (int) (20 * Styles.ScaleUtil.getSizeRatio());
         int pad2 = (int) (60 * Styles.ScaleUtil.getSizeRatio());
         final TextButton btnStart = new TextButton("Comenzar", styles.skin);
@@ -79,18 +74,18 @@ public class MenuState implements GameState {
         btnOptions.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click optionScreen...");
-                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)->
-                    game.changeState(game.getOptionState(),game.getFadeTransition())
-                 );
+                SMGame.ebus.post((ChangeStateCommand<SMGame>) (nameState, game) ->
+                        game.changeState(game.getOptionState(), game.getFadeTransition())
+                );
             }
         });
 
         btnScores.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Click highScoreScreen...");
-                SMGame.ebus.post((ChangeStateCommand<SMGame>)(nameState, game)->
-                    game.changeState(game.getScoresState(), game.getSlideTransition())
-                 );
+                SMGame.ebus.post((ChangeStateCommand<SMGame>) (nameState, game) ->
+                        game.changeState(game.getScoresState(), game.getSlideTransition())
+                );
             }
         });
 
@@ -110,7 +105,7 @@ public class MenuState implements GameState {
         mainTable.row();
         mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(Styles.MENU_BACKGROUND))));
         mainTable.row();
-        this.stage.addActor(mainTable);
+
     }
 
     @Override
@@ -138,7 +133,11 @@ public class MenuState implements GameState {
 
     @Override
     public void dispose() {
-        stage.clear();
         stage = null;
+    }
+
+    @Override
+    public void unloadResources() {
+        stage.clear();
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
 import com.indignado.games.states.game.Level;
+
 import java.util.List;
 
 public class Profile implements Serializable {
