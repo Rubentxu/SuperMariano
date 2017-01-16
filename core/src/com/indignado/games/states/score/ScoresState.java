@@ -79,7 +79,7 @@ public class ScoresState implements GameState {
 
         int score = calculateScore();
 
-        Label scoreLabel = new Label("Score: ", skin);
+        Label scoreLabel = new Label("Label: ", skin);
         scoreLabel.setText(scoreLabel.getText() + String.valueOf(score));
 
         Label highScoreLabel = new Label("HighScoreLabel: ", skin);
