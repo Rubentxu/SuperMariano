@@ -1,16 +1,13 @@
-package com.indignado.games.states.menu.components;
+package com.indignado.games.states.game.components;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.ilargia.games.entitas.codeGenerator.Component;
 import com.ilargia.games.entitas.interfaces.IComponent;
 
-@Component(pools = {"SM"}, isSingleEntity = true)
+@Component(pools = {"SMCore"}, isSingleEntity = true)
 public class Background implements IComponent {
     public Texture front;
     public Texture middle;
     public Texture back;
-
-
 
 }
