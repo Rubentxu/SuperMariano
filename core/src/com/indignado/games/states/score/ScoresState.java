@@ -2,7 +2,6 @@ package com.indignado.games.states.score;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,7 +18,7 @@ import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
 import com.indignado.games.Styles;
-import com.indignado.games.states.game.Level;
+import com.indignado.games.states.game.data.Level;
 import com.indignado.games.states.options.Profile;
 
 public class ScoresState implements GameState {

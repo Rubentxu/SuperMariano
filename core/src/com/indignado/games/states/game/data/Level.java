@@ -1,4 +1,4 @@
-package com.indignado.games.states.game;
+package com.indignado.games.states.game.data;
 
 
 import com.badlogic.gdx.utils.Json;

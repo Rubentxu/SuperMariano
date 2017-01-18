@@ -3,7 +3,7 @@ package com.indignado.games.states.options;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
-import com.indignado.games.states.game.Level;
+import com.indignado.games.states.game.data.Level;
 
 import java.util.List;
 

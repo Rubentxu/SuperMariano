@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.components;
+package com.indignado.games.states.game.data;
 
 import com.badlogic.gdx.math.Vector2;
 import com.ilargia.games.entitas.codeGenerator.Component;
