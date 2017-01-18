@@ -1,21 +1,13 @@
 package com.indignado.games.states.game.data;
 
+import com.indignado.games.states.game.gen.Entity;
 
-public class KeyboardSensor extends Sensor {
-    public KeyboardQuery query;
-    public String target = "";
+@FunctionalInterface
+public interface KeyboardSensor {
 
-    public void reset(String target) {
-        super.reset(0, false, 0);
-        target = "";
+    public enum Type { KeyUp, KeyDown}
 
-    }
+    boolean query(Entity entity, Type type, int keycode, char character);
 
-    public enum Type { KeyUp, keyDown }
-
-    @FunctionalInterface
-    public interface KeyboardQuery {
-         boolean query(KeyboardSensor sensor, Type type, int keycode, char character);
-    }
 
 }
