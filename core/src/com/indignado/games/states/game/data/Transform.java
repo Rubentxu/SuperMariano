@@ -4,8 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.ilargia.games.entitas.codeGenerator.Component;
 import com.ilargia.games.entitas.interfaces.IComponent;
 
-@Component(pools = {"SMCore"})
-public class Transform implements IComponent {
+
+public class Transform {
     public Vector2 position;
     public float rotation;
     public Vector2 scale;

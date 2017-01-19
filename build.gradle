@@ -47,7 +47,7 @@ project(":desktop") {
     }
 }
 
-project(":android") {
+/*project(":android") {
     apply plugin: "android"
 
     configurations { natives }
@@ -73,7 +73,7 @@ project(":android") {
         compile group: 'net.engio', name: 'mbassador', version: '1.3.0'
         compile 'com.android.support:multidex:1.0.0'
     }
-}
+}*/
 
 project(":ios") {
     apply plugin: "java"

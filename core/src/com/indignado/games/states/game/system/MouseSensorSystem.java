@@ -1,15 +1,15 @@
-package com.indignado.games.states.game.systems;
+package com.indignado.games.states.game.system;
 
 import com.badlogic.gdx.InputAdapter;
 import com.ilargia.games.entitas.Group;
 import com.ilargia.games.entitas.interfaces.ISetPool;
-import com.indignado.games.states.game.data.KeyboardSensor;
+import com.indignado.games.states.game.sensor.KeyboardSensor;
 import com.indignado.games.states.game.gen.Entity;
 import com.indignado.games.states.game.gen.Pool;
 import com.indignado.games.states.game.gen.SmcoreMatcher;
 
 
-public class KeyboardSensorSystem extends InputAdapter implements ISetPool<Pool> {
+public class MouseSensorSystem extends InputAdapter implements ISetPool<Pool> {
 
     private Group<Entity> _group;
 

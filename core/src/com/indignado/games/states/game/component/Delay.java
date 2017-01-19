@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.components;
+package com.indignado.games.states.game.component;
 
 import com.ilargia.games.entitas.codeGenerator.Component;
 import com.ilargia.games.entitas.interfaces.IComponent;

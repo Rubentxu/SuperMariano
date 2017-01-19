@@ -4,7 +4,7 @@ import com.ilargia.games.entitas.EntityMetaData;
 import com.ilargia.games.entitas.interfaces.FactoryEntity;
 import com.ilargia.games.entitas.events.EventBus;
 import com.ilargia.games.entitas.exceptions.EntitasException;
-import com.indignado.games.states.game.components.Background;
+import com.indignado.games.states.game.component.Background;
 
 /**
  * ---------------------------------------------------------------------------

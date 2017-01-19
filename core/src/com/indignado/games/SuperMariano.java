@@ -38,7 +38,7 @@ public class SuperMariano implements ApplicationListener {
         })));
         game.init();
         game.pushState(new SplashState(engine));
-        
+
 
     }
 

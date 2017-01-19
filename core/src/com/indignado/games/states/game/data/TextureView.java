@@ -6,8 +6,8 @@ import com.ilargia.games.entitas.codeGenerator.Component;
 import com.ilargia.games.entitas.interfaces.IComponent;
 import com.indignado.games.states.game.data.Bounds;
 
-@Component(pools = {"SMCore"})
-public class TextureView implements IComponent {
+
+public class TextureView {
     public String name;
     public TextureRegion texture;
     public Bounds bounds;

@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.components;
+package com.indignado.games.states.game.component;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.ilargia.games.entitas.codeGenerator.Component;

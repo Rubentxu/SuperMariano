@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.data;
+package com.indignado.games.states.game.sensor;
 
 import com.indignado.games.states.game.gen.Entity;
 

@@ -4,16 +4,16 @@ import com.ilargia.games.entitas.EntityMetaData;
 import com.ilargia.games.entitas.interfaces.IComponent;
 import java.util.Stack;
 import com.ilargia.games.entitas.events.EventBus;
-import com.indignado.games.states.game.components.AnimationView;
-import com.indignado.games.states.game.components.Background;
+import com.indignado.games.states.game.component.AnimationView;
+import com.indignado.games.states.game.component.Background;
 import com.badlogic.gdx.graphics.Texture;
-import com.indignado.games.states.game.components.Delay;
-import com.indignado.games.states.game.data.KeyboardSensor;
-import com.indignado.games.states.game.components.Label;
-import com.indignado.games.states.game.components.Motion;
+import com.indignado.games.states.game.component.Delay;
+import com.indignado.games.states.game.sensor.KeyboardSensor;
+import com.indignado.games.states.game.component.Label;
+import com.indignado.games.states.game.component.Motion;
 import com.badlogic.gdx.math.Vector2;
-import com.indignado.games.states.game.components.TransformCollection;
-import com.indignado.games.states.game.components.ViewCollection;
+import com.indignado.games.states.game.component.TransformCollection;
+import com.indignado.games.states.game.component.ViewCollection;
 
 /**
  * ---------------------------------------------------------------------------
