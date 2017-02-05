@@ -1,23 +1,21 @@
 package com.indignado.games.states.splash.systems;
 
 import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
-import com.ilargia.games.entitas.Group;
-import com.ilargia.games.entitas.interfaces.IExecuteSystem;
-import com.ilargia.games.entitas.interfaces.ISetPool;
+import com.ilargia.games.entitas.api.system.IExecuteSystem;
+import com.ilargia.games.entitas.group.Group;
 import com.indignado.games.SMGame;
 import com.indignado.games.states.splash.components.Delay;
+import com.indignado.games.states.splash.gen.SplashContext;
 import com.indignado.games.states.splash.gen.SplashEntity;
 import com.indignado.games.states.splash.gen.SplashMatcher;
-import com.indignado.games.states.splash.gen.SplashPool;
 
 
-public class DelaySystem implements IExecuteSystem, ISetPool<SplashPool> {
+public class DelaySystem implements IExecuteSystem {
 
     private Group<SplashEntity> _group;
 
-    @Override
-    public void setPool(SplashPool pool) {
-        _group = pool.getGroup(SplashMatcher.Delay());
+    public DelaySystem(SplashContext context) {
+        _group = context.getGroup(SplashMatcher.Delay());
 
     }
 

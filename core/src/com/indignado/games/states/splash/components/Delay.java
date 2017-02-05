@@ -1,7 +1,7 @@
 package com.indignado.games.states.splash.components;
 
+import com.ilargia.games.entitas.api.IComponent;
 import com.ilargia.games.entitas.codeGenerator.Component;
-import com.ilargia.games.entitas.interfaces.IComponent;
 
 @Component(pools = {"Splash"})
 public class Delay implements IComponent {

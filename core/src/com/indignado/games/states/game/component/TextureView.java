@@ -1,17 +1,17 @@
-package com.indignado.games.states.game.data;
+package com.indignado.games.states.game.component;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.ilargia.games.entitas.api.IComponent;
 import com.ilargia.games.entitas.codeGenerator.Component;
-import com.ilargia.games.entitas.interfaces.IComponent;
 import com.indignado.games.states.game.data.Bounds;
 
-
-public class TextureView {
+@Component(pools = {"Game"})
+public class TextureView implements IComponent {
     public String name;
     public TextureRegion texture;
     public Bounds bounds;
-    public boolean flipX ;
+    public boolean flipX;
     public boolean flipY;
     public int opacity;
     public int layer;

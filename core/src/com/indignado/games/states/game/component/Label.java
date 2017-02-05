@@ -1,9 +1,10 @@
 package com.indignado.games.states.game.component;
 
+import com.ilargia.games.entitas.api.IComponent;
 import com.ilargia.games.entitas.codeGenerator.Component;
-import com.ilargia.games.entitas.interfaces.IComponent;
 
-@Component(pools = {"SMCore"})
+
+@Component(pools = {"Gui"})
 public class Label implements IComponent {
     public String text;
     public String font;

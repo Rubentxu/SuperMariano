@@ -7,7 +7,7 @@ import com.ilargia.games.egdx.base.BaseGameState;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SuperMariano;
-import com.indignado.games.states.splash.gen.SplashContext;
+import com.indignado.games.states.splash.gen.Entitas;
 import com.indignado.games.states.splash.systems.DelaySystem;
 import com.indignado.games.states.splash.systems.RendererSplashSystem;
 
@@ -15,11 +15,11 @@ public class SplashState extends BaseGameState {
     public static final String SPLASH = "imagenes/fondos/splash.jpg";
     private EGAssetsManager assetsManager;
     private SMEngine engine;
-    private SplashContext context;
+    private Entitas entitas;
 
     public SplashState(SMEngine engine) {
         this.engine = engine;
-        context = new SplashContext();
+        entitas = new Entitas();
     }
 
     @Override
@@ -42,12 +42,12 @@ public class SplashState extends BaseGameState {
 
     @Override
     public void initialize() {
-        systems.addSystem(context.splash, new DelaySystem())
-                .addSystem(context.splash, new RendererSplashSystem(engine.cam, engine.batch));
+        systems.add(new DelaySystem(entitas.splash))
+                .add(new RendererSplashSystem(entitas.splash, engine.cam, engine.batch));
 
         Texture texture = assetsManager.getTexture(SPLASH);
 
-        context.splash.setTextureView("Splash", new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()), new Vector2(),
+        entitas.splash.setTextureView("Splash", new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()), new Vector2(),
                 0, SuperMariano.SCREEN_HEIGHT, SuperMariano.SCREEN_WIDTH)
                 .addDelay(3);
     }
@@ -55,7 +55,7 @@ public class SplashState extends BaseGameState {
     @Override
     public void unloadResources() {
         assetsManager.unloadTexture(SPLASH);
-        context.splash.destroyAllEntities();
+        entitas.splash.destroyAllEntities();
         systems.clearSystems();
     }
 

@@ -18,7 +18,7 @@ import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
 import com.indignado.games.Styles;
-import com.indignado.games.states.game.data.Level;
+import com.indignado.games.states.game.component.Level;
 import com.indignado.games.states.options.Profile;
 
 public class ScoresState implements GameState {

@@ -2,7 +2,6 @@ package com.indignado.games;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.ilargia.games.egdx.EGEventBus;
 import com.ilargia.games.egdx.base.interfaces.managers.ProfileManager;

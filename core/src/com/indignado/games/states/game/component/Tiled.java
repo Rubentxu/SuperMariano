@@ -1,14 +1,13 @@
 package com.indignado.games.states.game.component;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.ilargia.games.entitas.api.IComponent;
 import com.ilargia.games.entitas.codeGenerator.Component;
 
 
 @Component(pools = {"Scene"}, isSingleEntity = true)
-public class Background implements IComponent {
-    public Texture front;
-    public Texture middle;
-    public Texture back;
+public class Tiled implements IComponent {
+    public String tileMapName;
+    public float unitScale;
 
 }

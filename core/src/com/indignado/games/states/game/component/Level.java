@@ -1,9 +1,11 @@
-package com.indignado.games.states.game.data;
+package com.indignado.games.states.game.component;
 
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.ilargia.games.entitas.codeGenerator.Component;
 
+@Component(pools = {"Scene"})
 public class Level implements Json.Serializable {
 
     private String map;

@@ -90,7 +90,7 @@ public class ModelsAndViews {
                     }
 
                 } catch (Exception ex) {
-                    Gdx.app.log(Env.LOG, "Error en render: " + ex.getMessage() + "Grupo " + e.getGrupo() + " State" + e.getState());
+                    Gdx.app.log(Env.LOG, "Error en render: " + ex.getMessage() + "Grupo " + e.getGrupo() + " Character" + e.getState());
                 }
             }
             if (e instanceof Hero) {

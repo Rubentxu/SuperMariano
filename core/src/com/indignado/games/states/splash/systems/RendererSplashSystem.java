@@ -9,23 +9,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.ilargia.games.entitas.interfaces.IExecuteSystem;
-import com.ilargia.games.entitas.interfaces.IInitializeSystem;
-import com.ilargia.games.entitas.interfaces.ISetPool;
-import com.indignado.games.states.splash.gen.SplashPool;
+import com.ilargia.games.entitas.api.system.IExecuteSystem;
+import com.ilargia.games.entitas.api.system.IInitializeSystem;
+import com.indignado.games.states.splash.gen.SplashContext;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 
 
-public class RendererSplashSystem implements IInitializeSystem, IExecuteSystem, ISetPool<SplashPool> {
+public class RendererSplashSystem implements IInitializeSystem, IExecuteSystem {
 
     private final Stage stage;
     private final Table mainTable;
     private OrthographicCamera cam;
     private Batch batch;
-    private SplashPool pool;
+    private SplashContext context;
 
-    public RendererSplashSystem(OrthographicCamera cam, Batch batch) {
+    public RendererSplashSystem(SplashContext context, OrthographicCamera cam, Batch batch) {
+        this.context = context;
         this.cam = cam;
         this.batch = batch;
         mainTable = new Table();
@@ -34,11 +34,7 @@ public class RendererSplashSystem implements IInitializeSystem, IExecuteSystem, 
         mainTable.addAction(fadeIn(1f));
         stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.addActor(mainTable);
-    }
 
-    @Override
-    public void setPool(SplashPool pool) {
-        this.pool = pool;
     }
 
     @Override
@@ -53,7 +49,7 @@ public class RendererSplashSystem implements IInitializeSystem, IExecuteSystem, 
 
     @Override
     public void initialize() {
-        mainTable.setBackground(new SpriteDrawable(new Sprite(pool.getTextureView().texture)));
+        mainTable.setBackground(new SpriteDrawable(new Sprite(context.getTextureView().texture)));
 
     }
 }
