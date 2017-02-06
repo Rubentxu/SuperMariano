@@ -5,6 +5,9 @@ import com.indignado.games.states.game.component.Character;
 import com.indignado.games.states.game.component.Destroy;
 import com.indignado.games.states.game.component.GameElement;
 import com.indignado.games.states.game.component.Interactive;
+import com.indignado.games.states.game.component.Movable;
+import com.indignado.games.states.game.component.OnGround;
+import com.indignado.games.states.game.component.PlayerInputController;
 import com.indignado.games.states.game.component.RigidBody;
 import com.indignado.games.states.game.component.TextureView;
 
@@ -20,18 +23,23 @@ public class GameComponentIds {
 	public static final int Destroy = 2;
 	public static final int GameElement = 3;
 	public static final int Interactive = 4;
-	public static final int RigidBody = 5;
-	public static final int TextureView = 6;
-	public static final int totalComponents = 7;
+	public static final int Movable = 5;
+	public static final int OnGround = 6;
+	public static final int PlayerInputController = 7;
+	public static final int RigidBody = 8;
+	public static final int TextureView = 9;
+	public static final int totalComponents = 10;
 
 	public static String[] componentNames() {
 		return new String[]{"Animations", "Character", "Destroy",
-				"GameElement", "Interactive", "RigidBody", "TextureView"};
+				"GameElement", "Interactive", "Movable", "OnGround",
+				"PlayerInputController", "RigidBody", "TextureView"};
 	}
 
 	public static Class[] componentTypes() {
 		return new Class[]{Animations.class, Character.class, Destroy.class,
-				GameElement.class, Interactive.class, RigidBody.class,
+				GameElement.class, Interactive.class, Movable.class,
+				OnGround.class, PlayerInputController.class, RigidBody.class,
 				TextureView.class};
 	}
 }

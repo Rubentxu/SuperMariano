@@ -6,6 +6,7 @@ import java.util.Stack;
 import com.indignado.games.states.game.component.Label;
 import com.ilargia.games.entitas.api.IComponent;
 import com.indignado.games.states.game.component.Score;
+import com.indignado.games.states.game.component.TouchPad;
 
 /**
  * ---------------------------------------------------------------------------
@@ -86,6 +87,39 @@ public class GuiEntity extends Entity {
 
 	public GuiEntity removeScore() {
 		removeComponent(GuiComponentIds.Score);
+		return this;
+	}
+
+	public TouchPad getTouchPad() {
+		return (TouchPad) getComponent(GuiComponentIds.TouchPad);
+	}
+
+	public boolean hasTouchPad() {
+		return hasComponent(GuiComponentIds.TouchPad);
+	}
+
+	public GuiEntity addTouchPad(int value) {
+		TouchPad component = (TouchPad) recoverComponent(GuiComponentIds.TouchPad);
+		if (component == null) {
+			component = new TouchPad();
+		}
+		component.value = value;
+		addComponent(GuiComponentIds.TouchPad, component);
+		return this;
+	}
+
+	public GuiEntity replaceTouchPad(int value) {
+		TouchPad component = (TouchPad) recoverComponent(GuiComponentIds.TouchPad);
+		if (component == null) {
+			component = new TouchPad();
+		}
+		component.value = value;
+		replaceComponent(GuiComponentIds.TouchPad, component);
+		return this;
+	}
+
+	public GuiEntity removeTouchPad() {
+		removeComponent(GuiComponentIds.TouchPad);
 		return this;
 	}
 }

@@ -7,17 +7,12 @@ import com.indignado.games.states.game.data.StateCharacter;
 @Component(pools = {"Game"})
 public class Character implements IComponent {
     public StateCharacter currentState;
-    public float maxVelocity;
-    public float jumpForce;
-    public boolean isfacingLeft;
-    public boolean onGround;
+    public boolean facingLeft;
 
-    public Character(StateCharacter currentState, float maxVelocity, float jumpForce, boolean facingLeft, boolean onGround) {
+    public Character(StateCharacter currentState, boolean facingLeft) {
         this.currentState = currentState;
-        this.maxVelocity = maxVelocity;
-        this.jumpForce = jumpForce;
-        this.isfacingLeft = facingLeft;
-        this.onGround = onGround;
+        this.facingLeft = facingLeft;
+
     }
 
 }

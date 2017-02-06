@@ -1,6 +1,7 @@
 package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
+import com.indignado.games.states.game.component.PlayerInputController;
 
 /**
  * ---------------------------------------------------------------------------
@@ -12,5 +13,49 @@ public class GameContext extends com.ilargia.games.entitas.Context<GameEntity> {
 	public GameContext(int totalComponents, int startCreationIndex,
 			ContextInfo contextInfo, FactoryEntity<GameEntity> factoryMethod) {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
+	}
+
+	public GameEntity getPlayerInputControllerEntity() {
+		return getGroup(GameMatcher.PlayerInputController()).getSingleEntity();
+	}
+
+	public PlayerInputController getPlayerInputController() {
+		return getPlayerInputControllerEntity().getPlayerInputController();
+	}
+
+	public boolean hasPlayerInputController() {
+		return getPlayerInputControllerEntity() != null;
+	}
+
+	public GameEntity setPlayerInputController(boolean leftPressed,
+			boolean rightPressed, boolean jumpPressed) {
+		if (hasPlayerInputController()) {
+			throw new EntitasException(
+					"Could not set PlayerInputController!"
+							+ this
+							+ " already has an entity with PlayerInputController!",
+					"You should check if the context already has a PlayerInputControllerEntity before setting it or use context.ReplacePlayerInputController().");
+		}
+		GameEntity entity = createEntity();
+		entity.addPlayerInputController(leftPressed, rightPressed, jumpPressed);
+		return entity;
+	}
+
+	public GameEntity replacePlayerInputController(boolean leftPressed,
+			boolean rightPressed, boolean jumpPressed) {
+		GameEntity entity = getPlayerInputControllerEntity();
+		if (entity == null) {
+			entity = setPlayerInputController(leftPressed, rightPressed,
+					jumpPressed);
+		} else {
+			entity.replacePlayerInputController(leftPressed, rightPressed,
+					jumpPressed);
+		}
+		return entity;
+	}
+
+	public GameContext removePlayerInputController() {
+		destroyEntity(getPlayerInputControllerEntity());
+		return this;
 	}
 }

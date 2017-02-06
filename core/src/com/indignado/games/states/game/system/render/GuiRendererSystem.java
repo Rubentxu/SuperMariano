@@ -1,7 +1,13 @@
-package com.indignado.games.states.game.system;
+package com.indignado.games.states.game.system.render;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.entitas.api.IContext;
+import com.ilargia.games.entitas.api.system.IInitializeSystem;
+import com.ilargia.games.entitas.api.system.IRenderSystem;
 import com.ilargia.games.entitas.collector.Collector;
 import com.ilargia.games.entitas.systems.ReactiveSystem;
 import com.indignado.games.states.game.component.Tiled;
@@ -13,15 +19,24 @@ import com.indignado.games.states.game.gen.SceneMatcher;
 import java.util.List;
 
 
-public class TiledMapSystem extends ReactiveSystem<SceneEntity> {
+public class GuiRendererSystem extends ReactiveSystem<SceneEntity> implements IInitializeSystem, IRenderSystem {
 
-    private EGAssetsManager assetsManager;
+    private Stage stage;
     private SceneContext context;
+    private OrthographicCamera cam;
 
-    public TiledMapSystem(Entitas entitas, EGAssetsManager assetsManager) {
+    public GuiRendererSystem(Entitas entitas, Stage stage) {
         super(entitas.scene);
         this.context = entitas.scene;
-        this.assetsManager = assetsManager;
+        this.stage = stage;
+
+    }
+
+    @Override
+    public void initialize() {
+        this.cam = context.getCamera().camera;
+
+
     }
 
     @Override
@@ -36,8 +51,14 @@ public class TiledMapSystem extends ReactiveSystem<SceneEntity> {
 
     @Override
     protected void execute(List<SceneEntity> gameEntities) {
-        Tiled tiled = context.getTiled();
-        assetsManager.getMap(tiled.tileMapName);
+
     }
+
+    @Override
+    public void render() {
+
+
+    }
+
 
 }

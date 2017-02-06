@@ -11,6 +11,7 @@ public class GuiMatcher {
 
 	private static Matcher _matcherLabel;
 	private static Matcher _matcherScore;
+	private static Matcher _matcherTouchPad;
 
 	public static Matcher Label() {
 		if (_matcherLabel == null) {
@@ -28,5 +29,14 @@ public class GuiMatcher {
 			_matcherScore = matcher;
 		}
 		return _matcherScore;
+	}
+
+	public static Matcher TouchPad() {
+		if (_matcherTouchPad == null) {
+			Matcher matcher = (Matcher) Matcher.AllOf(GuiComponentIds.TouchPad);
+			matcher.componentNames = GuiComponentIds.componentNames();
+			_matcherTouchPad = matcher;
+		}
+		return _matcherTouchPad;
 	}
 }

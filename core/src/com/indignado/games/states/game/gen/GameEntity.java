@@ -13,6 +13,9 @@ import com.indignado.games.states.game.data.StateCharacter;
 import com.indignado.games.states.game.component.Destroy;
 import com.indignado.games.states.game.component.GameElement;
 import com.indignado.games.states.game.component.Interactive;
+import com.indignado.games.states.game.component.Movable;
+import com.indignado.games.states.game.component.OnGround;
+import com.indignado.games.states.game.component.PlayerInputController;
 import com.indignado.games.states.game.component.RigidBody;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.indignado.games.states.game.component.TextureView;
@@ -28,6 +31,7 @@ public class GameEntity extends Entity {
 
 	public Destroy DestroyComponent = new Destroy();
 	public Interactive InteractiveComponent = new Interactive();
+	public OnGround OnGroundComponent = new OnGround();
 
 	public GameEntity(int totalComponents,
 			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
@@ -84,36 +88,26 @@ public class GameEntity extends Entity {
 	}
 
 	public GameEntity addCharacter(StateCharacter currentState,
-			float maxVelocity, float jumpForce, boolean facingLeft,
-			boolean onGround) {
+			boolean facingLeft) {
 		Character component = (Character) recoverComponent(GameComponentIds.Character);
 		if (component == null) {
-			component = new Character(currentState, maxVelocity, jumpForce,
-					facingLeft, onGround);
+			component = new Character(currentState, facingLeft);
 		} else {
 			component.currentState = currentState;;
-			component.maxVelocity = maxVelocity;;
-			component.jumpForce = jumpForce;;
-			component.isfacingLeft = facingLeft;;
-			component.onGround = onGround;
+			component.facingLeft = facingLeft;
 		}
 		addComponent(GameComponentIds.Character, component);
 		return this;
 	}
 
 	public GameEntity replaceCharacter(StateCharacter currentState,
-			float maxVelocity, float jumpForce, boolean facingLeft,
-			boolean onGround) {
+			boolean facingLeft) {
 		Character component = (Character) recoverComponent(GameComponentIds.Character);
 		if (component == null) {
-			component = new Character(currentState, maxVelocity, jumpForce,
-					facingLeft, onGround);
+			component = new Character(currentState, facingLeft);
 		} else {
 			component.currentState = currentState;;
-			component.maxVelocity = maxVelocity;;
-			component.jumpForce = jumpForce;;
-			component.isfacingLeft = facingLeft;;
-			component.onGround = onGround;
+			component.facingLeft = facingLeft;
 		}
 		replaceComponent(GameComponentIds.Character, component);
 		return this;
@@ -184,6 +178,95 @@ public class GameEntity extends Entity {
 				removeComponent(GameComponentIds.Interactive);
 			}
 		}
+		return this;
+	}
+
+	public Movable getMovable() {
+		return (Movable) getComponent(GameComponentIds.Movable);
+	}
+
+	public boolean hasMovable() {
+		return hasComponent(GameComponentIds.Movable);
+	}
+
+	public GameEntity addMovable(float maxVelocity, float jumpForce) {
+		Movable component = (Movable) recoverComponent(GameComponentIds.Movable);
+		if (component == null) {
+			component = new Movable();
+		}
+		component.maxVelocity = maxVelocity;
+		component.jumpForce = jumpForce;
+		addComponent(GameComponentIds.Movable, component);
+		return this;
+	}
+
+	public GameEntity replaceMovable(float maxVelocity, float jumpForce) {
+		Movable component = (Movable) recoverComponent(GameComponentIds.Movable);
+		if (component == null) {
+			component = new Movable();
+		}
+		component.maxVelocity = maxVelocity;
+		component.jumpForce = jumpForce;
+		replaceComponent(GameComponentIds.Movable, component);
+		return this;
+	}
+
+	public GameEntity removeMovable() {
+		removeComponent(GameComponentIds.Movable);
+		return this;
+	}
+
+	public boolean isOnGround() {
+		return hasComponent(GameComponentIds.OnGround);
+	}
+
+	public GameEntity setOnGround(boolean value) {
+		if (value != hasComponent(GameComponentIds.OnGround)) {
+			if (value) {
+				addComponent(GameComponentIds.OnGround, OnGroundComponent);
+			} else {
+				removeComponent(GameComponentIds.OnGround);
+			}
+		}
+		return this;
+	}
+
+	public PlayerInputController getPlayerInputController() {
+		return (PlayerInputController) getComponent(GameComponentIds.PlayerInputController);
+	}
+
+	public boolean hasPlayerInputController() {
+		return hasComponent(GameComponentIds.PlayerInputController);
+	}
+
+	public GameEntity addPlayerInputController(boolean leftPressed,
+			boolean rightPressed, boolean jumpPressed) {
+		PlayerInputController component = (PlayerInputController) recoverComponent(GameComponentIds.PlayerInputController);
+		if (component == null) {
+			component = new PlayerInputController();
+		}
+		component.leftPressed = leftPressed;
+		component.rightPressed = rightPressed;
+		component.jumpPressed = jumpPressed;
+		addComponent(GameComponentIds.PlayerInputController, component);
+		return this;
+	}
+
+	public GameEntity replacePlayerInputController(boolean leftPressed,
+			boolean rightPressed, boolean jumpPressed) {
+		PlayerInputController component = (PlayerInputController) recoverComponent(GameComponentIds.PlayerInputController);
+		if (component == null) {
+			component = new PlayerInputController();
+		}
+		component.leftPressed = leftPressed;
+		component.rightPressed = rightPressed;
+		component.jumpPressed = jumpPressed;
+		replaceComponent(GameComponentIds.PlayerInputController, component);
+		return this;
+	}
+
+	public GameEntity removePlayerInputController() {
+		removeComponent(GameComponentIds.PlayerInputController);
 		return this;
 	}
 

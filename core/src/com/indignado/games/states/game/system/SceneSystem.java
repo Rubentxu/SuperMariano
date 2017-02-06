@@ -55,7 +55,6 @@ public class SceneSystem extends ReactiveSystem<GameEntity> implements IInitiali
     public void initialize() {
         GameWorld world = context.getGameWorld();
         OrthographicCamera camera = context.getCamera().camera;
-        //this.renderer = new OrthogonalTiledMapRenderer(world.getMap(), world.getParser().getUnitScale());
         camera.position.set(world.width / 2, world.height / 2, 0);
         camera.viewportWidth = world.width;
         camera.viewportHeight = world.height;

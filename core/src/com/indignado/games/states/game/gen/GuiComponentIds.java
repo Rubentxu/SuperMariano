@@ -2,6 +2,7 @@ package com.indignado.games.states.game.gen;
 
 import com.indignado.games.states.game.component.Label;
 import com.indignado.games.states.game.component.Score;
+import com.indignado.games.states.game.component.TouchPad;
 
 /**
  * ---------------------------------------------------------------------------
@@ -12,13 +13,14 @@ public class GuiComponentIds {
 
 	public static final int Label = 0;
 	public static final int Score = 1;
-	public static final int totalComponents = 2;
+	public static final int TouchPad = 2;
+	public static final int totalComponents = 3;
 
 	public static String[] componentNames() {
-		return new String[]{"Label", "Score"};
+		return new String[]{"Label", "Score", "TouchPad"};
 	}
 
 	public static Class[] componentTypes() {
-		return new Class[]{Label.class, Score.class};
+		return new Class[]{Label.class, Score.class, TouchPad.class};
 	}
 }
