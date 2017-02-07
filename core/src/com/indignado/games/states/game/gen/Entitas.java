@@ -11,14 +11,23 @@ import com.ilargia.games.entitas.api.*;
  */
 public class Entitas {
 
+	public InputContext input;
 	public GameContext game;
 	public GuiContext gui;
 	public SceneContext scene;
 
 	public Entitas() {
+		input = createInputContext();
 		game = createGameContext();
 		gui = createGuiContext();
 		scene = createSceneContext();
+	}
+
+	public InputContext createInputContext() {
+		return new InputContext(InputComponentIds.totalComponents, 0,
+				new ContextInfo("Input", InputComponentIds.componentNames(),
+						InputComponentIds.componentTypes()),
+				factoryInputEntity());
 	}
 
 	public GameContext createGameContext() {
@@ -41,7 +50,15 @@ public class Entitas {
 	}
 
 	public Context[] allContexts() {
-		return new Context[]{game, gui, scene};
+		return new Context[]{input, game, gui, scene};
+	}
+
+	public FactoryEntity<InputEntity> factoryInputEntity() {
+		return (int totalComponents, Stack<IComponent>[] componentContexts,
+				ContextInfo contextInfo) -> {
+			return new InputEntity(totalComponents, componentContexts,
+					contextInfo);
+		};
 	}
 
 	public FactoryEntity<GameEntity> factoryGameEntity() {

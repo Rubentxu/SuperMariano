@@ -2,7 +2,6 @@ package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
 import com.indignado.games.states.game.component.gui.Score;
-import com.indignado.games.states.game.component.gui.TouchPad;
 
 /**
  * ---------------------------------------------------------------------------
@@ -52,45 +51,6 @@ public class GuiContext extends com.ilargia.games.entitas.Context<GuiEntity> {
 
 	public GuiContext removeScore() {
 		destroyEntity(getScoreEntity());
-		return this;
-	}
-
-	public GuiEntity getTouchPadEntity() {
-		return getGroup(GuiMatcher.TouchPad()).getSingleEntity();
-	}
-
-	public TouchPad getTouchPad() {
-		return getTouchPadEntity().getTouchPad();
-	}
-
-	public boolean hasTouchPad() {
-		return getTouchPadEntity() != null;
-	}
-
-	public GuiEntity setTouchPad(int value) {
-		if (hasTouchPad()) {
-			throw new EntitasException(
-					"Could not set TouchPad!" + this
-							+ " already has an entity with TouchPad!",
-					"You should check if the context already has a TouchPadEntity before setting it or use context.ReplaceTouchPad().");
-		}
-		GuiEntity entity = createEntity();
-		entity.addTouchPad(value);
-		return entity;
-	}
-
-	public GuiEntity replaceTouchPad(int value) {
-		GuiEntity entity = getTouchPadEntity();
-		if (entity == null) {
-			entity = setTouchPad(value);
-		} else {
-			entity.replaceTouchPad(value);
-		}
-		return entity;
-	}
-
-	public GuiContext removeTouchPad() {
-		destroyEntity(getTouchPadEntity());
 		return this;
 	}
 }

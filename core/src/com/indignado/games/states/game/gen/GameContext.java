@@ -1,7 +1,7 @@
 package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
-import com.indignado.games.states.game.component.game.PlayerInputController;
+import com.indignado.games.states.game.component.game.Player;
 
 /**
  * ---------------------------------------------------------------------------
@@ -15,47 +15,44 @@ public class GameContext extends com.ilargia.games.entitas.Context<GameEntity> {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
 	}
 
-	public GameEntity getPlayerInputControllerEntity() {
-		return getGroup(GameMatcher.PlayerInputController()).getSingleEntity();
+	public GameEntity getPlayerEntity() {
+		return getGroup(GameMatcher.Player()).getSingleEntity();
 	}
 
-	public PlayerInputController getPlayerInputController() {
-		return getPlayerInputControllerEntity().getPlayerInputController();
+	public Player getPlayer() {
+		return getPlayerEntity().getPlayer();
 	}
 
-	public boolean hasPlayerInputController() {
-		return getPlayerInputControllerEntity() != null;
+	public boolean hasPlayer() {
+		return getPlayerEntity() != null;
 	}
 
-	public GameEntity setPlayerInputController(boolean leftPressed,
-			boolean rightPressed, boolean jumpPressed) {
-		if (hasPlayerInputController()) {
+	public GameEntity setPlayer(boolean leftPressed, boolean rightPressed,
+			boolean jumpPressed) {
+		if (hasPlayer()) {
 			throw new EntitasException(
-					"Could not set PlayerInputController!"
-							+ this
-							+ " already has an entity with PlayerInputController!",
-					"You should check if the context already has a PlayerInputControllerEntity before setting it or use context.ReplacePlayerInputController().");
+					"Could not set Player!" + this
+							+ " already has an entity with Player!",
+					"You should check if the context already has a PlayerEntity before setting it or use context.ReplacePlayer().");
 		}
 		GameEntity entity = createEntity();
-		entity.addPlayerInputController(leftPressed, rightPressed, jumpPressed);
+		entity.addPlayer(leftPressed, rightPressed, jumpPressed);
 		return entity;
 	}
 
-	public GameEntity replacePlayerInputController(boolean leftPressed,
-			boolean rightPressed, boolean jumpPressed) {
-		GameEntity entity = getPlayerInputControllerEntity();
+	public GameEntity replacePlayer(boolean leftPressed, boolean rightPressed,
+			boolean jumpPressed) {
+		GameEntity entity = getPlayerEntity();
 		if (entity == null) {
-			entity = setPlayerInputController(leftPressed, rightPressed,
-					jumpPressed);
+			entity = setPlayer(leftPressed, rightPressed, jumpPressed);
 		} else {
-			entity.replacePlayerInputController(leftPressed, rightPressed,
-					jumpPressed);
+			entity.replacePlayer(leftPressed, rightPressed, jumpPressed);
 		}
 		return entity;
 	}
 
-	public GameContext removePlayerInputController() {
-		destroyEntity(getPlayerInputControllerEntity());
+	public GameContext removePlayer() {
+		destroyEntity(getPlayerEntity());
 		return this;
 	}
 }

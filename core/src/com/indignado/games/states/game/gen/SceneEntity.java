@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.indignado.games.states.game.component.scene.GameWorld;
 import com.badlogic.gdx.graphics.Color;
 import com.indignado.games.states.game.component.scene.Tiled;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 /**
  * ---------------------------------------------------------------------------

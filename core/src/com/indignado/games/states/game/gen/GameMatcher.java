@@ -16,7 +16,7 @@ public class GameMatcher {
 	private static Matcher _matcherInteractive;
 	private static Matcher _matcherMovable;
 	private static Matcher _matcherOnGround;
-	private static Matcher _matcherPlayerInputController;
+	private static Matcher _matcherPlayer;
 	private static Matcher _matcherRigidBody;
 	private static Matcher _matcherTextureView;
 
@@ -88,14 +88,13 @@ public class GameMatcher {
 		return _matcherOnGround;
 	}
 
-	public static Matcher PlayerInputController() {
-		if (_matcherPlayerInputController == null) {
-			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.PlayerInputController);
+	public static Matcher Player() {
+		if (_matcherPlayer == null) {
+			Matcher matcher = (Matcher) Matcher.AllOf(GameComponentIds.Player);
 			matcher.componentNames = GameComponentIds.componentNames();
-			_matcherPlayerInputController = matcher;
+			_matcherPlayer = matcher;
 		}
-		return _matcherPlayerInputController;
+		return _matcherPlayer;
 	}
 
 	public static Matcher RigidBody() {

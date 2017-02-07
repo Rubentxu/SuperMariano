@@ -15,7 +15,7 @@ import com.indignado.games.states.game.component.game.GameElement;
 import com.indignado.games.states.game.component.game.Interactive;
 import com.indignado.games.states.game.component.game.Movable;
 import com.indignado.games.states.game.component.game.OnGround;
-import com.indignado.games.states.game.component.game.PlayerInputController;
+import com.indignado.games.states.game.component.game.Player;
 import com.indignado.games.states.game.component.game.RigidBody;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.indignado.games.states.game.component.game.TextureView;
@@ -231,42 +231,42 @@ public class GameEntity extends Entity {
 		return this;
 	}
 
-	public PlayerInputController getPlayerInputController() {
-		return (PlayerInputController) getComponent(GameComponentIds.PlayerInputController);
+	public Player getPlayer() {
+		return (Player) getComponent(GameComponentIds.Player);
 	}
 
-	public boolean hasPlayerInputController() {
-		return hasComponent(GameComponentIds.PlayerInputController);
+	public boolean hasPlayer() {
+		return hasComponent(GameComponentIds.Player);
 	}
 
-	public GameEntity addPlayerInputController(boolean leftPressed,
-			boolean rightPressed, boolean jumpPressed) {
-		PlayerInputController component = (PlayerInputController) recoverComponent(GameComponentIds.PlayerInputController);
+	public GameEntity addPlayer(boolean leftPressed, boolean rightPressed,
+			boolean jumpPressed) {
+		Player component = (Player) recoverComponent(GameComponentIds.Player);
 		if (component == null) {
-			component = new PlayerInputController();
+			component = new Player();
 		}
 		component.leftPressed = leftPressed;
 		component.rightPressed = rightPressed;
 		component.jumpPressed = jumpPressed;
-		addComponent(GameComponentIds.PlayerInputController, component);
+		addComponent(GameComponentIds.Player, component);
 		return this;
 	}
 
-	public GameEntity replacePlayerInputController(boolean leftPressed,
-			boolean rightPressed, boolean jumpPressed) {
-		PlayerInputController component = (PlayerInputController) recoverComponent(GameComponentIds.PlayerInputController);
+	public GameEntity replacePlayer(boolean leftPressed, boolean rightPressed,
+			boolean jumpPressed) {
+		Player component = (Player) recoverComponent(GameComponentIds.Player);
 		if (component == null) {
-			component = new PlayerInputController();
+			component = new Player();
 		}
 		component.leftPressed = leftPressed;
 		component.rightPressed = rightPressed;
 		component.jumpPressed = jumpPressed;
-		replaceComponent(GameComponentIds.PlayerInputController, component);
+		replaceComponent(GameComponentIds.Player, component);
 		return this;
 	}
 
-	public GameEntity removePlayerInputController() {
-		removeComponent(GameComponentIds.PlayerInputController);
+	public GameEntity removePlayer() {
+		removeComponent(GameComponentIds.Player);
 		return this;
 	}
 

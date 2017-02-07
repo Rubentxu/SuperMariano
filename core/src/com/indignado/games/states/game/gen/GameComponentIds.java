@@ -7,7 +7,7 @@ import com.indignado.games.states.game.component.game.GameElement;
 import com.indignado.games.states.game.component.game.Interactive;
 import com.indignado.games.states.game.component.game.Movable;
 import com.indignado.games.states.game.component.game.OnGround;
-import com.indignado.games.states.game.component.game.PlayerInputController;
+import com.indignado.games.states.game.component.game.Player;
 import com.indignado.games.states.game.component.game.RigidBody;
 import com.indignado.games.states.game.component.game.TextureView;
 
@@ -25,21 +25,21 @@ public class GameComponentIds {
 	public static final int Interactive = 4;
 	public static final int Movable = 5;
 	public static final int OnGround = 6;
-	public static final int PlayerInputController = 7;
+	public static final int Player = 7;
 	public static final int RigidBody = 8;
 	public static final int TextureView = 9;
 	public static final int totalComponents = 10;
 
 	public static String[] componentNames() {
 		return new String[]{"Animations", "Character", "Destroy",
-				"GameElement", "Interactive", "Movable", "OnGround",
-				"PlayerInputController", "RigidBody", "TextureView"};
+				"GameElement", "Interactive", "Movable", "OnGround", "Player",
+				"RigidBody", "TextureView"};
 	}
 
 	public static Class[] componentTypes() {
 		return new Class[]{Animations.class, Character.class, Destroy.class,
 				GameElement.class, Interactive.class, Movable.class,
-				OnGround.class, PlayerInputController.class, RigidBody.class,
+				OnGround.class, Player.class, RigidBody.class,
 				TextureView.class};
 	}
 }

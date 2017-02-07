@@ -2,6 +2,7 @@ package com.indignado.games.states.game.utils;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.indignado.games.states.game.component.input.PlayerInputController;
+import com.indignado.games.states.game.gen.InputEntity;
 
 import static com.indignado.games.SkinManager.GUI_ATLAS;
 import static com.indignado.games.SkinManager.ScaleUtil;
@@ -24,11 +27,12 @@ public class GuiFactory {
     }
 
 
-    Touchpad createTouchPad(float width, float height) {
+    public Touchpad createTouchPad(float width, float height, InputEntity player) {
         Touchpad touchpad = new Touchpad(10 * ScaleUtil.getSizeRatio(), skin);
         touchpad.setPosition(25 * ScaleUtil.getSizeRatio(), 15);
         touchpad.setWidth(width);
         touchpad.setHeight(height);
+        PlayerInputController stateController = player.getPlayerInputController();
 
         touchpad.addListener(new ChangeListener() {
             @Override
@@ -38,19 +42,26 @@ public class GuiFactory {
                         && ((Touchpad) actor).getKnobPercentX() > -0.5) {
 //                    controller.rightReleased();
 //                    controller.leftReleased();
+                      player.replacePlayerInputController(false, false, stateController.jumpPressed);
                 }
                 if (((Touchpad) actor).getKnobPercentX() > 0.5) {
 //                    controller.rightPressed();
 //                    controller.leftReleased();
+                    player.replacePlayerInputController(false, true, stateController.jumpPressed);
                 }
                 if (((Touchpad) actor).getKnobPercentX() < -0.5) {
 //                    controller.leftPressed();
 //                    controller.rightReleased();
+                    player.replacePlayerInputController(true, false, stateController.jumpPressed);
                 }
                 if (((Touchpad) actor).getKnobPercentY() > 0.5) {
 //                    controller.jumpPressed();
+                    player.replacePlayerInputController(stateController.leftPressed,
+                            stateController.rightPressed, true);
                 } else {
 //                    controller.jumpReleased();
+                    player.replacePlayerInputController(stateController.leftPressed,
+                            stateController.rightPressed, false);
                 }
 
             }
@@ -59,9 +70,10 @@ public class GuiFactory {
         return touchpad;
     }
 
-    Table createPadButtons(float width, float height) {
+    public Table createPadButtons(float width, float height, InputEntity player) {
 
         Table tableControlPad = new Table();
+        PlayerInputController stateController = player.getPlayerInputController();
 
 
         tableControlPad.row().height(height);
@@ -76,6 +88,7 @@ public class GuiFactory {
                 super.touchDown(event, x, y, pointer, button);
 //                controller.leftPressed();
 //                controller.rightReleased();
+                player.replacePlayerInputController(true, false, stateController.jumpPressed);
                 return true;
             }
 
@@ -84,6 +97,7 @@ public class GuiFactory {
                 System.out.println("Event " + event.getType());
                 super.touchUp(event, x, y, pointer, button);
 //                controller.leftReleased();
+                player.replacePlayerInputController(false, stateController.rightPressed, stateController.jumpPressed);
             }
 
             @Override
@@ -93,8 +107,10 @@ public class GuiFactory {
                 if (isOver(event.getListenerActor(), x, y)) {
 //                    controller.rightReleased();
 //                    controller.leftPressed();
+                    player.replacePlayerInputController(true, false, stateController.jumpPressed);
                 } else {
 //                    controller.leftReleased();
+                    player.replacePlayerInputController(false, stateController.rightPressed, stateController.jumpPressed);
                 }
             }
         });
@@ -110,6 +126,7 @@ public class GuiFactory {
                 super.touchDown(event, x, y, pointer, button);
 //                controller.leftReleased();
 //                controller.rightPressed();
+                player.replacePlayerInputController(false, true, stateController.jumpPressed);
                 return true;
             }
 
@@ -118,6 +135,7 @@ public class GuiFactory {
                 System.out.println("Event " + event.getType());
                 super.touchUp(event, x, y, pointer, button);
 //                controller.rightReleased();
+                player.replacePlayerInputController(stateController.leftPressed, false, stateController.jumpPressed);
             }
 
             @Override
@@ -127,8 +145,10 @@ public class GuiFactory {
                 if (isOver(event.getListenerActor(), x, y)) {
 //                    controller.rightPressed();
 //                    controller.leftReleased();
+                    player.replacePlayerInputController(false, true, stateController.jumpPressed);
                 } else {
 //                    controller.rightReleased();
+                    player.replacePlayerInputController(stateController.leftPressed, false, stateController.jumpPressed);
                 }
             }
         });
@@ -142,6 +162,7 @@ public class GuiFactory {
                 System.out.println("Event " + event.getType());
                 super.touchDown(event, x, y, pointer, button);
 //                controller.jumpPressed();
+                player.replacePlayerInputController(stateController.leftPressed, stateController.rightPressed, true);
                 return true;
             }
 
@@ -150,6 +171,7 @@ public class GuiFactory {
                 System.out.println("Event " + event.getType());
                 super.touchUp(event, x, y, pointer, button);
 //                controller.jumpReleased();
+                player.replacePlayerInputController(stateController.leftPressed, stateController.rightPressed, false);
             }
 
             @Override
@@ -158,8 +180,11 @@ public class GuiFactory {
                 super.touchDragged(event, x, y, pointer);
                 if (isOver(event.getListenerActor(), x, y)) {
 //                    controller.jumpPressed();
+                    player.replacePlayerInputController(stateController.leftPressed, stateController.rightPressed, true);
+                    
                 } else {
 //                    controller.jumpReleased();
+                    player.replacePlayerInputController(stateController.leftPressed, stateController.rightPressed, false);
                 }
             }
         });
@@ -168,7 +193,7 @@ public class GuiFactory {
         return tableControlPad;
     }
 
-    Table createScore(float width, float height) {
+    public Table createScore(float width, float height) {
         Table tableProfile = new Table();
         tableProfile.setBounds(0, 0, width, height);
 
