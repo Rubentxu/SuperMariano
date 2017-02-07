@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -19,18 +20,20 @@ import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.Styles;
+import com.indignado.games.SkinManager;
 
 public class MenuState implements GameState {
-    private Styles styles;
+    private final Skin skin;
+    private SkinManager skinManager;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
     private EGAssetsManager assetsManager;
 
-    public MenuState(Styles styles, SMEngine engine) {
-        this.styles = styles;
+    public MenuState(SMEngine engine) {
         this.engine = engine;
+        this.skinManager = engine.getManager(SkinManager.class);
+        this.skin = skinManager.skin;
 
 
     }
@@ -51,15 +54,15 @@ public class MenuState implements GameState {
     @Override
     public void init() {
         Gdx.app.log("Menu", "Init");
-        int pad = (int) (20 * Styles.ScaleUtil.getSizeRatio());
-        int pad2 = (int) (60 * Styles.ScaleUtil.getSizeRatio());
-        final TextButton btnStart = new TextButton("Comenzar", styles.skin);
+        int pad = (int) (20 * SkinManager.ScaleUtil.getSizeRatio());
+        int pad2 = (int) (60 * SkinManager.ScaleUtil.getSizeRatio());
+        final TextButton btnStart = new TextButton("Comenzar", skin);
         btnStart.pad(pad, pad2, pad, pad2);
-        final TextButton btnOptions = new TextButton("Opciones", styles.skin);
+        final TextButton btnOptions = new TextButton("Opciones", skin);
         btnOptions.pad(pad, pad2, pad, pad2);
-        final TextButton btnScores = new TextButton("Puntuaciones", styles.skin);
+        final TextButton btnScores = new TextButton("Puntuaciones", skin);
         btnScores.pad(pad, pad2, pad, pad2);
-        final TextButton button3 = new TextButton("Creditos", styles.skin);
+        final TextButton button3 = new TextButton("Creditos", skin);
         button3.pad(pad, pad2, pad, pad2);
         button3.setChecked(false);
 
@@ -88,7 +91,7 @@ public class MenuState implements GameState {
             }
         });
 
-        Label label = new Label("SUPER MARIANO", styles.skin, "header", Color.CYAN);
+        Label label = new Label("SUPER MARIANO", skin, "header", Color.CYAN);
         label.setAlignment(Align.center, Align.center);
         mainTable.defaults().padBottom(pad);
         if (Gdx.graphics.getHeight() < 480) mainTable.defaults().height(Gdx.graphics.getHeight() / 5f - pad);
@@ -102,7 +105,7 @@ public class MenuState implements GameState {
         mainTable.row();
         mainTable.add(button3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(Styles.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SkinManager.MENU_BACKGROUND))));
         mainTable.row();
 
     }

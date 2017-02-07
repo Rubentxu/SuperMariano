@@ -9,7 +9,7 @@ import com.ilargia.games.entitas.api.system.IInitializeSystem;
 import com.ilargia.games.entitas.api.system.IRenderSystem;
 import com.ilargia.games.entitas.collector.Collector;
 import com.ilargia.games.entitas.systems.ReactiveSystem;
-import com.indignado.games.states.game.component.Tiled;
+import com.indignado.games.states.game.component.scene.Tiled;
 import com.indignado.games.states.game.gen.Entitas;
 import com.indignado.games.states.game.gen.SceneContext;
 import com.indignado.games.states.game.gen.SceneEntity;

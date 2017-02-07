@@ -1,15 +1,15 @@
 package com.indignado.games.states.game.gen;
 
-import com.indignado.games.states.game.component.Animations;
-import com.indignado.games.states.game.component.Character;
-import com.indignado.games.states.game.component.Destroy;
-import com.indignado.games.states.game.component.GameElement;
-import com.indignado.games.states.game.component.Interactive;
-import com.indignado.games.states.game.component.Movable;
-import com.indignado.games.states.game.component.OnGround;
-import com.indignado.games.states.game.component.PlayerInputController;
-import com.indignado.games.states.game.component.RigidBody;
-import com.indignado.games.states.game.component.TextureView;
+import com.indignado.games.states.game.component.game.Animations;
+import com.indignado.games.states.game.component.game.Character;
+import com.indignado.games.states.game.component.game.Destroy;
+import com.indignado.games.states.game.component.game.GameElement;
+import com.indignado.games.states.game.component.game.Interactive;
+import com.indignado.games.states.game.component.game.Movable;
+import com.indignado.games.states.game.component.game.OnGround;
+import com.indignado.games.states.game.component.game.PlayerInputController;
+import com.indignado.games.states.game.component.game.RigidBody;
+import com.indignado.games.states.game.component.game.TextureView;
 
 /**
  * ---------------------------------------------------------------------------

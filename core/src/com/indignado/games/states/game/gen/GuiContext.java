@@ -1,8 +1,8 @@
 package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
-import com.indignado.games.states.game.component.Score;
-import com.indignado.games.states.game.component.TouchPad;
+import com.indignado.games.states.game.component.gui.Score;
+import com.indignado.games.states.game.component.gui.TouchPad;
 
 /**
  * ---------------------------------------------------------------------------

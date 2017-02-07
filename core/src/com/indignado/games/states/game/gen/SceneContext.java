@@ -2,12 +2,12 @@ package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
 import com.badlogic.gdx.graphics.Texture;
-import com.indignado.games.states.game.component.Background;
+import com.indignado.games.states.game.component.scene.Background;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.indignado.games.states.game.component.Camera;
+import com.indignado.games.states.game.component.scene.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.indignado.games.states.game.component.GameWorld;
-import com.indignado.games.states.game.component.Tiled;
+import com.indignado.games.states.game.component.scene.GameWorld;
+import com.indignado.games.states.game.component.scene.Tiled;
 
 /**
  * ---------------------------------------------------------------------------

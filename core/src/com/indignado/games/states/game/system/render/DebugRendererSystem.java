@@ -3,18 +3,12 @@ package com.indignado.games.states.game.system.render;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
 import com.ilargia.games.entitas.api.system.IRenderSystem;
-import com.ilargia.games.entitas.group.Group;
-import com.indignado.games.states.game.component.TextureView;
 import com.indignado.games.states.game.gen.Entitas;
-import com.indignado.games.states.game.gen.GameEntity;
-import com.indignado.games.states.game.gen.GameMatcher;
 
 
 public class DebugRendererSystem implements IInitializeSystem, IRenderSystem{

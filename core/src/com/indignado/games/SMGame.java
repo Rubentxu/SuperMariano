@@ -15,7 +15,7 @@ import net.engio.mbassy.listener.Handler;
 
 public class SMGame extends BaseGame<SMEngine> {
     private MenuState menuState;
-    private Styles styles;
+    private SkinManager skinManager;
     private FadeTransition fadeTransition;
     private OptionsState optionState;
     private ScoresState scoresState;
@@ -25,7 +25,9 @@ public class SMGame extends BaseGame<SMEngine> {
     public SMGame(SMEngine engine, EventBus bus) {
         super(engine, bus);
         ebus.subscribe(this);
-        styles = new Styles(_engine.getManager(EGAssetsManager.class));
+        skinManager = new SkinManager(_engine.getManager(EGAssetsManager.class));
+        _engine.addManager(skinManager);
+
     }
 
     @Handler
@@ -50,7 +52,7 @@ public class SMGame extends BaseGame<SMEngine> {
 
     public MenuState getMenuState() {
         if (menuState == null) {
-            menuState = new MenuState(styles, _engine);
+            menuState = new MenuState(_engine);
         }
         return menuState;
     }
@@ -64,7 +66,7 @@ public class SMGame extends BaseGame<SMEngine> {
 
     public OptionsState getOptionState() {
         if (optionState == null) {
-            optionState = new OptionsState(styles, _engine);
+            optionState = new OptionsState(_engine);
         }
         return optionState;
 
@@ -72,7 +74,7 @@ public class SMGame extends BaseGame<SMEngine> {
 
     public ScoresState getScoresState() {
         if (scoresState == null) {
-            scoresState = new ScoresState(styles, _engine);
+            scoresState = new ScoresState(_engine);
         }
         return scoresState;
     }

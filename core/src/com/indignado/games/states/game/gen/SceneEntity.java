@@ -3,15 +3,14 @@ package com.indignado.games.states.game.gen;
 import com.ilargia.games.entitas.api.*;
 import com.ilargia.games.entitas.Entity;
 import java.util.Stack;
-import com.indignado.games.states.game.component.Background;
+import com.indignado.games.states.game.component.scene.Background;
 import com.badlogic.gdx.graphics.Texture;
 import com.ilargia.games.entitas.api.IComponent;
-import com.indignado.games.states.game.component.Camera;
+import com.indignado.games.states.game.component.scene.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.indignado.games.states.game.component.GameWorld;
+import com.indignado.games.states.game.component.scene.GameWorld;
 import com.badlogic.gdx.graphics.Color;
-import com.indignado.games.states.game.component.Tiled;
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.indignado.games.states.game.component.scene.Tiled;
 
 /**
  * ---------------------------------------------------------------------------

@@ -10,10 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
+import com.ilargia.games.egdx.base.interfaces.managers.Manager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.ISkin;
 
-public class Styles implements ISkin, Disposable {
+public class SkinManager implements ISkin {
 
     public static final String GUI_ATLAS = "gui/gui.pack";
     public static final String GUI_PACK_ATLAS = "gui/gui-pack.pack";
@@ -43,7 +44,7 @@ public class Styles implements ISkin, Disposable {
     public BitmapFont font2;
     public Skin skin;
 
-    public Styles(EGAssetsManager assetsManager) {
+    public SkinManager(EGAssetsManager assetsManager) {
         loadAssets(assetsManager);
         this.skin = createSkin(assetsManager);
     }

@@ -12,7 +12,7 @@ import com.ilargia.games.entitas.factories.Collections;
 import com.ilargia.games.entitas.group.Group;
 import com.ilargia.games.entitas.matcher.Matcher;
 import com.ilargia.games.entitas.systems.ReactiveSystem;
-import com.indignado.games.states.game.component.GameWorld;
+import com.indignado.games.states.game.component.scene.GameWorld;
 import com.indignado.games.states.game.gen.Entitas;
 import com.indignado.games.states.game.gen.GameEntity;
 import com.indignado.games.states.game.gen.GameMatcher;

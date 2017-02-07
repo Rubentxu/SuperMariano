@@ -1,9 +1,9 @@
 package com.indignado.games.states.game.gen;
 
-import com.indignado.games.states.game.component.Background;
-import com.indignado.games.states.game.component.Camera;
-import com.indignado.games.states.game.component.GameWorld;
-import com.indignado.games.states.game.component.Tiled;
+import com.indignado.games.states.game.component.scene.Background;
+import com.indignado.games.states.game.component.scene.Camera;
+import com.indignado.games.states.game.component.scene.GameWorld;
+import com.indignado.games.states.game.component.scene.Tiled;
 
 /**
  * ---------------------------------------------------------------------------

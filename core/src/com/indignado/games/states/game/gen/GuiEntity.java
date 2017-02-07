@@ -3,10 +3,10 @@ package com.indignado.games.states.game.gen;
 import com.ilargia.games.entitas.api.*;
 import com.ilargia.games.entitas.Entity;
 import java.util.Stack;
-import com.indignado.games.states.game.component.Label;
+import com.indignado.games.states.game.component.gui.Label;
 import com.ilargia.games.entitas.api.IComponent;
-import com.indignado.games.states.game.component.Score;
-import com.indignado.games.states.game.component.TouchPad;
+import com.indignado.games.states.game.component.gui.Score;
+import com.indignado.games.states.game.component.gui.TouchPad;
 
 /**
  * ---------------------------------------------------------------------------

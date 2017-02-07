@@ -1,8 +1,8 @@
 package com.indignado.games.states.game.gen;
 
-import com.indignado.games.states.game.component.Label;
-import com.indignado.games.states.game.component.Score;
-import com.indignado.games.states.game.component.TouchPad;
+import com.indignado.games.states.game.component.gui.Label;
+import com.indignado.games.states.game.component.gui.Score;
+import com.indignado.games.states.game.component.gui.TouchPad;
 
 /**
  * ---------------------------------------------------------------------------

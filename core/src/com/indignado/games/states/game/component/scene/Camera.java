@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.component;
+package com.indignado.games.states.game.component.scene;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ilargia.games.entitas.api.IComponent;

@@ -1,7 +1,7 @@
 package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
-import com.indignado.games.states.game.component.PlayerInputController;
+import com.indignado.games.states.game.component.game.PlayerInputController;
 
 /**
  * ---------------------------------------------------------------------------

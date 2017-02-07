@@ -1,16 +1,12 @@
 package com.indignado.games.states.game.system.render;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.entitas.api.IContext;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
 import com.ilargia.games.entitas.api.system.IRenderSystem;
 import com.ilargia.games.entitas.collector.Collector;
 import com.ilargia.games.entitas.systems.ReactiveSystem;
-import com.indignado.games.states.game.component.Tiled;
 import com.indignado.games.states.game.gen.Entitas;
 import com.indignado.games.states.game.gen.SceneContext;
 import com.indignado.games.states.game.gen.SceneEntity;

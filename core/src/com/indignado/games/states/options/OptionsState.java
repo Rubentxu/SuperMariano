@@ -21,21 +21,21 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.Styles;
+import com.indignado.games.SkinManager;
 
 public class OptionsState implements GameState {
     private Label volumeValueSound;
     private Label volumeValueMusic;
     private EGPreferencesManager preferencesManager;
     private ProfileManager<Profile> profileManager;
-    private Styles styles;
+    private Skin skin;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
     private EGAssetsManager assetsManager;
 
-    public OptionsState(Styles styles, SMEngine engine) {
-        this.styles = styles;
+    public OptionsState(SMEngine engine) {
+        this.skin = engine.getManager(SkinManager.class).skin;
         this.engine = engine;
         this.preferencesManager = engine.getManager(EGPreferencesManager.class);
         this.profileManager = engine.getManager(ProfileManager.class);
@@ -58,16 +58,16 @@ public class OptionsState implements GameState {
     public void init() {
         Gdx.app.log("OptionState", "Init");
         preferencesManager.load();
-        Label label = new Label("Opciones del Juego", styles.skin, "header", Color.ORANGE);
+        Label label = new Label("Opciones del Juego", skin, "header", Color.ORANGE);
         label.setAlignment(Align.center, Align.center);
         mainTable.setFillParent(true);
-        mainTable.defaults().pad(6 * Styles.ScaleUtil.getSizeRatio());
-        mainTable.defaults().padLeft(50 * Styles.ScaleUtil.getSizeRatio());
+        mainTable.defaults().pad(6 * SkinManager.ScaleUtil.getSizeRatio());
+        mainTable.defaults().padLeft(50 * SkinManager.ScaleUtil.getSizeRatio());
         mainTable.add(label).colspan(3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(Styles.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SkinManager.MENU_BACKGROUND))));
 
-        final CheckBox musicCheckbox = new CheckBox(" Music", styles.skin);
+        final CheckBox musicCheckbox = new CheckBox(" Music", skin);
         musicCheckbox.align(Align.left);
         musicCheckbox.setChecked(preferencesManager.MUSIC);
         musicCheckbox.addListener(new ClickListener() {
@@ -75,12 +75,12 @@ public class OptionsState implements GameState {
             public void clicked(InputEvent event, float x, float y) {
                 boolean enabled = musicCheckbox.isChecked();
                 preferencesManager.MUSIC = enabled;
-                assetsManager.playMusic(Styles.MUSIC_MENU);
+                assetsManager.playMusic(SkinManager.MUSIC_MENU);
             }
         });
         mainTable.add(musicCheckbox);
 
-        Slider volumeSliderMusic = new Slider(0f, 1f, 0.1f, false, styles.skin);
+        Slider volumeSliderMusic = new Slider(0f, 1f, 0.1f, false, skin);
         volumeSliderMusic.setValue(preferencesManager.VOL_MUSIC);
         volumeSliderMusic.addListener(new ChangeListener() {
             @Override
@@ -94,13 +94,13 @@ public class OptionsState implements GameState {
         });
         mainTable.add(volumeSliderMusic);
 
-        volumeValueMusic = new Label(" Volume ", styles.skin);
+        volumeValueMusic = new Label(" Volume ", skin);
         updateVolumeLabelMusic();
         mainTable.add(volumeValueMusic);
         mainTable.row();
 
 
-        final CheckBox soundCheckbox = new CheckBox(" Sound", styles.skin);
+        final CheckBox soundCheckbox = new CheckBox(" Sound", skin);
         soundCheckbox.align(Align.left);
         soundCheckbox.setChecked(preferencesManager.SOUND);
         soundCheckbox.addListener(new ClickListener() {
@@ -114,7 +114,7 @@ public class OptionsState implements GameState {
         mainTable.add(soundCheckbox);
 
 
-        Slider volumeSliderSound = new Slider(0f, 1f, 0.1f, false, styles.skin);
+        Slider volumeSliderSound = new Slider(0f, 1f, 0.1f, false, skin);
         volumeSliderSound.setValue(preferencesManager.VOL_SOUND);
         volumeSliderSound.addListener(new ChangeListener() {
             @Override
@@ -128,12 +128,12 @@ public class OptionsState implements GameState {
         });
         mainTable.add(volumeSliderSound);
 
-        volumeValueSound = new Label(" Volume ", styles.skin);
+        volumeValueSound = new Label(" Volume ", skin);
         updateVolumeLabelSound();
         mainTable.add(volumeValueSound);
         mainTable.row();
 
-        final CheckBox touchPadCheckbox = new CheckBox(" TouchPad Control", styles.skin);
+        final CheckBox touchPadCheckbox = new CheckBox(" TouchPad Control", skin);
         touchPadCheckbox.align(Align.left);
         touchPadCheckbox.setChecked(preferencesManager.TOUCH_PAD_ENABLED);
         touchPadCheckbox.addListener(new ClickListener() {
@@ -147,7 +147,7 @@ public class OptionsState implements GameState {
         mainTable.row();
 
 
-        TextButton backButton = new TextButton("Volver Menu", styles.skin);
+        TextButton backButton = new TextButton("Volver Menu", skin);
         backButton.pad(20);
         backButton.addListener(new ClickListener() {
             @Override

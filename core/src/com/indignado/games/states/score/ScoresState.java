@@ -17,13 +17,13 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.Styles;
-import com.indignado.games.states.game.component.Level;
+import com.indignado.games.SkinManager;
+import com.indignado.games.states.game.component.scene.Level;
 import com.indignado.games.states.options.Profile;
 
 public class ScoresState implements GameState {
     private ProfileManager<Profile> profileManager;
-    private Styles styles;
+    private Skin skin;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
@@ -35,8 +35,8 @@ public class ScoresState implements GameState {
     private int kills;
     private int stars;
 
-    public ScoresState(Styles styles, SMEngine engine) {
-        this.styles = styles;
+    public ScoresState(SMEngine engine) {
+        this.skin = engine.getManager(SkinManager.class).skin;
         this.engine = engine;
         this.profileManager = engine.getManager(EGProfileManager.class);
         this.assetsManager = engine.getManager(EGAssetsManager.class);
@@ -62,9 +62,7 @@ public class ScoresState implements GameState {
         kills = profile.getKills();
         stars = profile.getStarAquired();
 
-        Skin skin = styles.skin;
-
-        mainTable.defaults().spaceBottom(50 * Styles.ScaleUtil.getSizeRatio());
+        mainTable.defaults().spaceBottom(50 * SkinManager.ScaleUtil.getSizeRatio());
         mainTable.setFillParent(true);
 
         Label killsLabel = new Label("Kills: ", skin);
