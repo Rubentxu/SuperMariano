@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
@@ -39,7 +38,7 @@ public abstract class BaseScreen implements Screen {
     protected Styles styles;
     protected OrthographicCamera camera;
     protected Stage stage;
-    protected StateMachine<BaseGame,GameState> gameStateMachine;
+    protected StateMachine<BaseGame, GameState> gameStateMachine;
     protected IAudioService audioService;
     protected ILevelService levelService;
     protected PreferencesService preferencesService;

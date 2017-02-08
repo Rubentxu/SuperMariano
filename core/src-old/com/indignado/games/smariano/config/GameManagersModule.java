@@ -18,7 +18,7 @@ public class GameManagersModule {
 
     @Provides
     @Singleton
-    CheckPointManager provideCheckPointManager(StateMachine<BaseGame,GameState> stateMachine) {
+    CheckPointManager provideCheckPointManager(StateMachine<BaseGame, GameState> stateMachine) {
         return new CheckPointManager(stateMachine);
     }
 

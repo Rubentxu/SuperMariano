@@ -32,6 +32,7 @@ public class GameEntity extends Entity {
 	public Destroy DestroyComponent = new Destroy();
 	public Interactive InteractiveComponent = new Interactive();
 	public OnGround OnGroundComponent = new OnGround();
+	public Player PlayerComponent = new Player();
 
 	public GameEntity(int totalComponents,
 			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
@@ -141,22 +142,24 @@ public class GameEntity extends Entity {
 		return hasComponent(GameComponentIds.GameElement);
 	}
 
-	public GameEntity addGameElement(String type) {
+	public GameEntity addGameElement(String type, String tags) {
 		GameElement component = (GameElement) recoverComponent(GameComponentIds.GameElement);
 		if (component == null) {
 			component = new GameElement();
 		}
 		component.type = type;
+		component.tags = tags;
 		addComponent(GameComponentIds.GameElement, component);
 		return this;
 	}
 
-	public GameEntity replaceGameElement(String type) {
+	public GameEntity replaceGameElement(String type, String tags) {
 		GameElement component = (GameElement) recoverComponent(GameComponentIds.GameElement);
 		if (component == null) {
 			component = new GameElement();
 		}
 		component.type = type;
+		component.tags = tags;
 		replaceComponent(GameComponentIds.GameElement, component);
 		return this;
 	}
@@ -231,42 +234,18 @@ public class GameEntity extends Entity {
 		return this;
 	}
 
-	public Player getPlayer() {
-		return (Player) getComponent(GameComponentIds.Player);
-	}
-
-	public boolean hasPlayer() {
+	public boolean isPlayer() {
 		return hasComponent(GameComponentIds.Player);
 	}
 
-	public GameEntity addPlayer(boolean leftPressed, boolean rightPressed,
-			boolean jumpPressed) {
-		Player component = (Player) recoverComponent(GameComponentIds.Player);
-		if (component == null) {
-			component = new Player();
+	public GameEntity setPlayer(boolean value) {
+		if (value != hasComponent(GameComponentIds.Player)) {
+			if (value) {
+				addComponent(GameComponentIds.Player, PlayerComponent);
+			} else {
+				removeComponent(GameComponentIds.Player);
+			}
 		}
-		component.leftPressed = leftPressed;
-		component.rightPressed = rightPressed;
-		component.jumpPressed = jumpPressed;
-		addComponent(GameComponentIds.Player, component);
-		return this;
-	}
-
-	public GameEntity replacePlayer(boolean leftPressed, boolean rightPressed,
-			boolean jumpPressed) {
-		Player component = (Player) recoverComponent(GameComponentIds.Player);
-		if (component == null) {
-			component = new Player();
-		}
-		component.leftPressed = leftPressed;
-		component.rightPressed = rightPressed;
-		component.jumpPressed = jumpPressed;
-		replaceComponent(GameComponentIds.Player, component);
-		return this;
-	}
-
-	public GameEntity removePlayer() {
-		removeComponent(GameComponentIds.Player);
 		return this;
 	}
 

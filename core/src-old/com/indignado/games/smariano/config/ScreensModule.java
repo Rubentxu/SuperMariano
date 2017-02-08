@@ -24,8 +24,8 @@ public class ScreensModule {
 
     @Provides
     @Singleton
-    StateMachine<BaseGame,GameState> provideGameStateMachine(BaseGame game) {
-        return new DefaultStateMachine<BaseGame,GameState>(game, GameState.RUNNING);
+    StateMachine<BaseGame, GameState> provideGameStateMachine(BaseGame game) {
+        return new DefaultStateMachine<BaseGame, GameState>(game, GameState.RUNNING);
 
     }
 

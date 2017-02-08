@@ -6,7 +6,6 @@ import java.util.Stack;
 import com.indignado.games.states.game.component.input.PadButtons;
 import com.ilargia.games.entitas.api.IComponent;
 import com.indignado.games.states.game.component.input.PlayerInputController;
-import com.indignado.games.states.game.data.StateCharacter;
 import com.indignado.games.states.game.component.input.TouchPad;
 
 /**

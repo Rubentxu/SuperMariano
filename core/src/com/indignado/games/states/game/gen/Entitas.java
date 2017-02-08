@@ -15,12 +15,14 @@ public class Entitas {
 	public GameContext game;
 	public GuiContext gui;
 	public SceneContext scene;
+	public ActuatorContext actuator;
 
 	public Entitas() {
 		input = createInputContext();
 		game = createGameContext();
 		gui = createGuiContext();
 		scene = createSceneContext();
+		actuator = createActuatorContext();
 	}
 
 	public InputContext createInputContext() {
@@ -49,8 +51,16 @@ public class Entitas {
 				factorySceneEntity());
 	}
 
+	public ActuatorContext createActuatorContext() {
+		return new ActuatorContext(ActuatorComponentIds.totalComponents, 0,
+				new ContextInfo("Actuator", ActuatorComponentIds
+						.componentNames(), ActuatorComponentIds
+						.componentTypes()),
+				factoryActuatorEntity());
+	}
+
 	public Context[] allContexts() {
-		return new Context[]{input, game, gui, scene};
+		return new Context[]{input, game, gui, scene, actuator};
 	}
 
 	public FactoryEntity<InputEntity> factoryInputEntity() {
@@ -81,6 +91,14 @@ public class Entitas {
 		return (int totalComponents, Stack<IComponent>[] componentContexts,
 				ContextInfo contextInfo) -> {
 			return new SceneEntity(totalComponents, componentContexts,
+					contextInfo);
+		};
+	}
+
+	public FactoryEntity<ActuatorEntity> factoryActuatorEntity() {
+		return (int totalComponents, Stack<IComponent>[] componentContexts,
+				ContextInfo contextInfo) -> {
+			return new ActuatorEntity(totalComponents, componentContexts,
 					contextInfo);
 		};
 	}

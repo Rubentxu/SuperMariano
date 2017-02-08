@@ -2,7 +2,6 @@ package com.indignado.games.states.game.utils;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -42,7 +41,7 @@ public class GuiFactory {
                         && ((Touchpad) actor).getKnobPercentX() > -0.5) {
 //                    controller.rightReleased();
 //                    controller.leftReleased();
-                      player.replacePlayerInputController(false, false, stateController.jumpPressed);
+                    player.replacePlayerInputController(false, false, stateController.jumpPressed);
                 }
                 if (((Touchpad) actor).getKnobPercentX() > 0.5) {
 //                    controller.rightPressed();
@@ -181,7 +180,7 @@ public class GuiFactory {
                 if (isOver(event.getListenerActor(), x, y)) {
 //                    controller.jumpPressed();
                     player.replacePlayerInputController(stateController.leftPressed, stateController.rightPressed, true);
-                    
+
                 } else {
 //                    controller.jumpReleased();
                     player.replacePlayerInputController(stateController.leftPressed, stateController.rightPressed, false);

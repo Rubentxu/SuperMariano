@@ -6,4 +6,5 @@ import com.ilargia.games.entitas.codeGenerator.Component;
 @Component(pools = {"Game"})
 public class GameElement implements IComponent {
     public String type;
+    public String tags;
 }

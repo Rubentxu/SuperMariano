@@ -11,7 +11,7 @@ import com.ilargia.games.entitas.api.system.IRenderSystem;
 import com.indignado.games.states.game.gen.Entitas;
 
 
-public class DebugRendererSystem implements IInitializeSystem, IRenderSystem{
+public class DebugRendererSystem implements IInitializeSystem, IRenderSystem {
 
     // Debug
     public static boolean TESTING = true;

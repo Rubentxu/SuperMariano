@@ -1,7 +1,6 @@
 package com.indignado.games.smariano.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.World;

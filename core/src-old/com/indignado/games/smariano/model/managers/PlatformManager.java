@@ -2,7 +2,6 @@ package com.indignado.games.smariano.model.managers;
 
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
 import com.indignado.games.smariano.model.entities.Hero;
 import com.indignado.games.smariano.model.entities.Hero.StateHero;
 import com.indignado.games.smariano.model.entities.MovingPlatform;

@@ -55,7 +55,7 @@ public class ResourceService implements Disposable, IResourcesService {
 
 
     public void finishLoading() {
-                                                                          GameLogger.info("ResourcesManager", "Finish Loading Assets: ");
+        GameLogger.info("ResourcesManager", "Finish Loading Assets: ");
         assetManager.finishLoading();
 
     }

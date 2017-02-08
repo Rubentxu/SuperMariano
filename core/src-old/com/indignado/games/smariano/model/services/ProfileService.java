@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 public class ProfileService implements IProfileService {
     @Inject
-    public StateMachine<BaseGame,GameState> gameStateMachine;
+    public StateMachine<BaseGame, GameState> gameStateMachine;
     private Profile profile;
 
 

@@ -19,11 +19,11 @@ import javax.inject.Inject;
 
 
 public class CheckPointManager extends AbstractWorldManager {
-    private StateMachine<BaseGame,GameState> gameStateMachine;
+    private StateMachine<BaseGame, GameState> gameStateMachine;
 
 
     @Inject
-    public CheckPointManager(StateMachine<BaseGame,GameState> gameStateMachine) {
+    public CheckPointManager(StateMachine<BaseGame, GameState> gameStateMachine) {
         this.gameStateMachine = gameStateMachine;
     }
 

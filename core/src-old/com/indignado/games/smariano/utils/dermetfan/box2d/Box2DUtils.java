@@ -17,7 +17,6 @@
 package com.indignado.games.smariano.utils.dermetfan.box2d;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.Shape.Type;
 import com.badlogic.gdx.utils.ObjectMap;
 

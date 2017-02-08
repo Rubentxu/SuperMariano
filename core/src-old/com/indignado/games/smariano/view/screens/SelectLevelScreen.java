@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Align;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.config.constantes.Env;
 import com.indignado.games.smariano.model.entities.Level;
@@ -15,10 +16,9 @@ import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.model.services.ResourceService;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
 import com.indignado.games.smariano.utils.gui.mtx.ButtonLevel;
-import com.badlogic.gdx.utils.Align;
+
 import javax.inject.Inject;
 import java.util.List;
-import com.badlogic.gdx.utils.Align;
 
 public class SelectLevelScreen extends BaseScreen {
 

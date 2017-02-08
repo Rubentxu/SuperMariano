@@ -417,7 +417,7 @@ public abstract class BayazitDecomposer {
                 return distancePointPoint(p, A);
             if (r >= 1.0)
                 return distancePointPoint(p, B);
-			/*
+            /*
 			 * (2) (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay) s = -----------------------------
 			 * Curve^2 Then the distance from C to Point = |s|*Curve.
 			 */

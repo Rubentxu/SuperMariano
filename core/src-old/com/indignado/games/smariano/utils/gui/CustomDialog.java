@@ -15,7 +15,7 @@ import javax.inject.Inject;
 
 public class CustomDialog extends Window {
     @Inject
-    public StateMachine<BaseGame,GameState> gameStateMachine;
+    public StateMachine<BaseGame, GameState> gameStateMachine;
 
     private Skin skin;
 

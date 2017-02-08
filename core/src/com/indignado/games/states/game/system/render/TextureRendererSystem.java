@@ -14,7 +14,7 @@ import com.indignado.games.states.game.gen.GameEntity;
 import com.indignado.games.states.game.gen.GameMatcher;
 
 
-public class TextureRendererSystem implements IInitializeSystem, IRenderSystem{
+public class TextureRendererSystem implements IInitializeSystem, IRenderSystem {
 
     private Entitas entitas;
     private OrthographicCamera cam;

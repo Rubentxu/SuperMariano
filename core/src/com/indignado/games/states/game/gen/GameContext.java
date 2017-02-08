@@ -1,7 +1,6 @@
 package com.indignado.games.states.game.gen;
 
 import com.ilargia.games.entitas.api.*;
-import com.indignado.games.states.game.component.game.Player;
 
 /**
  * ---------------------------------------------------------------------------
@@ -19,40 +18,19 @@ public class GameContext extends com.ilargia.games.entitas.Context<GameEntity> {
 		return getGroup(GameMatcher.Player()).getSingleEntity();
 	}
 
-	public Player getPlayer() {
-		return getPlayerEntity().getPlayer();
-	}
-
-	public boolean hasPlayer() {
+	public boolean isPlayer() {
 		return getPlayerEntity() != null;
 	}
 
-	public GameEntity setPlayer(boolean leftPressed, boolean rightPressed,
-			boolean jumpPressed) {
-		if (hasPlayer()) {
-			throw new EntitasException(
-					"Could not set Player!" + this
-							+ " already has an entity with Player!",
-					"You should check if the context already has a PlayerEntity before setting it or use context.ReplacePlayer().");
-		}
-		GameEntity entity = createEntity();
-		entity.addPlayer(leftPressed, rightPressed, jumpPressed);
-		return entity;
-	}
-
-	public GameEntity replacePlayer(boolean leftPressed, boolean rightPressed,
-			boolean jumpPressed) {
+	public GameContext setPlayer(boolean value) {
 		GameEntity entity = getPlayerEntity();
-		if (entity == null) {
-			entity = setPlayer(leftPressed, rightPressed, jumpPressed);
-		} else {
-			entity.replacePlayer(leftPressed, rightPressed, jumpPressed);
+		if (value != (entity != null)) {
+			if (value) {
+				entity.setPlayer(true);
+			} else {
+				destroyEntity(entity);
+			}
 		}
-		return entity;
-	}
-
-	public GameContext removePlayer() {
-		destroyEntity(getPlayerEntity());
 		return this;
 	}
 }

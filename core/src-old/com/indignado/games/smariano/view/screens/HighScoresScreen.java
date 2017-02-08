@@ -5,11 +5,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.indignado.games.smariano.BaseGame;
 import com.indignado.games.smariano.model.entities.Profile;
 import com.indignado.games.smariano.model.fms.GameState;
 import com.indignado.games.smariano.utils.gui.ScaleUtil;
-import com.badlogic.gdx.utils.Align;
 
 import javax.inject.Inject;
 
