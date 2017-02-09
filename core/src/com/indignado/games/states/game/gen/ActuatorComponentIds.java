@@ -1,6 +1,9 @@
 package com.indignado.games.states.game.gen;
 
 import com.indignado.games.states.game.component.actuator.CameraActuator;
+import com.indignado.games.states.game.component.actuator.CharacterActuator;
+import com.indignado.games.states.game.component.actuator.TextureActuator;
+import com.indignado.games.states.game.component.actuator.VelocityActuator;
 
 /**
  * ---------------------------------------------------------------------------
@@ -10,13 +13,18 @@ import com.indignado.games.states.game.component.actuator.CameraActuator;
 public class ActuatorComponentIds {
 
 	public static final int CameraActuator = 0;
-	public static final int totalComponents = 1;
+	public static final int CharacterActuator = 1;
+	public static final int TextureActuator = 2;
+	public static final int VelocityActuator = 3;
+	public static final int totalComponents = 4;
 
 	public static String[] componentNames() {
-		return new String[]{"CameraActuator"};
+		return new String[]{"CameraActuator", "CharacterActuator",
+				"TextureActuator", "VelocityActuator"};
 	}
 
 	public static Class[] componentTypes() {
-		return new Class[]{CameraActuator.class};
+		return new Class[]{CameraActuator.class, CharacterActuator.class,
+				TextureActuator.class, VelocityActuator.class};
 	}
 }

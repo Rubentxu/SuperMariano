@@ -8,7 +8,6 @@ import com.indignado.games.states.game.data.Bounds;
 
 @Component(pools = {"Game"})
 public class TextureView implements IComponent {
-    public String name;
     public TextureRegion texture;
     public Bounds bounds;
     public boolean flipX;
@@ -17,9 +16,8 @@ public class TextureView implements IComponent {
     public int layer;
     public Color tint;
 
-    public TextureView(String name, TextureRegion texture, Bounds bounds, boolean flipX, boolean flipY,
+    public TextureView(TextureRegion texture, Bounds bounds, boolean flipX, boolean flipY,
                        int opacity, int layer, Color tint) {
-        this.name = name;
         this.texture = texture;
         this.bounds = bounds;
         this.flipX = flipX;

@@ -88,28 +88,28 @@ public class GameEntity extends Entity {
 		return hasComponent(GameComponentIds.Character);
 	}
 
-	public GameEntity addCharacter(StateCharacter currentState,
+	public GameEntity addCharacter(String tag, StateCharacter currentState,
 			boolean facingLeft) {
 		Character component = (Character) recoverComponent(GameComponentIds.Character);
 		if (component == null) {
-			component = new Character(currentState, facingLeft);
-		} else {
-			component.currentState = currentState;;
-			component.facingLeft = facingLeft;
+			component = new Character();
 		}
+		component.tag = tag;
+		component.currentState = currentState;
+		component.facingLeft = facingLeft;
 		addComponent(GameComponentIds.Character, component);
 		return this;
 	}
 
-	public GameEntity replaceCharacter(StateCharacter currentState,
+	public GameEntity replaceCharacter(String tag, StateCharacter currentState,
 			boolean facingLeft) {
 		Character component = (Character) recoverComponent(GameComponentIds.Character);
 		if (component == null) {
-			component = new Character(currentState, facingLeft);
-		} else {
-			component.currentState = currentState;;
-			component.facingLeft = facingLeft;
+			component = new Character();
 		}
+		component.tag = tag;
+		component.currentState = currentState;
+		component.facingLeft = facingLeft;
 		replaceComponent(GameComponentIds.Character, component);
 		return this;
 	}
@@ -290,15 +290,13 @@ public class GameEntity extends Entity {
 		return hasComponent(GameComponentIds.TextureView);
 	}
 
-	public GameEntity addTextureView(String name, TextureRegion texture,
-			Bounds bounds, boolean flipX, boolean flipY, int opacity,
-			int layer, Color tint) {
+	public GameEntity addTextureView(TextureRegion texture, Bounds bounds,
+			boolean flipX, boolean flipY, int opacity, int layer, Color tint) {
 		TextureView component = (TextureView) recoverComponent(GameComponentIds.TextureView);
 		if (component == null) {
-			component = new TextureView(name, texture, bounds, flipX, flipY,
-					opacity, layer, tint);
+			component = new TextureView(texture, bounds, flipX, flipY, opacity,
+					layer, tint);
 		} else {
-			component.name = name;;
 			component.texture = texture;;
 			component.bounds = bounds;;
 			component.flipX = flipX;;
@@ -311,15 +309,13 @@ public class GameEntity extends Entity {
 		return this;
 	}
 
-	public GameEntity replaceTextureView(String name, TextureRegion texture,
-			Bounds bounds, boolean flipX, boolean flipY, int opacity,
-			int layer, Color tint) {
+	public GameEntity replaceTextureView(TextureRegion texture, Bounds bounds,
+			boolean flipX, boolean flipY, int opacity, int layer, Color tint) {
 		TextureView component = (TextureView) recoverComponent(GameComponentIds.TextureView);
 		if (component == null) {
-			component = new TextureView(name, texture, bounds, flipX, flipY,
-					opacity, layer, tint);
+			component = new TextureView(texture, bounds, flipX, flipY, opacity,
+					layer, tint);
 		} else {
-			component.name = name;;
 			component.texture = texture;;
 			component.bounds = bounds;;
 			component.flipX = flipX;;

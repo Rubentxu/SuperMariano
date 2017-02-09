@@ -6,13 +6,8 @@ import com.indignado.games.states.game.data.StateCharacter;
 
 @Component(pools = {"Game"})
 public class Character implements IComponent {
+    public String tag;
     public StateCharacter currentState;
     public boolean facingLeft;
-
-    public Character(StateCharacter currentState, boolean facingLeft) {
-        this.currentState = currentState;
-        this.facingLeft = facingLeft;
-
-    }
 
 }

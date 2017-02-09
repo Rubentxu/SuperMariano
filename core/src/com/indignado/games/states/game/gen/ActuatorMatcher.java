@@ -10,6 +10,9 @@ import com.ilargia.games.entitas.matcher.Matcher;
 public class ActuatorMatcher {
 
 	private static Matcher _matcherCameraActuator;
+	private static Matcher _matcherCharacterActuator;
+	private static Matcher _matcherTextureActuator;
+	private static Matcher _matcherVelocityActuator;
 
 	public static Matcher CameraActuator() {
 		if (_matcherCameraActuator == null) {
@@ -19,5 +22,35 @@ public class ActuatorMatcher {
 			_matcherCameraActuator = matcher;
 		}
 		return _matcherCameraActuator;
+	}
+
+	public static Matcher CharacterActuator() {
+		if (_matcherCharacterActuator == null) {
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(ActuatorComponentIds.CharacterActuator);
+			matcher.componentNames = ActuatorComponentIds.componentNames();
+			_matcherCharacterActuator = matcher;
+		}
+		return _matcherCharacterActuator;
+	}
+
+	public static Matcher TextureActuator() {
+		if (_matcherTextureActuator == null) {
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(ActuatorComponentIds.TextureActuator);
+			matcher.componentNames = ActuatorComponentIds.componentNames();
+			_matcherTextureActuator = matcher;
+		}
+		return _matcherTextureActuator;
+	}
+
+	public static Matcher VelocityActuator() {
+		if (_matcherVelocityActuator == null) {
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(ActuatorComponentIds.VelocityActuator);
+			matcher.componentNames = ActuatorComponentIds.componentNames();
+			_matcherVelocityActuator = matcher;
+		}
+		return _matcherVelocityActuator;
 	}
 }
