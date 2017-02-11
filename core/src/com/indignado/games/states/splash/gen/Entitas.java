@@ -2,7 +2,7 @@ package com.indignado.games.states.splash.gen;
 
 import com.ilargia.games.entitas.Context;
 import com.ilargia.games.entitas.api.ContextInfo;
-import com.ilargia.games.entitas.api.FactoryEntity;
+import com.ilargia.games.entitas.api.EntityBaseFactory;
 import com.ilargia.games.entitas.api.IComponent;
 
 import java.util.Stack;
@@ -31,7 +31,7 @@ public class Entitas {
         return new Context[]{splash};
     }
 
-    public FactoryEntity<SplashEntity> factorySplashEntity() {
+    public EntityBaseFactory<SplashEntity> factorySplashEntity() {
         return (int totalComponents, Stack<IComponent>[] componentContexts,
                 ContextInfo contextInfo) -> {
             return new SplashEntity(totalComponents, componentContexts,

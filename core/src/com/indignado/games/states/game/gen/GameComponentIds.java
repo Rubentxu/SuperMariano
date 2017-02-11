@@ -3,7 +3,7 @@ package com.indignado.games.states.game.gen;
 import com.indignado.games.states.game.component.game.Animations;
 import com.indignado.games.states.game.component.game.Character;
 import com.indignado.games.states.game.component.game.Destroy;
-import com.indignado.games.states.game.component.game.GameElement;
+import com.indignado.games.states.game.component.game.Element;
 import com.indignado.games.states.game.component.game.Interactive;
 import com.indignado.games.states.game.component.game.Movable;
 import com.indignado.games.states.game.component.game.OnGround;
@@ -32,13 +32,13 @@ public class GameComponentIds {
 
 	public static String[] componentNames() {
 		return new String[]{"Animations", "Character", "Destroy",
-				"GameElement", "Interactive", "Movable", "OnGround", "Player",
+				"Element", "Interactive", "Movable", "OnGround", "Player",
 				"RigidBody", "TextureView"};
 	}
 
 	public static Class[] componentTypes() {
 		return new Class[]{Animations.class, Character.class, Destroy.class,
-				GameElement.class, Interactive.class, Movable.class,
+				Element.class, Interactive.class, Movable.class,
 				OnGround.class, Player.class, RigidBody.class,
 				TextureView.class};
 	}

@@ -13,7 +13,7 @@ public class InputContext
 			com.ilargia.games.entitas.Context<InputEntity> {
 
 	public InputContext(int totalComponents, int startCreationIndex,
-			ContextInfo contextInfo, FactoryEntity<InputEntity> factoryMethod) {
+			ContextInfo contextInfo, EntityBaseFactory<InputEntity> factoryMethod) {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
 	}
 

@@ -19,7 +19,7 @@ public class SceneContext
 			com.ilargia.games.entitas.Context<SceneEntity> {
 
 	public SceneContext(int totalComponents, int startCreationIndex,
-			ContextInfo contextInfo, FactoryEntity<SceneEntity> factoryMethod) {
+			ContextInfo contextInfo, EntityBaseFactory<SceneEntity> factoryMethod) {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
 	}
 

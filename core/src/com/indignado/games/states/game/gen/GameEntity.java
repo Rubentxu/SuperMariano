@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.ilargia.games.entitas.api.IComponent;
 import java.util.Map;
 import com.indignado.games.states.game.component.game.Character;
+import com.indignado.games.states.game.component.game.Element;
 import com.indignado.games.states.game.data.StateCharacter;
 import com.indignado.games.states.game.component.game.Destroy;
-import com.indignado.games.states.game.component.game.GameElement;
 import com.indignado.games.states.game.component.game.Interactive;
 import com.indignado.games.states.game.component.game.Movable;
 import com.indignado.games.states.game.component.game.OnGround;
@@ -134,8 +134,8 @@ public class GameEntity extends Entity {
 		return this;
 	}
 
-	public GameElement getGameElement() {
-		return (GameElement) getComponent(GameComponentIds.GameElement);
+	public Element getGameElement() {
+		return (Element) getComponent(GameComponentIds.GameElement);
 	}
 
 	public boolean hasGameElement() {
@@ -143,9 +143,9 @@ public class GameEntity extends Entity {
 	}
 
 	public GameEntity addGameElement(String type, String tags) {
-		GameElement component = (GameElement) recoverComponent(GameComponentIds.GameElement);
+		Element component = (Element) recoverComponent(GameComponentIds.GameElement);
 		if (component == null) {
-			component = new GameElement();
+			component = new Element();
 		}
 		component.type = type;
 		component.tags = tags;
@@ -154,9 +154,9 @@ public class GameEntity extends Entity {
 	}
 
 	public GameEntity replaceGameElement(String type, String tags) {
-		GameElement component = (GameElement) recoverComponent(GameComponentIds.GameElement);
+		Element component = (Element) recoverComponent(GameComponentIds.GameElement);
 		if (component == null) {
-			component = new GameElement();
+			component = new Element();
 		}
 		component.type = type;
 		component.tags = tags;

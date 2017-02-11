@@ -11,7 +11,7 @@ import com.indignado.games.states.game.component.gui.Score;
 public class GuiContext extends com.ilargia.games.entitas.Context<GuiEntity> {
 
 	public GuiContext(int totalComponents, int startCreationIndex,
-			ContextInfo contextInfo, FactoryEntity<GuiEntity> factoryMethod) {
+			ContextInfo contextInfo, EntityBaseFactory<GuiEntity> factoryMethod) {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
 	}
 

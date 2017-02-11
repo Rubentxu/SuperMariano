@@ -10,7 +10,7 @@ import com.ilargia.games.entitas.api.*;
 public class GameContext extends com.ilargia.games.entitas.Context<GameEntity> {
 
 	public GameContext(int totalComponents, int startCreationIndex,
-			ContextInfo contextInfo, FactoryEntity<GameEntity> factoryMethod) {
+			ContextInfo contextInfo, EntityBaseFactory<GameEntity> factoryMethod) {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
 	}
 

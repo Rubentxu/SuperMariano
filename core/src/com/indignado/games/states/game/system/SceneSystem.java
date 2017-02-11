@@ -3,7 +3,7 @@ package com.indignado.games.states.game.system;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
-import com.ilargia.games.egdx.base.interfaces.GameElementFactory;
+import com.ilargia.games.egdx.api.GameElementFactory;
 import com.ilargia.games.entitas.api.IContext;
 import com.ilargia.games.entitas.api.system.ICleanupSystem;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;

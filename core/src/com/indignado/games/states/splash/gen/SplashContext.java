@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.ilargia.games.entitas.api.ContextInfo;
 import com.ilargia.games.entitas.api.EntitasException;
-import com.ilargia.games.entitas.api.FactoryEntity;
+import com.ilargia.games.entitas.api.EntityBaseFactory;
 import com.indignado.games.states.splash.components.TextureView;
 
 /**
@@ -17,7 +17,7 @@ public class SplashContext
         com.ilargia.games.entitas.Context<SplashEntity> {
 
     public SplashContext(int totalComponents, int startCreationIndex,
-                         ContextInfo contextInfo, FactoryEntity<SplashEntity> factoryMethod) {
+                         ContextInfo contextInfo, EntityBaseFactory<SplashEntity> factoryMethod) {
         super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
     }
 

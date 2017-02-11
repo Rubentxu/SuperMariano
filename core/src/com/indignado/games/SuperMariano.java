@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.ilargia.games.egdx.EGEventBus;
-import com.ilargia.games.egdx.base.interfaces.managers.ProfileManager;
+import com.ilargia.games.egdx.api.managers.ProfileManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.ilargia.games.egdx.managers.EGProfileManager;

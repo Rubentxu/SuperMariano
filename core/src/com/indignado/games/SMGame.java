@@ -1,10 +1,10 @@
 package com.indignado.games;
 
 import com.badlogic.gdx.math.Interpolation;
-import com.ilargia.games.egdx.base.BaseGame;
-import com.ilargia.games.egdx.base.interfaces.EventBus;
-import com.ilargia.games.egdx.base.interfaces.StateTransition;
-import com.ilargia.games.egdx.base.interfaces.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.api.base.BaseGame;
+import com.ilargia.games.egdx.api.EventBus;
+import com.ilargia.games.egdx.api.StateTransition;
+import com.ilargia.games.egdx.api.base.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.ilargia.games.egdx.transitions.SlideTransition;

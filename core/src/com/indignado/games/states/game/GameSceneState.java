@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.ilargia.games.egdx.base.BaseGameState;
+import com.ilargia.games.egdx.api.base.BaseGameState;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.util.BodyBuilder;
 import com.ilargia.games.egdx.util.FixtureDefBuilder;
@@ -37,6 +37,7 @@ public class GameSceneState extends BaseGameState {
     private EGAssetsManager assetsManager;
     private TextureAtlas atlas;
     private GuiFactory guiFactory;
+    private BodyBuilder bodyBuilder;
 
     public GameSceneState(SMEngine engine) {
         this.engine = engine;
@@ -101,7 +102,7 @@ public class GameSceneState extends BaseGameState {
         entitas.game.getPlayerEntity()
                 .addTextureView(null,new Bounds(0.8f,1.2f),false,false,1,1, Color.WHITE)
                 .addAnimations(animationHero, walking, 0.02f)
-                .addRigidBody()
+                .addRigidBody(body);
     }
 
     @Override
