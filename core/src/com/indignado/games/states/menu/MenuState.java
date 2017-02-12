@@ -15,16 +15,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.ilargia.games.egdx.api.ChangeStateCommand;
 import com.ilargia.games.egdx.api.GameState;
-import com.ilargia.games.egdx.api.base.commands.ChangeStateCommand;
+
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.SkinManager;
+import com.indignado.games.SMSkinManager;
 
 public class MenuState implements GameState {
     private final Skin skin;
-    private SkinManager skinManager;
+    private SMSkinManager skinManager;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
@@ -32,7 +33,7 @@ public class MenuState implements GameState {
 
     public MenuState(SMEngine engine) {
         this.engine = engine;
-        this.skinManager = engine.getManager(SkinManager.class);
+        this.skinManager = engine.getManager(SMSkinManager.class);
         this.skin = skinManager.skin;
 
 
@@ -54,8 +55,8 @@ public class MenuState implements GameState {
     @Override
     public void init() {
         Gdx.app.log("Menu", "Init");
-        int pad = (int) (20 * SkinManager.ScaleUtil.getSizeRatio());
-        int pad2 = (int) (60 * SkinManager.ScaleUtil.getSizeRatio());
+        int pad = (int) (20 * SMSkinManager.ScaleUtil.getSizeRatio());
+        int pad2 = (int) (60 * SMSkinManager.ScaleUtil.getSizeRatio());
         final TextButton btnStart = new TextButton("Comenzar", skin);
         btnStart.pad(pad, pad2, pad, pad2);
         final TextButton btnOptions = new TextButton("Opciones", skin);
@@ -105,7 +106,7 @@ public class MenuState implements GameState {
         mainTable.row();
         mainTable.add(button3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SkinManager.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SMSkinManager.MENU_BACKGROUND))));
         mainTable.row();
 
     }

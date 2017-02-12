@@ -9,9 +9,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.ilargia.games.egdx.api.managers.SkinManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 
-public class SkinManager implements ISkin {
+public class SMSkinManager implements SkinManager<EGAssetsManager> {
 
     public static final String GUI_ATLAS = "gui/gui.pack";
     public static final String GUI_PACK_ATLAS = "gui/gui-pack.pack";
@@ -41,7 +42,7 @@ public class SkinManager implements ISkin {
     public BitmapFont font2;
     public Skin skin;
 
-    public SkinManager(EGAssetsManager assetsManager) {
+    public SMSkinManager(EGAssetsManager assetsManager) {
         loadAssets(assetsManager);
         this.skin = createSkin(assetsManager);
     }

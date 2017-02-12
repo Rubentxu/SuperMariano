@@ -3,7 +3,7 @@ package com.indignado.games.states.splash;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.ilargia.games.egdx.api.base.BaseGameState;
+import com.ilargia.games.egdx.base.BaseGameState;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SuperMariano;

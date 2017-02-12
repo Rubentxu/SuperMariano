@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
-import com.indignado.games.SkinManager;
+import com.indignado.games.SMSkinManager;
 import com.indignado.games.states.game.component.input.PlayerInputController;
 import com.indignado.games.states.game.gen.InputContext;
 import com.indignado.games.states.game.gen.InputEntity;
@@ -28,9 +28,9 @@ public class InputsControllerSystem extends InputAdapter implements IInitializeS
         Gdx.input.setInputProcessor(this);
         player = context.getPlayerInputControllerEntity();
         if (context.isPadButtons()) {
-            factory.createPadButtons(370 * SkinManager.ScaleUtil.getSizeRatio(), 190 * SkinManager.ScaleUtil.getSizeRatio(), player);
+            factory.createPadButtons(370 * SMSkinManager.ScaleUtil.getSizeRatio(), 190 * SMSkinManager.ScaleUtil.getSizeRatio(), player);
         } else if (context.isTouchPad()) {
-            factory.createTouchPad(350 * SkinManager.ScaleUtil.getSizeRatio(), 350 * SkinManager.ScaleUtil.getSizeRatio(), player);
+            factory.createTouchPad(350 * SMSkinManager.ScaleUtil.getSizeRatio(), 350 * SMSkinManager.ScaleUtil.getSizeRatio(), player);
         }
 
 

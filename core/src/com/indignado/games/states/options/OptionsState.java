@@ -15,13 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.api.GameState;
-import com.ilargia.games.egdx.api.base.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.base.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.api.managers.ProfileManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.SkinManager;
+import com.indignado.games.SMSkinManager;
 
 public class OptionsState implements GameState {
     private Label volumeValueSound;
@@ -35,7 +35,7 @@ public class OptionsState implements GameState {
     private EGAssetsManager assetsManager;
 
     public OptionsState(SMEngine engine) {
-        this.skin = engine.getManager(SkinManager.class).skin;
+        this.skin = engine.getManager(SMSkinManager.class).skin;
         this.engine = engine;
         this.preferencesManager = engine.getManager(EGPreferencesManager.class);
         this.profileManager = engine.getManager(ProfileManager.class);
@@ -61,11 +61,11 @@ public class OptionsState implements GameState {
         Label label = new Label("Opciones del Juego", skin, "header", Color.ORANGE);
         label.setAlignment(Align.center, Align.center);
         mainTable.setFillParent(true);
-        mainTable.defaults().pad(6 * SkinManager.ScaleUtil.getSizeRatio());
-        mainTable.defaults().padLeft(50 * SkinManager.ScaleUtil.getSizeRatio());
+        mainTable.defaults().pad(6 * SMSkinManager.ScaleUtil.getSizeRatio());
+        mainTable.defaults().padLeft(50 * SMSkinManager.ScaleUtil.getSizeRatio());
         mainTable.add(label).colspan(3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SkinManager.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SMSkinManager.MENU_BACKGROUND))));
 
         final CheckBox musicCheckbox = new CheckBox(" Music", skin);
         musicCheckbox.align(Align.left);
@@ -75,7 +75,7 @@ public class OptionsState implements GameState {
             public void clicked(InputEvent event, float x, float y) {
                 boolean enabled = musicCheckbox.isChecked();
                 preferencesManager.MUSIC = enabled;
-                assetsManager.playMusic(SkinManager.MUSIC_MENU);
+                assetsManager.playMusic(SMSkinManager.MUSIC_MENU);
             }
         });
         mainTable.add(musicCheckbox);

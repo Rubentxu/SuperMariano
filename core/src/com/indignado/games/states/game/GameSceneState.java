@@ -10,13 +10,13 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.ilargia.games.egdx.api.base.BaseGameState;
+import com.ilargia.games.egdx.base.BaseGameState;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.util.BodyBuilder;
 import com.ilargia.games.egdx.util.FixtureDefBuilder;
 import com.ilargia.games.entitas.factories.Collections;
 import com.indignado.games.SMEngine;
-import com.indignado.games.SkinManager;
+import com.indignado.games.SMSkinManager;
 import com.indignado.games.states.game.data.Bounds;
 import com.indignado.games.states.game.gen.Entitas;
 import com.indignado.games.states.game.system.AnimationSystem;
@@ -31,7 +31,7 @@ public class GameSceneState extends BaseGameState {
     public static final float RUNNING_FRAME_DURATION = 0.02f;
     private final Skin skin;
     private final Entitas entitas;
-    private SkinManager skinManager;
+    private SMSkinManager skinManager;
     private Stage stage;
     private SMEngine engine;
     private EGAssetsManager assetsManager;
@@ -48,7 +48,7 @@ public class GameSceneState extends BaseGameState {
 
     @Override
     public void loadResources() {
-        this.skinManager = engine.getManager(SkinManager.class);
+        this.skinManager = engine.getManager(SMSkinManager.class);
         this.assetsManager = engine.getManager(EGAssetsManager.class);
         guiFactory = new GuiFactory(assetsManager, skin);
         bodyBuilder =  new BodyBuilder();

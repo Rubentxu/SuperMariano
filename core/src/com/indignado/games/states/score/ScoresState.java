@@ -11,13 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.ilargia.games.egdx.api.GameState;
-import com.ilargia.games.egdx.api.base.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.base.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.api.managers.ProfileManager;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.SkinManager;
+import com.indignado.games.SMSkinManager;
 import com.indignado.games.states.game.component.scene.Level;
 import com.indignado.games.states.options.Profile;
 
@@ -36,7 +36,7 @@ public class ScoresState implements GameState {
     private int stars;
 
     public ScoresState(SMEngine engine) {
-        this.skin = engine.getManager(SkinManager.class).skin;
+        this.skin = engine.getManager(SMSkinManager.class).skin;
         this.engine = engine;
         this.profileManager = engine.getManager(EGProfileManager.class);
         this.assetsManager = engine.getManager(EGAssetsManager.class);
@@ -62,7 +62,7 @@ public class ScoresState implements GameState {
         kills = profile.getKills();
         stars = profile.getStarAquired();
 
-        mainTable.defaults().spaceBottom(50 * SkinManager.ScaleUtil.getSizeRatio());
+        mainTable.defaults().spaceBottom(50 * SMSkinManager.ScaleUtil.getSizeRatio());
         mainTable.setFillParent(true);
 
         Label killsLabel = new Label("Kills: ", skin);

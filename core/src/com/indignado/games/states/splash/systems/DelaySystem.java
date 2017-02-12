@@ -1,6 +1,6 @@
 package com.indignado.games.states.splash.systems;
 
-import com.ilargia.games.egdx.api.base.commands.ChangeStateCommand;
+import com.ilargia.games.egdx.base.commands.ChangeStateCommand;
 import com.ilargia.games.entitas.api.system.IExecuteSystem;
 import com.ilargia.games.entitas.group.Group;
 import com.indignado.games.SMGame;
