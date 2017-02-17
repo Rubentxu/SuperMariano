@@ -16,7 +16,7 @@ import com.ilargia.games.egdx.util.BodyBuilder;
 import com.ilargia.games.egdx.util.FixtureDefBuilder;
 import com.ilargia.games.entitas.factories.Collections;
 import com.indignado.games.SMEngine;
-import com.indignado.games.SMSkinManager;
+import com.indignado.games.manager.SMSkinManager;
 import com.indignado.games.states.game.data.Bounds;
 import com.indignado.games.states.game.gen.Entitas;
 import com.indignado.games.states.game.system.AnimationSystem;

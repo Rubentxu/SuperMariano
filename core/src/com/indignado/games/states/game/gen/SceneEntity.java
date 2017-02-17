@@ -19,9 +19,7 @@ import com.indignado.games.states.game.component.scene.Tiled;
  */
 public class SceneEntity extends Entity {
 
-	public SceneEntity(int totalComponents,
-			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
-		super(totalComponents, componentContexts, contextInfo);
+	public SceneEntity() {
 	}
 
 	public Background getBackground() {

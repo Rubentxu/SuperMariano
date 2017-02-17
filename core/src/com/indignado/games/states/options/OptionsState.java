@@ -21,7 +21,7 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGPreferencesManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.SMSkinManager;
+import com.indignado.games.manager.SMSkinManager;
 
 public class OptionsState implements GameState {
     private Label volumeValueSound;

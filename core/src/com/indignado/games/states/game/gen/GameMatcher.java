@@ -12,7 +12,7 @@ public class GameMatcher {
 	private static Matcher _matcherAnimations;
 	private static Matcher _matcherCharacter;
 	private static Matcher _matcherDestroy;
-	private static Matcher _matcherGameElement;
+	private static Matcher _matcherElement;
 	private static Matcher _matcherInteractive;
 	private static Matcher _matcherMovable;
 	private static Matcher _matcherOnGround;
@@ -49,14 +49,13 @@ public class GameMatcher {
 		return _matcherDestroy;
 	}
 
-	public static Matcher GameElement() {
-		if (_matcherGameElement == null) {
-			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.GameElement);
+	public static Matcher Element() {
+		if (_matcherElement == null) {
+			Matcher matcher = (Matcher) Matcher.AllOf(GameComponentIds.Element);
 			matcher.componentNames = GameComponentIds.componentNames();
-			_matcherGameElement = matcher;
+			_matcherElement = matcher;
 		}
-		return _matcherGameElement;
+		return _matcherElement;
 	}
 
 	public static Matcher Interactive() {

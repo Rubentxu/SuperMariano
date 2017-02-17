@@ -18,9 +18,7 @@ public class InputEntity extends Entity {
 	public PadButtons PadButtonsComponent = new PadButtons();
 	public TouchPad TouchPadComponent = new TouchPad();
 
-	public InputEntity(int totalComponents,
-			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
-		super(totalComponents, componentContexts, contextInfo);
+	public InputEntity() {
 	}
 
 	public boolean isPadButtons() {

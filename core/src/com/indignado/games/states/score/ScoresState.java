@@ -17,7 +17,7 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.managers.EGProfileManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.SMSkinManager;
+import com.indignado.games.manager.SMSkinManager;
 import com.indignado.games.states.game.component.scene.Level;
 import com.indignado.games.states.options.Profile;
 

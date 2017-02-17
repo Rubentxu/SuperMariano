@@ -8,6 +8,7 @@ import com.ilargia.games.egdx.base.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.ilargia.games.egdx.transitions.SlideTransition;
+import com.indignado.games.manager.SMSkinManager;
 import com.indignado.games.states.menu.MenuState;
 import com.indignado.games.states.options.OptionsState;
 import com.indignado.games.states.score.ScoresState;

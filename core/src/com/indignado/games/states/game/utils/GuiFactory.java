@@ -13,8 +13,8 @@ import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.states.game.component.input.PlayerInputController;
 import com.indignado.games.states.game.gen.InputEntity;
 
-import static com.indignado.games.SMSkinManager.GUI_ATLAS;
-import static com.indignado.games.SMSkinManager.ScaleUtil;
+import static com.indignado.games.manager.SMSkinManager.GUI_ATLAS;
+import static com.indignado.games.manager.SMSkinManager.ScaleUtil;
 
 public class GuiFactory {
     private EGAssetsManager assetsManager;

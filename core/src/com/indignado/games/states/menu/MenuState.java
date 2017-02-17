@@ -21,7 +21,7 @@ import com.ilargia.games.egdx.api.GameState;
 import com.ilargia.games.egdx.managers.EGAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.SMSkinManager;
+import com.indignado.games.manager.SMSkinManager;
 
 public class MenuState implements GameState {
     private final Skin skin;

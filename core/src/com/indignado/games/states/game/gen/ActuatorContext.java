@@ -12,7 +12,8 @@ public class ActuatorContext
 			com.ilargia.games.entitas.Context<ActuatorEntity> {
 
 	public ActuatorContext(int totalComponents, int startCreationIndex,
-			ContextInfo contextInfo, EntityBaseFactory<ActuatorEntity> factoryMethod) {
+			ContextInfo contextInfo,
+			EntityBaseFactory<ActuatorEntity> factoryMethod) {
 		super(totalComponents, startCreationIndex, contextInfo, factoryMethod);
 	}
 }

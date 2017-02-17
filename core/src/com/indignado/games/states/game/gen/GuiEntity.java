@@ -14,9 +14,7 @@ import com.indignado.games.states.game.component.gui.Score;
  */
 public class GuiEntity extends Entity {
 
-	public GuiEntity(int totalComponents,
-			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
-		super(totalComponents, componentContexts, contextInfo);
+	public GuiEntity() {
 	}
 
 	public Label getLabel() {

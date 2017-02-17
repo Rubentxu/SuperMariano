@@ -1,4 +1,4 @@
-package com.indignado.games;
+package com.indignado.games.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

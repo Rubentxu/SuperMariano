@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
-import com.indignado.games.SMSkinManager;
+import com.indignado.games.manager.SMSkinManager;
 import com.indignado.games.states.game.component.input.PlayerInputController;
 import com.indignado.games.states.game.gen.InputContext;
 import com.indignado.games.states.game.gen.InputEntity;

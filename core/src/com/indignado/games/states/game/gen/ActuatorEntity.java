@@ -21,9 +21,7 @@ import com.indignado.games.states.game.component.actuator.VelocityActuator;
  */
 public class ActuatorEntity extends Entity {
 
-	public ActuatorEntity(int totalComponents,
-			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
-		super(totalComponents, componentContexts, contextInfo);
+	public ActuatorEntity() {
 	}
 
 	public CameraActuator getCameraActuator() {

@@ -21,7 +21,7 @@ public class GameComponentIds {
 	public static final int Animations = 0;
 	public static final int Character = 1;
 	public static final int Destroy = 2;
-	public static final int GameElement = 3;
+	public static final int Element = 3;
 	public static final int Interactive = 4;
 	public static final int Movable = 5;
 	public static final int OnGround = 6;
@@ -31,9 +31,9 @@ public class GameComponentIds {
 	public static final int totalComponents = 10;
 
 	public static String[] componentNames() {
-		return new String[]{"Animations", "Character", "Destroy",
-				"Element", "Interactive", "Movable", "OnGround", "Player",
-				"RigidBody", "TextureView"};
+		return new String[]{"Animations", "Character", "Destroy", "Element",
+				"Interactive", "Movable", "OnGround", "Player", "RigidBody",
+				"TextureView"};
 	}
 
 	public static Class[] componentTypes() {

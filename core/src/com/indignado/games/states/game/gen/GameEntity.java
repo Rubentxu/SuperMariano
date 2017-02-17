@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.ilargia.games.entitas.api.IComponent;
 import java.util.Map;
 import com.indignado.games.states.game.component.game.Character;
-import com.indignado.games.states.game.component.game.Element;
 import com.indignado.games.states.game.data.StateCharacter;
 import com.indignado.games.states.game.component.game.Destroy;
+import com.indignado.games.states.game.component.game.Element;
 import com.indignado.games.states.game.component.game.Interactive;
 import com.indignado.games.states.game.component.game.Movable;
 import com.indignado.games.states.game.component.game.OnGround;
@@ -34,9 +34,7 @@ public class GameEntity extends Entity {
 	public OnGround OnGroundComponent = new OnGround();
 	public Player PlayerComponent = new Player();
 
-	public GameEntity(int totalComponents,
-			Stack<IComponent>[] componentContexts, ContextInfo contextInfo) {
-		super(totalComponents, componentContexts, contextInfo);
+	public GameEntity() {
 	}
 
 	public Animations getAnimations() {
@@ -134,38 +132,38 @@ public class GameEntity extends Entity {
 		return this;
 	}
 
-	public Element getGameElement() {
-		return (Element) getComponent(GameComponentIds.GameElement);
+	public Element getElement() {
+		return (Element) getComponent(GameComponentIds.Element);
 	}
 
-	public boolean hasGameElement() {
-		return hasComponent(GameComponentIds.GameElement);
+	public boolean hasElement() {
+		return hasComponent(GameComponentIds.Element);
 	}
 
-	public GameEntity addGameElement(String type, String tags) {
-		Element component = (Element) recoverComponent(GameComponentIds.GameElement);
+	public GameEntity addElement(String type, String tags) {
+		Element component = (Element) recoverComponent(GameComponentIds.Element);
 		if (component == null) {
 			component = new Element();
 		}
 		component.type = type;
 		component.tags = tags;
-		addComponent(GameComponentIds.GameElement, component);
+		addComponent(GameComponentIds.Element, component);
 		return this;
 	}
 
-	public GameEntity replaceGameElement(String type, String tags) {
-		Element component = (Element) recoverComponent(GameComponentIds.GameElement);
+	public GameEntity replaceElement(String type, String tags) {
+		Element component = (Element) recoverComponent(GameComponentIds.Element);
 		if (component == null) {
 			component = new Element();
 		}
 		component.type = type;
 		component.tags = tags;
-		replaceComponent(GameComponentIds.GameElement, component);
+		replaceComponent(GameComponentIds.Element, component);
 		return this;
 	}
 
-	public GameEntity removeGameElement() {
-		removeComponent(GameComponentIds.GameElement);
+	public GameEntity removeElement() {
+		removeComponent(GameComponentIds.Element);
 		return this;
 	}
 
