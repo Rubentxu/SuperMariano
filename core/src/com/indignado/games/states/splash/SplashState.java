@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.ilargia.games.egdx.base.BaseGameState;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SuperMariano;
 import com.indignado.games.states.splash.gen.Entitas;
@@ -13,7 +13,7 @@ import com.indignado.games.states.splash.systems.RendererSplashSystem;
 
 public class SplashState extends BaseGameState {
     public static final String SPLASH = "imagenes/fondos/splash.jpg";
-    private EGAssetsManager assetsManager;
+    private BaseAssetsManager assetsManager;
     private SMEngine engine;
     private Entitas entitas;
 
@@ -24,7 +24,7 @@ public class SplashState extends BaseGameState {
 
     @Override
     public void loadResources() {
-        assetsManager = engine.getManager(EGAssetsManager.class);
+        assetsManager = engine.getManager(BaseAssetsManager.class);
         assetsManager.loadTexture(SPLASH);
         assetsManager.finishLoading();
 

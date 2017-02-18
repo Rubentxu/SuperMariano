@@ -4,28 +4,16 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.ilargia.games.egdx.api.EntityFactory;
-import com.ilargia.games.egdx.managers.EGSceneManager;
-import com.ilargia.games.entitas.api.IEntity;
+import com.ilargia.games.egdx.base.managers.BaseSceneManager;
 import com.indignado.games.SMEngine;
 
 
-public class SMSSceneManger extends EGSceneManager {
+public class SMSSceneManger extends BaseSceneManager {
 
     public SMSSceneManger(SMEngine engine) {
         super(engine);
     }
 
-    @Override
-    public <TEntity extends IEntity> TEntity createEntity(String name, float posX, float posY) {
-        EntityFactory factory = factories.get(name);
-        TEntity entity = null;
-        if (factory != null) {
-            entity = (TEntity) factory.create(egEngine, posX, posY);
-        }
-        return entity;
-
-    }
 
     @Override
     public void createScene(TiledMap map) {

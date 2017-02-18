@@ -17,34 +17,34 @@ import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.api.GameState;
 import com.ilargia.games.egdx.base.commands.ChangeStateCommand;
 import com.ilargia.games.egdx.api.managers.ProfileManager;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
-import com.ilargia.games.egdx.managers.EGPreferencesManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
+import com.ilargia.games.egdx.base.managers.BasePreferencesManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.manager.SMSkinManager;
+import com.indignado.games.manager.SMGUIManager;
 
 public class OptionsState implements GameState {
     private Label volumeValueSound;
     private Label volumeValueMusic;
-    private EGPreferencesManager preferencesManager;
+    private BasePreferencesManager preferencesManager;
     private ProfileManager<Profile> profileManager;
     private Skin skin;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
-    private EGAssetsManager assetsManager;
+    private BaseAssetsManager assetsManager;
 
     public OptionsState(SMEngine engine) {
-        this.skin = engine.getManager(SMSkinManager.class).skin;
+        this.skin = engine.getManager(SMGUIManager.class).skin;
         this.engine = engine;
-        this.preferencesManager = engine.getManager(EGPreferencesManager.class);
+        this.preferencesManager = engine.getManager(BasePreferencesManager.class);
         this.profileManager = engine.getManager(ProfileManager.class);
 
     }
 
     @Override
     public void loadResources() {
-        assetsManager = engine.getManager(EGAssetsManager.class);
+        assetsManager = engine.getManager(BaseAssetsManager.class);
         this.stage = new Stage();
         stage.clear();
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
@@ -61,11 +61,11 @@ public class OptionsState implements GameState {
         Label label = new Label("Opciones del Juego", skin, "header", Color.ORANGE);
         label.setAlignment(Align.center, Align.center);
         mainTable.setFillParent(true);
-        mainTable.defaults().pad(6 * SMSkinManager.ScaleUtil.getSizeRatio());
-        mainTable.defaults().padLeft(50 * SMSkinManager.ScaleUtil.getSizeRatio());
+        mainTable.defaults().pad(6 * SMGUIManager.ScaleUtil.getSizeRatio());
+        mainTable.defaults().padLeft(50 * SMGUIManager.ScaleUtil.getSizeRatio());
         mainTable.add(label).colspan(3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SMSkinManager.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SMGUIManager.MENU_BACKGROUND))));
 
         final CheckBox musicCheckbox = new CheckBox(" Music", skin);
         musicCheckbox.align(Align.left);
@@ -75,7 +75,7 @@ public class OptionsState implements GameState {
             public void clicked(InputEvent event, float x, float y) {
                 boolean enabled = musicCheckbox.isChecked();
                 preferencesManager.MUSIC = enabled;
-                assetsManager.playMusic(SMSkinManager.MUSIC_MENU);
+                assetsManager.playMusic(SMGUIManager.MUSIC_MENU);
             }
         });
         mainTable.add(musicCheckbox);

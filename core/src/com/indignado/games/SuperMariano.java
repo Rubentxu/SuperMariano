@@ -5,9 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.ilargia.games.egdx.EGEventBus;
 import com.ilargia.games.egdx.api.managers.ProfileManager;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
-import com.ilargia.games.egdx.managers.EGPreferencesManager;
-import com.ilargia.games.egdx.managers.EGProfileManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
+import com.ilargia.games.egdx.base.managers.BasePreferencesManager;
+import com.ilargia.games.egdx.base.managers.BaseProfileManager;
 import com.indignado.games.states.options.Profile;
 import com.indignado.games.states.splash.SplashState;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -23,12 +23,12 @@ public class SuperMariano implements ApplicationListener {
     @Override
     public void create() {
         AssetManager assetsManager = new AssetManager();
-        EGPreferencesManager preferencesManager = new EGPreferencesManager();
+        BasePreferencesManager preferencesManager = new BasePreferencesManager();
         SMEngine engine = new SMEngine();
-        ProfileManager profileManager = new EGProfileManager(new Profile(new ObjectArrayList<>()), preferencesManager);
+        ProfileManager profileManager = new BaseProfileManager(new Profile(new ObjectArrayList<>()), preferencesManager);
         engine.addManager(preferencesManager);
         engine.addManager(profileManager);
-        engine.addManager(new EGAssetsManager(assetsManager, preferencesManager));
+        engine.addManager(new BaseAssetsManager(assetsManager, preferencesManager));
         game = new SMGame(engine, new EGEventBus(new MBassador(new IPublicationErrorHandler() {
             @Override
             public void handleError(PublicationError error) {

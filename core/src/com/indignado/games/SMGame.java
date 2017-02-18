@@ -5,10 +5,10 @@ import com.ilargia.games.egdx.base.BaseGame;
 import com.ilargia.games.egdx.api.EventBus;
 import com.ilargia.games.egdx.api.StateTransition;
 import com.ilargia.games.egdx.base.commands.ChangeStateCommand;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
 import com.ilargia.games.egdx.transitions.FadeTransition;
 import com.ilargia.games.egdx.transitions.SlideTransition;
-import com.indignado.games.manager.SMSkinManager;
+import com.indignado.games.manager.SMGUIManager;
 import com.indignado.games.states.menu.MenuState;
 import com.indignado.games.states.options.OptionsState;
 import com.indignado.games.states.score.ScoresState;
@@ -16,7 +16,7 @@ import net.engio.mbassy.listener.Handler;
 
 public class SMGame extends BaseGame<SMEngine> {
     private MenuState menuState;
-    private SMSkinManager skinManager;
+    private SMGUIManager skinManager;
     private FadeTransition fadeTransition;
     private OptionsState optionState;
     private ScoresState scoresState;
@@ -26,7 +26,7 @@ public class SMGame extends BaseGame<SMEngine> {
     public SMGame(SMEngine engine, EventBus bus) {
         super(engine, bus);
         ebus.subscribe(this);
-        skinManager = new SMSkinManager(_engine.getManager(EGAssetsManager.class));
+        skinManager = new SMGUIManager(_engine.getManager(BaseAssetsManager.class));
         _engine.addManager(skinManager);
 
     }

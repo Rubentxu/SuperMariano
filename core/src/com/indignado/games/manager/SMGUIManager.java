@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.ilargia.games.egdx.api.managers.SkinManager;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.api.GUIFactory;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
+import com.ilargia.games.egdx.base.managers.BaseGUIManager;
+import com.ilargia.games.entitas.api.IEntity;
 
-public class SMSkinManager implements SkinManager<EGAssetsManager> {
+public class SMGUIManager extends BaseGUIManager {
 
     public static final String GUI_ATLAS = "gui/gui.pack";
     public static final String GUI_PACK_ATLAS = "gui/gui-pack.pack";
@@ -38,11 +40,10 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
     public static final String JUMP_SOUND = "sounds/sound/Jump.ogg";
     public static final String PICKUP_COIN_SOUND = "sounds/sound/Pickup_Coin.ogg";
     public static final String POWERUP_SOUND = "sounds/sound/Powerup.ogg";
-    public BitmapFont font;
     public BitmapFont font2;
-    public Skin skin;
 
-    public SMSkinManager(EGAssetsManager assetsManager) {
+
+    public SMGUIManager(BaseAssetsManager assetsManager) {
         loadAssets(assetsManager);
         this.skin = createSkin(assetsManager);
     }
@@ -56,7 +57,12 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
     }
 
     @Override
-    public void loadAssets(EGAssetsManager assetsManager) {
+    public void initialize() {
+
+    }
+
+    @Override
+    public void loadAssets(BaseAssetsManager assetsManager) {
         assetsManager.loadFont(DEFAULT_FONT);
         assetsManager.loadFont(HEADER_FONT);
         assetsManager.loadTextureAtlas(GUI_ATLAS);
@@ -68,17 +74,15 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
     }
 
     @Override
-    public Skin createSkin(EGAssetsManager assetsManager) {
-
-        skin = new Skin();
-        font = assetsManager.getFont(DEFAULT_FONT);
-        font.getData().setScale(ScaleUtil.getSizeRatio());
-        font.setUseIntegerPositions(false);
+    public Skin createSkin(BaseAssetsManager assetsManager) {
+        defaultFont = assetsManager.getFont(DEFAULT_FONT);
+        defaultFont.getData().setScale(ScaleUtil.getSizeRatio());
+        defaultFont.setUseIntegerPositions(false);
         font2 = assetsManager.getFont(HEADER_FONT);
         font2.getData().setScale(ScaleUtil.getSizeRatio());
         font2.setUseIntegerPositions(false);
 
-        skin.add("default", font);
+        skin.add("default", defaultFont);
         skin.add("header", font2);
 
         skin.add("lt-blue", new Color(.62f, .76f, .99f, 1f));
@@ -100,7 +104,7 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
         TextureRegionDrawable slider_knob = new TextureRegionDrawable(((TextureAtlas) assetsManager.getTextureAtlas(UISKIN_ATLAS)).findRegion("default-slider-knob"));
         TextureRegionDrawable slider = new TextureRegionDrawable(((TextureAtlas) assetsManager.getTextureAtlas(UISKIN_ATLAS)).findRegion("default-slider"));
 
-        CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle(checkox_false, checkox_true, font, Color.WHITE);
+        CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle(checkox_false, checkox_true, defaultFont, Color.WHITE);
 
 
         SpriteDrawable stats = new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(STATS_BACKGROUND)));
@@ -112,7 +116,7 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
 
 
         Label.LabelStyle lbs = new Label.LabelStyle();
-        lbs.font = font;
+        lbs.font = defaultFont;
         lbs.fontColor = Color.WHITE;
         skin.add("default", lbs);
 
@@ -121,7 +125,7 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
         lbsHeader.fontColor = Color.WHITE;
         skin.add("header", lbsHeader);
 
-        TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle(skin.getDrawable("btnMenu"), skin.getDrawable("btnMenuPress"), skin.getDrawable("btnMenu"), font);
+        TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle(skin.getDrawable("btnMenu"), skin.getDrawable("btnMenuPress"), skin.getDrawable("btnMenu"), defaultFont);
         tbs.fontColor = skin.getColor("dark-blue");
         tbs.pressedOffsetX = Math.round(1f * Gdx.graphics.getDensity());
         tbs.pressedOffsetY = tbs.pressedOffsetX * -1f;
@@ -148,6 +152,16 @@ public class SMSkinManager implements SkinManager<EGAssetsManager> {
         skin.add("default-horizontal", sliderStyle);
 
         return skin;
+    }
+
+    @Override
+    public void addGUIFactory(String name, GUIFactory factory) {
+
+    }
+
+    @Override
+    public <TEntity extends IEntity> TEntity createGUIElement(String name, float posX, float posY) {
+        return null;
     }
 
     public static class ScaleUtil {

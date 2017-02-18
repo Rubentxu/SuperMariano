@@ -9,18 +9,18 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
 import com.indignado.games.states.game.component.input.PlayerInputController;
 import com.indignado.games.states.game.gen.InputEntity;
 
-import static com.indignado.games.manager.SMSkinManager.GUI_ATLAS;
-import static com.indignado.games.manager.SMSkinManager.ScaleUtil;
+import static com.indignado.games.manager.SMGUIManager.GUI_ATLAS;
+import static com.indignado.games.manager.SMGUIManager.ScaleUtil;
 
 public class GuiFactory {
-    private EGAssetsManager assetsManager;
+    private BaseAssetsManager assetsManager;
     private Skin skin;
 
-    public GuiFactory(EGAssetsManager assetsManager, Skin skin) {
+    public GuiFactory(BaseAssetsManager assetsManager, Skin skin) {
         this.assetsManager = assetsManager;
         this.skin = skin;
     }

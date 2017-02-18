@@ -18,22 +18,22 @@ import com.badlogic.gdx.utils.Align;
 import com.ilargia.games.egdx.api.ChangeStateCommand;
 import com.ilargia.games.egdx.api.GameState;
 
-import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
 import com.indignado.games.SMEngine;
 import com.indignado.games.SMGame;
-import com.indignado.games.manager.SMSkinManager;
+import com.indignado.games.manager.SMGUIManager;
 
 public class MenuState implements GameState {
     private final Skin skin;
-    private SMSkinManager skinManager;
+    private SMGUIManager skinManager;
     private Stage stage;
     private Table mainTable;
     private SMEngine engine;
-    private EGAssetsManager assetsManager;
+    private BaseAssetsManager assetsManager;
 
     public MenuState(SMEngine engine) {
         this.engine = engine;
-        this.skinManager = engine.getManager(SMSkinManager.class);
+        this.skinManager = engine.getManager(SMGUIManager.class);
         this.skin = skinManager.skin;
 
 
@@ -41,7 +41,7 @@ public class MenuState implements GameState {
 
     @Override
     public void loadResources() {
-        assetsManager = engine.getManager(EGAssetsManager.class);
+        assetsManager = engine.getManager(BaseAssetsManager.class);
         this.stage = new Stage();
         mainTable = new Table();
         mainTable.setFillParent(true);
@@ -55,8 +55,8 @@ public class MenuState implements GameState {
     @Override
     public void init() {
         Gdx.app.log("Menu", "Init");
-        int pad = (int) (20 * SMSkinManager.ScaleUtil.getSizeRatio());
-        int pad2 = (int) (60 * SMSkinManager.ScaleUtil.getSizeRatio());
+        int pad = (int) (20 * SMGUIManager.ScaleUtil.getSizeRatio());
+        int pad2 = (int) (60 * SMGUIManager.ScaleUtil.getSizeRatio());
         final TextButton btnStart = new TextButton("Comenzar", skin);
         btnStart.pad(pad, pad2, pad, pad2);
         final TextButton btnOptions = new TextButton("Opciones", skin);
@@ -106,7 +106,7 @@ public class MenuState implements GameState {
         mainTable.row();
         mainTable.add(button3);
         mainTable.row();
-        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SMSkinManager.MENU_BACKGROUND))));
+        mainTable.setBackground(new SpriteDrawable(new Sprite((Texture) assetsManager.getTexture(SMGUIManager.MENU_BACKGROUND))));
         mainTable.row();
 
     }

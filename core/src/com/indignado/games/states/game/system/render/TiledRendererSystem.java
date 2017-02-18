@@ -3,7 +3,7 @@ package com.indignado.games.states.game.system.render;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.ilargia.games.egdx.managers.EGAssetsManager;
+import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
 import com.ilargia.games.entitas.api.IContext;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
 import com.ilargia.games.entitas.api.system.IRenderSystem;
@@ -20,12 +20,12 @@ import java.util.List;
 
 public class TiledRendererSystem extends ReactiveSystem<SceneEntity> implements IInitializeSystem, IRenderSystem {
 
-    private EGAssetsManager assetsManager;
+    private BaseAssetsManager assetsManager;
     private SceneContext context;
     private OrthogonalTiledMapRenderer tiledRenderer;
     private OrthographicCamera cam;
 
-    public TiledRendererSystem(Entitas entitas, EGAssetsManager assetsManager) {
+    public TiledRendererSystem(Entitas entitas, BaseAssetsManager assetsManager) {
         super(entitas.scene);
         this.context = entitas.scene;
         this.assetsManager = assetsManager;
