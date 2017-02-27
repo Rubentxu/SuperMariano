@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.input;
 
 import com.ilargia.games.entitas.api.*;
 import com.ilargia.games.entitas.Entity;
@@ -22,69 +22,70 @@ public class InputEntity extends Entity {
 	}
 
 	public boolean isPadButtons() {
-		return hasComponent(InputComponentIds.PadButtons);
+		return hasComponent(InputComponentsLookup.PadButtons);
 	}
 
 	public InputEntity setPadButtons(boolean value) {
-		if (value != hasComponent(InputComponentIds.PadButtons)) {
+		if (value != hasComponent(InputComponentsLookup.PadButtons)) {
 			if (value) {
-				addComponent(InputComponentIds.PadButtons, PadButtonsComponent);
+				addComponent(InputComponentsLookup.PadButtons,
+						PadButtonsComponent);
 			} else {
-				removeComponent(InputComponentIds.PadButtons);
+				removeComponent(InputComponentsLookup.PadButtons);
 			}
 		}
 		return this;
 	}
 
 	public PlayerInputController getPlayerInputController() {
-		return (PlayerInputController) getComponent(InputComponentIds.PlayerInputController);
+		return (PlayerInputController) getComponent(InputComponentsLookup.PlayerInputController);
 	}
 
 	public boolean hasPlayerInputController() {
-		return hasComponent(InputComponentIds.PlayerInputController);
+		return hasComponent(InputComponentsLookup.PlayerInputController);
 	}
 
 	public InputEntity addPlayerInputController(boolean leftPressed,
 			boolean rightPressed, boolean jumpPressed) {
-		PlayerInputController component = (PlayerInputController) recoverComponent(InputComponentIds.PlayerInputController);
+		PlayerInputController component = (PlayerInputController) recoverComponent(InputComponentsLookup.PlayerInputController);
 		if (component == null) {
 			component = new PlayerInputController();
 		}
 		component.leftPressed = leftPressed;
 		component.rightPressed = rightPressed;
 		component.jumpPressed = jumpPressed;
-		addComponent(InputComponentIds.PlayerInputController, component);
+		addComponent(InputComponentsLookup.PlayerInputController, component);
 		return this;
 	}
 
 	public InputEntity replacePlayerInputController(boolean leftPressed,
 			boolean rightPressed, boolean jumpPressed) {
-		PlayerInputController component = (PlayerInputController) recoverComponent(InputComponentIds.PlayerInputController);
+		PlayerInputController component = (PlayerInputController) recoverComponent(InputComponentsLookup.PlayerInputController);
 		if (component == null) {
 			component = new PlayerInputController();
 		}
 		component.leftPressed = leftPressed;
 		component.rightPressed = rightPressed;
 		component.jumpPressed = jumpPressed;
-		replaceComponent(InputComponentIds.PlayerInputController, component);
+		replaceComponent(InputComponentsLookup.PlayerInputController, component);
 		return this;
 	}
 
 	public InputEntity removePlayerInputController() {
-		removeComponent(InputComponentIds.PlayerInputController);
+		removeComponent(InputComponentsLookup.PlayerInputController);
 		return this;
 	}
 
 	public boolean isTouchPad() {
-		return hasComponent(InputComponentIds.TouchPad);
+		return hasComponent(InputComponentsLookup.TouchPad);
 	}
 
 	public InputEntity setTouchPad(boolean value) {
-		if (value != hasComponent(InputComponentIds.TouchPad)) {
+		if (value != hasComponent(InputComponentsLookup.TouchPad)) {
 			if (value) {
-				addComponent(InputComponentIds.TouchPad, TouchPadComponent);
+				addComponent(InputComponentsLookup.TouchPad, TouchPadComponent);
 			} else {
-				removeComponent(InputComponentIds.TouchPad);
+				removeComponent(InputComponentsLookup.TouchPad);
 			}
 		}
 		return this;

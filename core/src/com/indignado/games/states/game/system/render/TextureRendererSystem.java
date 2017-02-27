@@ -10,8 +10,8 @@ import com.ilargia.games.entitas.api.system.IRenderSystem;
 import com.ilargia.games.entitas.group.Group;
 import com.indignado.games.states.game.component.game.TextureView;
 import com.indignado.games.states.game.gen.Entitas;
-import com.indignado.games.states.game.gen.GameEntity;
-import com.indignado.games.states.game.gen.GameMatcher;
+import com.indignado.games.states.game.gen.game.GameEntity;
+import com.indignado.games.states.game.gen.game.GameMatcher;
 
 
 public class TextureRendererSystem implements IInitializeSystem, IRenderSystem {

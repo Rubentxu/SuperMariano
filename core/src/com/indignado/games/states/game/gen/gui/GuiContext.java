@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.gui;
 
 import com.ilargia.games.entitas.api.*;
 import com.indignado.games.states.game.component.gui.Score;

@@ -3,12 +3,18 @@ package com.indignado.games.states.game.system.actuator;
 
 import com.ilargia.games.entitas.api.system.IExecuteSystem;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
-import com.ilargia.games.entitas.factories.Collections;
+import com.ilargia.games.entitas.factories.CollectionFactories;
 import com.ilargia.games.entitas.group.Group;
 import com.ilargia.games.entitas.matcher.Matcher;
 import com.indignado.games.states.game.component.actuator.VelocityActuator;
 import com.indignado.games.states.game.component.game.RigidBody;
-import com.indignado.games.states.game.gen.*;
+import com.indignado.games.states.game.gen.Entitas;
+import com.indignado.games.states.game.gen.actuator.ActuatorContext;
+import com.indignado.games.states.game.gen.actuator.ActuatorEntity;
+import com.indignado.games.states.game.gen.actuator.ActuatorMatcher;
+import com.indignado.games.states.game.gen.game.GameContext;
+import com.indignado.games.states.game.gen.game.GameEntity;
+import com.indignado.games.states.game.gen.game.GameMatcher;
 
 import java.util.Map;
 
@@ -23,7 +29,7 @@ public class MotionActuatorSystem implements IInitializeSystem, IExecuteSystem {
     public MotionActuatorSystem(Entitas entitas) {
         this.gameContext = entitas.game;
         this.actuatorContext = entitas.actuator;
-        this.actuatorMap = Collections.createMap(String.class, VelocityActuator.class);
+        this.actuatorMap = CollectionFactories.createMap(String.class, VelocityActuator.class);
 
     }
 
@@ -46,7 +52,7 @@ public class MotionActuatorSystem implements IInitializeSystem, IExecuteSystem {
         for (GameEntity e : rigidBodyGroup.getEntities()) {
             RigidBody rigidBody = e.getRigidBody();
             tag = e.getCharacter().tag;
-            if(actuatorMap.containsKey(tag)) {
+            if (actuatorMap.containsKey(tag)) {
                 VelocityActuator actuator = actuatorMap.get(tag);
                 rigidBody.body.setLinearVelocity(actuator.velocity);
                 rigidBody.body.setAngularVelocity(actuator.angularVelocity);

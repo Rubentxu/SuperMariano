@@ -7,8 +7,8 @@ import com.badlogic.gdx.InputAdapter;
 import com.ilargia.games.entitas.api.system.IInitializeSystem;
 import com.indignado.games.manager.SMGUIManager;
 import com.indignado.games.states.game.component.input.PlayerInputController;
-import com.indignado.games.states.game.gen.InputContext;
-import com.indignado.games.states.game.gen.InputEntity;
+import com.indignado.games.states.game.gen.input.InputContext;
+import com.indignado.games.states.game.gen.input.InputEntity;
 import com.indignado.games.states.game.utils.GuiFactory;
 
 

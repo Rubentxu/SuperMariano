@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.gui;
 
 import com.ilargia.games.entitas.api.*;
 import com.ilargia.games.entitas.Entity;
@@ -18,72 +18,72 @@ public class GuiEntity extends Entity {
 	}
 
 	public Label getLabel() {
-		return (Label) getComponent(GuiComponentIds.Label);
+		return (Label) getComponent(GuiComponentsLookup.Label);
 	}
 
 	public boolean hasLabel() {
-		return hasComponent(GuiComponentIds.Label);
+		return hasComponent(GuiComponentsLookup.Label);
 	}
 
 	public GuiEntity addLabel(String text, String font) {
-		Label component = (Label) recoverComponent(GuiComponentIds.Label);
+		Label component = (Label) recoverComponent(GuiComponentsLookup.Label);
 		if (component == null) {
 			component = new Label(text, font);
 		} else {
 			component.text = text;;
 			component.font = font;
 		}
-		addComponent(GuiComponentIds.Label, component);
+		addComponent(GuiComponentsLookup.Label, component);
 		return this;
 	}
 
 	public GuiEntity replaceLabel(String text, String font) {
-		Label component = (Label) recoverComponent(GuiComponentIds.Label);
+		Label component = (Label) recoverComponent(GuiComponentsLookup.Label);
 		if (component == null) {
 			component = new Label(text, font);
 		} else {
 			component.text = text;;
 			component.font = font;
 		}
-		replaceComponent(GuiComponentIds.Label, component);
+		replaceComponent(GuiComponentsLookup.Label, component);
 		return this;
 	}
 
 	public GuiEntity removeLabel() {
-		removeComponent(GuiComponentIds.Label);
+		removeComponent(GuiComponentsLookup.Label);
 		return this;
 	}
 
 	public Score getScore() {
-		return (Score) getComponent(GuiComponentIds.Score);
+		return (Score) getComponent(GuiComponentsLookup.Score);
 	}
 
 	public boolean hasScore() {
-		return hasComponent(GuiComponentIds.Score);
+		return hasComponent(GuiComponentsLookup.Score);
 	}
 
 	public GuiEntity addScore(int value) {
-		Score component = (Score) recoverComponent(GuiComponentIds.Score);
+		Score component = (Score) recoverComponent(GuiComponentsLookup.Score);
 		if (component == null) {
 			component = new Score();
 		}
 		component.value = value;
-		addComponent(GuiComponentIds.Score, component);
+		addComponent(GuiComponentsLookup.Score, component);
 		return this;
 	}
 
 	public GuiEntity replaceScore(int value) {
-		Score component = (Score) recoverComponent(GuiComponentIds.Score);
+		Score component = (Score) recoverComponent(GuiComponentsLookup.Score);
 		if (component == null) {
 			component = new Score();
 		}
 		component.value = value;
-		replaceComponent(GuiComponentIds.Score, component);
+		replaceComponent(GuiComponentsLookup.Score, component);
 		return this;
 	}
 
 	public GuiEntity removeScore() {
-		removeComponent(GuiComponentIds.Score);
+		removeComponent(GuiComponentsLookup.Score);
 		return this;
 	}
 }

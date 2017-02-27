@@ -8,9 +8,9 @@ import com.ilargia.games.entitas.api.system.IRenderSystem;
 import com.ilargia.games.entitas.collector.Collector;
 import com.ilargia.games.entitas.systems.ReactiveSystem;
 import com.indignado.games.states.game.gen.Entitas;
-import com.indignado.games.states.game.gen.SceneContext;
-import com.indignado.games.states.game.gen.SceneEntity;
-import com.indignado.games.states.game.gen.SceneMatcher;
+import com.indignado.games.states.game.gen.scene.SceneContext;
+import com.indignado.games.states.game.gen.scene.SceneEntity;
+import com.indignado.games.states.game.gen.scene.SceneMatcher;
 
 import java.util.List;
 

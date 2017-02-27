@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.input;
 
 import com.ilargia.games.entitas.matcher.Matcher;
 
@@ -16,8 +16,8 @@ public class InputMatcher {
 	public static Matcher PadButtons() {
 		if (_matcherPadButtons == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(InputComponentIds.PadButtons);
-			matcher.componentNames = InputComponentIds.componentNames();
+					.AllOf(InputComponentsLookup.PadButtons);
+			matcher.componentNames = InputComponentsLookup.componentNames();
 			_matcherPadButtons = matcher;
 		}
 		return _matcherPadButtons;
@@ -26,8 +26,8 @@ public class InputMatcher {
 	public static Matcher PlayerInputController() {
 		if (_matcherPlayerInputController == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(InputComponentIds.PlayerInputController);
-			matcher.componentNames = InputComponentIds.componentNames();
+					.AllOf(InputComponentsLookup.PlayerInputController);
+			matcher.componentNames = InputComponentsLookup.componentNames();
 			_matcherPlayerInputController = matcher;
 		}
 		return _matcherPlayerInputController;
@@ -36,8 +36,8 @@ public class InputMatcher {
 	public static Matcher TouchPad() {
 		if (_matcherTouchPad == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(InputComponentIds.TouchPad);
-			matcher.componentNames = InputComponentIds.componentNames();
+					.AllOf(InputComponentsLookup.TouchPad);
+			matcher.componentNames = InputComponentsLookup.componentNames();
 			_matcherTouchPad = matcher;
 		}
 		return _matcherTouchPad;

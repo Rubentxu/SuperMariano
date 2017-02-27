@@ -5,12 +5,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.ilargia.games.entitas.api.IContext;
 import com.ilargia.games.entitas.collector.Collector;
 import com.ilargia.games.entitas.systems.ReactiveSystem;
-import com.indignado.games.states.game.gen.GameContext;
-import com.indignado.games.states.game.gen.GameEntity;
-import com.indignado.games.states.game.gen.GameMatcher;
-
+import com.indignado.games.states.game.gen.game.GameContext;
+import com.indignado.games.states.game.gen.game.GameEntity;
+import com.indignado.games.states.game.gen.game.GameMatcher;
 import java.util.List;
-
 
 public class DestroySystem extends ReactiveSystem<GameEntity> {
     private GameContext context;

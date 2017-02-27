@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.game;
 
 import com.ilargia.games.entitas.matcher.Matcher;
 
@@ -23,8 +23,8 @@ public class GameMatcher {
 	public static Matcher Animations() {
 		if (_matcherAnimations == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.Animations);
-			matcher.componentNames = GameComponentIds.componentNames();
+					.AllOf(GameComponentsLookup.Animations);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherAnimations = matcher;
 		}
 		return _matcherAnimations;
@@ -33,8 +33,8 @@ public class GameMatcher {
 	public static Matcher Character() {
 		if (_matcherCharacter == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.Character);
-			matcher.componentNames = GameComponentIds.componentNames();
+					.AllOf(GameComponentsLookup.Character);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherCharacter = matcher;
 		}
 		return _matcherCharacter;
@@ -42,8 +42,9 @@ public class GameMatcher {
 
 	public static Matcher Destroy() {
 		if (_matcherDestroy == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(GameComponentIds.Destroy);
-			matcher.componentNames = GameComponentIds.componentNames();
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(GameComponentsLookup.Destroy);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherDestroy = matcher;
 		}
 		return _matcherDestroy;
@@ -51,8 +52,9 @@ public class GameMatcher {
 
 	public static Matcher Element() {
 		if (_matcherElement == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(GameComponentIds.Element);
-			matcher.componentNames = GameComponentIds.componentNames();
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(GameComponentsLookup.Element);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherElement = matcher;
 		}
 		return _matcherElement;
@@ -61,8 +63,8 @@ public class GameMatcher {
 	public static Matcher Interactive() {
 		if (_matcherInteractive == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.Interactive);
-			matcher.componentNames = GameComponentIds.componentNames();
+					.AllOf(GameComponentsLookup.Interactive);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherInteractive = matcher;
 		}
 		return _matcherInteractive;
@@ -70,8 +72,9 @@ public class GameMatcher {
 
 	public static Matcher Movable() {
 		if (_matcherMovable == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(GameComponentIds.Movable);
-			matcher.componentNames = GameComponentIds.componentNames();
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(GameComponentsLookup.Movable);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherMovable = matcher;
 		}
 		return _matcherMovable;
@@ -80,8 +83,8 @@ public class GameMatcher {
 	public static Matcher OnGround() {
 		if (_matcherOnGround == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.OnGround);
-			matcher.componentNames = GameComponentIds.componentNames();
+					.AllOf(GameComponentsLookup.OnGround);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherOnGround = matcher;
 		}
 		return _matcherOnGround;
@@ -89,8 +92,9 @@ public class GameMatcher {
 
 	public static Matcher Player() {
 		if (_matcherPlayer == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(GameComponentIds.Player);
-			matcher.componentNames = GameComponentIds.componentNames();
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(GameComponentsLookup.Player);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherPlayer = matcher;
 		}
 		return _matcherPlayer;
@@ -99,8 +103,8 @@ public class GameMatcher {
 	public static Matcher RigidBody() {
 		if (_matcherRigidBody == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.RigidBody);
-			matcher.componentNames = GameComponentIds.componentNames();
+					.AllOf(GameComponentsLookup.RigidBody);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherRigidBody = matcher;
 		}
 		return _matcherRigidBody;
@@ -109,8 +113,8 @@ public class GameMatcher {
 	public static Matcher TextureView() {
 		if (_matcherTextureView == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(GameComponentIds.TextureView);
-			matcher.componentNames = GameComponentIds.componentNames();
+					.AllOf(GameComponentsLookup.TextureView);
+			matcher.componentNames = GameComponentsLookup.componentNames();
 			_matcherTextureView = matcher;
 		}
 		return _matcherTextureView;

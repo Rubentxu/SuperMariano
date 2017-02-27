@@ -1,8 +1,22 @@
 package com.indignado.games.states.game.gen;
 
-import java.util.Stack;
 import com.ilargia.games.entitas.Context;
 import com.ilargia.games.entitas.api.*;
+import com.indignado.games.states.game.gen.input.InputEntity;
+import com.indignado.games.states.game.gen.game.GameEntity;
+import com.indignado.games.states.game.gen.gui.GuiEntity;
+import com.indignado.games.states.game.gen.scene.SceneEntity;
+import com.indignado.games.states.game.gen.actuator.ActuatorEntity;
+import com.indignado.games.states.game.gen.input.InputComponentsLookup;
+import com.indignado.games.states.game.gen.game.GameComponentsLookup;
+import com.indignado.games.states.game.gen.gui.GuiComponentsLookup;
+import com.indignado.games.states.game.gen.scene.SceneComponentsLookup;
+import com.indignado.games.states.game.gen.actuator.ActuatorComponentsLookup;
+import com.indignado.games.states.game.gen.input.InputContext;
+import com.indignado.games.states.game.gen.game.GameContext;
+import com.indignado.games.states.game.gen.gui.GuiContext;
+import com.indignado.games.states.game.gen.scene.SceneContext;
+import com.indignado.games.states.game.gen.actuator.ActuatorContext;
 
 /**
  * ---------------------------------------------------------------------------
@@ -26,35 +40,39 @@ public class Entitas implements IContexts {
 	}
 
 	public InputContext createInputContext() {
-		return new InputContext(InputComponentIds.totalComponents, 0,
-				new ContextInfo("Input", InputComponentIds.componentNames(),
-						InputComponentIds.componentTypes()),
+		return new InputContext(InputComponentsLookup.totalComponents, 0,
+				new ContextInfo("Input",
+						InputComponentsLookup.componentNames(),
+						InputComponentsLookup.componentTypes()),
 				factoryInputEntity());
 	}
 
 	public GameContext createGameContext() {
-		return new GameContext(GameComponentIds.totalComponents, 0,
-				new ContextInfo("Game", GameComponentIds.componentNames(),
-						GameComponentIds.componentTypes()), factoryGameEntity());
+		return new GameContext(GameComponentsLookup.totalComponents, 0,
+				new ContextInfo("Game", GameComponentsLookup.componentNames(),
+						GameComponentsLookup.componentTypes()),
+				factoryGameEntity());
 	}
 
 	public GuiContext createGuiContext() {
-		return new GuiContext(GuiComponentIds.totalComponents, 0,
-				new ContextInfo("Gui", GuiComponentIds.componentNames(),
-						GuiComponentIds.componentTypes()), factoryGuiEntity());
+		return new GuiContext(GuiComponentsLookup.totalComponents, 0,
+				new ContextInfo("Gui", GuiComponentsLookup.componentNames(),
+						GuiComponentsLookup.componentTypes()),
+				factoryGuiEntity());
 	}
 
 	public SceneContext createSceneContext() {
-		return new SceneContext(SceneComponentIds.totalComponents, 0,
-				new ContextInfo("Scene", SceneComponentIds.componentNames(),
-						SceneComponentIds.componentTypes()),
+		return new SceneContext(SceneComponentsLookup.totalComponents, 0,
+				new ContextInfo("Scene",
+						SceneComponentsLookup.componentNames(),
+						SceneComponentsLookup.componentTypes()),
 				factorySceneEntity());
 	}
 
 	public ActuatorContext createActuatorContext() {
-		return new ActuatorContext(ActuatorComponentIds.totalComponents, 0,
-				new ContextInfo("Actuator", ActuatorComponentIds
-						.componentNames(), ActuatorComponentIds
+		return new ActuatorContext(ActuatorComponentsLookup.totalComponents, 0,
+				new ContextInfo("Actuator", ActuatorComponentsLookup
+						.componentNames(), ActuatorComponentsLookup
 						.componentTypes()),
 				factoryActuatorEntity());
 	}

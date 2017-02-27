@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.scene;
 
 import com.ilargia.games.entitas.api.*;
 import com.ilargia.games.entitas.Entity;
@@ -10,6 +10,7 @@ import com.indignado.games.states.game.component.scene.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.indignado.games.states.game.component.scene.GameWorld;
 import com.badlogic.gdx.graphics.Color;
+import com.indignado.games.states.game.component.scene.Light;
 import com.indignado.games.states.game.component.scene.Tiled;
 
 /**
@@ -23,88 +24,88 @@ public class SceneEntity extends Entity {
 	}
 
 	public Background getBackground() {
-		return (Background) getComponent(SceneComponentIds.Background);
+		return (Background) getComponent(SceneComponentsLookup.Background);
 	}
 
 	public boolean hasBackground() {
-		return hasComponent(SceneComponentIds.Background);
+		return hasComponent(SceneComponentsLookup.Background);
 	}
 
 	public SceneEntity addBackground(Texture front, Texture middle, Texture back) {
-		Background component = (Background) recoverComponent(SceneComponentIds.Background);
+		Background component = (Background) recoverComponent(SceneComponentsLookup.Background);
 		if (component == null) {
 			component = new Background();
 		}
 		component.front = front;
 		component.middle = middle;
 		component.back = back;
-		addComponent(SceneComponentIds.Background, component);
+		addComponent(SceneComponentsLookup.Background, component);
 		return this;
 	}
 
 	public SceneEntity replaceBackground(Texture front, Texture middle,
 			Texture back) {
-		Background component = (Background) recoverComponent(SceneComponentIds.Background);
+		Background component = (Background) recoverComponent(SceneComponentsLookup.Background);
 		if (component == null) {
 			component = new Background();
 		}
 		component.front = front;
 		component.middle = middle;
 		component.back = back;
-		replaceComponent(SceneComponentIds.Background, component);
+		replaceComponent(SceneComponentsLookup.Background, component);
 		return this;
 	}
 
 	public SceneEntity removeBackground() {
-		removeComponent(SceneComponentIds.Background);
+		removeComponent(SceneComponentsLookup.Background);
 		return this;
 	}
 
 	public Camera getCamera() {
-		return (Camera) getComponent(SceneComponentIds.Camera);
+		return (Camera) getComponent(SceneComponentsLookup.Camera);
 	}
 
 	public boolean hasCamera() {
-		return hasComponent(SceneComponentIds.Camera);
+		return hasComponent(SceneComponentsLookup.Camera);
 	}
 
 	public SceneEntity addCamera(OrthographicCamera camera) {
-		Camera component = (Camera) recoverComponent(SceneComponentIds.Camera);
+		Camera component = (Camera) recoverComponent(SceneComponentsLookup.Camera);
 		if (component == null) {
 			component = new Camera();
 		}
 		component.camera = camera;
-		addComponent(SceneComponentIds.Camera, component);
+		addComponent(SceneComponentsLookup.Camera, component);
 		return this;
 	}
 
 	public SceneEntity replaceCamera(OrthographicCamera camera) {
-		Camera component = (Camera) recoverComponent(SceneComponentIds.Camera);
+		Camera component = (Camera) recoverComponent(SceneComponentsLookup.Camera);
 		if (component == null) {
 			component = new Camera();
 		}
 		component.camera = camera;
-		replaceComponent(SceneComponentIds.Camera, component);
+		replaceComponent(SceneComponentsLookup.Camera, component);
 		return this;
 	}
 
 	public SceneEntity removeCamera() {
-		removeComponent(SceneComponentIds.Camera);
+		removeComponent(SceneComponentsLookup.Camera);
 		return this;
 	}
 
 	public GameWorld getGameWorld() {
-		return (GameWorld) getComponent(SceneComponentIds.GameWorld);
+		return (GameWorld) getComponent(SceneComponentsLookup.GameWorld);
 	}
 
 	public boolean hasGameWorld() {
-		return hasComponent(SceneComponentIds.GameWorld);
+		return hasComponent(SceneComponentsLookup.GameWorld);
 	}
 
 	public SceneEntity addGameWorld(float width, float height,
 			float metresToPixels, float pixelsToMetres, boolean catchBack,
 			boolean catchMenu, Color backGroundColor) {
-		GameWorld component = (GameWorld) recoverComponent(SceneComponentIds.GameWorld);
+		GameWorld component = (GameWorld) recoverComponent(SceneComponentsLookup.GameWorld);
 		if (component == null) {
 			component = new GameWorld();
 		}
@@ -115,14 +116,14 @@ public class SceneEntity extends Entity {
 		component.catchBack = catchBack;
 		component.catchMenu = catchMenu;
 		component.backGroundColor = backGroundColor;
-		addComponent(SceneComponentIds.GameWorld, component);
+		addComponent(SceneComponentsLookup.GameWorld, component);
 		return this;
 	}
 
 	public SceneEntity replaceGameWorld(float width, float height,
 			float metresToPixels, float pixelsToMetres, boolean catchBack,
 			boolean catchMenu, Color backGroundColor) {
-		GameWorld component = (GameWorld) recoverComponent(SceneComponentIds.GameWorld);
+		GameWorld component = (GameWorld) recoverComponent(SceneComponentsLookup.GameWorld);
 		if (component == null) {
 			component = new GameWorld();
 		}
@@ -133,47 +134,80 @@ public class SceneEntity extends Entity {
 		component.catchBack = catchBack;
 		component.catchMenu = catchMenu;
 		component.backGroundColor = backGroundColor;
-		replaceComponent(SceneComponentIds.GameWorld, component);
+		replaceComponent(SceneComponentsLookup.GameWorld, component);
 		return this;
 	}
 
 	public SceneEntity removeGameWorld() {
-		removeComponent(SceneComponentIds.GameWorld);
+		removeComponent(SceneComponentsLookup.GameWorld);
+		return this;
+	}
+
+	public Light getLight() {
+		return (Light) getComponent(SceneComponentsLookup.Light);
+	}
+
+	public boolean hasLight() {
+		return hasComponent(SceneComponentsLookup.Light);
+	}
+
+	public SceneEntity addLight(box2dLight.Light light) {
+		Light component = (Light) recoverComponent(SceneComponentsLookup.Light);
+		if (component == null) {
+			component = new Light();
+		}
+		component.light = light;
+		addComponent(SceneComponentsLookup.Light, component);
+		return this;
+	}
+
+	public SceneEntity replaceLight(box2dLight.Light light) {
+		Light component = (Light) recoverComponent(SceneComponentsLookup.Light);
+		if (component == null) {
+			component = new Light();
+		}
+		component.light = light;
+		replaceComponent(SceneComponentsLookup.Light, component);
+		return this;
+	}
+
+	public SceneEntity removeLight() {
+		removeComponent(SceneComponentsLookup.Light);
 		return this;
 	}
 
 	public Tiled getTiled() {
-		return (Tiled) getComponent(SceneComponentIds.Tiled);
+		return (Tiled) getComponent(SceneComponentsLookup.Tiled);
 	}
 
 	public boolean hasTiled() {
-		return hasComponent(SceneComponentIds.Tiled);
+		return hasComponent(SceneComponentsLookup.Tiled);
 	}
 
 	public SceneEntity addTiled(String tileMapName, float unitScale) {
-		Tiled component = (Tiled) recoverComponent(SceneComponentIds.Tiled);
+		Tiled component = (Tiled) recoverComponent(SceneComponentsLookup.Tiled);
 		if (component == null) {
 			component = new Tiled();
 		}
 		component.tileMapName = tileMapName;
 		component.unitScale = unitScale;
-		addComponent(SceneComponentIds.Tiled, component);
+		addComponent(SceneComponentsLookup.Tiled, component);
 		return this;
 	}
 
 	public SceneEntity replaceTiled(String tileMapName, float unitScale) {
-		Tiled component = (Tiled) recoverComponent(SceneComponentIds.Tiled);
+		Tiled component = (Tiled) recoverComponent(SceneComponentsLookup.Tiled);
 		if (component == null) {
 			component = new Tiled();
 		}
 		component.tileMapName = tileMapName;
 		component.unitScale = unitScale;
-		replaceComponent(SceneComponentIds.Tiled, component);
+		replaceComponent(SceneComponentsLookup.Tiled, component);
 		return this;
 	}
 
 	public SceneEntity removeTiled() {
-		removeComponent(SceneComponentIds.Tiled);
+		removeComponent(SceneComponentsLookup.Tiled);
 		return this;
 	}
 }

@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.actuator;
 
 import com.ilargia.games.entitas.api.*;
 

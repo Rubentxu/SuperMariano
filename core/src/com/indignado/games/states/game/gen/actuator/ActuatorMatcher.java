@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.actuator;
 
 import com.ilargia.games.entitas.matcher.Matcher;
 
@@ -17,8 +17,8 @@ public class ActuatorMatcher {
 	public static Matcher CameraActuator() {
 		if (_matcherCameraActuator == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(ActuatorComponentIds.CameraActuator);
-			matcher.componentNames = ActuatorComponentIds.componentNames();
+					.AllOf(ActuatorComponentsLookup.CameraActuator);
+			matcher.componentNames = ActuatorComponentsLookup.componentNames();
 			_matcherCameraActuator = matcher;
 		}
 		return _matcherCameraActuator;
@@ -27,8 +27,8 @@ public class ActuatorMatcher {
 	public static Matcher CharacterActuator() {
 		if (_matcherCharacterActuator == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(ActuatorComponentIds.CharacterActuator);
-			matcher.componentNames = ActuatorComponentIds.componentNames();
+					.AllOf(ActuatorComponentsLookup.CharacterActuator);
+			matcher.componentNames = ActuatorComponentsLookup.componentNames();
 			_matcherCharacterActuator = matcher;
 		}
 		return _matcherCharacterActuator;
@@ -37,8 +37,8 @@ public class ActuatorMatcher {
 	public static Matcher TextureActuator() {
 		if (_matcherTextureActuator == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(ActuatorComponentIds.TextureActuator);
-			matcher.componentNames = ActuatorComponentIds.componentNames();
+					.AllOf(ActuatorComponentsLookup.TextureActuator);
+			matcher.componentNames = ActuatorComponentsLookup.componentNames();
 			_matcherTextureActuator = matcher;
 		}
 		return _matcherTextureActuator;
@@ -47,8 +47,8 @@ public class ActuatorMatcher {
 	public static Matcher VelocityActuator() {
 		if (_matcherVelocityActuator == null) {
 			Matcher matcher = (Matcher) Matcher
-					.AllOf(ActuatorComponentIds.VelocityActuator);
-			matcher.componentNames = ActuatorComponentIds.componentNames();
+					.AllOf(ActuatorComponentsLookup.VelocityActuator);
+			matcher.componentNames = ActuatorComponentsLookup.componentNames();
 			_matcherVelocityActuator = matcher;
 		}
 		return _matcherVelocityActuator;

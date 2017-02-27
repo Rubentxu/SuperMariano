@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.gui;
 
 import com.ilargia.games.entitas.matcher.Matcher;
 
@@ -14,8 +14,9 @@ public class GuiMatcher {
 
 	public static Matcher Label() {
 		if (_matcherLabel == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(GuiComponentIds.Label);
-			matcher.componentNames = GuiComponentIds.componentNames();
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(GuiComponentsLookup.Label);
+			matcher.componentNames = GuiComponentsLookup.componentNames();
 			_matcherLabel = matcher;
 		}
 		return _matcherLabel;
@@ -23,8 +24,9 @@ public class GuiMatcher {
 
 	public static Matcher Score() {
 		if (_matcherScore == null) {
-			Matcher matcher = (Matcher) Matcher.AllOf(GuiComponentIds.Score);
-			matcher.componentNames = GuiComponentIds.componentNames();
+			Matcher matcher = (Matcher) Matcher
+					.AllOf(GuiComponentsLookup.Score);
+			matcher.componentNames = GuiComponentsLookup.componentNames();
 			_matcherScore = matcher;
 		}
 		return _matcherScore;

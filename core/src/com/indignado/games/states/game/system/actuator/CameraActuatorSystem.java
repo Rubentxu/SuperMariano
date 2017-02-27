@@ -12,6 +12,11 @@ import com.ilargia.games.entitas.systems.ReactiveSystem;
 import com.indignado.games.states.game.component.actuator.CameraActuator;
 import com.indignado.games.states.game.component.game.RigidBody;
 import com.indignado.games.states.game.gen.*;
+import com.indignado.games.states.game.gen.actuator.ActuatorEntity;
+import com.indignado.games.states.game.gen.actuator.ActuatorMatcher;
+import com.indignado.games.states.game.gen.game.GameContext;
+import com.indignado.games.states.game.gen.game.GameEntity;
+import com.indignado.games.states.game.gen.scene.SceneContext;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.ilargia.games.egdx.base.managers.BaseAssetsManager;
 import com.indignado.games.states.game.component.input.PlayerInputController;
-import com.indignado.games.states.game.gen.InputEntity;
+import com.indignado.games.states.game.gen.input.InputEntity;
 
 import static com.indignado.games.manager.SMGUIManager.GUI_ATLAS;
 import static com.indignado.games.manager.SMGUIManager.ScaleUtil;

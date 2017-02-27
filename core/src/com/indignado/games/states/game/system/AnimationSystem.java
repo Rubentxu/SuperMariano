@@ -8,8 +8,9 @@ import com.ilargia.games.entitas.matcher.Matcher;
 import com.indignado.games.states.game.component.game.Animations;
 import com.indignado.games.states.game.component.game.TextureView;
 import com.indignado.games.states.game.gen.Entitas;
-import com.indignado.games.states.game.gen.GameEntity;
-import com.indignado.games.states.game.gen.GameMatcher;
+import com.indignado.games.states.game.gen.game.GameEntity;
+import com.indignado.games.states.game.gen.game.GameMatcher;
+
 
 public class AnimationSystem implements IExecuteSystem {
 

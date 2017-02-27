@@ -1,4 +1,4 @@
-package com.indignado.games.states.game.gen;
+package com.indignado.games.states.game.gen.actuator;
 
 import com.ilargia.games.entitas.api.*;
 import com.ilargia.games.entitas.Entity;
@@ -25,94 +25,94 @@ public class ActuatorEntity extends Entity {
 	}
 
 	public CameraActuator getCameraActuator() {
-		return (CameraActuator) getComponent(ActuatorComponentIds.CameraActuator);
+		return (CameraActuator) getComponent(ActuatorComponentsLookup.CameraActuator);
 	}
 
 	public boolean hasCameraActuator() {
-		return hasComponent(ActuatorComponentIds.CameraActuator);
+		return hasComponent(ActuatorComponentsLookup.CameraActuator);
 	}
 
 	public ActuatorEntity addCameraActuator(short height, float damping,
 			String followTagEntity) {
-		CameraActuator component = (CameraActuator) recoverComponent(ActuatorComponentIds.CameraActuator);
+		CameraActuator component = (CameraActuator) recoverComponent(ActuatorComponentsLookup.CameraActuator);
 		if (component == null) {
 			component = new CameraActuator();
 		}
 		component.height = height;
 		component.damping = damping;
 		component.followTagEntity = followTagEntity;
-		addComponent(ActuatorComponentIds.CameraActuator, component);
+		addComponent(ActuatorComponentsLookup.CameraActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity replaceCameraActuator(short height, float damping,
 			String followTagEntity) {
-		CameraActuator component = (CameraActuator) recoverComponent(ActuatorComponentIds.CameraActuator);
+		CameraActuator component = (CameraActuator) recoverComponent(ActuatorComponentsLookup.CameraActuator);
 		if (component == null) {
 			component = new CameraActuator();
 		}
 		component.height = height;
 		component.damping = damping;
 		component.followTagEntity = followTagEntity;
-		replaceComponent(ActuatorComponentIds.CameraActuator, component);
+		replaceComponent(ActuatorComponentsLookup.CameraActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity removeCameraActuator() {
-		removeComponent(ActuatorComponentIds.CameraActuator);
+		removeComponent(ActuatorComponentsLookup.CameraActuator);
 		return this;
 	}
 
 	public CharacterActuator getCharacterActuator() {
-		return (CharacterActuator) getComponent(ActuatorComponentIds.CharacterActuator);
+		return (CharacterActuator) getComponent(ActuatorComponentsLookup.CharacterActuator);
 	}
 
 	public boolean hasCharacterActuator() {
-		return hasComponent(ActuatorComponentIds.CharacterActuator);
+		return hasComponent(ActuatorComponentsLookup.CharacterActuator);
 	}
 
 	public ActuatorEntity addCharacterActuator(String target,
 			StateCharacter newState, boolean facingLeft) {
-		CharacterActuator component = (CharacterActuator) recoverComponent(ActuatorComponentIds.CharacterActuator);
+		CharacterActuator component = (CharacterActuator) recoverComponent(ActuatorComponentsLookup.CharacterActuator);
 		if (component == null) {
 			component = new CharacterActuator();
 		}
 		component.target = target;
 		component.newState = newState;
 		component.facingLeft = facingLeft;
-		addComponent(ActuatorComponentIds.CharacterActuator, component);
+		addComponent(ActuatorComponentsLookup.CharacterActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity replaceCharacterActuator(String target,
 			StateCharacter newState, boolean facingLeft) {
-		CharacterActuator component = (CharacterActuator) recoverComponent(ActuatorComponentIds.CharacterActuator);
+		CharacterActuator component = (CharacterActuator) recoverComponent(ActuatorComponentsLookup.CharacterActuator);
 		if (component == null) {
 			component = new CharacterActuator();
 		}
 		component.target = target;
 		component.newState = newState;
 		component.facingLeft = facingLeft;
-		replaceComponent(ActuatorComponentIds.CharacterActuator, component);
+		replaceComponent(ActuatorComponentsLookup.CharacterActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity removeCharacterActuator() {
-		removeComponent(ActuatorComponentIds.CharacterActuator);
+		removeComponent(ActuatorComponentsLookup.CharacterActuator);
 		return this;
 	}
 
 	public TextureActuator getTextureActuator() {
-		return (TextureActuator) getComponent(ActuatorComponentIds.TextureActuator);
+		return (TextureActuator) getComponent(ActuatorComponentsLookup.TextureActuator);
 	}
 
 	public boolean hasTextureActuator() {
-		return hasComponent(ActuatorComponentIds.TextureActuator);
+		return hasComponent(ActuatorComponentsLookup.TextureActuator);
 	}
 
 	public ActuatorEntity addTextureActuator(String target, Bounds bounds,
 			int opacity, Boolean flipX, Boolean flipY, Color tint) {
-		TextureActuator component = (TextureActuator) recoverComponent(ActuatorComponentIds.TextureActuator);
+		TextureActuator component = (TextureActuator) recoverComponent(ActuatorComponentsLookup.TextureActuator);
 		if (component == null) {
 			component = new TextureActuator();
 		}
@@ -122,13 +122,13 @@ public class ActuatorEntity extends Entity {
 		component.flipX = flipX;
 		component.flipY = flipY;
 		component.tint = tint;
-		addComponent(ActuatorComponentIds.TextureActuator, component);
+		addComponent(ActuatorComponentsLookup.TextureActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity replaceTextureActuator(String target, Bounds bounds,
 			int opacity, Boolean flipX, Boolean flipY, Color tint) {
-		TextureActuator component = (TextureActuator) recoverComponent(ActuatorComponentIds.TextureActuator);
+		TextureActuator component = (TextureActuator) recoverComponent(ActuatorComponentsLookup.TextureActuator);
 		if (component == null) {
 			component = new TextureActuator();
 		}
@@ -138,51 +138,51 @@ public class ActuatorEntity extends Entity {
 		component.flipX = flipX;
 		component.flipY = flipY;
 		component.tint = tint;
-		replaceComponent(ActuatorComponentIds.TextureActuator, component);
+		replaceComponent(ActuatorComponentsLookup.TextureActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity removeTextureActuator() {
-		removeComponent(ActuatorComponentIds.TextureActuator);
+		removeComponent(ActuatorComponentsLookup.TextureActuator);
 		return this;
 	}
 
 	public VelocityActuator getVelocityActuator() {
-		return (VelocityActuator) getComponent(ActuatorComponentIds.VelocityActuator);
+		return (VelocityActuator) getComponent(ActuatorComponentsLookup.VelocityActuator);
 	}
 
 	public boolean hasVelocityActuator() {
-		return hasComponent(ActuatorComponentIds.VelocityActuator);
+		return hasComponent(ActuatorComponentsLookup.VelocityActuator);
 	}
 
 	public ActuatorEntity addVelocityActuator(String target, Vector2 velocity,
 			float angularVelocity) {
-		VelocityActuator component = (VelocityActuator) recoverComponent(ActuatorComponentIds.VelocityActuator);
+		VelocityActuator component = (VelocityActuator) recoverComponent(ActuatorComponentsLookup.VelocityActuator);
 		if (component == null) {
 			component = new VelocityActuator();
 		}
 		component.target = target;
 		component.velocity = velocity;
 		component.angularVelocity = angularVelocity;
-		addComponent(ActuatorComponentIds.VelocityActuator, component);
+		addComponent(ActuatorComponentsLookup.VelocityActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity replaceVelocityActuator(String target,
 			Vector2 velocity, float angularVelocity) {
-		VelocityActuator component = (VelocityActuator) recoverComponent(ActuatorComponentIds.VelocityActuator);
+		VelocityActuator component = (VelocityActuator) recoverComponent(ActuatorComponentsLookup.VelocityActuator);
 		if (component == null) {
 			component = new VelocityActuator();
 		}
 		component.target = target;
 		component.velocity = velocity;
 		component.angularVelocity = angularVelocity;
-		replaceComponent(ActuatorComponentIds.VelocityActuator, component);
+		replaceComponent(ActuatorComponentsLookup.VelocityActuator, component);
 		return this;
 	}
 
 	public ActuatorEntity removeVelocityActuator() {
-		removeComponent(ActuatorComponentIds.VelocityActuator);
+		removeComponent(ActuatorComponentsLookup.VelocityActuator);
 		return this;
 	}
 }
